@@ -944,7 +944,7 @@
   // =========================================================================
   const PALETTE_COMMANDS = [
     // Navigation
-    { id: 'nav-home', label: 'Go to Home / Hero', category: 'Navigation', icon: '⚡', action: () => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' }) },
+    { id: 'nav-home', label: 'Go to Home / Overview', category: 'Navigation', icon: '⚡', action: () => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' }) },
     { id: 'nav-term', label: 'Open Interactive TUI Terminal', category: 'Navigation', icon: '💻', action: () => { document.getElementById('terminal')?.scrollIntoView({ behavior: 'smooth' }); setTimeout(() => document.getElementById('tui-input')?.focus(), 250); } },
     { id: 'nav-cockpit', label: 'Open The Cockpit & Neovim', category: 'Navigation', icon: '🪟', action: () => document.getElementById('cockpit')?.scrollIntoView({ behavior: 'smooth' }) },
     { id: 'nav-projects', label: 'Explore Plugins & Projects', category: 'Navigation', icon: '📦', action: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) },

@@ -1,0 +1,54 @@
+name: Sync Portfolio Details & Metrics
+
+on:
+  schedule:
+    # Runs every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "_posts/**"
+      - "scripts/update_details.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "sync-details"
+  cancel-in-progress: true
+
+jobs:
+  sync-details:
+    name: Sync GitHub Metrics & Dispatches
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Execute Details Synchronization
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/update_details.py
+
+      - name: Commit & Push Updated Details
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          if [[ -n $(git status --porcelain _data/ README.md) ]]; then
+            echo "Changes detected in _data/ or README.md. Committing..."
+            git add _data/ README.md
+            git commit -m "chore(auto): sync github metrics, project details and dispatches"
+            git push origin main
+          else
+            echo "No telemetry changes detected. Clean working tree."
+          fi

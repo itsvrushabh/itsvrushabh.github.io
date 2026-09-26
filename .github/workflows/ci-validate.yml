@@ -1,0 +1,72 @@
+name: CI Quality & Content Validation
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-assets:
+    name: Lint & Validate Assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verify JavaScript Syntax
+        run: |
+          echo "Verifying omarchy.js syntax..."
+          node --check assets/js/omarchy.js
+          echo "✓ JavaScript syntax valid."
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON Data Files
+        run: |
+          echo "Validating JSON data files in _data/..."
+          python3 -c "
+          import json, glob, sys
+          files = glob.glob('_data/*.json')
+          for f in files:
+              try:
+                  with open(f) as fp:
+                      json.load(fp)
+                  print(f'✓ {f} is valid JSON')
+              except Exception as e:
+                  print(f'✗ Error in {f}: {e}', file=sys.stderr)
+                  sys.exit(1)
+          "
+
+  validate-jekyll:
+    name: Build & Verify Jekyll Site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: false
+
+      - name: Install Jekyll & Core Plugins
+        run: |
+          gem install jekyll jekyll-feed jekyll-sitemap jekyll-seo-tag kramdown rouge
+
+      - name: Build Jekyll Site
+        run: |
+          jekyll build --strict_front_matter --trace

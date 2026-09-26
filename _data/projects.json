@@ -1,0 +1,65 @@
+[
+  {
+    "repo": "asyncfsm",
+    "tag": "ENGINE // 01",
+    "name": "asyncfsm",
+    "desc": "Asynchronous finite-state machine library in Rust & Python for reactive orchestration, deterministic event queues, and low-latency transitions.",
+    "stack": [
+      "Rust",
+      "Tokio",
+      "Python",
+      "AsyncIO"
+    ],
+    "url": "https://github.com/itsvrushabh/asyncfsm",
+    "stars": 0,
+    "last_push": "Jan 20, 2026"
+  },
+  {
+    "repo": "fastapi-template",
+    "tag": "MICROSERVICE // 02",
+    "name": "fastapi-template",
+    "desc": "Production-hardened asynchronous REST microservice archetype with PostgreSQL connection pooling, Redis caching, and JWT auth.",
+    "stack": [
+      "FastAPI",
+      "PostgreSQL",
+      "Redis",
+      "Docker",
+      "Pydantic"
+    ],
+    "url": "https://github.com/itsvrushabh/fastapi-template",
+    "stars": 0,
+    "last_push": "Aug 23, 2025"
+  },
+  {
+    "repo": "DineInTakeOut",
+    "tag": "REAL-TIME // 03",
+    "name": "DineInTakeOut",
+    "desc": "Event-driven omnichannel food order routing & status coordination engine powered by WebSockets, Celery task workers, and Redis pub/sub.",
+    "stack": [
+      "Python",
+      "WebSockets",
+      "RabbitMQ",
+      "Redis",
+      "PostgreSQL"
+    ],
+    "url": "https://github.com/itsvrushabh/DineInTakeOut",
+    "stars": 0,
+    "last_push": "Sep 15, 2026"
+  },
+  {
+    "repo": "nvim",
+    "tag": "COCKPIT // 04",
+    "name": "nvim & omarchy-dotfiles",
+    "desc": "Precision Linux developer ergonomics: Omarchy Linux rolling kernel, Hyprland Wayland compositor, and Neovim with rust-analyzer & pyright.",
+    "stack": [
+      "Lua",
+      "Neovim",
+      "Hyprland",
+      "Wayland",
+      "Arch Linux"
+    ],
+    "url": "https://github.com/itsvrushabh/nvim",
+    "stars": 0,
+    "last_push": "Sep 25, 2026"
+  }
+]

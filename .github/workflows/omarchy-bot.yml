@@ -1,4 +1,4 @@
-name: Omarchy Agentic Bot
+name: Workstation Agentic Bot
 
 on:
   issues:
@@ -11,8 +11,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  omarchy-agent:
-    name: Omarchy Agentic Triage
+  workstation-agent:
+    name: Workstation Automated Triage
     runs-on: ubuntu-latest
     steps:
       - name: Agentic Dispatch Response
@@ -24,18 +24,18 @@ jobs:
 
             if (isIssue) {
               const issueNumber = context.payload.issue.number;
-              const commentBody = `### 🌀 OMARCHY AGENTIC TRIAGE // DISPATCH LOGGED
+              const commentBody = `### ⚡ VRUSHABH WORKSTATION // DISPATCH LOGGED
             
-            Welcome to the malleable era, @${author}!
+            Welcome, @${author}!
             
-            Our **Omarchy automated agents** have registered your ticket:
-            - **Workstation:** Omarchy Linux x86_64
-            - **Compositor:** Hyprland (Wayland)
-            - **Status:** 🟢 Agent Active / Ready to Vibe
+            The workstation automated triage agent has registered your dispatch:
+            - **Target:** itsvrushabh systems & architecture
+            - **Environment:** Arch Linux / Hyprland (Wayland)
+            - **Status:** 🟢 Dispatched to Vrushabh Deshmukh
             
-            > *"When you can vibe code whatever app comes to your mind, you should be able to vibe code your operating system."*
+            > *"Building malleable, low-latency backends and keyboard-driven developer environments."*
             
-            Vrushabh Deshmukh will review this dispatch shortly. Stay tuned! 🚀`;
+            Vrushabh will review this issue shortly. Thank you for reaching out! 🚀`;
 
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
@@ -46,18 +46,16 @@ jobs:
             } else {
               const prNumber = context.payload.pull_request.number;
               const headBranch = context.payload.pull_request.head.ref;
-              const commentBody = `### 🛠️ OMARCHY AGENTIC PULL REQUEST // REVIEW INITIATED
+              const commentBody = `### 🛠️ VRUSHABH WORKSTATION // PR REVIEW INITIATED
             
-            Thanks for contributing to the Omarchy ecosystem, @${author}!
+            Thanks for your contribution, @${author}!
             
-            Agentic checks initiated on branch \`${headBranch}\`:
+            Workstation verification running on branch \`${headBranch}\`:
             - **Target:** Clean borrow-checker traces, zero memory leaks
-            - **Tooling:** rust-analyzer & pyright syntax verification
-            - **Status:** In Review by Core Team
+            - **Tooling:** rust-analyzer, pyright & Jekyll CI validation
+            - **Status:** Queued for review
             
-            > *"Oma is for omakase, chef's choice: we pick the tools and tune the details. But this is your computer. You're free to change everything."*
-            
-            We will inspect your diffs shortly! ⚡`;
+            Vrushabh will inspect your diffs shortly! ⚡`;
 
               await github.rest.issues.createComment({
                 owner: context.repo.owner,

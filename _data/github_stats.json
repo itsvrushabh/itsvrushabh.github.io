@@ -1,0 +1,200 @@
+{
+  "last_updated": "2026-09-26T17:53:58Z",
+  "last_updated_pretty": "September 26, 2026 at 17:53 UTC",
+  "user": {
+    "login": "itsvrushabh",
+    "name": null,
+    "bio": null,
+    "public_repos": 18,
+    "followers": 5,
+    "total_stars": 0,
+    "total_forks": 0,
+    "html_url": "https://github.com/itsvrushabh"
+  },
+  "repos": [
+    {
+      "name": "itsvrushabh.github.io",
+      "description": "",
+      "stars": 0,
+      "forks": 0,
+      "language": "HTML",
+      "pushed_at": "2026-09-26T17:45:41Z",
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "topics": []
+    },
+    {
+      "name": "itsvrushabh",
+      "description": "",
+      "stars": 0,
+      "forks": 0,
+      "language": "Python",
+      "pushed_at": "2026-09-26T16:19:31Z",
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "topics": []
+    },
+    {
+      "name": "tmux",
+      "description": "My default tmux config",
+      "stars": 0,
+      "forks": 0,
+      "language": "Shell",
+      "pushed_at": "2026-09-25T11:23:37Z",
+      "html_url": "https://github.com/itsvrushabh/tmux",
+      "topics": []
+    },
+    {
+      "name": "nvim",
+      "description": "",
+      "stars": 0,
+      "forks": 0,
+      "language": "Lua",
+      "pushed_at": "2026-09-25T11:18:01Z",
+      "html_url": "https://github.com/itsvrushabh/nvim",
+      "topics": []
+    },
+    {
+      "name": "todo",
+      "description": "",
+      "stars": 0,
+      "forks": 0,
+      "language": "Python",
+      "pushed_at": "2026-09-25T07:43:30Z",
+      "html_url": "https://github.com/itsvrushabh/todo",
+      "topics": []
+    },
+    {
+      "name": "laya_demo",
+      "description": "",
+      "stars": 0,
+      "forks": 0,
+      "language": "Python",
+      "pushed_at": "2026-09-24T18:26:03Z",
+      "html_url": "https://github.com/itsvrushabh/laya_demo",
+      "topics": []
+    },
+    {
+      "name": "expense-organizer",
+      "description": "",
+      "stars": 0,
+      "forks": 0,
+      "language": "Dart",
+      "pushed_at": "2026-09-16T11:35:19Z",
+      "html_url": "https://github.com/itsvrushabh/expense-organizer",
+      "topics": []
+    },
+    {
+      "name": "DineInTakeOut",
+      "description": "",
+      "stars": 0,
+      "forks": 0,
+      "language": "Rust",
+      "pushed_at": "2026-09-15T04:59:26Z",
+      "html_url": "https://github.com/itsvrushabh/DineInTakeOut",
+      "topics": []
+    },
+    {
+      "name": "DinningIn",
+      "description": "",
+      "stars": 0,
+      "forks": 0,
+      "language": "",
+      "pushed_at": "2026-09-09T06:30:31Z",
+      "html_url": "https://github.com/itsvrushabh/DinningIn",
+      "topics": []
+    },
+    {
+      "name": "hotel-management",
+      "description": "",
+      "stars": 0,
+      "forks": 0,
+      "language": "TypeScript",
+      "pushed_at": "2026-08-28T12:44:46Z",
+      "html_url": "https://github.com/itsvrushabh/hotel-management",
+      "topics": []
+    },
+    {
+      "name": "init_me",
+      "description": "Config for system",
+      "stars": 0,
+      "forks": 0,
+      "language": "Lua",
+      "pushed_at": "2026-02-08T10:21:39Z",
+      "html_url": "https://github.com/itsvrushabh/init_me",
+      "topics": []
+    },
+    {
+      "name": "tonarchy",
+      "description": "To test out the my changes",
+      "stars": 0,
+      "forks": 0,
+      "language": "",
+      "pushed_at": "2026-01-23T21:46:31Z",
+      "html_url": "https://github.com/itsvrushabh/tonarchy",
+      "topics": []
+    },
+    {
+      "name": "asyncfsm",
+      "description": "Textfsm-rs with async code",
+      "stars": 0,
+      "forks": 0,
+      "language": "Rust",
+      "pushed_at": "2026-01-20T15:59:23Z",
+      "html_url": "https://github.com/itsvrushabh/asyncfsm",
+      "topics": []
+    },
+    {
+      "name": "textfsm-rs",
+      "description": "An experiment in implementing TextFSM in Rust",
+      "stars": 0,
+      "forks": 0,
+      "language": "Rust",
+      "pushed_at": "2026-01-16T05:45:47Z",
+      "html_url": "https://github.com/itsvrushabh/textfsm-rs",
+      "topics": [
+        "networking",
+        "nts-templates",
+        "rust"
+      ]
+    },
+    {
+      "name": "ente_local_without_s3",
+      "description": "🔒 End-to-end encrypted cloud for photos, videos and 2FA secrets.",
+      "stars": 0,
+      "forks": 0,
+      "language": "Dart",
+      "pushed_at": "2026-01-15T06:14:34Z",
+      "html_url": "https://github.com/itsvrushabh/ente_local_without_s3",
+      "topics": []
+    },
+    {
+      "name": "snowflake-sqlalchemy",
+      "description": "Snowflake SQLAlchemy",
+      "stars": 0,
+      "forks": 0,
+      "language": "Python",
+      "pushed_at": "2026-01-14T05:53:45Z",
+      "html_url": "https://github.com/itsvrushabh/snowflake-sqlalchemy",
+      "topics": []
+    },
+    {
+      "name": "linux",
+      "description": "Linux kernel source tree",
+      "stars": 0,
+      "forks": 0,
+      "language": "C",
+      "pushed_at": "2026-01-14T04:27:41Z",
+      "html_url": "https://github.com/itsvrushabh/linux",
+      "topics": []
+    },
+    {
+      "name": "fastapi-template",
+      "description": "boiler plate for fastapi",
+      "stars": 0,
+      "forks": 0,
+      "language": "Python",
+      "pushed_at": "2025-08-23T07:24:00Z",
+      "html_url": "https://github.com/itsvrushabh/fastapi-template",
+      "topics": []
+    }
+  ]
+}
