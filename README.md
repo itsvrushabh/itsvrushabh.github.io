@@ -78,6 +78,12 @@
 | :--- | :--- | :--- |
 | **🟢 Current: 1.98 / 2024** | Concurrency & Ergonomics | 1. **Async Closures:** Ergonomic borrow capturing across await points in `async |x|`.<br>2. **Let Chains:** Flattened conditional matching (`if let Some(x) = opt && x > 0`).<br>3. **`gen` Blocks & Yield:** First-class coroutine iterators without handwritten state machine boilerplate. |
 | **🚀 Next: 1.99+** | Memory Safety & Expressiveness | 1. **Async Drop:** Automated asynchronous destructor cleanup for sockets and DB transactions.<br>2. **Dyn Trait Upcasting:** Native sub-to-super trait coercion without manual wrapper shims.<br>3. **Advanced Const Generics:** Compile-time evaluations and arbitrary expressions in types. |
+
+<br />
+
+<div align="center">
+  <sub>📡 <i>Tracking frameworks, databases, and infra too?</i> <a href="./docs/TECH_RADAR.md"><b>Explore the Full-Stack Tech Radar (All 16+ Technologies) →</b></a></sub>
+</div>
 <!-- END_LANGUAGE_RADAR -->
 
 <br />
