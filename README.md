@@ -47,14 +47,24 @@
   <h2>⚙️ Tech Stack</h2>
 
   <p><b>Languages, Runtimes, Infra & Tools</b></p>
-  <img src="https://skillicons.dev/icons?i=rust,py,fastapi,django,docker,rabbitmq,linux,neovim,vscode,vscodium,sublime,git&theme=dark" alt="Languages, Tools and Editors" />
+  <img src="https://skillicons.dev/icons?i=rust,py,fastapi,django,dart,docker,rabbitmq,linux,neovim,vscode,vscodium,sublime,git&theme=dark" alt="Languages, Tools and Editors" />
   
   <br /><br />
   <p><b>Databases & Caching</b></p>
   <img src="https://skillicons.dev/icons?i=postgres,mysql,sqlite,redis,mongodb&theme=dark" alt="Databases and Caching" />
 
   <br /><br />
-  <sub>Also working with <b>Tokio</b>, <b>Axum</b>, <b>Iced</b>, <b>Turso</b>, and <b>Tmux</b> · <a href="./docs/ARCHITECTURE.md">Read Architecture & Stack Notes →</a></sub>
+  <p><b>Workstation, Systems & AI</b></p>
+  <a href="https://omarchy.org/"><img src="https://img.shields.io/badge/OS-Omarchy%20Linux-101014?style=flat-square&logo=arch-linux&logoColor=9ece6a" alt="Omarchy Linux" /></a>
+  &nbsp;
+  <a href="https://github.com/itsvrushabh/tmux"><img src="https://img.shields.io/badge/Multiplexer-Tmux-101014?style=flat-square&logo=tmux&logoColor=1bb954" alt="Tmux" /></a>
+  &nbsp;
+  <a href="https://dart.dev/"><img src="https://img.shields.io/badge/Language-Dart-0175C2?style=flat-square&logo=dart&logoColor=white" alt="Dart" /></a>
+  &nbsp;
+  <img src="https://img.shields.io/badge/AI-LLMs%20%26%20Agents-7aa2f7?style=flat-square&logo=openai&logoColor=black" alt="AI & LLMs" />
+
+  <br /><br />
+  <sub>Also working with <b>Tokio</b>, <b>Axum</b>, <b>Iced</b>, and <b>Turso (libSQL)</b> · <a href="./docs/ARCHITECTURE.md">Read Architecture & Stack Notes →</a></sub>
 </div>
 
 ---

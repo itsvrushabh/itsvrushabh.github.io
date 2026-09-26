@@ -29,9 +29,10 @@ flowchart LR
     Queue --> Worker[Async Workers]
 ```
 
-* **Core Languages:** Rust, Python
+* **Core Languages:** Rust, Python, Dart
 * **Frameworks & Runtimes:** Axum, Tokio, FastAPI, Django, Iced
-* **Databases & Caching:** PostgreSQL, MySQL, SQLite, Turso, Redis, MongoDB
+* **AI & Intelligent Systems:** LLM APIs, Function Calling, Autonomous Agents, Embeddings & RAG
+* **Databases & Caching:** PostgreSQL, MySQL, SQLite, Turso (libSQL), Redis, MongoDB
 * **Messaging & Brokers:** RabbitMQ
 * **Infrastructure & Ops:** Docker, Docker Compose, Git
 * **Workstation & OS:** Omarchy Linux, Hyprland (Wayland compositor)
