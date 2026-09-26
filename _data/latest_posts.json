@@ -1,35 +1,29 @@
 [
   {
-    "layout": "post",
     "title": "Building High-Throughput Distributed APIs in Rust with Axum and Tokio",
     "date": "2026-03-15 10:00:00 +0000",
     "category": "Systems & Backend",
-    "tags": "[\"rust\", \"axum\", \"backend\", \"concurrency\", \"performance\"]",
     "description": "How to structure an asynchronous Rust service with Axum, Tokio, connection pooling, and zero-allocation routing for sub-millisecond p99 latencies.",
     "slug": "building-high-throughput-apis-in-rust",
     "url": "/blog/building-high-throughput-apis-in-rust/",
     "filename": "2026-03-15-building-high-throughput-apis-in-rust.md"
   },
   {
-    "layout": "post",
     "title": "Resilient Distributed State: Reliable Event Queues with RabbitMQ and Redis",
     "date": "2026-02-10 14:30:00 +0000",
     "category": "Architecture",
-    "tags": "[\"distributed-systems\", \"rabbitmq\", \"redis\", \"architecture\", \"microservices\"]",
     "description": "Practical strategies for cache-aside patterns, idempotent message consumption, transactional outboxes, and dealing with network partitions.",
     "slug": "resilient-distributed-state-with-rabbitmq-and-redis",
     "url": "/blog/resilient-distributed-state-with-rabbitmq-and-redis/",
     "filename": "2026-02-10-resilient-distributed-state-with-rabbitmq-and-redis.md"
   },
   {
-    "layout": "post",
-    "title": "Architecting Modern Python Backends: Async FastAPI, PEP 649, and No-GIL",
+    "title": "Architecting Modern Async Rust Microservices: Axum, Tokio, and Zero-Copy Concurrency",
     "date": "2026-01-22 09:15:00 +0000",
-    "category": "Python Internals",
-    "tags": "[\"python\", \"fastapi\", \"performance\", \"async\"]",
-    "description": "Taking advantage of modern Python runtime enhancements, free-threaded execution, deferred type annotations, and connection pooling for scalable microservices.",
-    "slug": "architecting-modern-python-backends-for-scale",
-    "url": "/blog/architecting-modern-python-backends-for-scale/",
-    "filename": "2026-01-22-architecting-modern-python-backends-for-scale.md"
+    "category": "Rust & Systems",
+    "description": "Structuring production-ready asynchronous Rust microservices with Axum, SQLx connection pooling, Serde zero-copy deserialization, and multi-core work stealing.",
+    "slug": "architecting-modern-async-rust-microservices",
+    "url": "/blog/architecting-modern-async-rust-microservices/",
+    "filename": "2026-01-22-architecting-modern-async-rust-microservices.md"
   }
 ]

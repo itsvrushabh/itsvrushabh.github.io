@@ -9,7 +9,7 @@ on:
     branches: ["main"]
     paths:
       - "_posts/**"
-      - "scripts/update_details.py"
+      - "tools/portfolio-sync/**"
 
 permissions:
   contents: write
@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   sync-details:
-    name: Sync GitHub Metrics & Dispatches
+    name: Sync GitHub Metrics & Dispatches (Rust)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -28,16 +28,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
 
-      - name: Execute Details Synchronization
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "tools/portfolio-sync -> target"
+
+      - name: Execute Details Synchronization in Rust
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python3 scripts/update_details.py
+          cd tools/portfolio-sync
+          cargo run --release
 
       - name: Commit & Push Updated Details
         run: |
@@ -47,7 +51,7 @@ jobs:
           if [[ -n $(git status --porcelain _data/ README.md) ]]; then
             echo "Changes detected in _data/ or README.md. Committing..."
             git add _data/ README.md
-            git commit -m "chore(auto): sync github metrics, project details and dispatches"
+            git commit -m "chore(auto): sync github metrics, project details and dispatches [Rust]"
             git push origin main
           else
             echo "No telemetry changes detected. Clean working tree."

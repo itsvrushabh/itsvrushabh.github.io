@@ -10,7 +10,7 @@ repository: itsvrushabh/itsvrushabh.github.io
 author:
   name: Vrushabh Deshmukh
   email: itsvrushabh@gmail.com
-  bio: "Backend developer specializing in Python, Rust, high-throughput distributed APIs, and Linux systems architecture."
+  bio: "Systems and backend engineer specializing in Rust, Tokio, high-throughput distributed microservices, and Linux systems architecture."
   github: itsvrushabh
   linkedin: itsvrushabh
   location: "India"
@@ -51,5 +51,9 @@ exclude:
   - node_modules
   - vendor
   - scripts
+  - tools
+  - target
+  - Cargo.toml
+  - Cargo.lock
   - .github
   - README.md

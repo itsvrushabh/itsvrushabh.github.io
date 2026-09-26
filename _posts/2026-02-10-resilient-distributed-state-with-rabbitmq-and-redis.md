@@ -17,14 +17,30 @@ Here are the concrete patterns and defensive techniques I use to build robust di
 
 A common anti-pattern in event-driven systems is writing to a relational database and publishing an event to a message broker in an uncoordinated block:
 
-```python
-# ⚠️ ANTI-PATTERN: Dual Write Vulnerability
-async def complete_checkout(order_id: str, db, broker):
-    # 1. Update database
-    await db.execute("UPDATE orders SET status = 'COMPLETED' WHERE id = :id", {"id": order_id})
+```rust
+// ⚠️ ANTI-PATTERN: Dual Write Vulnerability
+pub async fn complete_checkout(
+    order_id: &str, 
+    db: &sqlx::PgPool, 
+    broker: &lapin::Channel
+) -> Result<(), Box<dyn std::error::Error>> {
+    // 1. Update database
+    sqlx::query("UPDATE orders SET status = 'COMPLETED' WHERE id = $1")
+        .bind(order_id)
+        .execute(db)
+        .await?;
     
-    # 2. What happens if the process crashes or network fails RIGHT HERE?
-    await broker.publish("orders.completed", {"order_id": order_id})
+    // 2. What happens if the process crashes or network fails RIGHT HERE?
+    broker.basic_publish(
+        "",
+        "orders.completed",
+        lapin::options::BasicPublishOptions::default(),
+        &serde_json::to_vec(&serde_json::json!({ "order_id": order_id }))?,
+        lapin::BasicProperties::default(),
+    ).await?;
+
+    Ok(())
+}
 ```
 
 If the node crashes between step 1 and 2, the order is marked completed in the database, but no downstream inventory or notification services will ever hear about it.
@@ -86,33 +102,55 @@ RabbitMQ guarantees **at-least-once** delivery when manual ACKs and persistent q
 
 Using Redis for atomic de-duplication locks:
 
-```python
-import aioredis
-from typing import Optional
+```rust
+use redis::AsyncCommands;
+use serde::Serialize;
+use std::sync::Arc;
+use tokio::sync::Mutex;
 
-class IdempotentConsumer:
-    def __init__(self, redis_pool: aioredis.Redis):
-        self.redis = redis_pool
+pub struct IdempotentConsumer {
+    redis: Arc<Mutex<redis::aio::MultiplexedConnection>>,
+}
 
-    async def process_event(self, event_id: str, payload: dict) -> bool:
-        # Atomic lock with 24-hour expiration
-        acquired = await self.redis.set(
-            f"processed:event:{event_id}",
-            "1",
-            ex=86400,
-            nx=True  # Only set if key does not exist
-        )
+impl IdempotentConsumer {
+    pub fn new(conn: redis::aio::MultiplexedConnection) -> Self {
+        Self {
+            redis: Arc::new(Mutex::new(conn)),
+        }
+    }
 
-        if not acquired:
-            # Duplicate event detected, skip execution safely
-            return False
+    pub async fn process_event<T: Serialize>(
+        &self, 
+        event_id: &str, 
+        payload: &T
+    ) -> Result<bool, redis::RedisError> {
+        let mut con = self.redis.lock().await;
+        let lock_key = format!("processed:event:{}", event_id);
+        
+        // Atomic lock with 24-hour expiration: SET lock_key 1 EX 86400 NX
+        let acquired: bool = redis::cmd("SET")
+            .arg(&lock_key)
+            .arg("1")
+            .arg("EX")
+            .arg(86400)
+            .arg("NX")
+            .query_async(&mut *con)
+            .await?;
 
-        # Execute business logic
-        await self.apply_business_logic(payload)
-        return True
+        if !acquired {
+            // Duplicate event detected, skip execution safely
+            return Ok(false);
+        }
 
-    async def apply_business_logic(self, payload: dict):
-        pass
+        // Execute domain logic safely
+        self.apply_business_logic(payload).await;
+        Ok(true)
+    }
+
+    async fn apply_business_logic<T: Serialize>(&self, _payload: &T) {
+        // Business logic invocation
+    }
+}
 ```
 
 ---

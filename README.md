@@ -15,10 +15,10 @@ Built with **Jekyll**, vanilla CSS with dark/light mode, and hosted on **GitHub 
 <!-- REPO_METRICS_START -->
 | Project | Stars | Tech Stack | Description | Repository |
 | :--- | :---: | :--- | :--- | :--- |
-| **asyncfsm** | ★ 0 | `Rust` `Tokio` `Python` `AsyncIO` | Asynchronous finite-state machine library in Rust & Python for reactive orchestration, deterministic event queues, and low-latency transitions. | [Code →](https://github.com/itsvrushabh/asyncfsm) |
-| **fastapi-template** | ★ 0 | `FastAPI` `PostgreSQL` `Redis` `Docker` `Pydantic` | Production-hardened asynchronous REST microservice archetype with PostgreSQL connection pooling, Redis caching, and JWT auth. | [Code →](https://github.com/itsvrushabh/fastapi-template) |
-| **DineInTakeOut** | ★ 0 | `Python` `WebSockets` `RabbitMQ` `Redis` `PostgreSQL` | Event-driven omnichannel food order routing & status coordination engine powered by WebSockets, Celery task workers, and Redis pub/sub. | [Code →](https://github.com/itsvrushabh/DineInTakeOut) |
-| **nvim & omarchy-dotfiles** | ★ 0 | `Lua` `Neovim` `Hyprland` `Wayland` `Arch Linux` | Precision Linux developer ergonomics: Omarchy Linux rolling kernel, Hyprland Wayland compositor, and Neovim with rust-analyzer & pyright. | [Code →](https://github.com/itsvrushabh/nvim) |
+| **asyncfsm** | ★ 0 | `Rust` `Tokio` `Async` `Tracing` | Asynchronous finite-state machine library in Rust & Tokio for reactive orchestration, deterministic event queues, and low-latency transitions. | [Code →](https://github.com/itsvrushabh/asyncfsm) |
+| **fastapi-template** | ★ 0 | `FastAPI` `PostgreSQL` `Redis` `Docker` | Production-hardened asynchronous REST microservice archetype with PostgreSQL connection pooling, Redis caching, and JWT auth. | [Code →](https://github.com/itsvrushabh/fastapi-template) |
+| **DineInTakeOut** | ★ 0 | `WebSockets` `RabbitMQ` `Redis` `PostgreSQL` | Event-driven omnichannel food order routing & status coordination engine powered by WebSockets, Celery task workers, and Redis pub/sub. | [Code →](https://github.com/itsvrushabh/DineInTakeOut) |
+| **nvim & omarchy-dotfiles** | ★ 0 | `Lua` `Neovim` `Hyprland` `Wayland` `Arch Linux` | Precision Linux developer ergonomics: Omarchy Linux rolling kernel, Hyprland Wayland compositor, and Neovim with rust-analyzer & inlay hints. | [Code →](https://github.com/itsvrushabh/nvim) |
 <!-- REPO_METRICS_END -->
 
 ---
@@ -41,8 +41,8 @@ Built with **Jekyll**, vanilla CSS with dark/light mode, and hosted on **GitHub 
   _How to structure an asynchronous Rust service with Axum, Tokio, connection pooling, and zero-allocation routing for sub-millisecond p99 latencies._
 - **[Resilient Distributed State: Reliable Event Queues with RabbitMQ and Redis](https://itsvrushabh.github.io/blog/resilient-distributed-state-with-rabbitmq-and-redis/)** (2026-02-10)  
   _Practical strategies for cache-aside patterns, idempotent message consumption, transactional outboxes, and dealing with network partitions._
-- **[Architecting Modern Python Backends: Async FastAPI, PEP 649, and No-GIL](https://itsvrushabh.github.io/blog/architecting-modern-python-backends-for-scale/)** (2026-01-22)  
-  _Taking advantage of modern Python runtime enhancements, free-threaded execution, deferred type annotations, and connection pooling for scalable microservices._
+- **[Architecting Modern Async Rust Microservices: Axum, Tokio, and Zero-Copy Concurrency](https://itsvrushabh.github.io/blog/architecting-modern-async-rust-microservices/)** (2026-01-22)  
+  _Structuring production-ready asynchronous Rust microservices with Axum, SQLx connection pooling, Serde zero-copy deserialization, and multi-core work stealing._
 <!-- LATEST_POSTS_END -->
 
 ---

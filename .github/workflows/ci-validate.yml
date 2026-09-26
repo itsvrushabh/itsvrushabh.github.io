@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   validate-assets:
-    name: Lint & Validate Assets
+    name: Lint & Validate Assets & Data
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -29,26 +29,42 @@ jobs:
           node --check assets/js/omarchy.js
           echo "✓ JavaScript syntax valid."
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
       - name: Validate JSON Data Files
         run: |
           echo "Validating JSON data files in _data/..."
-          python3 -c "
-          import json, glob, sys
-          files = glob.glob('_data/*.json')
-          for f in files:
-              try:
-                  with open(f) as fp:
-                      json.load(fp)
-                  print(f'✓ {f} is valid JSON')
-              except Exception as e:
-                  print(f'✗ Error in {f}: {e}', file=sys.stderr)
-                  sys.exit(1)
+          node -e "
+          const fs = require('fs');
+          const path = require('path');
+          const dataDir = '_data';
+          if (fs.existsSync(dataDir)) {
+            fs.readdirSync(dataDir).forEach(f => {
+              if (f.endsWith('.json')) {
+                JSON.parse(fs.readFileSync(path.join(dataDir, f), 'utf8'));
+                console.log('✓ ' + f + ' is valid JSON');
+              }
+            });
+          }
           "
+
+  validate-rust:
+    name: Build & Verify Rust Sync Tool
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "tools/portfolio-sync -> target"
+
+      - name: Cargo Check
+        run: |
+          cd tools/portfolio-sync
+          cargo check --all-targets
 
   validate-jekyll:
     name: Build & Verify Jekyll Site

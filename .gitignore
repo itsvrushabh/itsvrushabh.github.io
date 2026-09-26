@@ -213,3 +213,7 @@ _site/
 .jekyll-metadata
 vendor/
 .bundle/
+
+# Rust Build Artifacts
+target/
+tools/portfolio-sync/target/

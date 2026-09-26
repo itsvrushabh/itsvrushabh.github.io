@@ -3,12 +3,12 @@
     "repo": "asyncfsm",
     "tag": "ENGINE // 01",
     "name": "asyncfsm",
-    "desc": "Asynchronous finite-state machine library in Rust & Python for reactive orchestration, deterministic event queues, and low-latency transitions.",
+    "desc": "Asynchronous finite-state machine library in Rust & Tokio for reactive orchestration, deterministic event queues, and low-latency transitions.",
     "stack": [
       "Rust",
       "Tokio",
-      "Python",
-      "AsyncIO"
+      "Async",
+      "Tracing"
     ],
     "url": "https://github.com/itsvrushabh/asyncfsm",
     "stars": 0,
@@ -23,8 +23,7 @@
       "FastAPI",
       "PostgreSQL",
       "Redis",
-      "Docker",
-      "Pydantic"
+      "Docker"
     ],
     "url": "https://github.com/itsvrushabh/fastapi-template",
     "stars": 0,
@@ -36,7 +35,6 @@
     "name": "DineInTakeOut",
     "desc": "Event-driven omnichannel food order routing & status coordination engine powered by WebSockets, Celery task workers, and Redis pub/sub.",
     "stack": [
-      "Python",
       "WebSockets",
       "RabbitMQ",
       "Redis",
@@ -50,7 +48,7 @@
     "repo": "nvim",
     "tag": "COCKPIT // 04",
     "name": "nvim & omarchy-dotfiles",
-    "desc": "Precision Linux developer ergonomics: Omarchy Linux rolling kernel, Hyprland Wayland compositor, and Neovim with rust-analyzer & pyright.",
+    "desc": "Precision Linux developer ergonomics: Omarchy Linux rolling kernel, Hyprland Wayland compositor, and Neovim with rust-analyzer & inlay hints.",
     "stack": [
       "Lua",
       "Neovim",

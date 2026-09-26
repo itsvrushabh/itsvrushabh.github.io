@@ -333,7 +333,7 @@
   <table class="tui-table">
     <tr><td class="cmd-k">fastfetch / neofetch</td><td>Display system hardware, OS & runtime telemetry</td></tr>
     <tr><td class="cmd-k">about</td><td>Systems architect background & engineering philosophy</td></tr>
-    <tr><td class="cmd-k">skills</td><td>Low-level systems, Rust, Tokio, Python, Linux stack</td></tr>
+    <tr><td class="cmd-k">skills</td><td>Low-level systems, Rust, Tokio, Linux stack</td></tr>
     <tr><td class="cmd-k">projects</td><td>Flagship engines, state machines, microservices</td></tr>
     <tr><td class="cmd-k">theme [name]</td><td>Live switch site theme (e.g. <span class="text-brand">theme everforest</span>)</td></tr>
     <tr><td class="cmd-k">themes</td><td>List all 22 official Omarchy themes</td></tr>
@@ -363,7 +363,7 @@
     <div class="tui-spec-row"><span class="spec-label">WM:</span><span class="spec-val">Hyprland 0.47 (Wayland Compositor)</span></div>
     <div class="tui-spec-row"><span class="spec-label">Shell:</span><span class="spec-val">zsh 5.9 + starship prompt</span></div>
     <div class="tui-spec-row"><span class="spec-label">Terminal:</span><span class="spec-val">foot / alacritty (vi-mode bindings)</span></div>
-    <div class="tui-spec-row"><span class="spec-label">Editor:</span><span class="spec-val">Neovim (rust-analyzer + pyright)</span></div>
+    <div class="tui-spec-row"><span class="spec-label">Editor:</span><span class="spec-val">Neovim (rust-analyzer LSP)</span></div>
     <div class="tui-spec-row"><span class="spec-label">Theme:</span><span class="spec-val text-brand">${currentTheme}</span></div>
     <div class="tui-spec-row"><span class="spec-label">Architect:</span><span class="spec-val">Vrushabh Deshmukh</span></div>
     <div class="tui-spec-row"><span class="spec-label">Philosophy:</span><span class="spec-val">Zero-Allocation Concurrency &middot; Omakase Defaults</span></div>
@@ -380,7 +380,7 @@
 <div class="tui-text-block">
   <div class="tui-block-heading">[ ARCHITECT PROFILE // VRUSHABH DESHMUKH ]</div>
   <p>
-    I am a <strong>Backend Developer & Systems Architect</strong> operating at the intersection of compile-time systems programming (<strong>Rust & Tokio</strong>) and high-productivity backend services (<strong>Python & FastAPI</strong>).
+    I am a <strong>Backend Developer & Systems Architect</strong> operating at the intersection of compile-time systems programming (<strong>Rust & Tokio</strong>) and high-throughput async microservices (<strong>Axum & Tower</strong>).
   </p>
   <p>
     I run <strong>Omarchy Linux</strong> daily with Hyprland and Neovim. My core conviction is that computers should be fast by default, beautiful out of the box, and built with malleable tools that empower developers rather than burden them.
@@ -396,8 +396,8 @@
 <div class="tui-text-block">
   <div class="tui-block-heading">[ TECHNICAL STACK &amp; SPECIALIZATIONS ]</div>
   <div class="tui-skills-grid">
-    <div><strong>SYSTEMS & RUNTIMES:</strong> Rust, Tokio Async IO, C/C++, Linux IPC, POSIX Sockets, Zero-Copy serialization</div>
-    <div><strong>BACKEND ENGINES:</strong> Python 3.13, FastAPI, Django, Asyncpg, Pydantic v2, PEP 649</div>
+    <div><strong>SYSTEMS & RUNTIMES:</strong> Rust (Edition 2024), Tokio Async IO, C/C++, Linux IPC, POSIX Sockets, Zero-Copy serialization</div>
+    <div><strong>BACKEND ENGINES:</strong> Rust (Axum, Tower, Hyper), Lapin (RabbitMQ), SQLx, Redis-rs</div>
     <div><strong>DISTRIBUTED INFRA:</strong> RabbitMQ (Transactional Outbox), Redis (Cache-aside & Cluster), PostgreSQL, Docker</div>
     <div><strong>LINUX DESKTOP:</strong> Omarchy Linux, Hyprland, Wayland protocols, Neovim (Lua), Systemd, Bash/Zsh</div>
   </div>
@@ -407,7 +407,7 @@
 <div class="tui-text-block">
   <div class="tui-block-heading">[ FLAGSHIP REPOSITORIES ]</div>
   <div class="tui-project-row">
-    <strong>1. asyncfsm</strong> [Python &middot; Asyncio &middot; Distributed State]<br>
+    <strong>1. asyncfsm</strong> [Rust &middot; Tokio &middot; Distributed State]<br>
     Asynchronous finite state machine engine with non-blocking transitions and audit logging.<br>
     <a href="https://github.com/itsvrushabh/asyncfsm" target="_blank" class="tui-link">Repo: github.com/itsvrushabh/asyncfsm &rarr;</a>
   </div>
@@ -1127,7 +1127,8 @@
   function initNeovimPlayground() {
     const tabMeta = {
       rust: { file: 'src/runtime/main.rs', type: 'rust' },
-      python: { file: 'src/fsm/state_machine.py', type: 'python' },
+      fsm: { file: 'src/fsm/state_machine.rs', type: 'rust' },
+      python: { file: 'src/fsm/state_machine.rs', type: 'rust' },
       hyprland: { file: '~/.config/hypr/hyprland.conf', type: 'hyprlang' },
       starship: { file: '~/.config/starship.toml', type: 'toml' }
     };
