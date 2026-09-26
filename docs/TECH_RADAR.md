@@ -1,5 +1,17 @@
 # 📡 Full-Stack Technology Radar & Evolution Guide
 
+<div align="left">
+  <a href="https://github.com/itsvrushabh/itsvrushabh/actions/workflows/update-radar.yml">
+    <img src="https://github.com/itsvrushabh/itsvrushabh/actions/workflows/update-radar.yml/badge.svg" alt="Update Radar Bot Status" />
+  </a>
+  &nbsp;
+  <img src="https://img.shields.io/badge/Automated-Weekly_Sync-7aa2f7?style=flat-square&logo=github-actions&logoColor=white" alt="Weekly Automation" />
+  &nbsp;
+  <img src="https://img.shields.io/badge/Technologies_Tracked-16+-101014?style=flat-square&logo=databricks&logoColor=7aa2f7" alt="16+ Tech Tracked" />
+</div>
+
+<br />
+
 A deep-dive reference tracking the current production versions and upcoming generational shifts across my entire technology stack — from languages and frameworks to databases, infrastructure, and developer ergonomics.
 
 ---

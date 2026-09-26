@@ -8,7 +8,25 @@
   </p>
   <sub>⚡ Daily Driver: <b>Omarchy Linux</b> + <b>Hyprland</b> · Dotfiles: <a href="https://github.com/itsvrushabh/nvim"><b>nvim (LazyVim)</b></a> · <a href="https://github.com/itsvrushabh/tmux"><b>tmux (Omarchy theme)</b></a></sub>
 
-  <br /><br />
+  <br />
+
+  <details>
+    <summary><b>🖥️ Click to inspect Workstation Ergonomics & Dotfiles Specs</b></summary>
+    <br />
+    <div align="left">
+
+| Layer | Technology | Key Features & Architecture |
+| :--- | :--- | :--- |
+| **Operating System** | [**Omarchy Linux**](https://omarchy.org/) | Rolling-release Arch base with Linux 6.12+ `sched-ext` user-space scheduler for ultra-low latency response. |
+| **Compositor / WM** | [**Hyprland**](https://hyprland.org/) | Hardware-accelerated Wayland tiling compositor, tear-free gaming/display protocol, Tokyo Night palette. |
+| **Editor** | [**Neovim (LazyVim)**](https://github.com/itsvrushabh/nvim) | Configured with `rust-analyzer`, `pyright`, Treesitter syntax parsing, and native LSP inlay hints. |
+| **Multiplexer** | [**Tmux**](https://github.com/itsvrushabh/tmux) | Custom Omarchy Tokyo Night statusline, extended xterm key handling (`Ctrl+Shift`), session persistence. |
+| **Workstation Scripts**| [**tonarchy**](https://github.com/itsvrushabh/tonarchy) | Automated system provisioning, sound, keymaps, and desktop workflow helpers. |
+
+    </div>
+  </details>
+
+  <br />
 
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/itsvrushabh/itsvrushabh/output/github-contribution-grid-snake-dark.svg" />
@@ -89,9 +107,11 @@
 <br />
 
 <div align="center">
-  <h2>📊 GitHub Activity & Streak</h2>
+  <h2>📊 GitHub Activity & Language Distribution</h2>
 
   <img src="https://streak-stats.demolab.com/?user=itsvrushabh&theme=tokyonight" alt="GitHub Streak" />
+  &nbsp;&nbsp;
+  <img src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=itsvrushabh&layout=compact&theme=tokyonight&hide_border=true&langs_count=6" alt="Top Languages" />
 
   <br /><br />
 
@@ -101,6 +121,51 @@
     <img alt="3D Contribution Graph" src="./profile-3d-contrib/profile-night-view.svg" width="100%" />
   </picture>
 </div>
+
+---
+
+<div align="center">
+  <h2>🌟 Featured Flagship Projects</h2>
+  <p>Production boilerplates, asynchronous state engines, and distributed messaging architectures.</p>
+
+  <a href="https://github.com/itsvrushabh/asyncfsm">
+    <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=asyncfsm&theme=tokyonight&hide_border=true" alt="asyncfsm" />
+  </a>
+  &nbsp;
+  <a href="https://github.com/itsvrushabh/fastapi-template">
+    <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=fastapi-template&theme=tokyonight&hide_border=true" alt="fastapi-template" />
+  </a>
+  
+  <br /><br />
+
+  <a href="https://github.com/itsvrushabh/rabbitmq-cluster">
+    <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=rabbitmq-cluster&theme=tokyonight&hide_border=true" alt="rabbitmq-cluster" />
+  </a>
+  &nbsp;
+  <a href="https://github.com/itsvrushabh/hello-axum">
+    <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=hello-axum&theme=tokyonight&hide_border=true" alt="hello-axum" />
+  </a>
+</div>
+
+<br />
+
+---
+
+## 📐 Engineering Philosophy & System Design
+
+```mermaid
+flowchart LR
+    Client([Client / Web]) -->|Reverse Proxy| Gateway[HAProxy / Gateway]
+    Gateway -->|Async HTTP| Svc[FastAPI / Django / Axum]
+    Svc <-->|Cache / Ephemeral| Cache[(Redis)]
+    Svc <-->|Connection Pool| DB[(PostgreSQL)]
+    Svc -->|Message Queue| Queue[(RabbitMQ)]
+    Queue --> Worker[Async Workers]
+```
+
+* ⚡ **Zero-Allocation Critical Paths:** Leveraging Rust and Axum/Tokio when sub-millisecond throughput and deterministic memory consumption are paramount.
+* 🛡️ **Resilient Distributed State:** Multi-node RabbitMQ message brokering, Redis cache-aside strategies, and robust connection pooling (`asyncpg`, `sqlx`).
+* 🔒 **Strict Type Contracts:** End-to-end type safety from compile-time borrow checks in Rust to Pydantic runtime models and PEP 649 annotations in Python.
 
 ---
 
