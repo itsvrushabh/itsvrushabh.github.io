@@ -31,11 +31,6 @@
 
 <br />
 
-- 🔧 Building high-throughput services with **Rust**, **Python**, **PostgreSQL**, **Redis**, and **Docker**
-- 🌱 Exploring: Advanced Rust, Tokio concurrency patterns, and distributed systems architecture
-- 🧪 Obsessed with performance benchmarks, type safety, and clean code
-
-<br />
 <div align="center">
 
   <p><b>Languages, Runtimes, Infra & Tools</b></p>
