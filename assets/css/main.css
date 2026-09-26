@@ -30,6 +30,65 @@
   --container-narrow: 840px;
 }
 
+/* ==========================================================================
+   Lenis Smooth Inertia Scroll (Lando Norris Physics)
+   ========================================================================== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Signature Lando Norris Rolling Text Hover Effect
+   ========================================================================== */
+.roll-text {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  line-height: 1.25;
+  vertical-align: middle;
+}
+
+.roll-text-inner {
+  display: inline-block;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.roll-text-inner::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  color: currentColor;
+  white-space: nowrap;
+}
+
+*:hover > .roll-text > .roll-text-inner,
+.btn-f1-lime:hover .roll-text-inner,
+.btn-f1-primary:hover .roll-text-inner,
+.btn-f1-outline:hover .roll-text-inner,
+.btn-f1-ghost:hover .roll-text-inner,
+.nav-link:hover .roll-text-inner {
+  transform: translateY(-100%);
+}
+
 /* Dark Theme (Lando Formula 1 Stealth Carbon - Default) */
 [data-theme="dark"], :root:not([data-theme="light"]) {
   --bg-body: #090d0b;
@@ -696,15 +755,30 @@ a {
 .circuit-track-svg {
   width: 100%;
   height: 100%;
+  overflow: visible;
+}
+
+.track-line {
+  stroke-dasharray: 450;
+  stroke-dashoffset: 450;
+  animation: draw-circuit 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes draw-circuit {
+  to { stroke-dashoffset: 0; }
 }
 
 .track-car-dot {
-  animation: car-pulse 1s infinite alternate;
+  offset-path: path("M20 70 C 20 40, 50 20, 80 20 C 110 20, 140 35, 170 30 C 185 28, 190 45, 180 60 C 165 80, 150 90, 130 95 C 100 102, 70 85, 50 100 C 35 110, 20 100, 20 70 Z");
+  animation: race-lap 6s linear infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 6px var(--color-lime));
 }
 
-@keyframes car-pulse {
-  from { opacity: 0.5; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1.2); }
+@keyframes race-lap {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
 }
 
 .circuit-title {
@@ -853,6 +927,30 @@ a {
 
 .f1-link-more:hover {
   color: #ffffff;
+}
+
+/* ==========================================================================
+   Scroll-Triggered Reveals & Interactive Spotlight (Lando Norris style)
+   ========================================================================== */
+[data-reveal], .f1-stat-card, .f1-race-card, .f1-article-card, .f1-callout-panel {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  will-change: opacity, transform;
+}
+
+[data-reveal].revealed, 
+.f1-stat-card.revealed, 
+.f1-race-card.revealed, 
+.f1-article-card.revealed, 
+.f1-callout-panel.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.f1-race-card, .f1-stat-card, .f1-article-card {
+  position: relative;
+  background-image: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(210, 255, 0, 0.08) 0%, transparent 80%);
 }
 
 /* Stats Telemetry Grid */

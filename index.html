@@ -51,16 +51,16 @@ title: "Home"
 
       <div class="f1-hero-buttons">
         <a href="{{ '/projects/' | relative_url }}" class="btn-f1-primary">
-          <span>EXPLORE ON TRACK</span>
+          <span class="roll-text"><span class="roll-text-inner" data-text="EXPLORE ON TRACK">EXPLORE ON TRACK</span></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
 
         <a href="{{ '/blog/' | relative_url }}" class="btn-f1-outline">
-          <span>READ PADDOCK DISPATCHES</span>
+          <span class="roll-text"><span class="roll-text-inner" data-text="READ PADDOCK DISPATCHES">READ PADDOCK DISPATCHES</span></span>
         </a>
 
         <a href="{{ '/resume/' | relative_url }}" class="btn-f1-ghost">
-          <span>DRIVER CV / RESUME &rarr;</span>
+          <span class="roll-text"><span class="roll-text-inner" data-text="DRIVER CV / RESUME →">DRIVER CV / RESUME &rarr;</span></span>
         </a>
       </div>
     </div>
@@ -160,26 +160,26 @@ title: "Home"
     </div>
 
     <div class="f1-stats-grid">
-      <div class="f1-stat-card">
-        <div class="f1-stat-metric text-lime">20,000+</div>
+      <div class="f1-stat-card" data-reveal>
+        <div class="f1-stat-metric text-lime" data-counter="20000" data-suffix="+">20,000+</div>
         <div class="f1-stat-label">REQ / SECOND THROUGHPUT</div>
         <div class="f1-stat-sub">Axum &middot; Tokio multi-threaded socket pipeline</div>
       </div>
 
-      <div class="f1-stat-card">
-        <div class="f1-stat-metric">0.42 ms</div>
+      <div class="f1-stat-card" data-reveal>
+        <div class="f1-stat-metric" data-counter="0.42" data-decimals="2" data-suffix=" ms">0.42 ms</div>
         <div class="f1-stat-label">P50 IN-MEMORY LATENCY</div>
         <div class="f1-stat-sub">Redis cache-aside with connection pooling</div>
       </div>
 
-      <div class="f1-stat-card">
-        <div class="f1-stat-metric text-lime">99.999%</div>
+      <div class="f1-stat-card" data-reveal>
+        <div class="f1-stat-metric text-lime" data-counter="99.999" data-decimals="3" data-suffix="%">99.999%</div>
         <div class="f1-stat-label">DISTRIBUTED SYSTEM SLA</div>
         <div class="f1-stat-sub">Transactional outbox &amp; RabbitMQ broker resilience</div>
       </div>
 
-      <div class="f1-stat-card">
-        <div class="f1-stat-metric">#1</div>
+      <div class="f1-stat-card" data-reveal>
+        <div class="f1-stat-metric" data-counter="1" data-prefix="#">#1</div>
         <div class="f1-stat-label">ZERO-ALLOCATION CODEPATHS</div>
         <div class="f1-stat-sub">Strict borrow-checked Rust &amp; PEP 649 typing</div>
       </div>
