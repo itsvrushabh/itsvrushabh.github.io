@@ -265,4 +265,4 @@ A deep-dive reference tracking the current production versions and upcoming gene
 
 ---
 
-[← Back to Profile Overview](../README.md)
+[← Documentation Index](./index.md) · [GitHub Profile Overview](../README.md)

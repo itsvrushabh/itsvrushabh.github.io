@@ -84,6 +84,6 @@ A dynamically synchronized directory of open-source projects, experiments, dotfi
 
 ---
 
-[← Back to Profile Overview](../README.md)
+[← Documentation Index](./index.md) · [GitHub Profile Overview](../README.md)
 
 <!-- END_REPOSITORIES_CATALOG -->
