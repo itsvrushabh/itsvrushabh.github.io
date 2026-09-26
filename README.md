@@ -142,8 +142,8 @@
     <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=rabbitmq-cluster&theme=tokyonight&hide_border=true" alt="rabbitmq-cluster" />
   </a>
   &nbsp;
-  <a href="https://github.com/itsvrushabh/hello-axum">
-    <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=hello-axum&theme=tokyonight&hide_border=true" alt="hello-axum" />
+  <a href="https://github.com/itsvrushabh/hello-rocket">
+    <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=hello-rocket&theme=tokyonight&hide_border=true" alt="hello-rocket" />
   </a>
 </div>
 

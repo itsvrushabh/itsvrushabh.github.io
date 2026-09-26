@@ -1,54 +1,93 @@
+<!-- START_REPOSITORIES_CATALOG -->
 # 📚 Complete Repository Catalog
 
-A categorized directory of open-source projects, experiments, dotfiles, and contributions by [Vrushabh](https://github.com/itsvrushabh).
+<div align="left">
+  <a href="https://github.com/itsvrushabh/itsvrushabh/actions/workflows/update-repositories.yml">
+    <img src="https://github.com/itsvrushabh/itsvrushabh/actions/workflows/update-repositories.yml/badge.svg" alt="Update Repositories Catalog Status" />
+  </a>
+  &nbsp;
+  <img src="https://img.shields.io/badge/Repositories-21-7aa2f7?style=flat-square&logo=github&logoColor=white" alt="Total Repositories" />
+  &nbsp;
+  <img src="https://img.shields.io/badge/Original_Projects-16-9ece6a?style=flat-square" alt="Original Projects" />
+  &nbsp;
+  <img src="https://img.shields.io/badge/Forks_5-bb9af7?style=flat-square" alt="Forks" />
+  &nbsp;
+  <img src="https://img.shields.io/badge/Last_Sync-September_2026-101014?style=flat-square" alt="Last Synced" />
+</div>
+
+A dynamically synchronized directory of open-source projects, experiments, dotfiles, and contributions by [Vrushabh](https://github.com/itsvrushabh). Automatically updated weekly.
 
 ---
 
-### 🦀 Rust
-| Repository | Description | Primary Focus |
-| :--- | :--- | :--- |
-| [**asyncfsm**](https://github.com/itsvrushabh/asyncfsm) | Asynchronous finite-state machine parsing engine | Concurrency, State Machines |
-| [**hello-axum**](https://github.com/itsvrushabh/hello-axum) | High-performance REST API exploration with Axum | Web Frameworks, Tokio |
-| [**hello-rocket**](https://github.com/itsvrushabh/hello-rocket) | Type-safe web service experiments with Rocket | Routing, Middleware |
-| [**textfsm-rs**](https://github.com/itsvrushabh/textfsm-rs) | Port of TextFSM parser into Rust (Fork) | Parsing, CLI Tools |
+### 🦀 Rust & Systems Programming
+*High-performance systems, asynchronous engines, and command-line parsers.*
+
+| Repository | Description | Primary Focus | Language |
+| :--- | :--- | :--- | :--- |
+| [**asyncfsm**](https://github.com/itsvrushabh/asyncfsm) | Asynchronous finite-state machine parsing engine with streaming token processing. | Concurrency, State Machines, Tokio | `Rust` |
+| [**DineInTakeOut**](https://github.com/itsvrushabh/DineInTakeOut) | Restaurant dining and takeout order lifecycle management service built in Rust. | Systems Architecture, Backend Service | `Rust` |
+| [**hello-rocket**](https://github.com/itsvrushabh/hello-rocket) | Type-safe asynchronous web microservice experiments with Rocket. | Routing, Middleware, Microservices | `Rust` |
+| [**textfsm-rs**](https://github.com/itsvrushabh/textfsm-rs) <sub>*(Fork)*</sub> | High-performance Rust implementation of the TextFSM template parser. | Parsing, Networking Templates, CLI | `Rust` |
 
 ---
 
-### 🐍 Python
-| Repository | Description | Primary Focus |
-| :--- | :--- | :--- |
-| [**fastapi-template**](https://github.com/itsvrushabh/fastapi-template) | Production-ready, async REST API boilerplate | Async SQLAlchemy, Redis, Docker |
-| [**python-patterns**](https://github.com/itsvrushabh/python-patterns) | Implementations of design patterns | Clean Architecture, OOP |
-| [**snowflake-sqlalchemy**](https://github.com/itsvrushabh/snowflake-sqlalchemy) | Snowflake SQLAlchemy dialect optimizations (Fork) | Database Dialects |
-| [**Tasker**](https://github.com/itsvrushabh/Tasker) | Automation and background task orchestrator | Scripting, Workflows |
+### 🐍 Python & Backend Engineering
+*Microservices, async REST APIs, design patterns, and task runners.*
+
+| Repository | Description | Primary Focus | Language |
+| :--- | :--- | :--- | :--- |
+| [**fastapi-template**](https://github.com/itsvrushabh/fastapi-template) | Production-ready, asynchronous REST API boilerplate with SQLAlchemy, Redis, and Docker. | Async SQLAlchemy, Redis, Docker, OpenAPI | `Python` |
+| [**laya_demo**](https://github.com/itsvrushabh/laya_demo) | Python data pipeline exploration and algorithmic testbed. | Data Processing, Prototyping | `Python` |
+| [**python-patterns**](https://github.com/itsvrushabh/python-patterns) | Clean-code reference implementations of architectural and behavioral design patterns. | Clean Architecture, OOP, Design Patterns | `Python` |
+| [**snowflake-sqlalchemy**](https://github.com/itsvrushabh/snowflake-sqlalchemy) <sub>*(Fork)*</sub> | Snowflake database dialect extensions and connection pooling optimizations. | Database Dialects, SQLAlchemy, Cloud Data | `Python` |
+| [**Tasker**](https://github.com/itsvrushabh/Tasker) | Automated workflow runner and background task orchestrator. | Automation, Workflows, Scripting | `Python` |
+| [**todo**](https://github.com/itsvrushabh/todo) | Minimalist task tracking backend service and CLI interface. | CLI, CRUD, Python | `Python` |
 
 ---
 
-### 🎯 Distributed Systems & Cloud
-| Repository | Description | Primary Focus |
-| :--- | :--- | :--- |
-| [**rabbitmq-cluster**](https://github.com/itsvrushabh/rabbitmq-cluster) | Multi-node RabbitMQ cluster load-balanced via HAProxy | High Availability, Message Queues |
-| [**ente_local_without_s3**](https://github.com/itsvrushabh/ente_local_without_s3) | End-to-end encrypted storage without cloud S3 | Local-First, Security |
+### 🎯 Distributed Systems & Cloud Infrastructure
+*Clustered brokers, high availability setups, and encrypted storage.*
+
+| Repository | Description | Primary Focus | Language |
+| :--- | :--- | :--- | :--- |
+| [**ente_local_without_s3**](https://github.com/itsvrushabh/ente_local_without_s3) <sub>*(Fork)*</sub> | End-to-end encrypted local-first private storage engine operating without cloud S3. | Local-First Storage, E2EE, Security | `Dart` |
+| [**rabbitmq-cluster**](https://github.com/itsvrushabh/rabbitmq-cluster) | Multi-node RabbitMQ message broker cluster with automated HAProxy load balancing. | High Availability, Message Queues, Clustering | `Shell` |
 
 ---
 
-### ⚙️ Developer Environment & Systems
-| Repository | Description | Primary Focus |
-| :--- | :--- | :--- |
-| [**tonarchy**](https://github.com/itsvrushabh/tonarchy) | Custom workstation scripts and tweaks for Omarchy Linux | Omarchy, System Customization |
-| [**nvim**](https://github.com/itsvrushabh/nvim) | LazyVim configuration tailored for Omarchy Linux (Rust & Python LSP) | LazyVim, Treesitter, LSP |
-| [**tmux**](https://github.com/itsvrushabh/tmux) | Tmux multiplexer setup with custom Omarchy Tokyo Night theme | Session Ergonomics, Omarchy |
-| [**linux**](https://github.com/itsvrushabh/linux) | Linux kernel source exploration (Fork) | Systems Architecture |
+### ⚙️ Workstation, Dotfiles & Developer Ergonomics
+*Omarchy Linux system configs, LazyVim IDE, and Tmux workflows.*
+
+| Repository | Description | Primary Focus | Language |
+| :--- | :--- | :--- | :--- |
+| [**init_me**](https://github.com/itsvrushabh/init_me) | Automated system initialization and dotfile bootstrapper. | Dotfiles, System Bootstrap, Lua | `Lua` |
+| [**linux**](https://github.com/itsvrushabh/linux) <sub>*(Fork)*</sub> | Linux kernel source exploration and systems programming reference. | Kernel Internals, Systems Programming | `C` |
+| [**nvim**](https://github.com/itsvrushabh/nvim) | LazyVim configuration tailored for Omarchy Linux with Rust Analyzer, Pyright, and Treesitter. | LazyVim, Treesitter, LSP, Tokio/Python Ergonomics | `Lua` |
+| [**tmux**](https://github.com/itsvrushabh/tmux) | Tmux terminal multiplexer setup featuring custom Omarchy Tokyo Night statusline. | Session Ergonomics, Omarchy, Extended Keys | `Shell` |
+| [**tonarchy**](https://github.com/itsvrushabh/tonarchy) <sub>*(Fork)*</sub> | Workstation provisioning, system tweaks, and custom tools for Omarchy Linux. | Omarchy Linux, Hyprland, System Customization | `Multi-language` |
 
 ---
 
-### 🌐 Web & Applications
-| Repository | Description | Primary Focus |
-| :--- | :--- | :--- |
-| [**FTracker**](https://github.com/itsvrushabh/FTracker) | Personal finance and budget tracking utility | Full-Stack, Budgeting |
-| [**DineInTakeOut**](https://github.com/itsvrushabh/DineInTakeOut) | Dining and takeout service platform | Web Applications |
-| [**expense-organizer**](https://github.com/itsvrushabh/expense-organizer) | Expense classification utility | Data Processing |
+### 🌐 Full-Stack, Mobile & Web Applications
+*End-user web apps, mobile utilities, and domain-specific platforms.*
+
+| Repository | Description | Primary Focus | Language |
+| :--- | :--- | :--- | :--- |
+| [**DinningIn**](https://github.com/itsvrushabh/DinningIn) | Table management and guest reservation coordination application. | Full-Stack, Service Management | `Multi-language` |
+| [**expense-organizer**](https://github.com/itsvrushabh/expense-organizer) | Mobile expense classification and receipt accounting utility. | Flutter / Dart, Mobile, Expense Tracking | `Dart` |
+| [**hotel-management**](https://github.com/itsvrushabh/hotel-management) | Full-lifecycle hotel booking, reservation, and room management system. | TypeScript, Full-Stack, Web App | `TypeScript` |
+
+---
+
+### 🤖 Profile Automation & Meta
+*Automated GitHub bots, CI workflows, and documentation generators.*
+
+| Repository | Description | Primary Focus | Language |
+| :--- | :--- | :--- | :--- |
+| [**itsvrushabh**](https://github.com/itsvrushabh/itsvrushabh) | Personal GitHub profile configuration, automated Tech Radar, and live CI workflows. | GitHub Actions, CI/CD, Profile Automation | `Python` |
 
 ---
 
 [← Back to Profile Overview](../README.md)
+
+<!-- END_REPOSITORIES_CATALOG -->
