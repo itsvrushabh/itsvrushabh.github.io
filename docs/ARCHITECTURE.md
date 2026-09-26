@@ -22,7 +22,7 @@ Notes on my technical approach, architectural preferences, and design principles
 ```mermaid
 flowchart LR
     Client([Client / Web]) -->|Reverse Proxy| Gateway[HAProxy / Gateway]
-    Gateway -->|Async HTTP| Svc[FastAPI / Axum]
+    Gateway -->|Async HTTP| Svc[FastAPI / Django / Axum]
     Svc <-->|Cache / Ephemeral| Cache[(Redis)]
     Svc <-->|Connection Pool| DB[(PostgreSQL)]
     Svc -->|Message Queue| Queue[(RabbitMQ)]
@@ -30,7 +30,7 @@ flowchart LR
 ```
 
 * **Core Languages:** Rust, Python
-* **Frameworks & Runtimes:** Axum, Tokio, FastAPI, Iced
+* **Frameworks & Runtimes:** Axum, Tokio, FastAPI, Django, Iced
 * **Databases & Caching:** PostgreSQL, MySQL, SQLite, Turso, Redis, MongoDB
 * **Messaging & Brokers:** RabbitMQ
 * **Infrastructure & Ops:** Docker, Docker Compose, Git

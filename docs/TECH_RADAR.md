@@ -63,6 +63,20 @@ A deep-dive reference tracking the current production versions and upcoming gene
 
 <br />
 
+### 🎸 Django
+<div align="left">
+  <img src="https://img.shields.io/badge/Django_v6.1-Current_Stable-092E20?style=flat-square&logo=django&logoColor=white" alt="Django" />
+  &nbsp;
+  <img src="https://img.shields.io/badge/Django_v6.2+-Next_Gen-0C4B33?style=flat-square&logo=django&logoColor=white" alt="Django Next" />
+</div>
+
+| Release | Focus | Top 3 Core Innovations |
+| :--- | :--- | :--- |
+| **🟢 Current: v6.1** | Native Background Workers & Async ORM | 1. **Native Background Tasks Engine:** Asynchronous task queue and worker architecture integrated into core without external Celery brokers.<br>2. **Composite Primary Keys & Query Optimizations:** Native multi-column primary keys and advanced subquery unrolling in ORM.<br>3. **Zero-Threadpool Async Streaming:** Async streaming HTTP responses executing natively on event loops without sync-to-async thread handoffs. |
+| **🚀 Next: v6.2+** | Full Async Writes & OpenTelemetry Core | 1. **Non-Blocking Write Queries:** Native asynchronous write pipelines (`acreate`, `abulk_create`, `aupdate`) bypassing thread pool overhead.<br>2. **Built-in OpenTelemetry Instrumentation:** Distributed tracing and metrics exported directly from Django core request-response lifecycle.<br>3. **Reactive Form Components:** Component-based template rendering with declarative reactive client-side bindings. |
+
+<br />
+
 ### ⚙️ Tokio
 <div align="left">
   <img src="https://img.shields.io/badge/Tokio_v1.53.1-Current_Stable-000000?style=flat-square&logo=tokio&logoColor=white" alt="Tokio" />
