@@ -106,6 +106,7 @@ Check out my **Pinned Repositories** on this profile for active flagship project
 
 | Section | Description | Link |
 | :--- | :--- | :---: |
+| 📡 **Full-Stack Tech Radar** | Current & upcoming versions + top 3 innovations across all 16+ tools | [**View Tech Radar →**](./docs/TECH_RADAR.md) |
 | 📚 **Complete Repository Catalog** | Categorized list of all open-source repositories, forks, and tools | [**View Catalog →**](./docs/REPOSITORIES.md) |
 | 📐 **Architecture & Stack Notes** | Design principles, concurrency models, and preferred system topology | [**Read Architecture →**](./docs/ARCHITECTURE.md) |
 
