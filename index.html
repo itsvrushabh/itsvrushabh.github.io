@@ -3,275 +3,402 @@ layout: default
 title: "Home"
 ---
 
-<div class="container">
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-status-pill">
-      <span class="pulse-dot"></span>
-      <span>Available for backend & systems architecture</span>
+<!-- ==========================================
+     HERO: MAX VERSTAPPEN ✕ VRUSHABH DESHMUKH
+     ========================================== -->
+<section class="f1-hero-section">
+  <!-- Max Verstappen Hero Background with Dynamic Vignette -->
+  <div class="f1-hero-bg-wrapper">
+    <picture>
+      <source srcset="{{ '/assets/images/max-hero.webp' | relative_url }}" type="image/webp">
+      <img src="{{ '/assets/images/max-hero.jpg' | relative_url }}" alt="Max Verstappen World Champion" class="f1-hero-img">
+    </picture>
+    <div class="f1-hero-overlay"></div>
+    <div class="f1-grid-mesh"></div>
+  </div>
+
+  <div class="container f1-hero-container">
+    <!-- Top Telemetry Row -->
+    <div class="f1-hero-meta-row">
+      <div class="f1-status-tag">
+        <span class="f1-pulsing-green"></span>
+        <span>PIT WALL ACTIVE // TELEMETRY ONLINE</span>
+      </div>
+
+      <!-- Driver #1 & Omarchy Pill -->
+      <div class="f1-driver-meta">
+        <span class="f1-champ-pill">4X WORLD CHAMPION ENERGY</span>
+        <span class="f1-badge-no">#1</span>
+      </div>
     </div>
 
-    <h1 class="hero-title">
-      Hi, I'm <span class="gradient-text">Vrushabh Deshmukh</span>
-    </h1>
+    <!-- Main Hero Headings -->
+    <div class="f1-hero-content">
+      <div class="f1-subheading-eyebrow">
+        <span>RED BULL RACING &middot; FORMULA 1 SPEED &middot; LINUX ARCHITECTURE</span>
+      </div>
 
-    <div class="hero-tagline">
-      Backend Developer &middot; API Designer &middot; Systems & Rust Enthusiast
+      <h1 class="f1-headline">
+        <span class="f1-champ-name">MAX VERSTAPPEN</span>
+        <span class="f1-amp">&times;</span>
+        <span class="f1-engineer-name">VRUSHABH DESHMUKH</span>
+      </h1>
+
+      <p class="f1-lead">
+        High-throughput backend engineering inspired by Formula 1 precision. 
+        Zero-allocation asynchronous runtimes in <strong>Rust &amp; Tokio</strong>, resilient distributed state with <strong>RabbitMQ &amp; Redis</strong>, and sub-millisecond p99 telemetry on <strong>Omarchy Linux</strong>.
+      </p>
+
+      <div class="f1-hero-buttons">
+        <a href="{{ '/projects/' | relative_url }}" class="btn-f1-primary">
+          <span>EXPLORE ON TRACK</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+
+        <a href="{{ '/blog/' | relative_url }}" class="btn-f1-outline">
+          <span>READ PADDOCK DISPATCHES</span>
+        </a>
+
+        <a href="{{ '/resume/' | relative_url }}" class="btn-f1-ghost">
+          <span>DRIVER CV / RESUME &rarr;</span>
+        </a>
+      </div>
     </div>
 
-    <p class="hero-bio">
-      I design and build resilient, high-throughput backend services and distributed systems. 
-      Obsessed with zero-allocation critical paths, robust message queues, strict type safety, 
-      and crafting software that performs reliably under extreme scale.
-    </p>
+    <!-- Floating Next Race / Circuit Telemetry HUD Card (Lando Norris style) -->
+    <aside class="f1-circuit-card">
+      <div class="circuit-card-header">
+        <span class="circuit-card-label">NEXT GP // DEPLOYMENT</span>
+        <span class="circuit-status">LIVE TRACK</span>
+      </div>
 
-    <div class="hero-actions">
-      <a href="{{ '/blog/' | relative_url }}" class="btn btn-primary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+      <div class="circuit-map-wrap">
+        <!-- SVG F1 Circuit Track Outline (Silverstone / GP Style) -->
+        <svg class="circuit-track-svg" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 70 C 20 40, 50 20, 80 20 C 110 20, 140 35, 170 30 C 185 28, 190 45, 180 60 C 165 80, 150 90, 130 95 C 100 102, 70 85, 50 100 C 35 110, 20 100, 20 70 Z" 
+                stroke="var(--color-lime)" stroke-width="3" stroke-dasharray="350" stroke-dashoffset="0" class="track-line" />
+          <circle cx="80" cy="20" r="4" fill="#ffffff" class="track-car-dot" />
         </svg>
-        Read Technical Articles
-      </a>
+      </div>
 
-      <a href="{{ '/projects/' | relative_url }}" class="btn btn-secondary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="16 18 22 12 16 6"></polyline>
-          <polyline points="8 6 2 12 8 18"></polyline>
-        </svg>
-        View Projects
-      </a>
+      <div class="circuit-details">
+        <div class="circuit-title">BAKU GP &middot; PROD CLUSTER</div>
+        <div class="circuit-specs">
+          <div class="spec-col">
+            <span class="spec-k">P50 LATENCY</span>
+            <span class="spec-v text-lime">0.42 MS</span>
+          </div>
+          <div class="spec-col">
+            <span class="spec-k">THROUGHPUT</span>
+            <span class="spec-v">20K+ REQ/S</span>
+          </div>
+          <div class="spec-col">
+            <span class="spec-k">RELIABILITY</span>
+            <span class="spec-v">99.999%</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
 
-      <a href="{{ '/contact/' | relative_url }}" class="btn btn-secondary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-          <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
-        Get in Touch
-      </a>
+<!-- ==========================================
+     CONTINUOUS RACING MARQUEE TICKER (Lando Norris Style)
+     ========================================== -->
+<div class="f1-marquee-wrapper" aria-hidden="true">
+  <div class="f1-marquee-track">
+    <div class="f1-marquee-content">
+      <span>MAX VERSTAPPEN</span> <span class="f1-num-tag">#1</span>
+      <span>&middot;</span>
+      <span>4X WORLD CHAMPION</span>
+      <span>&middot;</span>
+      <span>VRUSHABH DESHMUKH</span>
+      <span>&middot;</span>
+      <span class="text-lime">ZERO-ALLOCATION RUST</span>
+      <span>&middot;</span>
+      <span>RABBITMQ EVENT QUEUES</span>
+      <span>&middot;</span>
+      <span>OMARCHY LINUX WORKSTATION</span>
+      <span>&middot;</span>
+      <span class="text-lime">20,000 REQ/SEC</span>
+      <span>&middot;</span>
+      <span>SUB-MILLISECOND P99</span>
+      <span>&middot;</span>
     </div>
-  </section>
-
-  <!-- Core Tech Stack -->
-  <section class="section">
-    <div class="section-header">
-      <h2 class="section-title">Core Competencies & Stack</h2>
-      <a href="{{ '/about/' | relative_url }}" class="section-more">More in About &rarr;</a>
+    <div class="f1-marquee-content">
+      <span>MAX VERSTAPPEN</span> <span class="f1-num-tag">#1</span>
+      <span>&middot;</span>
+      <span>4X WORLD CHAMPION</span>
+      <span>&middot;</span>
+      <span>VRUSHABH DESHMUKH</span>
+      <span>&middot;</span>
+      <span class="text-lime">ZERO-ALLOCATION RUST</span>
+      <span>&middot;</span>
+      <span>RABBITMQ EVENT QUEUES</span>
+      <span>&middot;</span>
+      <span>OMARCHY LINUX WORKSTATION</span>
+      <span>&middot;</span>
+      <span class="text-lime">20,000 REQ/SEC</span>
+      <span>&middot;</span>
+      <span>SUB-MILLISECOND P99</span>
+      <span>&middot;</span>
     </div>
+  </div>
+</div>
 
-    <div class="skills-grid">
-      <div class="skill-category">
-        <div class="skill-cat-title">
-          <span>🦀 Languages</span>
-        </div>
-        <ul class="skill-list">
-          <li class="skill-item">Rust</li>
-          <li class="skill-item">Python 3.13+</li>
-          <li class="skill-item">SQL</li>
-          <li class="skill-item">Bash / Zsh</li>
-          <li class="skill-item">Dart</li>
-        </ul>
+<div class="container f1-main-container">
+  <!-- ==========================================
+       SECTION 01: PIT WALL TELEMETRY STATS
+       ========================================== -->
+  <section class="f1-section">
+    <div class="f1-section-header">
+      <div class="f1-section-title-wrap">
+        <span class="f1-section-idx">01 // TELEMETRY</span>
+        <h2 class="f1-section-title">ENGINEERING BENCHMARKS</h2>
       </div>
-
-      <div class="skill-category">
-        <div class="skill-cat-title">
-          <span>⚡ Backend & Runtimes</span>
-        </div>
-        <ul class="skill-list">
-          <li class="skill-item">Axum / Tokio</li>
-          <li class="skill-item">FastAPI</li>
-          <li class="skill-item">Django</li>
-          <li class="skill-item">Docker / Containers</li>
-          <li class="skill-item">REST & gRPC</li>
-        </ul>
-      </div>
-
-      <div class="skill-category">
-        <div class="skill-cat-title">
-          <span>🗄️ Databases & Messaging</span>
-        </div>
-        <ul class="skill-list">
-          <li class="skill-item">PostgreSQL</li>
-          <li class="skill-item">Redis</li>
-          <li class="skill-item">RabbitMQ</li>
-          <li class="skill-item">SQLite / libSQL</li>
-          <li class="skill-item">SQLx / asyncpg</li>
-        </ul>
-      </div>
-
-      <div class="skill-category">
-        <div class="skill-cat-title">
-          <span>🖥️ Workstation & Environment</span>
-        </div>
-        <ul class="skill-list">
-          <li class="skill-item">Omarchy Linux</li>
-          <li class="skill-item">Hyprland (Wayland)</li>
-          <li class="skill-item">Neovim (LazyVim)</li>
-          <li class="skill-item">Tmux</li>
-          <li class="skill-item">Git / CI/CD</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Projects -->
-  <section class="section">
-    <div class="section-header">
-      <h2 class="section-title">Featured Projects</h2>
-      <a href="{{ '/projects/' | relative_url }}" class="section-more">View All Projects &rarr;</a>
+      <span class="f1-header-tag">RACE SPECIFICATIONS</span>
     </div>
 
-    <div class="grid-2">
-      <!-- Project 1: asyncfsm -->
-      <div class="card project-card">
-        <div class="project-top">
-          <div class="project-header-row">
-            <h3 class="project-title">asyncfsm</h3>
-            <div class="project-links">
-              <a href="https://github.com/itsvrushabh/asyncfsm" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="GitHub Repository">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-          <p class="project-desc">
-            Asynchronous finite state machine engine designed for complex distributed lifecycle orchestration, lock-free concurrency, and transition auditability.
-          </p>
-        </div>
-        <div class="project-tags">
-          <span class="tag-badge">Python</span>
-          <span class="tag-badge">Asyncio</span>
-          <span class="tag-badge">State Machine</span>
-          <span class="tag-badge">FSM</span>
-        </div>
+    <div class="f1-stats-grid">
+      <div class="f1-stat-card">
+        <div class="f1-stat-metric text-lime">20,000+</div>
+        <div class="f1-stat-label">REQ / SECOND THROUGHPUT</div>
+        <div class="f1-stat-sub">Axum &middot; Tokio multi-threaded socket pipeline</div>
       </div>
 
-      <!-- Project 2: fastapi-template -->
-      <div class="card project-card">
-        <div class="project-top">
-          <div class="project-header-row">
-            <h3 class="project-title">fastapi-template</h3>
-            <div class="project-links">
-              <a href="https://github.com/itsvrushabh/fastapi-template" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="GitHub Repository">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-          <p class="project-desc">
-            Production-grade, modular FastAPI microservice boilerplate featuring async SQLAlchemy, Redis connection pooling, JWT authentication, and Docker Compose orchestration.
-          </p>
-        </div>
-        <div class="project-tags">
-          <span class="tag-badge">FastAPI</span>
-          <span class="tag-badge">PostgreSQL</span>
-          <span class="tag-badge">Redis</span>
-          <span class="tag-badge">Docker</span>
-        </div>
+      <div class="f1-stat-card">
+        <div class="f1-stat-metric">0.42 ms</div>
+        <div class="f1-stat-label">P50 IN-MEMORY LATENCY</div>
+        <div class="f1-stat-sub">Redis cache-aside with connection pooling</div>
       </div>
 
-      <!-- Project 3: DineInTakeOut -->
-      <div class="card project-card">
-        <div class="project-top">
-          <div class="project-header-row">
-            <h3 class="project-title">DineInTakeOut</h3>
-            <div class="project-links">
-              <a href="https://github.com/itsvrushabh/DineInTakeOut" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="GitHub Repository">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-          <p class="project-desc">
-            Real-time multi-tenant order dispatch and table management architecture with live status synchronization and resilient transaction boundaries.
-          </p>
-        </div>
-        <div class="project-tags">
-          <span class="tag-badge">Python</span>
-          <span class="tag-badge">Django</span>
-          <span class="tag-badge">WebSockets</span>
-          <span class="tag-badge">PostgreSQL</span>
-        </div>
+      <div class="f1-stat-card">
+        <div class="f1-stat-metric text-lime">99.999%</div>
+        <div class="f1-stat-label">DISTRIBUTED SYSTEM SLA</div>
+        <div class="f1-stat-sub">Transactional outbox &amp; RabbitMQ broker resilience</div>
       </div>
 
-      <!-- Project 4: nvim dotfiles -->
-      <div class="card project-card">
-        <div class="project-top">
-          <div class="project-header-row">
-            <h3 class="project-title">nvim (LazyVim Config)</h3>
-            <div class="project-links">
-              <a href="https://github.com/itsvrushabh/nvim" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="GitHub Repository">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-          <p class="project-desc">
-            Ultra-responsive, Tokyo Night styled Neovim development environment tuned for Rust, Python, Treesitter, and native LSP inlay hints.
-          </p>
-        </div>
-        <div class="project-tags">
-          <span class="tag-badge">Lua</span>
-          <span class="tag-badge">Neovim</span>
-          <span class="tag-badge">LSP</span>
-          <span class="tag-badge">Tokyo Night</span>
-        </div>
+      <div class="f1-stat-card">
+        <div class="f1-stat-metric">#1</div>
+        <div class="f1-stat-label">ZERO-ALLOCATION CODEPATHS</div>
+        <div class="f1-stat-sub">Strict borrow-checked Rust &amp; PEP 649 typing</div>
       </div>
     </div>
   </section>
 
-  <!-- Latest Blog Posts -->
-  <section class="section">
-    <div class="section-header">
-      <h2 class="section-title">Latest Articles</h2>
-      <a href="{{ '/blog/' | relative_url }}" class="section-more">Read All Posts &rarr;</a>
+  <!-- ==========================================
+       SECTION 02: ON TRACK (FLAGSHIP PROJECTS)
+       ========================================== -->
+  <section class="f1-section">
+    <div class="f1-section-header">
+      <div class="f1-section-title-wrap">
+        <span class="f1-section-idx">02 // ON TRACK</span>
+        <h2 class="f1-section-title">FLAGSHIP SYSTEMS &amp; ENGINES</h2>
+      </div>
+      <a href="{{ '/projects/' | relative_url }}" class="f1-link-more">
+        <span>VIEW ALL REPOSITORIES</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
     </div>
 
-    <div class="posts-list">
+    <div class="f1-project-grid">
+      <!-- Project 1 -->
+      <article class="f1-race-card">
+        <div class="f1-card-inner">
+          <div class="f1-card-badge-row">
+            <span class="f1-spec-badge">ENGINE // 01</span>
+            <span class="f1-card-driver">STATE MACHINE</span>
+          </div>
+          <h3 class="f1-card-title">asyncfsm</h3>
+          <p class="f1-card-desc">
+            Asynchronous finite state machine engine with non-blocking transitions, lifecycle validation guards, and comprehensive state transition audit trails for distributed systems.
+          </p>
+          <div class="f1-card-tags">
+            <span class="f1-tag">PYTHON</span>
+            <span class="f1-tag">ASYNCIO</span>
+            <span class="f1-tag">CONCURRENCY</span>
+          </div>
+          <div class="f1-card-footer">
+            <a href="https://github.com/itsvrushabh/asyncfsm" target="_blank" rel="noopener noreferrer" class="btn-f1-card">
+              <span>VIEW REPO</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="f1-race-card">
+        <div class="f1-card-inner">
+          <div class="f1-card-badge-row">
+            <span class="f1-spec-badge">MICROSERVICE // 02</span>
+            <span class="f1-card-driver">ENTERPRISE CHASSIS</span>
+          </div>
+          <h3 class="f1-card-title">fastapi-template</h3>
+          <p class="f1-card-desc">
+            High-concurrency microservice chassis with asyncpg connection pooling, Redis caching, Celery task queue integration, JWT auth, and multi-stage container optimization.
+          </p>
+          <div class="f1-card-tags">
+            <span class="f1-tag">FASTAPI</span>
+            <span class="f1-tag">POSTGRESQL</span>
+            <span class="f1-tag">REDIS</span>
+            <span class="f1-tag">DOCKER</span>
+          </div>
+          <div class="f1-card-footer">
+            <a href="https://github.com/itsvrushabh/fastapi-template" target="_blank" rel="noopener noreferrer" class="btn-f1-card">
+              <span>VIEW REPO</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="f1-race-card">
+        <div class="f1-card-inner">
+          <div class="f1-card-badge-row">
+            <span class="f1-spec-badge">REAL-TIME // 03</span>
+            <span class="f1-card-driver">EVENT DISPATCH</span>
+          </div>
+          <h3 class="f1-card-title">DineInTakeOut</h3>
+          <p class="f1-card-desc">
+            High-throughput event coordination platform with WebSocket state syncing between point-of-sale systems and kitchen terminals under peak concurrent load.
+          </p>
+          <div class="f1-card-tags">
+            <span class="f1-tag">DJANGO</span>
+            <span class="f1-tag">WEBSOCKETS</span>
+            <span class="f1-tag">POSTGRESQL</span>
+          </div>
+          <div class="f1-card-footer">
+            <a href="https://github.com/itsvrushabh/DineInTakeOut" target="_blank" rel="noopener noreferrer" class="btn-f1-card">
+              <span>VIEW REPO</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 4 -->
+      <article class="f1-race-card">
+        <div class="f1-card-inner">
+          <div class="f1-card-badge-row">
+            <span class="f1-spec-badge">COCKPIT // 04</span>
+            <span class="f1-card-driver">DEV ENVIRONMENT</span>
+          </div>
+          <h3 class="f1-card-title">nvim &amp; tonarchy</h3>
+          <p class="f1-card-desc">
+            Precision Linux developer ergonomics: Omarchy Linux rolling kernel, Hyprland Wayland compositor, and Neovim configured with rust-analyzer and pyright inlay hints.
+          </p>
+          <div class="f1-card-tags">
+            <span class="f1-tag">LUA</span>
+            <span class="f1-tag">HYPRLAND</span>
+            <span class="f1-tag">OMARCHY</span>
+          </div>
+          <div class="f1-card-footer">
+            <a href="https://github.com/itsvrushabh/nvim" target="_blank" rel="noopener noreferrer" class="btn-f1-card">
+              <span>VIEW REPO</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 03: PADDOCK DISPATCHES (BLOG)
+       ========================================== -->
+  <section class="f1-section">
+    <div class="f1-section-header">
+      <div class="f1-section-title-wrap">
+        <span class="f1-section-idx">03 // DISPATCHES</span>
+        <h2 class="f1-section-title">TECHNICAL RACE DEBRIEFS</h2>
+      </div>
+      <a href="{{ '/blog/' | relative_url }}" class="f1-link-more">
+        <span>ALL ARTICLES</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+    </div>
+
+    <div class="f1-articles-grid">
       {% for post in site.posts limit:3 %}
-        <article class="card post-card">
-          <div class="post-card-meta">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
-            <span class="meta-dot">&middot;</span>
-            <span>{{ post.content | number_of_words | divided_by: 200 | at_least: 1 }} min read</span>
+        <article class="f1-article-card">
+          <div class="f1-article-meta">
+            <span class="f1-article-date">{{ post.date | date: "%B %d, %Y" }}</span>
+            <span class="f1-meta-sep">&middot;</span>
+            <span class="f1-article-read">{{ post.content | number_of_words | divided_by: 200 | at_least: 1 }} MIN DEBRIEF</span>
             {% if post.category %}
-              <span class="meta-dot">&middot;</span>
-              <span>{{ post.category }}</span>
+              <span class="f1-meta-sep">&middot;</span>
+              <span class="f1-article-cat text-lime">{{ post.category | upcase }}</span>
             {% endif %}
           </div>
 
-          <h3 class="post-card-title">
+          <h3 class="f1-article-title">
             <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
           </h3>
 
-          <p class="post-card-desc">
+          <p class="f1-article-lead">
             {{ post.description }}
           </p>
 
-          <div class="post-card-footer">
-            <div class="project-tags">
-              {% for tag in post.tags limit:3 %}
-                <span class="tag-badge">#{{ tag }}</span>
+          <div class="f1-article-footer">
+            <div class="f1-article-tags">
+              {% for tag in post.tags limit:2 %}
+                <span class="f1-tag">#{{ tag | upcase }}</span>
               {% endfor %}
             </div>
-            <a href="{{ post.url | relative_url }}" class="section-more">Read Article &rarr;</a>
+            <a href="{{ post.url | relative_url }}" class="f1-read-btn">
+              <span>READ DISPATCH</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
           </div>
         </article>
       {% endfor %}
     </div>
   </section>
 
-  <!-- Architecture Philosophy Callout -->
-  <section class="callout-box">
-    <h3 class="callout-title">📐 Engineering Principles</h3>
-    <p class="callout-text">
-      <strong>Zero-Allocation Critical Paths:</strong> Sub-millisecond p99 latencies by minimizing runtime heap churn.<br>
-      <strong>Resilient Distributed State:</strong> Decoupled message queues, cache-aside strategies, and idempotent consumers that tolerate network partitions gracefully.<br>
-      <strong>Strict Type Contracts:</strong> Catching bugs at compile time through Rust's borrow checker and Python's deferred typing architecture.
-    </p>
+  <!-- ==========================================
+       SECTION 04: RADIO COMMS / PIT WALL
+       ========================================== -->
+  <section class="f1-callout-panel">
+    <div class="f1-callout-grid">
+      <div class="f1-callout-left">
+        <span class="f1-section-idx text-lime">04 // PIT WALL RADIO</span>
+        <h2 class="f1-callout-heading">OPEN FOR HIGH-SPEED COLLABORATION</h2>
+        <p class="f1-callout-desc">
+          Looking for low-latency backend systems architecture, distributed microservice consulting, or mission-critical API design? Connect directly to the pit wall.
+        </p>
+        <div class="f1-callout-links">
+          <a href="{{ '/contact/' | relative_url }}" class="btn-f1-primary">
+            <span>TRANSMIT RADIO MESSAGE</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="mailto:{{ site.author.email }}" class="f1-email-direct">{{ site.author.email }}</a>
+        </div>
+      </div>
+
+      <div class="f1-callout-right">
+        <div class="f1-radio-hud">
+          <div class="radio-hud-header">
+            <span class="radio-freq">FREQ: 142.850 MHz</span>
+            <span class="radio-live-pill">LIVE CH</span>
+          </div>
+          <div class="radio-hud-body">
+            <div class="radio-msg-line">
+              <span class="radio-speaker">[BOX // VRUSHABH]:</span>
+              <span class="radio-text">"Pushing zero-allocation binary to production cluster. Telemetry is green."</span>
+            </div>
+            <div class="radio-msg-line">
+              <span class="radio-speaker">[PIT WALL]:</span>
+              <span class="radio-text">"Copy that. 0.42ms latency confirmed. We are P1."</span>
+            </div>
+          </div>
+          <div class="radio-hud-footer">
+            <span class="radio-driver">DRIVER: MAX VERSTAPPEN #1</span>
+            <span class="radio-engineer">SYS ARCH: VRUSHABH DESHMUKH</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </div>

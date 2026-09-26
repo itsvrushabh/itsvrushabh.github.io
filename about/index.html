@@ -1,42 +1,67 @@
 ---
 layout: default
-title: "About Me"
-subtitle: "Backend Developer, Systems Engineer, and Low-Latency Concurrency Enthusiast."
+title: "Telemetry & About"
+subtitle: "Systems Architect inspired by Formula 1 precision & Max Verstappen racing speed."
 ---
 
 <div class="container page-container">
   <div class="page-header">
-    <h1 class="page-title">About Me</h1>
+    <div class="f1-section-idx">04 // TELEMETRY &amp; PROFILE</div>
+    <h1 class="page-title">ABOUT &amp; ARCHITECTURE</h1>
     <p class="page-subtitle">
-      Hi! I'm Vrushabh Deshmukh — a backend developer and systems builder based in India.
+      Backend Developer &middot; Distributed Systems Architect &middot; Driven by #1 Formula 1 Precision.
     </p>
   </div>
 
+  <!-- Max Verstappen Profile Highlight Card -->
+  <div class="f1-race-card" style="margin-bottom: 3rem;">
+    <div style="display: grid; grid-template-columns: 240px 1fr; gap: 2rem; align-items: center; padding: 2rem;">
+      <div style="position: relative; border-radius: var(--radius-xs); overflow: hidden; border: 2px solid var(--color-lime);">
+        <img src="{{ '/assets/images/max-portrait.webp' | relative_url }}" alt="Max Verstappen World Champion" style="width: 100%; height: auto; display: block;">
+        <span style="position: absolute; bottom: 0.5rem; left: 0.5rem; background: #000000; color: var(--color-lime); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 2px;">
+          DRIVER #1
+        </span>
+      </div>
+
+      <div>
+        <span class="f1-spec-badge">THE RACING ETHOS</span>
+        <h3 style="font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.03em; margin: 0.4rem 0 0.75rem;">
+          MAX VERSTAPPEN SPEED &times; ZERO-ALLOCATION RUNTIMES
+        </h3>
+        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
+          In Formula 1, championship races are won in milliseconds and aerodynamic telemetry. 
+          In backend engineering, high-throughput architectures are won with zero-allocation memory paths, 
+          resilient connection pools, and non-blocking asynchronous event coordination.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <div class="markdown-body">
-    <h2>Background & Engineering Focus</h2>
+    <h2>Engineering Philosophy</h2>
     <p>
       I focus on building reliable, distributed, and high-performance server architectures. 
-      My day-to-day work spans designing type-safe REST & gRPC APIs, optimizing PostgreSQL and Redis queries, 
+      My day-to-day work spans designing type-safe REST &amp; gRPC APIs, optimizing PostgreSQL and Redis queries, 
       coordinating asynchronous tasks with RabbitMQ, and deploying lightweight containerized services.
     </p>
 
     <p>
-      I am particularly interested in the intersection of compile-time systems programming (Rust) 
-      and high-productivity backend development (Python / FastAPI). I believe that software should be fast by default, 
-      defensively designed against failure, and simple to reason about.
+      I operate at the intersection of compile-time systems programming (<strong>Rust &amp; Tokio</strong>) 
+      and high-productivity backend development (<strong>Python, FastAPI &amp; PEP 649</strong>). 
+      Every system must be fast by default, defensively designed against network failure, and simple to reason about.
     </p>
 
-    <h2>Architecture Principles</h2>
+    <h2>Telemetry &amp; Principles</h2>
     <ul>
-      <li><strong>Defensive Concurrency:</strong> Embracing async runtimes (Tokio, uvloop) while rigorously guarding shared state and avoiding unbounded in-memory queues.</li>
+      <li><strong>Defensive Concurrency:</strong> Embracing async runtimes (Tokio, uvloop) while rigorously guarding shared state and eliminating unbounded memory buffers.</li>
       <li><strong>Idempotency by Design:</strong> Treating every external webhook and message bus event as potentially duplicated; implementing atomic distributed locks and transaction outboxes.</li>
       <li><strong>Zero-Fluff Tooling:</strong> Minimal dependencies, explicit data models with Pydantic / Serde, and strict static analysis.</li>
-      <li><strong>Observability First:</strong> Structured JSON logging, tracing spans, and health checks built into services from day one.</li>
+      <li><strong>Observability First:</strong> Structured JSON logging, tracing spans, and real-time telemetry built into services from day one.</li>
     </ul>
 
-    <h2>Daily Driver Workstation & Ergonomics</h2>
+    <h2>Cockpit &amp; Workstation Ergonomics</h2>
     <p>
-      A fast, distraction-free environment makes all the difference when writing code. 
+      A fast, distraction-free environment makes all the difference when writing mission-critical code. 
       My development workstation runs an ultra-lean Linux setup:
     </p>
 
@@ -57,7 +82,7 @@ subtitle: "Backend Developer, Systems Engineer, and Low-Latency Concurrency Enth
         <tr>
           <td><strong>Window Manager</strong></td>
           <td>Hyprland (Wayland)</td>
-          <td>Hardware-accelerated dynamic tiling with custom Tokyo Night color palette.</td>
+          <td>Hardware-accelerated dynamic tiling with custom stealth Tokyo Night palette.</td>
         </tr>
         <tr>
           <td><strong>Primary Editor</strong></td>
@@ -65,22 +90,16 @@ subtitle: "Backend Developer, Systems Engineer, and Low-Latency Concurrency Enth
           <td>Equipped with <code>rust-analyzer</code>, <code>pyright</code>, Treesitter, and native LSP inlay hints.</td>
         </tr>
         <tr>
-          <td><strong>Terminal & Multiplexer</strong></td>
+          <td><strong>Terminal &amp; Multiplexer</strong></td>
           <td>Alacritty / Foot + Tmux</td>
           <td>Session persistence, vi-mode navigation, and streamlined split workflows.</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>When I'm Not Coding</h2>
-    <p>
-      When away from the keyboard, I explore operating system internals, experiment with new compiler proposals 
-      (like PEP 649 and Rust's async drop improvements), contribute to open-source software, and test out local AI model workflows.
-    </p>
-
-    <div style="margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-      <a href="{{ '/contact/' | relative_url }}" class="btn btn-primary">Let's Connect</a>
-      <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Explore GitHub</a>
+    <div style="margin-top: 3.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+      <a href="{{ '/contact/' | relative_url }}" class="btn-f1-primary">TRANSMIT MESSAGE</a>
+      <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer" class="btn-f1-outline">EXPLORE GITHUB</a>
     </div>
   </div>
 </div>
