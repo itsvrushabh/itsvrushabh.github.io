@@ -138,12 +138,12 @@
   
   <br /><br />
 
-  <a href="https://github.com/itsvrushabh/rabbitmq-cluster">
-    <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=rabbitmq-cluster&theme=tokyonight&hide_border=true" alt="rabbitmq-cluster" />
+  <a href="https://github.com/itsvrushabh/DineInTakeOut">
+    <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=DineInTakeOut&theme=tokyonight&hide_border=true" alt="DineInTakeOut" />
   </a>
   &nbsp;
-  <a href="https://github.com/itsvrushabh/hello-rocket">
-    <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=hello-rocket&theme=tokyonight&hide_border=true" alt="hello-rocket" />
+  <a href="https://github.com/itsvrushabh/nvim">
+    <img src="https://github-readme-stats-eight-theta.vercel.app/api/pin/?username=itsvrushabh&repo=nvim&theme=tokyonight&hide_border=true" alt="nvim" />
   </a>
 </div>
 

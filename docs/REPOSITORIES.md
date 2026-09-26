@@ -6,9 +6,9 @@
     <img src="https://github.com/itsvrushabh/itsvrushabh/actions/workflows/update-repositories.yml/badge.svg" alt="Update Repositories Catalog Status" />
   </a>
   &nbsp;
-  <img src="https://img.shields.io/badge/Repositories-21-7aa2f7?style=flat-square&logo=github&logoColor=white" alt="Total Repositories" />
+  <img src="https://img.shields.io/badge/Repositories-17-7aa2f7?style=flat-square&logo=github&logoColor=white" alt="Total Repositories" />
   &nbsp;
-  <img src="https://img.shields.io/badge/Original_Projects-16-9ece6a?style=flat-square" alt="Original Projects" />
+  <img src="https://img.shields.io/badge/Original_Projects-12-9ece6a?style=flat-square" alt="Original Projects" />
   &nbsp;
   <img src="https://img.shields.io/badge/Forks_5-bb9af7?style=flat-square" alt="Forks" />
   &nbsp;
@@ -26,7 +26,6 @@ A dynamically synchronized directory of open-source projects, experiments, dotfi
 | :--- | :--- | :--- | :--- |
 | [**asyncfsm**](https://github.com/itsvrushabh/asyncfsm) | Asynchronous finite-state machine parsing engine with streaming token processing. | Concurrency, State Machines, Tokio | `Rust` |
 | [**DineInTakeOut**](https://github.com/itsvrushabh/DineInTakeOut) | Restaurant dining and takeout order lifecycle management service built in Rust. | Systems Architecture, Backend Service | `Rust` |
-| [**hello-rocket**](https://github.com/itsvrushabh/hello-rocket) | Type-safe asynchronous web microservice experiments with Rocket. | Routing, Middleware, Microservices | `Rust` |
 | [**textfsm-rs**](https://github.com/itsvrushabh/textfsm-rs) <sub>*(Fork)*</sub> | High-performance Rust implementation of the TextFSM template parser. | Parsing, Networking Templates, CLI | `Rust` |
 
 ---
@@ -38,9 +37,7 @@ A dynamically synchronized directory of open-source projects, experiments, dotfi
 | :--- | :--- | :--- | :--- |
 | [**fastapi-template**](https://github.com/itsvrushabh/fastapi-template) | Production-ready, asynchronous REST API boilerplate with SQLAlchemy, Redis, and Docker. | Async SQLAlchemy, Redis, Docker, OpenAPI | `Python` |
 | [**laya_demo**](https://github.com/itsvrushabh/laya_demo) | Python data pipeline exploration and algorithmic testbed. | Data Processing, Prototyping | `Python` |
-| [**python-patterns**](https://github.com/itsvrushabh/python-patterns) | Clean-code reference implementations of architectural and behavioral design patterns. | Clean Architecture, OOP, Design Patterns | `Python` |
 | [**snowflake-sqlalchemy**](https://github.com/itsvrushabh/snowflake-sqlalchemy) <sub>*(Fork)*</sub> | Snowflake database dialect extensions and connection pooling optimizations. | Database Dialects, SQLAlchemy, Cloud Data | `Python` |
-| [**Tasker**](https://github.com/itsvrushabh/Tasker) | Automated workflow runner and background task orchestrator. | Automation, Workflows, Scripting | `Python` |
 | [**todo**](https://github.com/itsvrushabh/todo) | Minimalist task tracking backend service and CLI interface. | CLI, CRUD, Python | `Python` |
 
 ---
@@ -51,7 +48,6 @@ A dynamically synchronized directory of open-source projects, experiments, dotfi
 | Repository | Description | Primary Focus | Language |
 | :--- | :--- | :--- | :--- |
 | [**ente_local_without_s3**](https://github.com/itsvrushabh/ente_local_without_s3) <sub>*(Fork)*</sub> | End-to-end encrypted local-first private storage engine operating without cloud S3. | Local-First Storage, E2EE, Security | `Dart` |
-| [**rabbitmq-cluster**](https://github.com/itsvrushabh/rabbitmq-cluster) | Multi-node RabbitMQ message broker cluster with automated HAProxy load balancing. | High Availability, Message Queues, Clustering | `Shell` |
 
 ---
 
