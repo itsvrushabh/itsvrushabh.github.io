@@ -16,6 +16,7 @@ A deep-dive reference tracking the current production versions and upcoming gene
 
 ---
 
+<!-- START_TECH_RADAR_LANGUAGES -->
 ## 1. 🦀 Languages & Runtimes
 
 ### 🐍 Python
@@ -27,8 +28,8 @@ A deep-dive reference tracking the current production versions and upcoming gene
 
 | Release | Focus | Top 3 Core Innovations |
 | :--- | :--- | :--- |
-| **🟢 Current: 3.14** | Typing & Metaprogramming | 1. **Deferred Annotations (PEP 649):** Type hints evaluated lazily on demand without runtime execution cost.<br>2. **Template Strings (PEP 750):** Native `t-strings` for injection-safe, structured templating in SQL and HTML.<br>3. **Tier-2 JIT Optimizations:** Micro-op tracing and deep interpreter tail-call speedups. |
-| **🚀 Next: 3.15** | Free-Threading & JIT Maturity | 1. **Standard Free-Threading Stabilization:** Ecosystem-wide C-extension stabilization for GIL-less concurrency.<br>2. **Advanced Trace JIT:** Native machine-code generation for hot instruction loops.<br>3. **Zero-Cost Exceptions:** Near-zero overhead for try/except blocks on happy execution paths. |
+| **🟢 Current: 3.14** | Typing & Metaprogramming | 1. **Deferred Annotations (PEP 649):** Type hints evaluated lazily on demand without runtime cost.<br>2. **Template Strings (PEP 750):** Native `t-strings` for injection-safe, structured templating.<br>3. **Tier-2 JIT Optimizations:** Micro-op tracing and deep interpreter tail-call speedups. |
+| **🚀 Next: 3.15** | Subinterpreters & JIT Maturity | 1. **Standard Free-Threading Stability:** Full ecosystem C-extension stabilization for No-GIL.<br>2. **Advanced Tier-2 Trace JIT:** Native machine-code generation for hot instruction traces.<br>3. **Zero-Cost Exception Refinements:** Near-zero overhead for try/except blocks on happy paths. |
 
 <br />
 
@@ -41,8 +42,9 @@ A deep-dive reference tracking the current production versions and upcoming gene
 
 | Release | Focus | Top 3 Core Innovations |
 | :--- | :--- | :--- |
-| **🟢 Current: 1.98 / Edition 2024** | Concurrency & Ergonomics | 1. **Async Closures:** First-class `async \|x\|` closures capturing borrows cleanly across await boundaries.<br>2. **Let Chains:** Flattened pattern matching combining conditionals (`if let Some(x) = opt && x > 0`).<br>3. **`gen` Blocks & Yield:** Native coroutine iterators without handwriting manual state machines. |
-| **🚀 Next: 1.99+** | Memory Safety & Expressiveness | 1. **Async Drop:** Automated asynchronous destructor cleanup for sockets, connection pools, and DB transactions.<br>2. **Dyn Trait Upcasting:** Native sub-to-super trait coercion without manual wrapper boilerplate.<br>3. **Advanced Const Generics:** Compile-time evaluations and arbitrary expressions in type parameters. |
+| **🟢 Current: 1.98 / Edition 2024** | Concurrency & Ergonomics | 1. **Async Closures:** Ergonomic borrow capturing across await points in `async |x|`.<br>2. **Let Chains:** Flattened conditional matching (`if let Some(x) = opt && x > 0`).<br>3. **`gen` Blocks & Yield:** First-class coroutine iterators without handwritten state machine boilerplate. |
+| **🚀 Next: 1.99+** | Memory Safety & Expressiveness | 1. **Async Drop:** Automated asynchronous destructor cleanup for sockets and DB transactions.<br>2. **Dyn Trait Upcasting:** Native sub-to-super trait coercion without manual wrapper shims.<br>3. **Advanced Const Generics:** Compile-time evaluations and arbitrary expressions in types. |
+<!-- END_TECH_RADAR_LANGUAGES -->
 
 ---
 
