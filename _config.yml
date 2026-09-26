@@ -1,16 +1,24 @@
 # GitHub Pages & Jekyll Configuration
-# Theme: jekyll-theme-midnight (Dark theme)
-theme: jekyll-theme-midnight
-
-# Site Metadata
 title: Vrushabh Deshmukh
-tagline: Backend Developer | API Designer | Rust Enthusiast
-description: Personal documentation, system architecture notes, repository catalog, and full-stack technology radar.
+tagline: Backend Developer & Systems Engineer
+description: "Personal website, technical engineering blog, and systems architecture portfolio of Vrushabh Deshmukh."
 url: "https://itsvrushabh.github.io"
-baseurl: "/itsvrushabh"
-repository: itsvrushabh/itsvrushabh
+baseurl: ""
+repository: itsvrushabh/itsvrushabh.github.io
 
-# Markdown and Syntax Highlighting
+# Author & Social Information
+author:
+  name: Vrushabh Deshmukh
+  email: itsvrushabh@gmail.com
+  bio: "Backend developer specializing in Python, Rust, high-throughput distributed APIs, and Linux systems architecture."
+  github: itsvrushabh
+  linkedin: itsvrushabh
+  location: "India"
+
+# Blog Permalink Configuration
+permalink: /blog/:title/
+
+# Markdown & Syntax Highlighting
 markdown: kramdown
 highlighter: rouge
 kramdown:
@@ -18,27 +26,30 @@ kramdown:
   hard_wrap: false
   syntax_highlighter: rouge
 
-# Automatically apply the theme layout to markdown pages
+# Default Layouts
 defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
   - scope:
       path: ""
     values:
       layout: "default"
 
-# Theme Display Settings
-show_downloads: false
-
-# GitHub Pages Plugins
+# GitHub Pages Supported Plugins
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-feed
 
-# Exclude unnecessary files from the Jekyll build
+# Exclude non-site development files
 exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
   - vendor
   - scripts
-  - profile-3d-contrib
   - .github
+  - README.md

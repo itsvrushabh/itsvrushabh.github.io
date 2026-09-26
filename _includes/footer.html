@@ -1,0 +1,39 @@
+<footer class="site-footer">
+  <div class="container footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-title">{{ site.title }}</span>
+        <p class="footer-tagline">{{ site.tagline }}</p>
+      </div>
+
+      <div class="footer-social-links">
+        <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer" class="footer-link">
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener noreferrer" class="footer-link">
+          LinkedIn
+        </a>
+        <a href="mailto:{{ site.author.email }}" class="footer-link">
+          Email
+        </a>
+        <a href="{{ '/feed.xml' | relative_url }}" class="footer-link">
+          RSS Feed
+        </a>
+        <a href="{{ '/sitemap.xml' | relative_url }}" class="footer-link">
+          Sitemap
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        &copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}. Built with precision, Jekyll & GitHub Pages.
+      </p>
+      <p class="footer-meta">
+        Driven by <span class="status-dot"></span> Omarchy Linux · Rust · Python
+      </p>
+    </div>
+  </div>
+</footer>

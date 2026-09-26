@@ -1,0 +1,93 @@
+---
+layout: default
+---
+
+<article class="post-container container">
+  <div class="post-nav-back">
+    <a href="{{ '/blog/' | relative_url }}" class="back-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>Back to all posts</span>
+    </a>
+  </div>
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        {{ page.date | date: "%B %d, %Y" }}
+      </time>
+      <span class="meta-dot">·</span>
+      <span class="post-reading-time">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        {{ content | number_of_words | divided_by: 200 | at_least: 1 }} min read
+      </span>
+      {% if page.category %}
+        <span class="meta-dot">·</span>
+        <span class="post-category">{{ page.category }}</span>
+      {% endif %}
+    </div>
+
+    <h1 class="post-title">{{ page.title }}</h1>
+
+    {% if page.description %}
+      <p class="post-lead">{{ page.description }}</p>
+    {% endif %}
+
+    {% if page.tags %}
+      <div class="post-tags">
+        {% for tag in page.tags %}
+          <a href="{{ '/blog/' | relative_url }}?tag={{ tag | url_encode }}" class="tag-badge">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </header>
+
+  <div class="post-body markdown-body">
+    {{ content }}
+  </div>
+
+  <section class="author-card">
+    <div class="author-avatar">
+      <span>VD</span>
+    </div>
+    <div class="author-info">
+      <h3 class="author-name">{{ site.author.name }}</h3>
+      <p class="author-bio">{{ site.author.bio }}</p>
+      <div class="author-links">
+        <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:{{ site.author.email }}">Email</a>
+      </div>
+    </div>
+  </section>
+
+  <nav class="post-pagination">
+    <div class="pagination-prev">
+      {% if page.previous.url %}
+        <a href="{{ page.previous.url | relative_url }}" class="pagination-link">
+          <span class="pagination-label">← Previous Post</span>
+          <span class="pagination-title">{{ page.previous.title }}</span>
+        </a>
+      {% endif %}
+    </div>
+    <div class="pagination-next">
+      {% if page.next.url %}
+        <a href="{{ page.next.url | relative_url }}" class="pagination-link">
+          <span class="pagination-label">Next Post →</span>
+          <span class="pagination-title">{{ page.next.title }}</span>
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+</article>

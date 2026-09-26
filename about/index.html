@@ -1,0 +1,86 @@
+---
+layout: default
+title: "About Me"
+subtitle: "Backend Developer, Systems Engineer, and Low-Latency Concurrency Enthusiast."
+---
+
+<div class="container page-container">
+  <div class="page-header">
+    <h1 class="page-title">About Me</h1>
+    <p class="page-subtitle">
+      Hi! I'm Vrushabh Deshmukh — a backend developer and systems builder based in India.
+    </p>
+  </div>
+
+  <div class="markdown-body">
+    <h2>Background & Engineering Focus</h2>
+    <p>
+      I focus on building reliable, distributed, and high-performance server architectures. 
+      My day-to-day work spans designing type-safe REST & gRPC APIs, optimizing PostgreSQL and Redis queries, 
+      coordinating asynchronous tasks with RabbitMQ, and deploying lightweight containerized services.
+    </p>
+
+    <p>
+      I am particularly interested in the intersection of compile-time systems programming (Rust) 
+      and high-productivity backend development (Python / FastAPI). I believe that software should be fast by default, 
+      defensively designed against failure, and simple to reason about.
+    </p>
+
+    <h2>Architecture Principles</h2>
+    <ul>
+      <li><strong>Defensive Concurrency:</strong> Embracing async runtimes (Tokio, uvloop) while rigorously guarding shared state and avoiding unbounded in-memory queues.</li>
+      <li><strong>Idempotency by Design:</strong> Treating every external webhook and message bus event as potentially duplicated; implementing atomic distributed locks and transaction outboxes.</li>
+      <li><strong>Zero-Fluff Tooling:</strong> Minimal dependencies, explicit data models with Pydantic / Serde, and strict static analysis.</li>
+      <li><strong>Observability First:</strong> Structured JSON logging, tracing spans, and health checks built into services from day one.</li>
+    </ul>
+
+    <h2>Daily Driver Workstation & Ergonomics</h2>
+    <p>
+      A fast, distraction-free environment makes all the difference when writing code. 
+      My development workstation runs an ultra-lean Linux setup:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Technology</th>
+          <th>Configuration Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Operating System</strong></td>
+          <td>Omarchy Linux (Arch base)</td>
+          <td>Rolling release kernel with low-latency user-space scheduling.</td>
+        </tr>
+        <tr>
+          <td><strong>Window Manager</strong></td>
+          <td>Hyprland (Wayland)</td>
+          <td>Hardware-accelerated dynamic tiling with custom Tokyo Night color palette.</td>
+        </tr>
+        <tr>
+          <td><strong>Primary Editor</strong></td>
+          <td>Neovim (LazyVim)</td>
+          <td>Equipped with <code>rust-analyzer</code>, <code>pyright</code>, Treesitter, and native LSP inlay hints.</td>
+        </tr>
+        <tr>
+          <td><strong>Terminal & Multiplexer</strong></td>
+          <td>Alacritty / Foot + Tmux</td>
+          <td>Session persistence, vi-mode navigation, and streamlined split workflows.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>When I'm Not Coding</h2>
+    <p>
+      When away from the keyboard, I explore operating system internals, experiment with new compiler proposals 
+      (like PEP 649 and Rust's async drop improvements), contribute to open-source software, and test out local AI model workflows.
+    </p>
+
+    <div style="margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+      <a href="{{ '/contact/' | relative_url }}" class="btn btn-primary">Let's Connect</a>
+      <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Explore GitHub</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<header class="site-header">
+  <div class="container header-container">
+    <a href="{{ '/' | relative_url }}" class="brand-logo">
+      <span class="logo-box">VD</span>
+      <span class="logo-text">Vrushabh Deshmukh</span>
+    </a>
+
+    <button id="mobile-toggle" class="mobile-toggle-btn" aria-label="Toggle Navigation Menu">
+      <svg class="hamburger-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav class="nav-menu" id="nav-menu">
+      <ul class="nav-list">
+        <li>
+          <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
+        </li>
+        <li>
+          <a href="{{ '/blog/' | relative_url }}" class="nav-link {% if page.url contains '/blog/' %}active{% endif %}">Blog</a>
+        </li>
+        <li>
+          <a href="{{ '/projects/' | relative_url }}" class="nav-link {% if page.url contains '/projects/' %}active{% endif %}">Projects</a>
+        </li>
+        <li>
+          <a href="{{ '/about/' | relative_url }}" class="nav-link {% if page.url contains '/about/' %}active{% endif %}">About</a>
+        </li>
+        <li>
+          <a href="{{ '/contact/' | relative_url }}" class="nav-link {% if page.url contains '/contact/' %}active{% endif %}">Contact</a>
+        </li>
+      </ul>
+
+      <div class="header-actions">
+        <!-- GitHub Profile Quick Link -->
+        <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer" class="icon-link" aria-label="GitHub Profile">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        </a>
+
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
