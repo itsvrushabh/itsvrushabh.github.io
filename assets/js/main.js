@@ -1,6 +1,127 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
-  // 1. Theme Toggle (Dark / Light) & Giscus Theme Sync
+  // 1. Lenis Smooth Inertia Scrolling (Lando Norris style)
+  // ==========================================
+  if (typeof Lenis !== 'undefined') {
+    try {
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    } catch (e) {
+      console.warn('Lenis smooth scroll failed to initialize:', e);
+    }
+  }
+
+  // ==========================================
+  // 2. Hero Parallax on Scroll
+  // ==========================================
+  const heroImg = document.querySelector('.f1-hero-img');
+  if (heroImg) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (scrollY < window.innerHeight * 1.2) {
+        heroImg.style.transform = `translate3d(0, ${scrollY * 0.22}px, 0) scale(${1 + scrollY * 0.00015})`;
+      }
+    }, { passive: true });
+  }
+
+  // ==========================================
+  // 3. Scroll Reveal Animation (Staggered IntersectionObserver)
+  // ==========================================
+  const revealElements = document.querySelectorAll(
+    '[data-reveal], .f1-stat-card, .f1-race-card, .f1-article-card, .f1-callout-panel'
+  );
+
+  if ('IntersectionObserver' in window && revealElements.length > 0) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('revealed');
+          }, index * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add('revealed'));
+  }
+
+  // ==========================================
+  // 4. Animated Telemetry Counters
+  // ==========================================
+  const counterElements = document.querySelectorAll('[data-counter]');
+  if ('IntersectionObserver' in window && counterElements.length > 0) {
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const targetVal = parseFloat(el.getAttribute('data-counter'));
+          const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+          const suffix = el.getAttribute('data-suffix') || '';
+          const prefix = el.getAttribute('data-prefix') || '';
+          const duration = 1600; // ms
+          const startTime = performance.now();
+
+          const updateCount = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // easeOutExpo for sports telemetry feel
+            const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            const current = targetVal * ease;
+
+            el.textContent = `${prefix}${current.toLocaleString('en-US', {
+              minimumFractionDigits: decimals,
+              maximumFractionDigits: decimals
+            })}${suffix}`;
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCount);
+            }
+          };
+
+          requestAnimationFrame(updateCount);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    counterElements.forEach(el => counterObserver.observe(el));
+  }
+
+  // ==========================================
+  // 5. Interactive Card Spotlight (Mouse Tracker)
+  // ==========================================
+  const spotlightCards = document.querySelectorAll(
+    '.f1-race-card, .f1-stat-card, .f1-article-card, .f1-callout-panel'
+  );
+  spotlightCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+
+  // ==========================================
+  // 6. Theme Toggle (Dark / Light) & Giscus Theme Sync
   // ==========================================
   const themeToggle = document.getElementById('theme-toggle');
   
@@ -26,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 2. Mobile Navigation Toggle
+  // 7. Mobile Navigation Toggle
   // ==========================================
   const mobileToggle = document.getElementById('mobile-toggle');
   const navMenu = document.getElementById('nav-menu');
@@ -44,11 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 3. Add Copy Button to Code Blocks
+  // 8. Add Copy Button to Code Blocks
   // ==========================================
   const codeBlocks = document.querySelectorAll('.markdown-body pre');
   codeBlocks.forEach((pre) => {
-    // Skip if inside mermaid container
     if (pre.querySelector('.language-mermaid') || pre.classList.contains('mermaid')) {
       return;
     }
@@ -69,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
           await navigator.clipboard.writeText(codeText);
           copyBtn.textContent = 'Copied!';
-          copyBtn.style.color = '#4ade80';
+          copyBtn.style.color = '#d2ff00';
           setTimeout(() => {
             copyBtn.textContent = 'Copy';
             copyBtn.style.color = '';
@@ -85,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 4. Reading Progress Bar & Table of Contents (TOC)
+  // 9. Reading Progress Bar & Table of Contents (TOC)
   // ==========================================
   const progressBar = document.getElementById('reading-progress');
   const tocContainer = document.getElementById('post-toc');
@@ -94,7 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const markdownBody = document.querySelector('.post-body.markdown-body');
 
   if (markdownBody) {
-    // Reading Progress
     if (progressBar) {
       window.addEventListener('scroll', () => {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -102,10 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const progress = (window.scrollY / totalHeight) * 100;
           progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
         }
-      });
+      }, { passive: true });
     }
 
-    // Auto-generate TOC from h2 and h3
     const headings = markdownBody.querySelectorAll('h2, h3');
     if (headings.length >= 2 && tocContainer && tocNav) {
       headings.forEach((heading, idx) => {
@@ -126,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
           e.preventDefault();
           const target = document.getElementById(heading.id);
           if (target) {
-            const yOffset = -80; // Account for sticky navbar
+            const yOffset = -80;
             const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: 'smooth' });
           }
@@ -149,7 +267,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // Scroll Spy for TOC
       const tocLinks = tocNav.querySelectorAll('.toc-link');
       window.addEventListener('scroll', () => {
         let currentActive = '';
@@ -167,12 +284,12 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.remove('active');
           }
         });
-      });
+      }, { passive: true });
     }
   }
 
   // ==========================================
-  // 5. Post Share Bar & Copy Link
+  // 10. Post Share Bar & Copy Link
   // ==========================================
   const shareCopyBtn = document.getElementById('share-copy-btn');
   if (shareCopyBtn) {
@@ -187,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           await navigator.clipboard.writeText(window.location.href);
           if (shareText) shareText.textContent = 'Copied!';
-          shareCopyBtn.style.color = '#4ade80';
+          shareCopyBtn.style.color = '#d2ff00';
           setTimeout(() => {
             if (shareText) shareText.textContent = 'Copy Link';
             shareCopyBtn.style.color = '';
@@ -200,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 6. Giscus Comments Loader
+  // 11. Giscus Comments Loader
   // ==========================================
   const giscusSlot = document.getElementById('giscus-slot');
   if (giscusSlot) {
@@ -210,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
     script.setAttribute('data-repo', 'itsvrushabh/itsvrushabh.github.io');
-    script.setAttribute('data-repo-id', 'R_kgDON6U-UA'); // Will connect to repository
+    script.setAttribute('data-repo-id', 'R_kgDON6U-UA');
     script.setAttribute('data-category', 'Announcements');
     script.setAttribute('data-category-id', 'DIC_kwDON6U-UM4Cn92L');
     script.setAttribute('data-mapping', 'pathname');
@@ -228,11 +345,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 7. Mermaid.js Diagram Support
+  // 12. Mermaid.js Diagram Support
   // ==========================================
   const mermaidBlocks = document.querySelectorAll('.language-mermaid, pre code.language-mermaid');
   if (mermaidBlocks.length > 0) {
-    // Transform code blocks to .mermaid divs
     mermaidBlocks.forEach(codeBlock => {
       const container = document.createElement('div');
       container.className = 'mermaid';
@@ -244,7 +360,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Dynamically load Mermaid library
     const script = document.createElement('script');
     script.type = 'module';
     script.textContent = `
@@ -261,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 8. Blog Search & Tag Filtering
+  // 13. Blog Search & Tag Filtering
   // ==========================================
   const searchInput = document.getElementById('blog-search');
   const filterButtons = document.querySelectorAll('.filter-btn');
@@ -316,7 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
-      // Handle ?tag=... parameter in URL
       const urlParams = new URLSearchParams(window.location.search);
       const tagParam = urlParams.get('tag');
       if (tagParam) {
