@@ -4,401 +4,425 @@ title: "Home"
 ---
 
 <!-- ==========================================
-     HERO: RED BULL RB19 ✕ VRUSHABH DESHMUKH
+     HERO: OMARCHY ✕ VRUSHABH DESHMUKH
      ========================================== -->
-<section class="f1-hero-section">
-  <!-- Red Bull RB19 Hero Background with Dynamic Vignette -->
-  <div class="f1-hero-bg-wrapper">
-    <picture>
-      <source srcset="{{ '/assets/images/rb19-hero.webp' | relative_url }}" type="image/webp">
-      <img src="{{ '/assets/images/rb19-hero.jpg' | relative_url }}" alt="Red Bull Racing RB19" class="f1-hero-img">
-    </picture>
-    <div class="f1-hero-overlay"></div>
-    <div class="f1-grid-mesh"></div>
-  </div>
-
-  <div class="container f1-hero-container">
-    <!-- Top Telemetry Row -->
-    <div class="f1-hero-meta-row">
-      <div class="f1-status-tag">
-        <span class="f1-pulsing-green"></span>
-        <span>PIT WALL ACTIVE // TELEMETRY ONLINE</span>
-      </div>
-
-      <!-- Car #7 & Omarchy Pill -->
-      <div class="f1-driver-meta">
-        <span class="f1-champ-pill">RED BULL RB19 APEX AERODYNAMICS</span>
-        <span class="f1-badge-no">#7</span>
-      </div>
+<section id="home" class="omarchy-hero">
+  <div class="container">
+    <!-- Announcement Pill -->
+    <div class="hero-pill-wrap">
+      <a href="#terminal" class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        <span>OMARCHY LINUX WORKSTATION // HYPRLAND &middot; ROLLING KERNEL</span>
+      </a>
     </div>
 
-    <!-- Main Hero Headings -->
-    <div class="f1-hero-content">
-      <div class="f1-subheading-eyebrow">
-        <span>RED BULL RB19 &middot; CAR #7 &middot; LINUX ARCHITECTURE</span>
-      </div>
-
-      <h1 class="f1-headline">
-        <span class="f1-champ-name">RED BULL RB19</span>
-        <span class="f1-amp">&times;</span>
-        <span class="f1-engineer-name">VRUSHABH DESHMUKH</span>
-      </h1>
-
-      <p class="f1-lead">
-        High-throughput backend engineering inspired by Formula 1 precision. 
-        Zero-allocation asynchronous runtimes in <strong>Rust &amp; Tokio</strong>, resilient distributed state with <strong>RabbitMQ &amp; Redis</strong>, and sub-millisecond p99 telemetry on <strong>Omarchy Linux</strong>.
-      </p>
-
-      <div class="f1-hero-buttons">
-        <a href="{{ '/projects/' | relative_url }}" class="btn-f1-primary">
-          <span class="roll-text"><span class="roll-text-inner" data-text="EXPLORE ON TRACK">EXPLORE ON TRACK</span></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </a>
-
-        <a href="{{ '/blog/' | relative_url }}" class="btn-f1-outline">
-          <span class="roll-text"><span class="roll-text-inner" data-text="READ PADDOCK DISPATCHES">READ PADDOCK DISPATCHES</span></span>
-        </a>
-
-        <a href="{{ '/resume/' | relative_url }}" class="btn-f1-ghost">
-          <span class="roll-text"><span class="roll-text-inner" data-text="DRIVER CV / RESUME →">DRIVER CV / RESUME &rarr;</span></span>
-        </a>
-      </div>
+    <!-- Pixel Art Hero Wordmark -->
+    <div class="hero-wordmark-wrap">
+      <img src="{{ '/assets/images/omarchy-wordmark.svg' | relative_url }}" alt="Omarchy Wordmark" class="hero-wordmark-svg">
     </div>
 
-    <!-- Floating Next Race / Circuit Telemetry HUD Card (Lando Norris style) -->
-    <aside class="f1-circuit-card">
-      <div class="circuit-card-header">
-        <span class="circuit-card-label">NEXT GP // DEPLOYMENT</span>
-        <span class="circuit-status">LIVE TRACK</span>
-      </div>
+    <!-- Main Title & Lead -->
+    <h1 class="hero-title">
+      Beautiful, fun &amp; agentic systems by <a href="https://github.com/itsvrushabh" target="_blank" rel="noopener noreferrer" class="author-link">Vrushabh Deshmukh</a>
+    </h1>
 
-      <div class="circuit-map-wrap">
-        <!-- SVG F1 Circuit Track Outline (Silverstone / GP Style) -->
-        <svg class="circuit-track-svg" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 70 C 20 40, 50 20, 80 20 C 110 20, 140 35, 170 30 C 185 28, 190 45, 180 60 C 165 80, 150 90, 130 95 C 100 102, 70 85, 50 100 C 35 110, 20 100, 20 70 Z" 
-                stroke="var(--color-lime)" stroke-width="3" stroke-dasharray="350" stroke-dashoffset="0" class="track-line" />
-          <circle cx="80" cy="20" r="4" fill="#ffffff" class="track-car-dot" />
+    <p class="hero-lead">
+      The malleable backend for the age of agents. Zero-allocation <strong>Rust &amp; Tokio</strong> runtimes, resilient event queues with <strong>RabbitMQ &amp; Redis</strong>, and custom <strong>Omarchy Linux</strong> developer workflows.
+    </p>
+
+    <!-- Quick Copy Snippet (Omarchy style) -->
+    <div class="hero-snippet-wrap">
+      <button id="copy-install-btn" class="hero-snippet" data-snippet="curl -sL https://itsvrushabh.github.io/omarchy.sh | sh" title="Click to copy install snippet">
+        <span class="prompt-sym">$</span>
+        <span class="copy-label">curl -sL https://itsvrushabh.github.io/omarchy.sh | sh</span>
+        <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
         </svg>
-      </div>
+      </button>
+    </div>
 
-      <div class="circuit-details">
-        <div class="circuit-title">BAKU GP &middot; PROD CLUSTER</div>
-        <div class="circuit-specs">
-          <div class="spec-col">
-            <span class="spec-k">P50 LATENCY</span>
-            <span class="spec-v text-lime">0.42 MS</span>
-          </div>
-          <div class="spec-col">
-            <span class="spec-k">THROUGHPUT</span>
-            <span class="spec-v">20K+ REQ/S</span>
-          </div>
-          <div class="spec-col">
-            <span class="spec-k">RELIABILITY</span>
-            <span class="spec-v">99.999%</span>
-          </div>
-        </div>
-      </div>
-    </aside>
+    <!-- Hero CTA Buttons -->
+    <div class="hero-ctas">
+      <a href="#terminal" class="btn-omarchy-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 17 10 11 4 5"></polyline>
+          <line x1="12" y1="19" x2="20" y2="19"></line>
+        </svg>
+        <span>Launch Terminal [ ~ ]</span>
+      </a>
+
+      <a href="#projects" class="btn-omarchy-secondary">
+        <span>Explore Plugins &amp; Code</span>
+      </a>
+
+      <a href="#themes" class="btn-omarchy-secondary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="m4.93 4.93 4.24 4.24"></path>
+          <path d="m14.83 9.17 4.24-4.24"></path>
+          <path d="m14.83 14.83 4.24 4.24"></path>
+          <path d="m9.17 14.83-4.24 4.24"></path>
+        </svg>
+        <span>Pick a Theme [ T ]</span>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- ==========================================
-     CONTINUOUS RACING MARQUEE TICKER (Lando Norris Style)
+     INTERACTIVE TUI TERMINAL (Foot / Alacritty Simulation)
      ========================================== -->
-<div class="f1-marquee-wrapper" aria-hidden="true">
-  <div class="f1-marquee-track">
-    <div class="f1-marquee-content">
-      <span>RED BULL RB19</span> <span class="f1-num-tag">#7</span>
-      <span>&middot;</span>
-      <span>APEX AERODYNAMICS</span>
-      <span>&middot;</span>
-      <span>VRUSHABH DESHMUKH</span>
-      <span>&middot;</span>
-      <span class="text-lime">ZERO-ALLOCATION RUST</span>
-      <span>&middot;</span>
-      <span>RABBITMQ EVENT QUEUES</span>
-      <span>&middot;</span>
-      <span>OMARCHY LINUX WORKSTATION</span>
-      <span>&middot;</span>
-      <span class="text-lime">20,000 REQ/SEC</span>
-      <span>&middot;</span>
-      <span>SUB-MILLISECOND P99</span>
-      <span>&middot;</span>
-    </div>
-    <div class="f1-marquee-content">
-      <span>RED BULL RB19</span> <span class="f1-num-tag">#7</span>
-      <span>&middot;</span>
-      <span>APEX AERODYNAMICS</span>
-      <span>&middot;</span>
-      <span>VRUSHABH DESHMUKH</span>
-      <span>&middot;</span>
-      <span class="text-lime">ZERO-ALLOCATION RUST</span>
-      <span>&middot;</span>
-      <span>RABBITMQ EVENT QUEUES</span>
-      <span>&middot;</span>
-      <span>OMARCHY LINUX WORKSTATION</span>
-      <span>&middot;</span>
-      <span class="text-lime">20,000 REQ/SEC</span>
-      <span>&middot;</span>
-      <span>SUB-MILLISECOND P99</span>
-      <span>&middot;</span>
+<section id="terminal" class="omarchy-tui-section">
+  <div class="container">
+    <div id="tui-window" class="tui-window">
+      <!-- Titlebar with Window Controls -->
+      <div class="tui-titlebar">
+        <div class="tui-dots">
+          <button id="tui-btn-close" class="tui-dot dot-red" title="Clear terminal viewport" aria-label="Clear terminal"></button>
+          <button id="tui-btn-min" class="tui-dot dot-yellow" title="Minimize / Collapse" aria-label="Minimize terminal"></button>
+          <button id="tui-btn-max" class="tui-dot dot-green" title="Toggle Fullscreen" aria-label="Fullscreen terminal"></button>
+        </div>
+
+        <div class="tui-title">
+          vrushabh@omarchy:~ (hyprland/foot) [wayland] &middot; zsh
+        </div>
+
+        <div class="tui-meta">
+          <span class="meta-pill" id="tui-active-theme">tokyo-night</span>
+          <span class="hidden sm:inline">60 FPS</span>
+        </div>
+      </div>
+
+      <!-- Quick Command Buttons Bar -->
+      <div class="tui-controls-bar">
+        <span class="tui-bar-label">QUICK CMDS:</span>
+        <button class="tui-cmd-btn" data-tui-cmd="fastfetch">fastfetch</button>
+        <button class="tui-cmd-btn" data-tui-cmd="about">about</button>
+        <button class="tui-cmd-btn" data-tui-cmd="skills">skills</button>
+        <button class="tui-cmd-btn" data-tui-cmd="projects">projects</button>
+        <button class="tui-cmd-btn" data-tui-cmd="themes">themes</button>
+        <button class="tui-cmd-btn" data-tui-cmd="shortcuts">shortcuts</button>
+        <button class="tui-cmd-btn" data-tui-cmd="clear">clear</button>
+      </div>
+
+      <!-- Terminal Body / Output Stream -->
+      <div id="omarchy-tui" class="tui-body">
+        <div id="tui-output"></div>
+
+        <!-- Active Interactive Prompt Line -->
+        <div class="tui-input-line">
+          <span class="tui-prompt"><span class="user">vrushabh</span><span class="at">@</span><span class="host">omarchy</span>:<span class="path">~</span>$</span>
+          <form id="tui-form" class="tui-form" autocomplete="off">
+            <input type="text" id="tui-input" class="tui-input" spellcheck="false" autofocus aria-label="Interactive terminal input">
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="container f1-main-container">
-  <!-- ==========================================
-       SECTION 01: PIT WALL TELEMETRY STATS
-       ========================================== -->
-  <section class="f1-section">
-    <div class="f1-section-header">
-      <div class="f1-section-title-wrap">
-        <span class="f1-section-idx">01 // TELEMETRY</span>
-        <h2 class="f1-section-title">ENGINEERING BENCHMARKS</h2>
+<!-- ==========================================
+     THEMES SECTION: PICK A THEME, CHANGE EVERYTHING
+     ========================================== -->
+<section id="themes" class="omarchy-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Pick a theme, change everything</h2>
+        <p class="section-subtitle">
+          A theme restyles the whole system at once: terminal, bar, notifications, wallpaper. Pick one and this site wears it too. Or press <kbd>T</kbd> to flip through them.
+        </p>
       </div>
-      <span class="f1-header-tag">RACE SPECIFICATIONS</span>
-    </div>
-
-    <div class="f1-stats-grid">
-      <div class="f1-stat-card" data-reveal>
-        <div class="f1-stat-metric text-lime" data-counter="20000" data-suffix="+">20,000+</div>
-        <div class="f1-stat-label">REQ / SECOND THROUGHPUT</div>
-        <div class="f1-stat-sub">Axum &middot; Tokio multi-threaded socket pipeline</div>
-      </div>
-
-      <div class="f1-stat-card" data-reveal>
-        <div class="f1-stat-metric" data-counter="0.42" data-decimals="2" data-suffix=" ms">0.42 ms</div>
-        <div class="f1-stat-label">P50 IN-MEMORY LATENCY</div>
-        <div class="f1-stat-sub">Redis cache-aside with connection pooling</div>
-      </div>
-
-      <div class="f1-stat-card" data-reveal>
-        <div class="f1-stat-metric text-lime" data-counter="99.999" data-decimals="3" data-suffix="%">99.999%</div>
-        <div class="f1-stat-label">DISTRIBUTED SYSTEM SLA</div>
-        <div class="f1-stat-sub">Transactional outbox &amp; RabbitMQ broker resilience</div>
-      </div>
-
-      <div class="f1-stat-card" data-reveal>
-        <div class="f1-stat-metric" data-counter="7" data-prefix="#">#7</div>
-        <div class="f1-stat-label">LUCKY #7 // ZERO ALLOCATIONS</div>
-        <div class="f1-stat-sub">Strict borrow-checked Rust &amp; PEP 649 typing</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       SECTION 02: ON TRACK (FLAGSHIP PROJECTS)
-       ========================================== -->
-  <section class="f1-section">
-    <div class="f1-section-header">
-      <div class="f1-section-title-wrap">
-        <span class="f1-section-idx">02 // ON TRACK</span>
-        <h2 class="f1-section-title">FLAGSHIP SYSTEMS &amp; ENGINES</h2>
-      </div>
-      <a href="{{ '/projects/' | relative_url }}" class="f1-link-more">
-        <span>VIEW ALL REPOSITORIES</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      <a href="https://omarchy.org/themes/" target="_blank" rel="noopener noreferrer" class="btn-omarchy-secondary btn-sm">
+        <span>More Omarchy Themes &rarr;</span>
       </a>
     </div>
 
-    <div class="f1-project-grid">
-      <!-- Project 1 -->
-      <article class="f1-race-card">
-        <div class="f1-card-inner">
-          <div class="f1-card-badge-row">
-            <span class="f1-spec-badge">ENGINE // 01</span>
-            <span class="f1-card-driver">STATE MACHINE</span>
-          </div>
-          <h3 class="f1-card-title">asyncfsm</h3>
-          <p class="f1-card-desc">
-            Asynchronous finite state machine engine with non-blocking transitions, lifecycle validation guards, and comprehensive state transition audit trails for distributed systems.
-          </p>
-          <div class="f1-card-tags">
-            <span class="f1-tag">PYTHON</span>
-            <span class="f1-tag">ASYNCIO</span>
-            <span class="f1-tag">CONCURRENCY</span>
-          </div>
-          <div class="f1-card-footer">
-            <a href="https://github.com/itsvrushabh/asyncfsm" target="_blank" rel="noopener noreferrer" class="btn-f1-card">
-              <span>VIEW REPO</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-            </a>
-          </div>
-        </div>
-      </article>
+    <div class="themes-grid">
+      <!-- 22 Official Themes -->
+      <button class="theme-chip" data-theme-choice="tokyo-night" aria-pressed="true">
+        <span class="theme-name">Tokyo Night</span>
+        <span class="theme-swatch" style="background: #9ece6a;"></span>
+      </button>
 
-      <!-- Project 2 -->
-      <article class="f1-race-card">
-        <div class="f1-card-inner">
-          <div class="f1-card-badge-row">
-            <span class="f1-spec-badge">MICROSERVICE // 02</span>
-            <span class="f1-card-driver">ENTERPRISE CHASSIS</span>
-          </div>
-          <h3 class="f1-card-title">fastapi-template</h3>
-          <p class="f1-card-desc">
-            High-concurrency microservice chassis with asyncpg connection pooling, Redis caching, Celery task queue integration, JWT auth, and multi-stage container optimization.
-          </p>
-          <div class="f1-card-tags">
-            <span class="f1-tag">FASTAPI</span>
-            <span class="f1-tag">POSTGRESQL</span>
-            <span class="f1-tag">REDIS</span>
-            <span class="f1-tag">DOCKER</span>
-          </div>
-          <div class="f1-card-footer">
-            <a href="https://github.com/itsvrushabh/fastapi-template" target="_blank" rel="noopener noreferrer" class="btn-f1-card">
-              <span>VIEW REPO</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-            </a>
-          </div>
-        </div>
-      </article>
+      <button class="theme-chip" data-theme-choice="catppuccin" aria-pressed="false">
+        <span class="theme-name">Catppuccin</span>
+        <span class="theme-swatch" style="background: #cba6f7;"></span>
+      </button>
 
-      <!-- Project 3 -->
-      <article class="f1-race-card">
-        <div class="f1-card-inner">
-          <div class="f1-card-badge-row">
-            <span class="f1-spec-badge">REAL-TIME // 03</span>
-            <span class="f1-card-driver">EVENT DISPATCH</span>
-          </div>
-          <h3 class="f1-card-title">DineInTakeOut</h3>
-          <p class="f1-card-desc">
-            High-throughput event coordination platform with WebSocket state syncing between point-of-sale systems and kitchen terminals under peak concurrent load.
-          </p>
-          <div class="f1-card-tags">
-            <span class="f1-tag">DJANGO</span>
-            <span class="f1-tag">WEBSOCKETS</span>
-            <span class="f1-tag">POSTGRESQL</span>
-          </div>
-          <div class="f1-card-footer">
-            <a href="https://github.com/itsvrushabh/DineInTakeOut" target="_blank" rel="noopener noreferrer" class="btn-f1-card">
-              <span>VIEW REPO</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-            </a>
-          </div>
-        </div>
-      </article>
+      <button class="theme-chip" data-theme-choice="gruvbox" aria-pressed="false">
+        <span class="theme-name">Gruvbox</span>
+        <span class="theme-swatch" style="background: #b8bb26;"></span>
+      </button>
 
-      <!-- Project 4 -->
-      <article class="f1-race-card">
-        <div class="f1-card-inner">
-          <div class="f1-card-badge-row">
-            <span class="f1-spec-badge">COCKPIT // 04</span>
-            <span class="f1-card-driver">DEV ENVIRONMENT</span>
-          </div>
-          <h3 class="f1-card-title">nvim &amp; tonarchy</h3>
-          <p class="f1-card-desc">
-            Precision Linux developer ergonomics: Omarchy Linux rolling kernel, Hyprland Wayland compositor, and Neovim configured with rust-analyzer and pyright inlay hints.
-          </p>
-          <div class="f1-card-tags">
-            <span class="f1-tag">LUA</span>
-            <span class="f1-tag">HYPRLAND</span>
-            <span class="f1-tag">OMARCHY</span>
-          </div>
-          <div class="f1-card-footer">
-            <a href="https://github.com/itsvrushabh/nvim" target="_blank" rel="noopener noreferrer" class="btn-f1-card">
-              <span>VIEW REPO</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-            </a>
-          </div>
-        </div>
-      </article>
+      <button class="theme-chip" data-theme-choice="nord" aria-pressed="false">
+        <span class="theme-name">Nord</span>
+        <span class="theme-swatch" style="background: #88c0d0;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="everforest" aria-pressed="false">
+        <span class="theme-name">Everforest</span>
+        <span class="theme-swatch" style="background: #a7c080;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="rose-pine" aria-pressed="false">
+        <span class="theme-name">Rosé Pine</span>
+        <span class="theme-swatch" style="background: #ebbcba;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="hackerman" aria-pressed="false">
+        <span class="theme-name">Hackerman</span>
+        <span class="theme-swatch" style="background: #00ff66;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="kanagawa" aria-pressed="false">
+        <span class="theme-name">Kanagawa</span>
+        <span class="theme-swatch" style="background: #7e9cd8;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="matte-black" aria-pressed="false">
+        <span class="theme-name">Matte Black</span>
+        <span class="theme-swatch" style="background: #737373;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="solitude" aria-pressed="false">
+        <span class="theme-name">Solitude</span>
+        <span class="theme-swatch" style="background: #8ea8c3;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="lumon" aria-pressed="false">
+        <span class="theme-name">Lumon</span>
+        <span class="theme-swatch" style="background: #4cc9f0;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="retro-82" aria-pressed="false">
+        <span class="theme-name">Retro 82</span>
+        <span class="theme-swatch" style="background: #33ff33;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="miasma" aria-pressed="false">
+        <span class="theme-name">Miasma</span>
+        <span class="theme-swatch" style="background: #78a090;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="osaka-jade" aria-pressed="false">
+        <span class="theme-name">Osaka Jade</span>
+        <span class="theme-swatch" style="background: #4ade80;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="last-horizon" aria-pressed="false">
+        <span class="theme-name">Last Horizon</span>
+        <span class="theme-swatch" style="background: #f97316;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="ethereal" aria-pressed="false">
+        <span class="theme-name">Ethereal</span>
+        <span class="theme-swatch" style="background: #818cf8;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="catppuccin-latte" aria-pressed="false">
+        <span class="theme-name">Catppuccin Latte</span>
+        <span class="theme-swatch" style="background: #8839ef;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="flexoki-light" aria-pressed="false">
+        <span class="theme-name">Flexoki Light</span>
+        <span class="theme-swatch" style="background: #205ea6;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="lupine" aria-pressed="false">
+        <span class="theme-name">Lupine</span>
+        <span class="theme-swatch" style="background: #a855f7;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="ristretto" aria-pressed="false">
+        <span class="theme-name">Ristretto</span>
+        <span class="theme-swatch" style="background: #d4a373;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="vantablack" aria-pressed="false">
+        <span class="theme-name">Vantablack</span>
+        <span class="theme-swatch" style="background: #ffffff;"></span>
+      </button>
+
+      <button class="theme-chip" data-theme-choice="white" aria-pressed="false">
+        <span class="theme-name">White</span>
+        <span class="theme-swatch" style="background: #111111;"></span>
+      </button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ==========================================
-       SECTION 03: PADDOCK DISPATCHES (BLOG)
-       ========================================== -->
-  <section class="f1-section">
-    <div class="f1-section-header">
-      <div class="f1-section-title-wrap">
-        <span class="f1-section-idx">03 // DISPATCHES</span>
-        <h2 class="f1-section-title">TECHNICAL RACE DEBRIEFS</h2>
+<!-- ==========================================
+     FLAGSHIP PROJECTS & ENGINES (Plugins Style)
+     ========================================== -->
+<section id="projects" class="omarchy-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Plugins, Engines &amp; Software</h2>
+        <p class="section-subtitle">
+          Open-source systems, asynchronous state machines, and microservice chassis built with clean abstractions and zero fluff.
+        </p>
       </div>
-      <a href="{{ '/blog/' | relative_url }}" class="f1-link-more">
-        <span>ALL ARTICLES</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      <a href="{{ '/projects/' | relative_url }}" class="btn-omarchy-secondary btn-sm">
+        <span>View All Repositories &rarr;</span>
       </a>
     </div>
 
-    <div class="f1-articles-grid">
+    <div class="projects-grid">
+      <!-- Card 1 -->
+      <article class="project-card">
+        <div class="card-top">
+          <span class="card-type">ENGINE // 01</span>
+          <span class="card-stars">&star; GitHub</span>
+        </div>
+        <h3 class="card-title">asyncfsm</h3>
+        <p class="card-desc">
+          Asynchronous finite state machine engine with non-blocking transitions, lifecycle validation guards, and comprehensive state transition audit trails for distributed systems.
+        </p>
+        <div class="card-tags">
+          <span class="card-tag">Python</span>
+          <span class="card-tag">AsyncIO</span>
+          <span class="card-tag">Concurrency</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/itsvrushabh/asyncfsm" target="_blank" rel="noopener noreferrer" class="card-link">
+            <span>github.com/itsvrushabh/asyncfsm</span> &rarr;
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="project-card">
+        <div class="card-top">
+          <span class="card-type">MICROSERVICE // 02</span>
+          <span class="card-stars">&star; GitHub</span>
+        </div>
+        <h3 class="card-title">fastapi-template</h3>
+        <p class="card-desc">
+          High-concurrency microservice chassis with asyncpg connection pooling, Redis caching, Celery task queue integration, JWT auth, and multi-stage container optimization.
+        </p>
+        <div class="card-tags">
+          <span class="card-tag">FastAPI</span>
+          <span class="card-tag">PostgreSQL</span>
+          <span class="card-tag">Redis</span>
+          <span class="card-tag">Docker</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/itsvrushabh/fastapi-template" target="_blank" rel="noopener noreferrer" class="card-link">
+            <span>github.com/itsvrushabh/fastapi-template</span> &rarr;
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="project-card">
+        <div class="card-top">
+          <span class="card-type">REAL-TIME // 03</span>
+          <span class="card-stars">&star; GitHub</span>
+        </div>
+        <h3 class="card-title">DineInTakeOut</h3>
+        <p class="card-desc">
+          High-throughput event coordination platform with WebSocket state syncing between point-of-sale systems and kitchen terminals under peak concurrent load.
+        </p>
+        <div class="card-tags">
+          <span class="card-tag">Django</span>
+          <span class="card-tag">WebSockets</span>
+          <span class="card-tag">PostgreSQL</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/itsvrushabh/DineInTakeOut" target="_blank" rel="noopener noreferrer" class="card-link">
+            <span>github.com/itsvrushabh/DineInTakeOut</span> &rarr;
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="project-card">
+        <div class="card-top">
+          <span class="card-type">COCKPIT // 04</span>
+          <span class="card-stars">&star; GitHub</span>
+        </div>
+        <h3 class="card-title">nvim &amp; omarchy-dotfiles</h3>
+        <p class="card-desc">
+          Precision Linux developer ergonomics: Omarchy Linux rolling kernel, Hyprland Wayland compositor, and Neovim configured with rust-analyzer and pyright inlay hints.
+        </p>
+        <div class="card-tags">
+          <span class="card-tag">Lua</span>
+          <span class="card-tag">Hyprland</span>
+          <span class="card-tag">Wayland</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/itsvrushabh/nvim" target="_blank" rel="noopener noreferrer" class="card-link">
+            <span>github.com/itsvrushabh/nvim</span> &rarr;
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     DOCTRINE / PHILOSOPHY
+     ========================================== -->
+<section id="doctrine" class="omarchy-section">
+  <div class="container">
+    <div class="omarchy-quote-card">
+      <div class="quote-mark">&ldquo;</div>
+      <blockquote class="quote-text">
+        When you can vibe code whatever app comes to your mind, you should be able to vibe code your operating system.
+      </blockquote>
+      <div class="quote-author">
+        <div class="author-meta">
+          <div class="author-name">David Heinemeier Hansson (DHH)</div>
+          <div class="author-sub">Creator of Omarchy &middot; Rails &middot; 37signals</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     DISPATCHES & DEBRIEFS (News style)
+     ========================================== -->
+<section id="dispatches" class="omarchy-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Technical Dispatches</h2>
+        <p class="section-subtitle">
+          In-depth technical articles on distributed concurrency, Rust async runtimes, Linux kernel ergonomics, and systems architecture.
+        </p>
+      </div>
+      <a href="{{ '/blog/' | relative_url }}" class="btn-omarchy-secondary btn-sm">
+        <span>All Dispatches &rarr;</span>
+      </a>
+    </div>
+
+    <div class="dispatches-list">
       {% for post in site.posts limit:3 %}
-        <article class="f1-article-card">
-          <div class="f1-article-meta">
-            <span class="f1-article-date">{{ post.date | date: "%B %d, %Y" }}</span>
-            <span class="f1-meta-sep">&middot;</span>
-            <span class="f1-article-read">{{ post.content | number_of_words | divided_by: 200 | at_least: 1 }} MIN DEBRIEF</span>
-            {% if post.category %}
-              <span class="f1-meta-sep">&middot;</span>
-              <span class="f1-article-cat text-lime">{{ post.category | upcase }}</span>
-            {% endif %}
-          </div>
-
-          <h3 class="f1-article-title">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          </h3>
-
-          <p class="f1-article-lead">
-            {{ post.description }}
-          </p>
-
-          <div class="f1-article-footer">
-            <div class="f1-article-tags">
-              {% for tag in post.tags limit:2 %}
-                <span class="f1-tag">#{{ tag | upcase }}</span>
-              {% endfor %}
+        <article class="dispatch-row">
+          <div>
+            <div class="dispatch-meta">
+              <span>{{ post.date | date: "%B %d, %Y" }}</span>
+              &middot;
+              <span>{{ post.content | number_of_words | divided_by: 200 | at_least: 1 }} MIN READ</span>
+              {% if post.category %}
+                &middot;
+                <span class="text-brand">{{ post.category | upcase }}</span>
+              {% endif %}
             </div>
-            <a href="{{ post.url | relative_url }}" class="f1-read-btn">
-              <span>READ DISPATCH</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </a>
+            <h3 class="dispatch-title">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h3>
           </div>
+          <a href="{{ post.url | relative_url }}" class="btn-omarchy-secondary btn-sm" style="margin-top: 0.75rem;">
+            <span>Read Article &rarr;</span>
+          </a>
         </article>
       {% endfor %}
     </div>
-  </section>
-
-  <!-- ==========================================
-       SECTION 04: RADIO COMMS / PIT WALL
-       ========================================== -->
-  <section class="f1-callout-panel">
-    <div class="f1-callout-grid">
-      <div class="f1-callout-left">
-        <span class="f1-section-idx text-lime">04 // PIT WALL RADIO</span>
-        <h2 class="f1-callout-heading">OPEN FOR HIGH-SPEED COLLABORATION</h2>
-        <p class="f1-callout-desc">
-          Looking for low-latency backend systems architecture, distributed microservice consulting, or mission-critical API design? Connect directly to the pit wall.
-        </p>
-        <div class="f1-callout-links">
-          <a href="{{ '/contact/' | relative_url }}" class="btn-f1-primary">
-            <span>TRANSMIT RADIO MESSAGE</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </a>
-          <a href="mailto:{{ site.author.email }}" class="f1-email-direct">{{ site.author.email }}</a>
-        </div>
-      </div>
-
-      <div class="f1-callout-right">
-        <div class="f1-radio-hud">
-          <div class="radio-hud-header">
-            <span class="radio-freq">FREQ: 142.850 MHz</span>
-            <span class="radio-live-pill">LIVE CH</span>
-          </div>
-          <div class="radio-hud-body">
-            <div class="radio-msg-line">
-              <span class="radio-speaker">[BOX // VRUSHABH]:</span>
-              <span class="radio-text">"Pushing zero-allocation binary to production cluster. Telemetry is green."</span>
-            </div>
-            <div class="radio-msg-line">
-              <span class="radio-speaker">[PIT WALL]:</span>
-              <span class="radio-text">"Copy that. 0.42ms latency confirmed. Car #7 is flying."</span>
-            </div>
-          </div>
-          <div class="radio-hud-footer">
-            <span class="radio-driver">CHASSIS: RED BULL RB19 #7</span>
-            <span class="radio-engineer">SYS ARCH: VRUSHABH DESHMUKH</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+  </div>
+</section>

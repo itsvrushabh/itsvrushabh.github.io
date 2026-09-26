@@ -1,105 +1,110 @@
 ---
 layout: default
-title: "Telemetry & About"
-subtitle: "Systems Architect inspired by Formula 1 precision & Red Bull RB19 racing aerodynamics."
+title: "Manual & Architecture"
+subtitle: "Systems Architect & Developer Workstation on Omarchy Linux."
 ---
 
-<div class="container page-container">
-  <div class="page-header">
-    <div class="f1-section-idx">04 // TELEMETRY &amp; PROFILE</div>
-    <h1 class="page-title">ABOUT &amp; ARCHITECTURE</h1>
-    <p class="page-subtitle">
-      Backend Developer &middot; Distributed Systems Architect &middot; Driven by Red Bull RB19 #7 Precision.
+<div class="container" style="padding-top: 3.5rem; padding-bottom: 5rem;">
+  <div style="margin-bottom: 3rem;">
+    <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--brand); letter-spacing: 0.05em; margin-bottom: 0.5rem;">
+      MANUAL // ARCHITECTURE &middot; PHILOSOPHY
+    </div>
+    <h1 style="font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem;">
+      The Omarchy Workstation &amp; Doctrine
+    </h1>
+    <p style="color: var(--text-secondary); font-size: 1.05rem; max-width: 42rem; line-height: 1.6;">
+      Backend Developer &middot; Distributed Systems Architect &middot; Powered by Omarchy Linux, Hyprland &amp; Zero-Allocation Concurrency.
     </p>
   </div>
 
-  <!-- Red Bull RB19 Profile Highlight Card -->
-  <div class="f1-race-card" style="margin-bottom: 3rem;">
-    <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: center; padding: 2rem;">
-      <div style="position: relative; border-radius: var(--radius-xs); overflow: hidden; border: 2px solid var(--color-lime);">
-        <img src="{{ '/assets/images/rb19-profile.webp' | relative_url }}" alt="Red Bull Racing RB19" style="width: 100%; height: auto; display: block;">
-        <span style="position: absolute; bottom: 0.5rem; left: 0.5rem; background: #000000; color: var(--color-lime); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 2px;">
-          CAR #7 // RB19
-        </span>
-      </div>
-
-      <div>
-        <span class="f1-spec-badge">THE RACING ETHOS</span>
-        <h3 style="font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.03em; margin: 0.4rem 0 0.75rem;">
-          RED BULL RB19 PRECISION &times; ZERO-ALLOCATION RUNTIMES
-        </h3>
-        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
-          In Formula 1, championship races are won in milliseconds and aerodynamic telemetry. 
-          In backend engineering, high-throughput architectures are won with zero-allocation memory paths, 
-          resilient connection pools, and non-blocking asynchronous event coordination.
-        </p>
-      </div>
+  <!-- Omarchy Workstation Callout -->
+  <div class="omarchy-quote-card" style="margin-bottom: 3rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+      <svg viewBox="0 0 1200 1200" fill="none" style="width: 24px; height: 24px; fill: var(--brand);" aria-hidden="true">
+        <path clip-rule="evenodd" d="m1200 1200h-480v-80h400v-1040h-479.996v160h-400v720h720v-720h-80v-80h159.996v880h-400v160h-640v-1200h1200zm-1120-80h480v-80h-400l.004-400h-80.004zm0-560h80.004v-400h400v-80h-480.004z" fill="currentColor" fill-rule="evenodd"/>
+      </svg>
+      <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--brand);">
+        THE OMARCHY ETHOS
+      </span>
+    </div>
+    <blockquote class="quote-text" style="font-size: 1.15rem; margin-bottom: 1rem;">
+      &ldquo;Linux used to be a chore to setup, difficult to debug, and full of confusing upfront choices. Omarchy solves all of it with a lightning fast installation, agents that debug all issues, and fantastic defaults that give you a fully functioning system that looks amazing out of the box.&rdquo;
+    </blockquote>
+    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
+      From the Omarchy Doctrine &middot; OMA is for Omakase (Chef's Choice)
     </div>
   </div>
 
-  <div class="markdown-body">
-    <h2>Engineering Philosophy</h2>
-    <p>
-      I focus on building reliable, distributed, and high-performance server architectures. 
-      My day-to-day work spans designing type-safe REST &amp; gRPC APIs, optimizing PostgreSQL and Redis queries, 
-      coordinating asynchronous tasks with RabbitMQ, and deploying lightweight containerized services.
-    </p>
+  <div style="display: flex; flex-direction: column; gap: 2.5rem; max-width: 48rem; line-height: 1.7; color: var(--text-secondary);">
+    <div>
+      <h2 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1rem;">Engineering Philosophy</h2>
+      <p style="margin-bottom: 1rem;">
+        I focus on building reliable, distributed, and high-performance server architectures. 
+        My day-to-day work spans designing type-safe REST &amp; gRPC APIs, optimizing PostgreSQL and Redis queries, 
+        coordinating asynchronous tasks with RabbitMQ, and deploying lightweight containerized services.
+      </p>
+      <p>
+        I operate at the intersection of compile-time systems programming (<strong>Rust &amp; Tokio</strong>) 
+        and high-productivity backend development (<strong>Python, FastAPI &amp; PEP 649</strong>). 
+        Every system must be fast by default, defensively designed against network failure, and simple to reason about.
+      </p>
+    </div>
 
-    <p>
-      I operate at the intersection of compile-time systems programming (<strong>Rust &amp; Tokio</strong>) 
-      and high-productivity backend development (<strong>Python, FastAPI &amp; PEP 649</strong>). 
-      Every system must be fast by default, defensively designed against network failure, and simple to reason about.
-    </p>
+    <div>
+      <h2 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1rem;">Core Principles</h2>
+      <ul style="list-style: disc; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+        <li><strong style="color: var(--text);">Defensive Concurrency:</strong> Embracing async runtimes (Tokio, uvloop) while rigorously guarding shared state and eliminating unbounded memory buffers.</li>
+        <li><strong style="color: var(--text);">Idempotency by Design:</strong> Treating every external webhook and message bus event as potentially duplicated; implementing atomic distributed locks and transaction outboxes.</li>
+        <li><strong style="color: var(--text);">Zero-Fluff Tooling:</strong> Minimal dependencies, explicit data models with Pydantic / Serde, and strict static analysis.</li>
+        <li><strong style="color: var(--text);">Observability First:</strong> Structured JSON logging, tracing spans, and real-time telemetry built into services from day one.</li>
+      </ul>
+    </div>
 
-    <h2>Telemetry &amp; Principles</h2>
-    <ul>
-      <li><strong>Defensive Concurrency:</strong> Embracing async runtimes (Tokio, uvloop) while rigorously guarding shared state and eliminating unbounded memory buffers.</li>
-      <li><strong>Idempotency by Design:</strong> Treating every external webhook and message bus event as potentially duplicated; implementing atomic distributed locks and transaction outboxes.</li>
-      <li><strong>Zero-Fluff Tooling:</strong> Minimal dependencies, explicit data models with Pydantic / Serde, and strict static analysis.</li>
-      <li><strong>Observability First:</strong> Structured JSON logging, tracing spans, and real-time telemetry built into services from day one.</li>
-    </ul>
+    <div>
+      <h2 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1rem;">Workstation &amp; Cockpit Specifications</h2>
+      <p style="margin-bottom: 1.25rem;">
+        A fast, distraction-free environment makes all the difference when writing mission-critical code. 
+        My development workstation runs an ultra-lean Omarchy Linux setup:
+      </p>
 
-    <h2>Cockpit &amp; Workstation Ergonomics</h2>
-    <p>
-      A fast, distraction-free environment makes all the difference when writing mission-critical code. 
-      My development workstation runs an ultra-lean Linux setup:
-    </p>
+      <div style="overflow-x: auto; background-color: var(--surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+        <table class="tui-table" style="font-size: 0.85rem; margin: 0;">
+          <thead>
+            <tr style="background-color: var(--surface-2);">
+              <th style="padding: 0.65rem 0.85rem; text-align: left; font-family: var(--font-mono); color: var(--text);">Component</th>
+              <th style="padding: 0.65rem 0.85rem; text-align: left; font-family: var(--font-mono); color: var(--text);">Technology</th>
+              <th style="padding: 0.65rem 0.85rem; text-align: left; font-family: var(--font-mono); color: var(--text);">Configuration Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 0.65rem 0.85rem;"><strong style="color: var(--brand);">Operating System</strong></td>
+              <td style="padding: 0.65rem 0.85rem;">Omarchy Linux (Arch Base)</td>
+              <td style="padding: 0.65rem 0.85rem;">Rolling release kernel with low-latency user-space scheduling.</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.65rem 0.85rem;"><strong style="color: var(--brand);">Window Manager</strong></td>
+              <td style="padding: 0.65rem 0.85rem;">Hyprland (Wayland)</td>
+              <td style="padding: 0.65rem 0.85rem;">Hardware-accelerated dynamic tiling with custom Omarchy palette.</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.65rem 0.85rem;"><strong style="color: var(--brand);">Primary Editor</strong></td>
+              <td style="padding: 0.65rem 0.85rem;">Neovim (LazyVim)</td>
+              <td style="padding: 0.65rem 0.85rem;">Equipped with <code>rust-analyzer</code>, <code>pyright</code>, and native LSP inlay hints.</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.65rem 0.85rem;"><strong style="color: var(--brand);">Terminal &amp; Shell</strong></td>
+              <td style="padding: 0.65rem 0.85rem;">Foot / Alacritty + Tmux</td>
+              <td style="padding: 0.65rem 0.85rem;">Session persistence, vi-mode navigation, and Starship prompt.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Component</th>
-          <th>Technology</th>
-          <th>Configuration Details</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Operating System</strong></td>
-          <td>Omarchy Linux (Arch base)</td>
-          <td>Rolling release kernel with low-latency user-space scheduling.</td>
-        </tr>
-        <tr>
-          <td><strong>Window Manager</strong></td>
-          <td>Hyprland (Wayland)</td>
-          <td>Hardware-accelerated dynamic tiling with custom stealth Tokyo Night palette.</td>
-        </tr>
-        <tr>
-          <td><strong>Primary Editor</strong></td>
-          <td>Neovim (LazyVim)</td>
-          <td>Equipped with <code>rust-analyzer</code>, <code>pyright</code>, Treesitter, and native LSP inlay hints.</td>
-        </tr>
-        <tr>
-          <td><strong>Terminal &amp; Multiplexer</strong></td>
-          <td>Alacritty / Foot + Tmux</td>
-          <td>Session persistence, vi-mode navigation, and streamlined split workflows.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div style="margin-top: 3.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-      <a href="{{ '/contact/' | relative_url }}" class="btn-f1-primary">TRANSMIT MESSAGE</a>
-      <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer" class="btn-f1-outline">EXPLORE GITHUB</a>
+    <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+      <a href="{{ '/contact/' | relative_url }}" class="btn-omarchy-primary">Transmit Message</a>
+      <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer" class="btn-omarchy-secondary">Explore GitHub &rarr;</a>
     </div>
   </div>
 </div>

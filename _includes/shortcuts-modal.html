@@ -1,0 +1,99 @@
+<!-- ==========================================
+     OMARCHY KEYBOARD SHORTCUTS CHEATSHEET MODAL
+     ========================================== -->
+<div id="shortcuts-modal" class="omarchy-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="omarchy-modal-backdrop" data-close-shortcuts></div>
+  <div class="omarchy-modal-card">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <svg viewBox="0 0 24 24" fill="none" class="modal-icon" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="1.5"></rect>
+          <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+        <h3 id="modal-title" class="modal-title">OMARCHY // KEYBOARD SHORTCUTS</h3>
+      </div>
+      <button class="modal-close-btn" data-close-shortcuts aria-label="Close shortcuts cheatsheet">
+        <svg viewBox="0 0 24 24" fill="none" class="close-icon"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <p class="modal-desc">
+        Omarchy is designed for full keyboard flow. You can navigate, cycle themes, and command the TUI without lifting your hands from the home row.
+      </p>
+
+      <div class="shortcuts-group">
+        <h4 class="shortcuts-group-title">GENERAL SYSTEM CONTROLS</h4>
+        <div class="shortcuts-grid">
+          <div class="shortcut-item">
+            <div class="keys"><kbd>T</kbd></div>
+            <div class="desc">Cycle through 22 official Omarchy themes</div>
+          </div>
+          <div class="shortcut-item">
+            <div class="keys"><kbd>?</kbd></div>
+            <div class="desc">Toggle this keyboard shortcuts cheatsheet</div>
+          </div>
+          <div class="shortcut-item">
+            <div class="keys"><kbd>`</kbd> or <kbd>~</kbd></div>
+            <div class="desc">Jump to &amp; focus interactive TUI terminal</div>
+          </div>
+          <div class="shortcut-item">
+            <div class="keys"><kbd>Esc</kbd></div>
+            <div class="desc">Close modal / unfocus current input</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shortcuts-group">
+        <h4 class="shortcuts-group-title">WORKSPACE JUMP NAVIGATION</h4>
+        <div class="shortcuts-grid">
+          <div class="shortcut-item">
+            <div class="keys"><kbd>1</kbd></div>
+            <div class="desc">Workspace 1: Home &middot; Hero wordmark</div>
+          </div>
+          <div class="shortcut-item">
+            <div class="keys"><kbd>2</kbd></div>
+            <div class="desc">Workspace 2: Interactive TUI Terminal</div>
+          </div>
+          <div class="shortcut-item">
+            <div class="keys"><kbd>3</kbd></div>
+            <div class="desc">Workspace 3: Flagship Plugins &amp; Repositories</div>
+          </div>
+          <div class="shortcut-item">
+            <div class="keys"><kbd>4</kbd></div>
+            <div class="desc">Workspace 4: Live 22 Themes Palette Picker</div>
+          </div>
+          <div class="shortcut-item">
+            <div class="keys"><kbd>5</kbd></div>
+            <div class="desc">Workspace 5: Technical Debriefs &amp; Dispatches</div>
+          </div>
+          <div class="shortcut-item">
+            <div class="keys"><kbd>G</kbd> then <kbd>H</kbd></div>
+            <div class="desc">Open Vrushabh's GitHub profile in new tab</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shortcuts-group">
+        <h4 class="shortcuts-group-title">INTERACTIVE TUI COMMANDS</h4>
+        <div class="shortcuts-grid">
+          <div class="shortcut-item">
+            <div class="keys"><kbd>Tab</kbd></div>
+            <div class="desc">Autocomplete shell command in TUI prompt</div>
+          </div>
+          <div class="shortcut-item">
+            <div class="keys"><kbd>&uarr;</kbd> / <kbd>&darr;</kbd></div>
+            <div class="desc">Navigate command execution history</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div class="footer-tip">
+        <span>Active Workstation:</span> <strong>Omarchy Linux &middot; Hyprland Wayland</strong>
+      </div>
+      <button class="btn-omarchy-primary btn-sm" data-close-shortcuts>Dismiss [Esc]</button>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="tokyo-night">
 <head>
   {% include head.html %}
 </head>
 <body class="site-body">
+  <!-- Ambient Animated Background Canvas & Scanlines -->
+  <canvas id="omarchy-canvas" class="omarchy-canvas" aria-hidden="true"></canvas>
+  <div class="omarchy-scanlines" aria-hidden="true"></div>
+
   {% include navbar.html %}
 
   <main class="site-main" id="main-content">
@@ -12,8 +16,18 @@
 
   {% include footer.html %}
 
-  <!-- Lenis Smooth Inertia Scroll (Lando Norris style) -->
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
+  <!-- Floating Shortcuts Indicator Pill -->
+  <button data-open-shortcuts class="floating-shortcut-pill" aria-label="Open keyboard shortcuts cheatsheet">
+    <kbd>?</kbd> <span>Shortcuts</span> &middot; <kbd>T</kbd> <span>Theme</span>
+  </button>
+
+  <!-- Live Toast Notification Container -->
+  <div id="omarchy-toast" class="omarchy-toast" aria-live="polite"></div>
+
+  <!-- Keyboard Shortcuts Cheatsheet Modal -->
+  {% include shortcuts-modal.html %}
+
+  <!-- Omarchy Core Script (Themes, TUI, Shortcuts, Canvas Animation) -->
+  <script src="{{ '/assets/js/omarchy.js' | relative_url }}"></script>
 </body>
 </html>

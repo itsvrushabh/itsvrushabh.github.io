@@ -2,38 +2,29 @@
   <div class="container footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="footer-title">VRUSHABH DESHMUKH <span class="text-lime">#7</span></div>
-        <p class="footer-tagline">RED BULL RB19 FORMULA 1 SPEED &times; HIGH-THROUGHPUT SYSTEMS RUNTIME</p>
+        <svg viewBox="0 0 1200 1200" fill="none" style="width: 18px; height: 18px; fill: var(--brand);" aria-hidden="true">
+          <path clip-rule="evenodd" d="m1200 1200h-480v-80h400v-1040h-479.996v160h-400v720h720v-720h-80v-80h159.996v880h-400v160h-640v-1200h1200zm-1120-80h480v-80h-400l.004-400h-80.004zm0-560h80.004v-400h400v-80h-480.004z" fill="currentColor" fill-rule="evenodd"/>
+        </svg>
+        <span>VRUSHABH DESHMUKH &middot; OMARCHY</span>
       </div>
 
-      <div class="footer-social-links">
-        <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer" class="footer-link">
-          [ GITHUB ]
-        </a>
-        <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener noreferrer" class="footer-link">
-          [ LINKEDIN ]
-        </a>
-        <a href="mailto:{{ site.author.email }}" class="footer-link">
-          [ RADIO / EMAIL ]
-        </a>
-        <a href="{{ '/feed.xml' | relative_url }}" class="footer-link">
-          [ RSS FEED ]
-        </a>
-        <a href="{{ '/sitemap.xml' | relative_url }}" class="footer-link">
-          [ SITEMAP ]
-        </a>
+      <div class="footer-links">
+        <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:{{ site.author.email }}">Email</a>
+        <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+        <a href="{{ '/sitemap.xml' | relative_url }}">Sitemap</a>
+        <a href="https://omarchy.org" target="_blank" rel="noopener noreferrer">Omarchy.org &rarr;</a>
       </div>
     </div>
 
-    <div class="footer-divider"></div>
-
     <div class="footer-bottom">
       <p class="footer-copy">
-        &copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}. Red Bull Racing aesthetic &middot; Built with Jekyll &amp; GitHub Pages.
+        &copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}. Designed in the spirit of <a href="https://omarchy.org" target="_blank" rel="noopener noreferrer" style="color: var(--brand); text-decoration: underline;">Omarchy Linux</a>.
       </p>
-      <p class="footer-meta">
-        <span class="status-dot"></span> PIT WALL TELEMETRY: OMARCHY LINUX &middot; RUST &middot; PYTHON
-      </p>
+      <div class="footer-shortcuts-tip">
+        <span>Press <kbd>?</kbd> for shortcuts</span> &middot; <span><kbd>T</kbd> to cycle themes</span>
+      </div>
     </div>
   </div>
 </footer>

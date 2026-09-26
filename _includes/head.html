@@ -9,17 +9,14 @@
 <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
 
 <!-- Favicon & Web App Manifest -->
-<link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/images/omarchy-logo.svg' | relative_url }}">
 <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
-<meta name="theme-color" content="#0a0d0b">
+<meta name="theme-color" content="#1a1b26">
 
-<!-- Preload Red Bull RB19 Hero Photo -->
-<link rel="preload" as="image" href="{{ '/assets/images/rb19-hero.webp' | relative_url }}">
-
-<!-- Google Fonts: Bebas Neue, Syne, Inter, JetBrains Mono -->
+<!-- Google Fonts: Inter & JetBrains Mono -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Theme Stylesheets -->
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
@@ -33,19 +30,23 @@
 <meta property="og:site_name" content="{{ site.title }}">
 
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
 <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
 
-<!-- Anti-FOUC Theme Init -->
+<!-- Anti-FOUC Omarchy Theme Initialization -->
 <script>
   (function() {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
-      document.documentElement.setAttribute('data-theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
+    try {
+      var t = localStorage.getItem("omarchy-site-theme");
+      var ok = ["tokyo-night","catppuccin","gruvbox","nord","everforest","rose-pine","hackerman","kanagawa","matte-black","solitude","lumon","retro-82","miasma","osaka-jade","last-horizon","ethereal","catppuccin-latte","flexoki-light","lupine","ristretto","vantablack","white"];
+      if (!t || ok.indexOf(t) < 0) {
+        t = "tokyo-night";
+        localStorage.setItem("omarchy-site-theme", t);
+      }
+      document.documentElement.dataset.theme = t;
+    } catch(e) {
+      document.documentElement.dataset.theme = "tokyo-night";
     }
   })();
 </script>

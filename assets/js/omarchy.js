@@ -1,0 +1,738 @@
+/**
+ * OMARCHY CORE JAVASCRIPT ENGINE
+ * Handles:
+ * 1. 22 Official Omarchy Themes + cycling with 'T'
+ * 2. Interactive Terminal User Interface (TUI) with real command execution
+ * 3. Global Keyboard Shortcuts System (cheatsheet modal, hotkeys)
+ * 4. Ambient Background Canvas Animation with dynamic theme reactivity
+ */
+
+(function () {
+  'use strict';
+
+  // =========================================================================
+  // 1. THEMES SYSTEM
+  // =========================================================================
+  const OMARCHY_THEMES = [
+    'tokyo-night',
+    'catppuccin',
+    'gruvbox',
+    'nord',
+    'everforest',
+    'rose-pine',
+    'hackerman',
+    'kanagawa',
+    'matte-black',
+    'solitude',
+    'lumon',
+    'retro-82',
+    'miasma',
+    'osaka-jade',
+    'last-horizon',
+    'ethereal',
+    'catppuccin-latte',
+    'flexoki-light',
+    'lupine',
+    'ristretto',
+    'vantablack',
+    'white'
+  ];
+
+  let currentTheme = localStorage.getItem('omarchy-site-theme') || 'tokyo-night';
+  if (!OMARCHY_THEMES.includes(currentTheme)) {
+    currentTheme = 'tokyo-night';
+  }
+
+  function setTheme(themeName, showToast = true) {
+    if (!OMARCHY_THEMES.includes(themeName)) return;
+    currentTheme = themeName;
+    document.documentElement.dataset.theme = themeName;
+    localStorage.setItem('omarchy-site-theme', themeName);
+
+    // Update active state on theme chips
+    document.querySelectorAll('[data-theme-choice]').forEach(btn => {
+      const isCurrent = btn.dataset.themeChoice === themeName;
+      btn.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+      btn.classList.toggle('active', isCurrent);
+    });
+
+    // Update TUI active theme indicator if present
+    const tuiThemeEl = document.getElementById('tui-active-theme');
+    if (tuiThemeEl) {
+      tuiThemeEl.textContent = themeName;
+    }
+
+    // Update meta theme-color from computed bg
+    setTimeout(() => {
+      const computedBg = getComputedStyle(document.documentElement).getPropertyValue('--t-bg').trim();
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme && computedBg) {
+        metaTheme.setAttribute('content', computedBg);
+      }
+      // Notify canvas animation of theme change
+      window.dispatchEvent(new CustomEvent('omarchyThemeChanged', { detail: { theme: themeName } }));
+    }, 50);
+
+    if (showToast) {
+      showToastNotice(`Theme: ${formatThemeName(themeName)} · Press T to cycle`);
+    }
+  }
+
+  function cycleTheme() {
+    const idx = OMARCHY_THEMES.indexOf(currentTheme);
+    const nextIdx = (idx + 1) % OMARCHY_THEMES.length;
+    setTheme(OMARCHY_THEMES[nextIdx], true);
+  }
+
+  function formatThemeName(slug) {
+    return slug
+      .split('-')
+      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(' ');
+  }
+
+  // Toast notification helper
+  let toastTimeout;
+  function showToastNotice(msg) {
+    let toast = document.getElementById('omarchy-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'omarchy-toast';
+      toast.className = 'omarchy-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('visible');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toast.classList.remove('visible');
+    }, 2400);
+  }
+
+  // =========================================================================
+  // 2. BACKGROUND CANVAS ANIMATION (Retro Grid / Cyber Particles)
+  // =========================================================================
+  function initBackgroundCanvas() {
+    const canvas = document.getElementById('omarchy-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let dpr = window.devicePixelRatio || 1;
+    let animationFrameId = null;
+    let particles = [];
+    let mouse = { x: -1000, y: -1000 };
+    let brandColor = '#9ece6a';
+    let borderColor = 'rgba(255, 255, 255, 0.08)';
+
+    function updateColors() {
+      const styles = getComputedStyle(document.documentElement);
+      brandColor = styles.getPropertyValue('--t-brand').trim() || '#9ece6a';
+      borderColor = styles.getPropertyValue('--t-border-subtle').trim() || 'rgba(255, 255, 255, 0.08)';
+    }
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+      createParticles();
+    }
+
+    function createParticles() {
+      particles = [];
+      // Adjust density based on screen dimensions
+      const count = Math.min(Math.floor((width * height) / 18000), 55);
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.45,
+          vy: (Math.random() - 0.5) * 0.45,
+          radius: Math.random() * 1.8 + 1,
+          baseAlpha: Math.random() * 0.35 + 0.15,
+          pulseSpeed: Math.random() * 0.02 + 0.01,
+          pulseOffset: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    let time = 0;
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw subtle retro grid scanlines
+      const gridSize = 48;
+      ctx.strokeStyle = borderColor;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      // Draw vertical grid lines
+      for (let x = 0; x < width; x += gridSize) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+      }
+      // Draw horizontal grid lines
+      for (let y = 0; y < height; y += gridSize) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+      }
+      ctx.stroke();
+
+      time += 0.02;
+
+      // Update and draw particles & links
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Wrap around boundaries
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
+        // Mouse gentle interaction
+        const dx = p.x - mouse.x;
+        const dy = p.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120 && dist > 0) {
+          const force = (120 - dist) / 120;
+          p.x += (dx / dist) * force * 1.5;
+          p.y += (dy / dist) * force * 1.5;
+        }
+
+        // Particle pulse
+        const alpha = p.baseAlpha + Math.sin(time * p.pulseSpeed * 20 + p.pulseOffset) * 0.12;
+
+        // Draw particle
+        ctx.fillStyle = brandColor;
+        ctx.globalAlpha = Math.max(0.05, Math.min(0.8, alpha));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Connect nearby particles
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist2 = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist2 < 110) {
+            ctx.strokeStyle = brandColor;
+            ctx.globalAlpha = (1 - dist2 / 110) * 0.18;
+            ctx.lineWidth = 0.75;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      ctx.globalAlpha = 1.0;
+      animationFrameId = requestAnimationFrame(render);
+    }
+
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(animationFrameId);
+      resize();
+      render();
+    });
+
+    window.addEventListener('mousemove', e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('omarchyThemeChanged', () => {
+      updateColors();
+    });
+
+    // Pause when page is hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationFrameId);
+      } else {
+        render();
+      }
+    });
+
+    updateColors();
+    resize();
+    render();
+  }
+
+  // =========================================================================
+  // 3. INTERACTIVE TUI (TERMINAL USER INTERFACE)
+  // =========================================================================
+  function initTUI() {
+    const tuiContainer = document.getElementById('omarchy-tui');
+    if (!tuiContainer) return;
+
+    const tuiOutput = document.getElementById('tui-output');
+    const tuiInput = document.getElementById('tui-input');
+    const tuiForm = document.getElementById('tui-form');
+
+    const commandHistory = [];
+    let historyIdx = -1;
+
+    const KNOWN_COMMANDS = [
+      'help',
+      'fastfetch',
+      'neofetch',
+      'about',
+      'skills',
+      'projects',
+      'theme',
+      'themes',
+      'shortcuts',
+      'clear',
+      'whoami',
+      'date',
+      'curl',
+      'exit'
+    ];
+
+    const COMMAND_HANDLERS = {
+      help: () => `
+<div class="tui-help">
+  <div class="tui-help-title">OMARCHY TUI - AVAILABLE SHELL COMMANDS:</div>
+  <table class="tui-table">
+    <tr><td class="cmd-k">fastfetch / neofetch</td><td>Display system hardware, OS & runtime telemetry</td></tr>
+    <tr><td class="cmd-k">about</td><td>Systems architect background & engineering philosophy</td></tr>
+    <tr><td class="cmd-k">skills</td><td>Low-level systems, Rust, Tokio, Python, Linux stack</td></tr>
+    <tr><td class="cmd-k">projects</td><td>Flagship engines, state machines, microservices</td></tr>
+    <tr><td class="cmd-k">theme [name]</td><td>Live switch site theme (e.g. <span class="text-brand">theme everforest</span>)</td></tr>
+    <tr><td class="cmd-k">themes</td><td>List all 22 official Omarchy themes</td></tr>
+    <tr><td class="cmd-k">shortcuts</td><td>Open global keyboard shortcuts cheatsheet (<kbd>?</kbd>)</td></tr>
+    <tr><td class="cmd-k">whoami</td><td>Current terminal user session credentials</td></tr>
+    <tr><td class="cmd-k">date</td><td>Show current system date & timezone</td></tr>
+    <tr><td class="cmd-k">clear</td><td>Clear terminal viewport</td></tr>
+  </table>
+  <div class="tui-tip">Tip: Press <kbd>Tab</kbd> to autocomplete, <kbd>↑</kbd>/<kbd>↓</kbd> for history, or press <kbd>T</kbd> to cycle themes.</div>
+</div>`,
+
+      fastfetch: () => `
+<div class="tui-fastfetch">
+  <pre class="tui-ascii">
+    ___                      _           
+   / _ \\ _ __ ___   __ _ _ __| |__  _   _ 
+  | | | | '_ \` _ \\ / _\` | '__| '_ \\| | | |
+  | |_| | | | | | | (_| | |  | | | | |_| |
+   \\___/|_| |_| |_|\\__,_|_|  |_| |_|\\__, |
+                                     |___/ 
+  </pre>
+  <div class="tui-spec-list">
+    <div class="tui-spec-row"><span class="spec-label">OS:</span><span class="spec-val">Omarchy Linux x86_64 (Rolling)</span></div>
+    <div class="tui-spec-row"><span class="spec-label">Host:</span><span class="spec-val">Arch Linux Custom Workstation</span></div>
+    <div class="tui-spec-row"><span class="spec-label">Kernel:</span><span class="spec-val">6.13.4-cachyos-bore (Low-Latency PREEMPT)</span></div>
+    <div class="tui-spec-row"><span class="spec-label">WM:</span><span class="spec-val">Hyprland 0.47 (Wayland Compositor)</span></div>
+    <div class="tui-spec-row"><span class="spec-label">Shell:</span><span class="spec-val">zsh 5.9 + starship prompt</span></div>
+    <div class="tui-spec-row"><span class="spec-label">Terminal:</span><span class="spec-val">foot / alacritty (vi-mode bindings)</span></div>
+    <div class="tui-spec-row"><span class="spec-label">Editor:</span><span class="spec-val">Neovim (rust-analyzer + pyright)</span></div>
+    <div class="tui-spec-row"><span class="spec-label">Theme:</span><span class="spec-val text-brand">${currentTheme}</span></div>
+    <div class="tui-spec-row"><span class="spec-label">Architect:</span><span class="spec-val">Vrushabh Deshmukh</span></div>
+    <div class="tui-spec-row"><span class="spec-label">Philosophy:</span><span class="spec-val">Zero-Allocation Concurrency &middot; Omakase Defaults</span></div>
+    <div class="tui-spec-colors">
+      <span class="color-block c1"></span><span class="color-block c2"></span><span class="color-block c3"></span>
+      <span class="color-block c4"></span><span class="color-block c5"></span><span class="color-block c6"></span><span class="color-block c7"></span>
+    </div>
+  </div>
+</div>`,
+
+      neofetch: () => COMMAND_HANDLERS.fastfetch(),
+
+      about: () => `
+<div class="tui-text-block">
+  <div class="tui-block-heading">[ ARCHITECT PROFILE // VRUSHABH DESHMUKH ]</div>
+  <p>
+    I am a <strong>Backend Developer & Systems Architect</strong> operating at the intersection of compile-time systems programming (<strong>Rust & Tokio</strong>) and high-productivity backend services (<strong>Python & FastAPI</strong>).
+  </p>
+  <p>
+    I run <strong>Omarchy Linux</strong> daily with Hyprland and Neovim. My core conviction is that computers should be fast by default, beautiful out of the box, and built with malleable tools that empower developers rather than burden them.
+  </p>
+  <div class="tui-contact-links">
+    &bull; GitHub: <a href="https://github.com/itsvrushabh" target="_blank" class="tui-link">@itsvrushabh</a><br>
+    &bull; LinkedIn: <a href="https://linkedin.com/in/itsvrushabh" target="_blank" class="tui-link">in/itsvrushabh</a><br>
+    &bull; Dispatches: <a href="/blog/" class="tui-link">/blog/</a>
+  </div>
+</div>`,
+
+      skills: () => `
+<div class="tui-text-block">
+  <div class="tui-block-heading">[ TECHNICAL STACK &amp; SPECIALIZATIONS ]</div>
+  <div class="tui-skills-grid">
+    <div><strong>SYSTEMS & RUNTIMES:</strong> Rust, Tokio Async IO, C/C++, Linux IPC, POSIX Sockets, Zero-Copy serialization</div>
+    <div><strong>BACKEND ENGINES:</strong> Python 3.13, FastAPI, Django, Asyncpg, Pydantic v2, PEP 649</div>
+    <div><strong>DISTRIBUTED INFRA:</strong> RabbitMQ (Transactional Outbox), Redis (Cache-aside & Cluster), PostgreSQL, Docker</div>
+    <div><strong>LINUX DESKTOP:</strong> Omarchy Linux, Hyprland, Wayland protocols, Neovim (Lua), Systemd, Bash/Zsh</div>
+  </div>
+</div>`,
+
+      projects: () => `
+<div class="tui-text-block">
+  <div class="tui-block-heading">[ FLAGSHIP REPOSITORIES ]</div>
+  <div class="tui-project-row">
+    <strong>1. asyncfsm</strong> [Python &middot; Asyncio &middot; Distributed State]<br>
+    Asynchronous finite state machine engine with non-blocking transitions and audit logging.<br>
+    <a href="https://github.com/itsvrushabh/asyncfsm" target="_blank" class="tui-link">Repo: github.com/itsvrushabh/asyncfsm &rarr;</a>
+  </div>
+  <div class="tui-project-row">
+    <strong>2. fastapi-template</strong> [FastAPI &middot; Asyncpg &middot; Redis &middot; Celery]<br>
+    High-concurrency microservice chassis with connection pooling and container orchestration.<br>
+    <a href="https://github.com/itsvrushabh/fastapi-template" target="_blank" class="tui-link">Repo: github.com/itsvrushabh/fastapi-template &rarr;</a>
+  </div>
+  <div class="tui-project-row">
+    <strong>3. DineInTakeOut</strong> [Django &middot; WebSockets &middot; Real-Time Sync]<br>
+    Peak-load event coordination engine with bidirectional WebSocket synchronization.<br>
+    <a href="https://github.com/itsvrushabh/DineInTakeOut" target="_blank" class="tui-link">Repo: github.com/itsvrushabh/DineInTakeOut &rarr;</a>
+  </div>
+  <div class="tui-project-row">
+    <strong>4. nvim &amp; omarchy-dotfiles</strong> [Lua &middot; Hyprland &middot; Wayland]<br>
+    Ergonomic developer cockpit with rust-analyzer, pyright, and Omarchy theme synchronization.<br>
+    <a href="https://github.com/itsvrushabh/nvim" target="_blank" class="tui-link">Repo: github.com/itsvrushabh/nvim &rarr;</a>
+  </div>
+</div>`,
+
+      themes: () => `
+<div class="tui-text-block">
+  <div class="tui-block-heading">[ 22 OFFICIAL OMARCHY THEMES ]</div>
+  <div class="tui-themes-list">
+    ${OMARCHY_THEMES.map(t => `<span class="tui-theme-tag ${t === currentTheme ? 'active-tag' : ''}">theme ${t}</span>`).join(' ')}
+  </div>
+  <div class="tui-tip">Usage: Type <code>theme &lt;name&gt;</code> to switch (e.g. <code>theme catppuccin</code> or <code>theme gruvbox</code>).</div>
+</div>`,
+
+      shortcuts: () => {
+        openShortcutsModal();
+        return `<span class="text-brand">&check; Opened keyboard shortcuts cheatsheet modal.</span>`;
+      },
+
+      whoami: () => `visitor@omarchy.org (guest on Vrushabh's digital workstation)`,
+      date: () => new Date().toString(),
+      clear: () => {
+        tuiOutput.innerHTML = '';
+        return null;
+      },
+      exit: () => {
+        COMMAND_HANDLERS.clear();
+        return `<span class="text-muted">Terminal cleared. Type 'help' to restart session.</span>`;
+      }
+    };
+
+    function runCommand(cmdRaw) {
+      const trimmed = cmdRaw.trim();
+      if (!trimmed) return;
+
+      // Add to history
+      commandHistory.push(trimmed);
+      historyIdx = commandHistory.length;
+
+      // Render command line in output
+      const cmdLineEl = document.createElement('div');
+      cmdLineEl.className = 'tui-history-line';
+      cmdLineEl.innerHTML = `<span class="tui-prompt"><span class="user">vrushabh</span><span class="at">@</span><span class="host">omarchy</span>:<span class="path">~</span>$</span> <span class="cmd-text">${escapeHtml(trimmed)}</span>`;
+      tuiOutput.appendChild(cmdLineEl);
+
+      const parts = trimmed.split(/\s+/);
+      const cmd = parts[0].toLowerCase();
+      const args = parts.slice(1);
+
+      let response = '';
+
+      if (cmd === 'theme' && args.length > 0) {
+        const targetTheme = args[0].toLowerCase();
+        if (OMARCHY_THEMES.includes(targetTheme)) {
+          setTheme(targetTheme, true);
+          response = `<span class="text-brand">&check; Switched active theme to <strong>${formatThemeName(targetTheme)}</strong>.</span>`;
+        } else {
+          response = `<span class="text-red">Unknown theme: '${escapeHtml(targetTheme)}'. Type 'themes' for the list of 22 supported palettes.</span>`;
+        }
+      } else if (cmd === 'sudo') {
+        response = `<span class="text-red">Permission denied: Nice try! User is not in the sudoers file. This incident has been logged to the Omarchy Core team.</span>`;
+      } else if (cmd === 'echo') {
+        response = escapeHtml(args.join(' '));
+      } else if (cmd === 'curl') {
+        response = `Fetching remote dispatches... 200 OK. Connected to https://itsvrushabh.github.io`;
+      } else if (COMMAND_HANDLERS[cmd]) {
+        response = COMMAND_HANDLERS[cmd]();
+      } else {
+        response = `<span class="text-red">omarchy: command not found: ${escapeHtml(cmd)}. Type <strong class="text-brand">help</strong> to see available commands.</span>`;
+      }
+
+      if (response !== null) {
+        const respEl = document.createElement('div');
+        respEl.className = 'tui-response';
+        respEl.innerHTML = response;
+        tuiOutput.appendChild(respEl);
+      }
+
+      // Auto scroll
+      tuiContainer.scrollTop = tuiContainer.scrollHeight;
+    }
+
+    tuiForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const val = tuiInput.value;
+      tuiInput.value = '';
+      runCommand(val);
+    });
+
+    tuiInput.addEventListener('keydown', e => {
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (historyIdx > 0) {
+          historyIdx--;
+          tuiInput.value = commandHistory[historyIdx] || '';
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyIdx < commandHistory.length - 1) {
+          historyIdx++;
+          tuiInput.value = commandHistory[historyIdx] || '';
+        } else {
+          historyIdx = commandHistory.length;
+          tuiInput.value = '';
+        }
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        const current = tuiInput.value.toLowerCase().trim();
+        if (current) {
+          const match = KNOWN_COMMANDS.find(c => c.startsWith(current));
+          if (match) {
+            tuiInput.value = match;
+          }
+        }
+      }
+    });
+
+    // Window controls
+    const btnClose = document.getElementById('tui-btn-close');
+    const btnMin = document.getElementById('tui-btn-min');
+    const btnMax = document.getElementById('tui-btn-max');
+    const tuiWindow = document.getElementById('tui-window');
+
+    if (btnClose) {
+      btnClose.addEventListener('click', () => {
+        tuiOutput.innerHTML = '';
+        tuiInput.focus();
+      });
+    }
+
+    if (btnMin) {
+      btnMin.addEventListener('click', () => {
+        tuiWindow.classList.toggle('minimized');
+      });
+    }
+
+    if (btnMax) {
+      btnMax.addEventListener('click', () => {
+        tuiWindow.classList.toggle('fullscreen');
+      });
+    }
+
+    // Quick Command Pills
+    document.querySelectorAll('[data-tui-cmd]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cmd = btn.dataset.tuiCmd;
+        if (cmd) {
+          runCommand(cmd);
+          tuiInput.focus();
+        }
+      });
+    });
+
+    // Run initial fastfetch on load
+    runCommand('fastfetch');
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // =========================================================================
+  // 4. GLOBAL SHORTCUTS MODAL & LISTENER
+  // =========================================================================
+  function openShortcutsModal() {
+    const modal = document.getElementById('shortcuts-modal');
+    if (modal) {
+      modal.classList.add('visible');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function closeShortcutsModal() {
+    const modal = document.getElementById('shortcuts-modal');
+    if (modal) {
+      modal.classList.remove('visible');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  function initShortcuts() {
+    // Keyboard listener
+    let gKeyTimeout;
+    let gPressed = false;
+
+    window.addEventListener('keydown', e => {
+      const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+      const isInputFocused = (activeTag === 'input' || activeTag === 'textarea') && document.activeElement.id !== 'tui-input';
+
+      // Always handle Escape
+      if (e.key === 'Escape') {
+        closeShortcutsModal();
+        const tuiWindow = document.getElementById('tui-window');
+        if (tuiWindow && tuiWindow.classList.contains('fullscreen')) {
+          tuiWindow.classList.remove('fullscreen');
+        }
+        if (document.activeElement && typeof document.activeElement.blur === 'function') {
+          document.activeElement.blur();
+        }
+        return;
+      }
+
+      // If user is inside an input form, don't hijack typing
+      if (isInputFocused) return;
+
+      // Handle '?' for shortcuts
+      if (e.key === '?' || (e.key === '/' && e.shiftKey)) {
+        e.preventDefault();
+        const modal = document.getElementById('shortcuts-modal');
+        if (modal && modal.classList.contains('visible')) {
+          closeShortcutsModal();
+        } else {
+          openShortcutsModal();
+        }
+        return;
+      }
+
+      // Handle 'T' / 't' for theme cycle (unless in terminal input)
+      if ((e.key === 't' || e.key === 'T') && document.activeElement.id !== 'tui-input') {
+        e.preventDefault();
+        cycleTheme();
+        return;
+      }
+
+      // Handle '`' or '~' to focus terminal
+      if (e.key === '`' || e.key === '~') {
+        e.preventDefault();
+        const tuiInput = document.getElementById('tui-input');
+        const termSec = document.getElementById('terminal');
+        if (termSec) {
+          termSec.scrollIntoView({ behavior: 'smooth' });
+        }
+        if (tuiInput) {
+          setTimeout(() => tuiInput.focus(), 200);
+        }
+        return;
+      }
+
+      // Handle navigation keys 1-5
+      if (['1', '2', '3', '4', '5'].includes(e.key) && document.activeElement.id !== 'tui-input') {
+        e.preventDefault();
+        const map = {
+          '1': '#home',
+          '2': '#terminal',
+          '3': '#projects',
+          '4': '#themes',
+          '5': '#dispatches'
+        };
+        const target = document.querySelector(map[e.key]);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+      }
+
+      // Handle 'G' then 'H' for GitHub
+      if ((e.key === 'g' || e.key === 'G') && document.activeElement.id !== 'tui-input') {
+        gPressed = true;
+        clearTimeout(gKeyTimeout);
+        gKeyTimeout = setTimeout(() => {
+          gPressed = false;
+        }, 1000);
+        return;
+      }
+      if (gPressed && (e.key === 'h' || e.key === 'H')) {
+        gPressed = false;
+        window.open('https://github.com/itsvrushabh', '_blank');
+        return;
+      }
+    });
+
+    // Close buttons on modal
+    document.querySelectorAll('[data-close-shortcuts]').forEach(el => {
+      el.addEventListener('click', closeShortcutsModal);
+    });
+
+    // Open button on triggers
+    document.querySelectorAll('[data-open-shortcuts]').forEach(el => {
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        openShortcutsModal();
+      });
+    });
+
+    // Theme trigger button in header
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        cycleTheme();
+      });
+    }
+
+    // Theme picker chips in themes section
+    document.querySelectorAll('[data-theme-choice]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const chosen = btn.dataset.themeChoice;
+        setTheme(chosen, true);
+      });
+    });
+
+    // Quick copy snippet
+    const copyBtn = document.getElementById('copy-install-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const snippet = copyBtn.dataset.snippet || 'curl -sL https://itsvrushabh.github.io/omarchy.sh | sh';
+        navigator.clipboard.writeText(snippet).then(() => {
+          showToastNotice('Copied curl command to clipboard!');
+          const label = copyBtn.querySelector('.copy-label');
+          if (label) {
+            const original = label.textContent;
+            label.textContent = 'Copied!';
+            setTimeout(() => {
+              label.textContent = original;
+            }, 2000);
+          }
+        });
+      });
+    }
+
+    // Mobile nav toggle
+    const mobToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    if (mobToggle && navMenu) {
+      mobToggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('open');
+        mobToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
+  }
+
+  // =========================================================================
+  // 5. INITIALIZATION
+  // =========================================================================
+  document.addEventListener('DOMContentLoaded', () => {
+    setTheme(currentTheme, false);
+    initBackgroundCanvas();
+    initTUI();
+    initShortcuts();
+  });
+})();

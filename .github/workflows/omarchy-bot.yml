@@ -1,0 +1,68 @@
+name: Omarchy Agentic Bot
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  omarchy-agent:
+    name: Omarchy Agentic Triage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Agentic Dispatch Response
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const isIssue = !!context.payload.issue;
+            const author = context.actor;
+
+            if (isIssue) {
+              const issueNumber = context.payload.issue.number;
+              const commentBody = `### 🌀 OMARCHY AGENTIC TRIAGE // DISPATCH LOGGED
+            
+            Welcome to the malleable era, @${author}!
+            
+            Our **Omarchy automated agents** have registered your ticket:
+            - **Workstation:** Omarchy Linux x86_64
+            - **Compositor:** Hyprland (Wayland)
+            - **Status:** 🟢 Agent Active / Ready to Vibe
+            
+            > *"When you can vibe code whatever app comes to your mind, you should be able to vibe code your operating system."*
+            
+            Vrushabh Deshmukh will review this dispatch shortly. Stay tuned! 🚀`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body: commentBody
+              });
+            } else {
+              const prNumber = context.payload.pull_request.number;
+              const headBranch = context.payload.pull_request.head.ref;
+              const commentBody = `### 🛠️ OMARCHY AGENTIC PULL REQUEST // REVIEW INITIATED
+            
+            Thanks for contributing to the Omarchy ecosystem, @${author}!
+            
+            Agentic checks initiated on branch \`${headBranch}\`:
+            - **Target:** Clean borrow-checker traces, zero memory leaks
+            - **Tooling:** rust-analyzer & pyright syntax verification
+            - **Status:** In Review by Core Team
+            
+            > *"Oma is for omakase, chef's choice: we pick the tools and tune the details. But this is your computer. You're free to change everything."*
+            
+            We will inspect your diffs shortly! ⚡`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: commentBody
+              });
+            }
