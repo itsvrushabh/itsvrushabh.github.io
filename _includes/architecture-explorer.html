@@ -1,0 +1,106 @@
+<!-- ==========================================
+     INTERACTIVE DISTRIBUTED ARCHITECTURE EXPLORER
+     ========================================== -->
+<section id="architecture" class="omarchy-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Distributed Systems Architecture Explorer</h2>
+        <p class="section-subtitle">
+          Interactive packet flow simulation: Watch how zero message loss is guaranteed across PostgreSQL, RabbitMQ, and Redis under network partitions.
+        </p>
+      </div>
+      <div class="arch-controls-top">
+        <button id="arch-step-btn" class="btn-omarchy-primary btn-sm">
+          <span>Step Flow &rarr;</span>
+        </button>
+        <button id="arch-chaos-btn" class="btn-omarchy-secondary btn-sm" title="Simulate a network partition / broker crash">
+          <span>⚡ Inject Chaos / Partition</span>
+        </button>
+        <button id="arch-autoplay-btn" class="btn-omarchy-secondary btn-sm">
+          <span>▶ Auto-Simulate</span>
+        </button>
+        <button id="arch-reset-btn" class="btn-omarchy-secondary btn-sm">
+          <span>↺ Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="arch-explorer-card">
+      <!-- Pipeline Nodes -->
+      <div class="arch-pipeline" id="arch-pipeline">
+        <!-- Node 1 -->
+        <div class="arch-node active" id="node-1" data-node="1">
+          <div class="node-icon">⚡</div>
+          <div class="node-title">Axum Gateway</div>
+          <div class="node-sub">HTTP Ingestion</div>
+          <div class="node-status-badge">Active</div>
+        </div>
+
+        <div class="arch-connector" id="conn-1">
+          <div class="packet-tracer"></div>
+        </div>
+
+        <!-- Node 2 -->
+        <div class="arch-node" id="node-2" data-node="2">
+          <div class="node-icon">🗄️</div>
+          <div class="node-title">PostgreSQL</div>
+          <div class="node-sub">Orders + Outbox</div>
+          <div class="node-status-badge">Idle</div>
+        </div>
+
+        <div class="arch-connector" id="conn-2">
+          <div class="packet-tracer"></div>
+        </div>
+
+        <!-- Node 3 -->
+        <div class="arch-node" id="node-3" data-node="3">
+          <div class="node-icon">🦀</div>
+          <div class="node-title">CDC Relay</div>
+          <div class="node-sub">Tokio Outbox Poller</div>
+          <div class="node-status-badge">Idle</div>
+        </div>
+
+        <div class="arch-connector" id="conn-3">
+          <div class="packet-tracer"></div>
+        </div>
+
+        <!-- Node 4 -->
+        <div class="arch-node" id="node-4" data-node="4">
+          <div class="node-icon">🐇</div>
+          <div class="node-title">RabbitMQ</div>
+          <div class="node-sub">Durable Exchange</div>
+          <div class="node-status-badge">Idle</div>
+        </div>
+
+        <div class="arch-connector" id="conn-4">
+          <div class="packet-tracer"></div>
+        </div>
+
+        <!-- Node 5 -->
+        <div class="arch-node" id="node-5" data-node="5">
+          <div class="node-icon">🛡️</div>
+          <div class="node-title">Consumer</div>
+          <div class="node-sub">Redis Atomic Lock</div>
+          <div class="node-status-badge">Idle</div>
+        </div>
+      </div>
+
+      <!-- Real-time Architecture Telemetry Log -->
+      <div class="arch-telemetry-console">
+        <div class="arch-console-header">
+          <span class="console-indicator"></span>
+          <span class="console-header-title">EVENT LIFECYCLE AUDIT TRAIL // STAGE <span id="arch-step-num">1</span> OF 5</span>
+          <span class="arch-chaos-indicator" id="arch-chaos-indicator" style="display: none;">PARTITION ACTIVE</span>
+        </div>
+        <div class="arch-console-body" id="arch-console-body">
+          <div class="arch-log-entry active">
+            <span class="log-time">[T+0.00ms]</span>
+            <span class="log-tag tag-api">[AXUM-API]</span>
+            <span class="log-msg">POST /api/v2/checkout received with idempotency key <code>req_98bf1</code>. Client connection assigned to Tokio worker thread #2.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

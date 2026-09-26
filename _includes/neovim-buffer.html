@@ -27,6 +27,10 @@
       </button>
     </div>
     <div class="neovim-tab-actions">
+      <button id="run-wasm-btn" class="neovim-run-btn" title="Execute Rust code in browser WebAssembly runtime">
+        <span class="run-icon">▶</span>
+        <span class="run-text">Run in Wasm</span>
+      </button>
       <button id="copy-nvim-code-btn" class="neovim-copy-btn" title="Copy active buffer code">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -145,6 +149,20 @@
 <span class="hl-line"><span class="hl-num">15</span> [character]</span>
 <span class="hl-line"><span class="hl-num">16</span> success_symbol = "[❯](bold green)"</span>
 <span class="hl-line"><span class="hl-num">17</span> error_symbol = "[❯](bold red)"</span></code></pre>
+    </div>
+    <!-- Wasm Live Execution Console Pane -->
+    <div class="neovim-wasm-console" id="nvim-wasm-console" style="display: none;">
+      <div class="wasm-console-header">
+        <div class="wasm-console-title">
+          <span class="wasm-dot"></span>
+          <span>WASM TOKIO RUNTIME &middot; REAL-TIME IN-BROWSER EXECUTION</span>
+        </div>
+        <div class="wasm-console-actions">
+          <button id="clear-wasm-console-btn" class="btn-xs-clean">Clear</button>
+          <button id="close-wasm-console-btn" class="btn-xs-clean">&times;</button>
+        </div>
+      </div>
+      <div class="wasm-console-body" id="wasm-console-output"></div>
     </div>
   </div>
 
