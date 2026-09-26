@@ -1,0 +1,40 @@
+<!-- ==========================================
+     OMARCHY AMBIENT MUSIC PLAYER
+     Track: Kevin Koontz - We Can Fix Everything
+     ========================================== -->
+<div id="omarchy-music-player" class="omarchy-music-card" aria-label="Music Player">
+  <!-- Album Art & Play/Pause Trigger -->
+  <button id="music-play-btn" class="music-art-btn" title="Turn Sound On / Off (Press 'M')" aria-label="Toggle Sound">
+    <img src="{{ '/assets/images/kevin_koontz.webp' | relative_url }}" alt="Kevin Koontz Album Art" class="music-art-img">
+    <span class="music-play-overlay">
+      <svg id="music-overlay-icon-play" class="music-icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+      </svg>
+      <svg id="music-overlay-icon-pause" class="music-icon-svg" style="display: none;" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="6" y="4" width="4" height="16"></rect>
+        <rect x="14" y="4" width="4" height="16"></rect>
+      </svg>
+    </span>
+  </button>
+
+  <!-- Track Information & Scrubbing Bar -->
+  <div class="music-info">
+    <div class="music-title-wrap">
+      <span class="music-track-title">We Can Fix Everything</span>
+    </div>
+    <div class="music-artist">Kevin Koontz &middot; Omarchy OST</div>
+    <div class="music-progress-wrap">
+      <span id="music-curr-time">0:00</span>
+      <input type="range" id="music-seek" class="music-seek-bar" min="0" max="100" value="0" aria-label="Seek track position">
+      <span id="music-duration">--:--</span>
+    </div>
+  </div>
+
+  <!-- Real-time Animated Equalizer Bars -->
+  <div class="music-eq-bars" title="Audio Equalizer" aria-hidden="true">
+    <span class="eq-bar"></span>
+    <span class="eq-bar"></span>
+    <span class="eq-bar"></span>
+    <span class="eq-bar"></span>
+  </div>
+</div>

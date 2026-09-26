@@ -1823,3 +1823,156 @@ kbd {
   body { background: white !important; color: black !important; }
   .resume-sheet { border: none !important; box-shadow: none !important; padding: 0 !important; }
 }
+
+
+/* ==========================================================================
+   OMARCHY MUSIC PLAYER COMPONENT
+   ========================================================================== */
+.omarchy-music-card {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  background-color: color-mix(in srgb, var(--surface) 90%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  transition: all var(--transition-smooth);
+}
+
+@media (max-width: 639px) {
+  .omarchy-music-card {
+    bottom: 3.8rem;
+    left: 1rem;
+    right: auto;
+  }
+}
+
+.music-art-btn {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border: none;
+  background: var(--surface-2);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.music-art-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity var(--transition-fast);
+}
+
+.music-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  transition: background-color var(--transition-fast);
+}
+
+.music-art-btn:hover .music-play-overlay {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0.85rem;
+  min-width: 175px;
+  max-width: 220px;
+}
+
+.music-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-artist {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.music-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.music-seek-bar {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--surface-2);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.music-seek-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+  cursor: pointer;
+}
+
+.music-eq-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  padding: 0 0.75rem;
+  border-left: 1px solid var(--border-subtle);
+}
+
+.eq-bar {
+  width: 3px;
+  height: 3px;
+  background-color: var(--brand);
+  border-radius: 1px;
+  transition: height 0.1s ease;
+}
+
+.omarchy-music-card.playing .eq-bar:nth-child(1) { animation: eq-anim 0.8s infinite ease-in-out alternate; }
+.omarchy-music-card.playing .eq-bar:nth-child(2) { animation: eq-anim 0.6s infinite ease-in-out alternate 0.2s; }
+.omarchy-music-card.playing .eq-bar:nth-child(3) { animation: eq-anim 0.9s infinite ease-in-out alternate 0.4s; }
+.omarchy-music-card.playing .eq-bar:nth-child(4) { animation: eq-anim 0.7s infinite ease-in-out alternate 0.1s; }
+
+@keyframes eq-anim {
+  0% { height: 2px; }
+  100% { height: 14px; }
+}

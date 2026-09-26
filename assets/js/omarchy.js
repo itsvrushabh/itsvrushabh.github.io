@@ -292,6 +292,10 @@
       'whoami',
       'date',
       'curl',
+      'music',
+      'sound',
+      'play',
+      'pause',
       'exit'
     ];
 
@@ -309,6 +313,7 @@
     <tr><td class="cmd-k">shortcuts</td><td>Open global keyboard shortcuts cheatsheet (<kbd>?</kbd>)</td></tr>
     <tr><td class="cmd-k">whoami</td><td>Current terminal user session credentials</td></tr>
     <tr><td class="cmd-k">date</td><td>Show current system date & timezone</td></tr>
+    <tr><td class="cmd-k">music / sound</td><td>Toggle background music playback (<kbd>M</kbd>)</td></tr>
     <tr><td class="cmd-k">clear</td><td>Clear terminal viewport</td></tr>
   </table>
   <div class="tui-tip">Tip: Press <kbd>Tab</kbd> to autocomplete, <kbd>↑</kbd>/<kbd>↓</kbd> for history, or press <kbd>T</kbd> to cycle themes.</div>
@@ -416,6 +421,25 @@
         tuiOutput.innerHTML = '';
         return null;
       },
+      music: (args) => {
+        const sub = (args && args[0]) ? args[0].toLowerCase() : '';
+        if (sub === 'play') {
+          playMusic();
+          return '<span class="text-brand">▶ Playing: Kevin Koontz - We Can Fix Everything [Omarchy OST]</span>';
+        } else if (sub === 'pause' || sub === 'stop') {
+          pauseMusic();
+          return '<span class="text-muted">❚❚ Paused background music.</span>';
+        } else {
+          const isPlaying = toggleMusic();
+          return isPlaying
+            ? '<span class="text-brand">▶ Sound on: Kevin Koontz - We Can Fix Everything [Omarchy OST]</span>'
+            : '<span class="text-muted">❚❚ Sound off: Background music paused.</span>';
+        }
+      },
+      sound: (args) => COMMAND_HANDLERS.music(args),
+      play: () => COMMAND_HANDLERS.music(['play']),
+      pause: () => COMMAND_HANDLERS.music(['pause']),
+
       exit: () => {
         COMMAND_HANDLERS.clear();
         return `<span class="text-muted">Terminal cleared. Type 'help' to restart session.</span>`;
@@ -457,7 +481,7 @@
       } else if (cmd === 'curl') {
         response = `Fetching remote dispatches... 200 OK. Connected to https://itsvrushabh.github.io`;
       } else if (COMMAND_HANDLERS[cmd]) {
-        response = COMMAND_HANDLERS[cmd]();
+        response = COMMAND_HANDLERS[cmd](args);
       } else {
         response = `<span class="text-red">omarchy: command not found: ${escapeHtml(cmd)}. Type <strong class="text-brand">help</strong> to see available commands.</span>`;
       }
@@ -613,6 +637,13 @@
         return;
       }
 
+      // Handle 'M' / 'm' to toggle music
+      if ((e.key === 'm' || e.key === 'M') && document.activeElement.id !== 'tui-input') {
+        e.preventDefault();
+        toggleMusic();
+        return;
+      }
+
       // Handle 'T' / 't' for theme cycle (unless in terminal input)
       if ((e.key === 't' || e.key === 'T') && document.activeElement.id !== 'tui-input') {
         e.preventDefault();
@@ -727,12 +758,136 @@
   }
 
   // =========================================================================
-  // 5. INITIALIZATION
+  
+  // =========================================================================
+  // 5. AMBIENT MUSIC ENGINE (Kevin Koontz - We Can Fix Everything)
+  // =========================================================================
+  let audioInstance = null;
+  let isAudioPlaying = false;
+
+  function getAudio() {
+    if (!audioInstance) {
+      audioInstance = new Audio();
+      audioInstance.crossOrigin = 'anonymous';
+      audioInstance.loop = true;
+      audioInstance.preload = 'metadata';
+      audioInstance.src = '/assets/audio/kevin_koontz-we_can_fix_everything.mp3';
+
+      audioInstance.addEventListener('error', () => {
+        console.warn('Local audio path failed, falling back to omarchy.org CDN');
+        if (!audioInstance.src.includes('omarchy.org')) {
+          audioInstance.src = 'https://omarchy.org/music/kevin_koontz-we_can_fix_everything.mp3';
+        }
+      });
+
+      const seek = document.getElementById('music-seek');
+      const currTimeEl = document.getElementById('music-curr-time');
+      const durationEl = document.getElementById('music-duration');
+
+      audioInstance.addEventListener('timeupdate', () => {
+        if (audioInstance.duration) {
+          const progress = (audioInstance.currentTime / audioInstance.duration) * 100;
+          if (seek && !seek.dataset.seeking) {
+            seek.value = progress;
+          }
+          if (currTimeEl) currTimeEl.textContent = formatAudioTime(audioInstance.currentTime);
+          if (durationEl) durationEl.textContent = formatAudioTime(audioInstance.duration);
+        }
+      });
+
+      audioInstance.addEventListener('loadedmetadata', () => {
+        if (durationEl) durationEl.textContent = formatAudioTime(audioInstance.duration);
+      });
+
+      if (seek) {
+        seek.addEventListener('input', () => {
+          seek.dataset.seeking = 'true';
+          if (audioInstance.duration) {
+            const t = (seek.value / 100) * audioInstance.duration;
+            if (currTimeEl) currTimeEl.textContent = formatAudioTime(t);
+          }
+        });
+        seek.addEventListener('change', () => {
+          seek.dataset.seeking = '';
+          if (audioInstance.duration) {
+            audioInstance.currentTime = (seek.value / 100) * audioInstance.duration;
+          }
+        });
+      }
+    }
+    return audioInstance;
+  }
+
+  function formatAudioTime(seconds) {
+    const s = Math.max(0, Math.floor(seconds || 0));
+    const m = Math.floor(s / 60);
+    const rem = s % 60;
+    return `${m}:${String(rem).padStart(2, '0')}`;
+  }
+
+  function updateMusicUI(playing) {
+    isAudioPlaying = playing;
+    const playerEl = document.getElementById('omarchy-music-player');
+    const iconPlay = document.getElementById('music-overlay-icon-play');
+    const iconPause = document.getElementById('music-overlay-icon-pause');
+    const headSoundOff = document.getElementById('header-sound-off-icon');
+    const headSoundOn = document.getElementById('header-sound-on-icon');
+
+    if (playerEl) playerEl.classList.toggle('playing', playing);
+    if (iconPlay) iconPlay.style.display = playing ? 'none' : 'block';
+    if (iconPause) iconPause.style.display = playing ? 'block' : 'none';
+    if (headSoundOff) headSoundOff.style.display = playing ? 'none' : 'block';
+    if (headSoundOn) headSoundOn.style.display = playing ? 'block' : 'none';
+  }
+
+  function playMusic() {
+    const audio = getAudio();
+    audio.play().then(() => {
+      updateMusicUI(true);
+      showToastNotice('▶ Sound on: Kevin Koontz - We Can Fix Everything');
+    }).catch(err => {
+      console.warn('User gesture required to play audio:', err);
+      showToastNotice('Click music button to enable sound');
+    });
+    return true;
+  }
+
+  function pauseMusic() {
+    const audio = getAudio();
+    audio.pause();
+    updateMusicUI(false);
+    showToastNotice('❚❚ Sound off');
+    return false;
+  }
+
+  function toggleMusic() {
+    const audio = getAudio();
+    if (audio.paused) {
+      return playMusic();
+    } else {
+      return pauseMusic();
+    }
+  }
+
+  function initMusicPlayer() {
+    const playBtn = document.getElementById('music-play-btn');
+    if (playBtn) {
+      playBtn.addEventListener('click', toggleMusic);
+    }
+    const headerToggle = document.getElementById('header-music-toggle');
+    if (headerToggle) {
+      headerToggle.addEventListener('click', toggleMusic);
+    }
+  }
+
+  // =========================================================================
+  // 6. INITIALIZATION
   // =========================================================================
   document.addEventListener('DOMContentLoaded', () => {
     setTheme(currentTheme, false);
     initBackgroundCanvas();
     initTUI();
     initShortcuts();
+    initMusicPlayer();
   });
 })();
