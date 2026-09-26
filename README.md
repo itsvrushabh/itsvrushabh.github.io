@@ -24,41 +24,90 @@
 
 ---
 
+## ⚙️ Tech Stack Options (Preview & Pick Your Favorite)
+
+<!-- ======================================================== -->
+<!-- OPTION 1: COMPACT MATRIX TABLE (Structured & Clean)       -->
+<!-- ======================================================== -->
+### 🔹 Style 1: Compact Matrix Table
+
 <div align="center">
-  <h2>⚙️ Tech Stack</h2>
 
-  <h3>Languages</h3>
-  <img src="https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white" alt="Rust" />
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" />
+| Domain | Technologies |
+| :--- | :--- |
+| **🦀 Languages** | <img src="https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white" alt="Rust" /> <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" /> |
+| **⚡ Frameworks** | <img src="https://img.shields.io/badge/Tokio-000000?style=flat-square&logo=tokio&logoColor=white" alt="Tokio" /> <img src="https://img.shields.io/badge/Axum-000000?style=flat-square&logo=rust&logoColor=white" alt="Axum" /> <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" /> <img src="https://img.shields.io/badge/Iced-2F5C8F?style=flat-square&logo=rust&logoColor=white" alt="Iced" /> |
+| **🗄️ Databases** | <img src="https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" /> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL" /> <img src="https://img.shields.io/badge/SQLite-07405E?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite" /> <img src="https://img.shields.io/badge/Turso-4FF8D2?style=flat-square&logo=turso&logoColor=black" alt="Turso" /> <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white" alt="Redis" /> <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB" /> |
+| **🚀 Infra & Queues** | <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" /> <img src="https://img.shields.io/badge/RabbitMQ-FF6600?style=flat-square&logo=rabbitmq&logoColor=white" alt="RabbitMQ" /> |
+| **💻 Editors** | <img src="https://img.shields.io/badge/Neovim-57A143?style=flat-square&logo=neovim&logoColor=white" alt="Neovim" /> <img src="https://img.shields.io/badge/VS_Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white" alt="VS Code" /> <img src="https://img.shields.io/badge/VSCodium-2F80ED?style=flat-square&logo=vscodium&logoColor=white" alt="VSCodium" /> <img src="https://img.shields.io/badge/Sublime_Text_4-FF9800?style=flat-square&logo=sublime-text&logoColor=white" alt="Sublime Text 4" /> |
+| **🛠️ OS & Tools** | <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black" alt="Linux" /> <img src="https://img.shields.io/badge/Tmux-1BB954?style=flat-square&logo=tmux&logoColor=white" alt="Tmux" /> <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git" /> |
 
-  <h3>Frameworks & Runtimes</h3>
-  <img src="https://img.shields.io/badge/Tokio-000000?style=flat-square&logo=tokio&logoColor=white" alt="Tokio" />
-  <img src="https://img.shields.io/badge/Axum-000000?style=flat-square&logo=rust&logoColor=white" alt="Axum" />
-  <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" />
-  <img src="https://img.shields.io/badge/Iced-2F5C8F?style=flat-square&logo=rust&logoColor=white" alt="Iced" />
+</div>
 
-  <h3>Databases & Caching</h3>
-  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL" />
-  <img src="https://img.shields.io/badge/SQLite-07405E?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite" />
-  <img src="https://img.shields.io/badge/Turso-4FF8D2?style=flat-square&logo=turso&logoColor=black" alt="Turso" />
-  <img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white" alt="Redis" />
-  <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB" />
+<br />
 
-  <h3>Infrastructure & Messaging</h3>
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" />
-  <img src="https://img.shields.io/badge/RabbitMQ-FF6600?style=flat-square&logo=rabbitmq&logoColor=white" alt="RabbitMQ" />
+<!-- ======================================================== -->
+<!-- OPTION 2: TERMINAL / NEOFETCH CARD (Backend CLI Vibe)     -->
+<!-- ======================================================== -->
+### 🔹 Style 2: Terminal / System Card
 
-  <h3>Editors</h3>
-  <img src="https://img.shields.io/badge/Neovim-57A143?style=flat-square&logo=neovim&logoColor=white" alt="Neovim" />
-  <img src="https://img.shields.io/badge/VS_Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white" alt="VS Code" />
-  <img src="https://img.shields.io/badge/VSCodium-2F80ED?style=flat-square&logo=vscodium&logoColor=white" alt="VSCodium" />
-  <img src="https://img.shields.io/badge/Sublime_Text_4-FF9800?style=flat-square&logo=sublime-text&logoColor=white" alt="Sublime Text 4" />
+```ini
+vrushabh@workstation
+-------------------
+OS:          Linux (Arch / CachyOS)
+Terminal:    Tmux + Alacritty / Ghostty
+Editor:      Neovim (Daily) · VS Code · VSCodium · Sublime Text 4
+Languages:   Rust 🦀 · Python 🐍
+Runtimes:    Tokio · Axum · FastAPI · Iced
+Databases:   PostgreSQL · Redis · Turso · SQLite · MySQL · MongoDB
+Brokers:     RabbitMQ
+Containers:  Docker & Docker Compose
+VCS:         Git
+```
 
-  <h3>OS & Workflow</h3>
-  <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black" alt="Linux" />
-  <img src="https://img.shields.io/badge/Tmux-1BB954?style=flat-square&logo=tmux&logoColor=white" alt="Tmux" />
-  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git" />
+<br />
+
+<!-- ======================================================== -->
+<!-- OPTION 3: INTERACTIVE MINDMAP (GitHub Native Mermaid)     -->
+<!-- ======================================================== -->
+### 🔹 Style 3: Native Vector Mindmap
+
+```mermaid
+mindmap
+  root((Tech Stack))
+    Languages
+      Rust
+      Python
+    Frameworks
+      Tokio & Axum
+      FastAPI
+      Iced
+    Databases
+      PostgreSQL & Redis
+      SQLite & Turso
+      MySQL & MongoDB
+    Infra
+      Docker
+      RabbitMQ
+    Editors & OS
+      Neovim & VS Code
+      Linux & Tmux
+```
+
+<br />
+
+<!-- ======================================================== -->
+<!-- OPTION 4: COMPACT APP ICON TILES (SkillIcons Dark Grid)   -->
+<!-- ======================================================== -->
+### 🔹 Style 4: Compact Dark App Tiles
+
+<div align="center">
+  <p><b>Languages, Runtimes & Infrastructure</b></p>
+  <img src="https://skillicons.dev/icons?i=rust,py,fastapi,docker,rabbitmq,linux,neovim,vscode,sublime&theme=dark" alt="Languages and Tools" />
+  
+  <br />
+  <p><b>Databases & Caching</b></p>
+  <img src="https://skillicons.dev/icons?i=postgres,mysql,sqlite,redis,mongodb&theme=dark" alt="Databases" />
 </div>
 
 ---
