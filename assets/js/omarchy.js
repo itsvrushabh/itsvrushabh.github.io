@@ -183,11 +183,37 @@
 
       time += 0.02;
 
+      // Audio-reactive visualizer boost
+      let audioBoost = 0;
+      if (window.audioAnalyser && window.isAudioPlaying && window.audioFrequencyData) {
+        window.audioAnalyser.getByteFrequencyData(window.audioFrequencyData);
+        // Average low-frequency bass (bins 1 to 6)
+        let bassSum = 0;
+        for (let b = 1; b <= 6; b++) {
+          bassSum += window.audioFrequencyData[b] || 0;
+        }
+        audioBoost = (bassSum / 6) / 255; // 0.0 to 1.0
+
+        // Real-time equalizer bars update on music player
+        const eqBars = document.querySelectorAll('#omarchy-music-player .eq-bar');
+        if (eqBars.length === 4) {
+          const b1 = Math.max(2, Math.round((window.audioFrequencyData[2] / 255) * 14));
+          const b2 = Math.max(2, Math.round((window.audioFrequencyData[6] / 255) * 14));
+          const b3 = Math.max(2, Math.round((window.audioFrequencyData[12] / 255) * 14));
+          const b4 = Math.max(2, Math.round((window.audioFrequencyData[20] / 255) * 14));
+          eqBars[0].style.height = b1 + 'px';
+          eqBars[1].style.height = b2 + 'px';
+          eqBars[2].style.height = b3 + 'px';
+          eqBars[3].style.height = b4 + 'px';
+        }
+      }
+
       // Update and draw particles & links
       for (let i = 0; i < particles.length; i++) {
+        const speedMult = 1 + audioBoost * 1.8;
         const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
+        p.x += p.vx * speedMult;
+        p.y += p.vy * speedMult;
 
         // Wrap around boundaries
         if (p.x < 0) p.x = width;
@@ -212,7 +238,8 @@
         ctx.fillStyle = brandColor;
         ctx.globalAlpha = Math.max(0.05, Math.min(0.8, alpha));
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        const rBoost = p.radius * (1 + audioBoost * 0.9);
+        ctx.arc(p.x, p.y, rBoost, 0, Math.PI * 2);
         ctx.fill();
 
         // Connect nearby particles
@@ -610,7 +637,15 @@
       const isInputFocused = (activeTag === 'input' || activeTag === 'textarea') && document.activeElement.id !== 'tui-input';
 
       // Always handle Escape
+      // Handle Ctrl+K / Cmd+K / Super+Space for Command Palette
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        openCommandPalette();
+        return;
+      }
+
       if (e.key === 'Escape') {
+        closeCommandPalette();
         closeShortcutsModal();
         const tuiWindow = document.getElementById('tui-window');
         if (tuiWindow && tuiWindow.classList.contains('fullscreen')) {
@@ -769,6 +804,24 @@
     if (!audioInstance) {
       audioInstance = new Audio();
       audioInstance.crossOrigin = 'anonymous';
+
+      // Setup Web Audio API Analyser for real-time visualizer
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+          const audioCtx = new AudioContext();
+          const analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 64;
+          const source = audioCtx.createMediaElementSource(audioInstance);
+          source.connect(analyser);
+          analyser.connect(audioCtx.destination);
+          window.audioAnalyser = analyser;
+          window.audioContext = audioCtx;
+          window.audioFrequencyData = new Uint8Array(analyser.frequencyBinCount);
+        }
+      } catch (e) {
+        console.warn('Web Audio API not supported or restricted:', e);
+      }
       audioInstance.loop = true;
       audioInstance.preload = 'metadata';
       audioInstance.src = '/assets/audio/kevin_koontz-we_can_fix_everything.mp3';
@@ -827,6 +880,10 @@
 
   function updateMusicUI(playing) {
     isAudioPlaying = playing;
+    window.isAudioPlaying = playing;
+    if (playing && window.audioContext && window.audioContext.state === 'suspended') {
+      window.audioContext.resume();
+    }
     const playerEl = document.getElementById('omarchy-music-player');
     const iconPlay = document.getElementById('music-overlay-icon-play');
     const iconPause = document.getElementById('music-overlay-icon-pause');
@@ -881,7 +938,310 @@
   }
 
   // =========================================================================
-  // 6. INITIALIZATION
+  
+  // =========================================================================
+  // 6. COMMAND PALETTE ENGINE (Ctrl+K / Super+Space / Wofi)
+  // =========================================================================
+  const PALETTE_COMMANDS = [
+    // Navigation
+    { id: 'nav-home', label: 'Go to Home / Hero', category: 'Navigation', icon: '⚡', action: () => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' }) },
+    { id: 'nav-term', label: 'Open Interactive TUI Terminal', category: 'Navigation', icon: '💻', action: () => { document.getElementById('terminal')?.scrollIntoView({ behavior: 'smooth' }); setTimeout(() => document.getElementById('tui-input')?.focus(), 250); } },
+    { id: 'nav-cockpit', label: 'Open The Cockpit & Neovim', category: 'Navigation', icon: '🪟', action: () => document.getElementById('cockpit')?.scrollIntoView({ behavior: 'smooth' }) },
+    { id: 'nav-projects', label: 'Explore Plugins & Projects', category: 'Navigation', icon: '📦', action: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) },
+    { id: 'nav-themes', label: 'Pick a Theme (22 Palettes)', category: 'Navigation', icon: '🎨', action: () => document.getElementById('themes')?.scrollIntoView({ behavior: 'smooth' }) },
+    { id: 'nav-blog', label: 'Read Technical Dispatches', category: 'Navigation', icon: '📰', action: () => { window.location.href = '/blog/'; } },
+    { id: 'nav-about', label: 'View Omarchy Manual & Philosophy', category: 'Navigation', icon: '📖', action: () => { window.location.href = '/about/'; } },
+    { id: 'nav-resume', label: 'View Driver Resume / CV', category: 'Navigation', icon: '📄', action: () => { window.location.href = '/resume/'; } },
+    { id: 'nav-contact', label: 'Get in Touch / Contact', category: 'Navigation', icon: '✉️', action: () => { window.location.href = '/contact/'; } },
+
+    // Music
+    { id: 'music-toggle', label: 'Toggle Background Music (Kevin Koontz)', category: 'Media', icon: '🎵', action: () => toggleMusic() },
+    { id: 'music-play', label: 'Play Omarchy Soundtrack', category: 'Media', icon: '▶️', action: () => playMusic() },
+    { id: 'music-pause', label: 'Pause Omarchy Soundtrack', category: 'Media', icon: '⏸️', action: () => pauseMusic() },
+
+    // Themes
+    { id: 'theme-tokyo', label: 'Theme: Tokyo Night (Default)', category: 'Theme', icon: '🌙', action: () => setTheme('tokyo-night', true) },
+    { id: 'theme-catppuccin', label: 'Theme: Catppuccin', category: 'Theme', icon: '☕', action: () => setTheme('catppuccin', true) },
+    { id: 'theme-gruvbox', label: 'Theme: Gruvbox', category: 'Theme', icon: '🪵', action: () => setTheme('gruvbox', true) },
+    { id: 'theme-everforest', label: 'Theme: Everforest', category: 'Theme', icon: '🌲', action: () => setTheme('everforest', true) },
+    { id: 'theme-nord', label: 'Theme: Nord', category: 'Theme', icon: '❄️', action: () => setTheme('nord', true) },
+    { id: 'theme-rosepine', label: 'Theme: Rosé Pine', category: 'Theme', icon: '🌸', action: () => setTheme('rose-pine', true) },
+    { id: 'theme-hackerman', label: 'Theme: Hackerman (Matrix)', category: 'Theme', icon: '🟢', action: () => setTheme('hackerman', true) },
+    { id: 'theme-kanagawa', label: 'Theme: Kanagawa', category: 'Theme', icon: '🌊', action: () => setTheme('kanagawa', true) },
+    { id: 'theme-matteblack', label: 'Theme: Matte Black', category: 'Theme', icon: '⬛', action: () => setTheme('matte-black', true) },
+    { id: 'theme-solitude', label: 'Theme: Solitude', category: 'Theme', icon: '🌌', action: () => setTheme('solitude', true) },
+    { id: 'theme-lumon', label: 'Theme: Lumon', category: 'Theme', icon: '💡', action: () => setTheme('lumon', true) },
+    { id: 'theme-retro82', label: 'Theme: Retro 82', category: 'Theme', icon: '📟', action: () => setTheme('retro-82', true) },
+
+    // System / External
+    { id: 'ext-gh', label: 'GitHub Profile (@itsvrushabh)', category: 'External', icon: '🐙', action: () => window.open('https://github.com/itsvrushabh', '_blank') },
+    { id: 'ext-dotfiles', label: 'Clone Dotfiles (nvim & Omarchy)', category: 'External', icon: '⚙️', action: () => window.open('https://github.com/itsvrushabh/nvim', '_blank') }
+  ];
+
+  let selectedPaletteIndex = 0;
+  let filteredPaletteCommands = [...PALETTE_COMMANDS];
+
+  function openCommandPalette() {
+    const modal = document.getElementById('command-palette-modal');
+    const input = document.getElementById('palette-input');
+    if (!modal || !input) return;
+
+    modal.classList.add('visible');
+    modal.setAttribute('aria-hidden', 'false');
+    input.value = '';
+    filterPalette('');
+    setTimeout(() => input.focus(), 50);
+  }
+
+  function closeCommandPalette() {
+    const modal = document.getElementById('command-palette-modal');
+    if (modal) {
+      modal.classList.remove('visible');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  function filterPalette(query) {
+    const q = query.toLowerCase().trim();
+    if (!q) {
+      filteredPaletteCommands = [...PALETTE_COMMANDS];
+    } else {
+      filteredPaletteCommands = PALETTE_COMMANDS.filter(cmd =>
+        cmd.label.toLowerCase().includes(q) || cmd.category.toLowerCase().includes(q)
+      );
+    }
+    selectedPaletteIndex = 0;
+    renderPaletteResults();
+  }
+
+  function renderPaletteResults() {
+    const container = document.getElementById('palette-results');
+    if (!container) return;
+
+    container.innerHTML = '';
+    if (filteredPaletteCommands.length === 0) {
+      container.innerHTML = `<div style="padding: 1.5rem; text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem;">No commands or pages matching query</div>`;
+      return;
+    }
+
+    let lastCategory = '';
+    filteredPaletteCommands.forEach((cmd, idx) => {
+      if (cmd.category !== lastCategory) {
+        lastCategory = cmd.category;
+        const catEl = document.createElement('div');
+        catEl.className = 'palette-category-label';
+        catEl.textContent = cmd.category;
+        container.appendChild(catEl);
+      }
+
+      const itemEl = document.createElement('div');
+      itemEl.className = `palette-item ${idx === selectedPaletteIndex ? 'selected' : ''}`;
+      itemEl.innerHTML = `
+        <div class="palette-item-left">
+          <span class="palette-item-icon">${cmd.icon}</span>
+          <span>${cmd.label}</span>
+        </div>
+        <span class="palette-badge">${cmd.category}</span>
+      `;
+
+      itemEl.addEventListener('click', () => {
+        closeCommandPalette();
+        cmd.action();
+      });
+
+      itemEl.addEventListener('mouseenter', () => {
+        selectedPaletteIndex = idx;
+        updateSelectedPaletteItem();
+      });
+
+      container.appendChild(itemEl);
+    });
+
+    scrollSelectedIntoView();
+  }
+
+  function updateSelectedPaletteItem() {
+    const items = document.querySelectorAll('#palette-results .palette-item');
+    items.forEach((item, idx) => {
+      item.classList.toggle('selected', idx === selectedPaletteIndex);
+    });
+  }
+
+  function scrollSelectedIntoView() {
+    const selected = document.querySelector('#palette-results .palette-item.selected');
+    if (selected) {
+      selected.scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  function initCommandPalette() {
+    const input = document.getElementById('palette-input');
+    const openBtn = document.getElementById('open-palette-btn');
+
+    if (openBtn) {
+      openBtn.addEventListener('click', openCommandPalette);
+    }
+
+    document.querySelectorAll('[data-close-palette]').forEach(el => {
+      el.addEventListener('click', closeCommandPalette);
+    });
+
+    if (input) {
+      input.addEventListener('input', e => {
+        filterPalette(e.target.value);
+      });
+
+      input.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (filteredPaletteCommands.length > 0) {
+            selectedPaletteIndex = (selectedPaletteIndex + 1) % filteredPaletteCommands.length;
+            updateSelectedPaletteItem();
+            scrollSelectedIntoView();
+          }
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (filteredPaletteCommands.length > 0) {
+            selectedPaletteIndex = (selectedPaletteIndex - 1 + filteredPaletteCommands.length) % filteredPaletteCommands.length;
+            updateSelectedPaletteItem();
+            scrollSelectedIntoView();
+          }
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          const targetCmd = filteredPaletteCommands[selectedPaletteIndex];
+          if (targetCmd) {
+            closeCommandPalette();
+            targetCmd.action();
+          }
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          closeCommandPalette();
+        }
+      });
+    }
+  }
+
+  // =========================================================================
+  // 7. INTERACTIVE NEOVIM PLAYGROUND ENGINE
+  // =========================================================================
+  function initNeovimPlayground() {
+    const tabMeta = {
+      rust: { file: 'src/runtime/main.rs', type: 'rust' },
+      python: { file: 'src/fsm/state_machine.py', type: 'python' },
+      hyprland: { file: '~/.config/hypr/hyprland.conf', type: 'hyprlang' },
+      starship: { file: '~/.config/starship.toml', type: 'toml' }
+    };
+
+    const tabs = document.querySelectorAll('.neovim-tab');
+    const statusFile = document.getElementById('nvim-status-file');
+    const statusType = document.getElementById('nvim-status-type');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.nvimTab;
+        if (!target) return;
+
+        // Toggle active tabs
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        // Toggle active buffer
+        document.querySelectorAll('.neovim-buffer-content').forEach(buf => {
+          buf.style.display = 'none';
+          buf.classList.remove('active');
+        });
+        const activeBuf = document.getElementById(`nvim-buf-${target}`);
+        if (activeBuf) {
+          activeBuf.style.display = 'block';
+          activeBuf.classList.add('active');
+        }
+
+        // Update Lualine status bar
+        if (tabMeta[target]) {
+          if (statusFile) statusFile.textContent = tabMeta[target].file;
+          if (statusType) statusType.textContent = tabMeta[target].type;
+        }
+      });
+    });
+
+    // Copy active buffer button
+    const copyBtn = document.getElementById('copy-nvim-code-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const activeBuf = document.querySelector('.neovim-buffer-content.active');
+        if (activeBuf) {
+          const text = activeBuf.innerText.replace(/^[0-9 ]{1,4}/gm, ''); // Strip line numbers
+          navigator.clipboard.writeText(text).then(() => {
+            showToastNotice('Copied buffer code to clipboard!');
+            const copyText = copyBtn.querySelector('.copy-text');
+            if (copyText) {
+              const original = copyText.textContent;
+              copyText.textContent = 'Copied!';
+              setTimeout(() => { copyText.textContent = original; }, 2000);
+            }
+          });
+        }
+      });
+    }
+  }
+
+  // =========================================================================
+  // 8. LIVE GITHUB STATS ENGINE
+  // =========================================================================
+  function initGitHubStats() {
+    const CACHE_KEY = 'omarchy_gh_stats_cache';
+    const CACHE_EXPIRY = 60 * 60 * 1000; // 1 hour
+
+    function updateRepoCards(repos) {
+      document.querySelectorAll('[data-gh-repo]').forEach(badge => {
+        const repoName = badge.dataset.ghRepo;
+        const starEl = badge.querySelector('.gh-star-count');
+        if (!starEl) return;
+
+        const repoData = repos.find(r => r.name.toLowerCase() === repoName.toLowerCase());
+        if (repoData) {
+          const stars = repoData.stargazers_count;
+          const updated = new Date(repoData.pushed_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+          starEl.innerHTML = `★ ${stars} &middot; ${updated}`;
+        }
+      });
+    }
+
+    try {
+      const cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Date.now() - parsed.timestamp < CACHE_EXPIRY && parsed.data) {
+          updateRepoCards(parsed.data);
+          return;
+        }
+      }
+    } catch (e) {
+      // Ignore cache parse error
+    }
+
+    fetch('https://api.github.com/users/itsvrushabh/repos?sort=pushed&per_page=12')
+      .then(res => {
+        if (!res.ok) throw new Error('GitHub API response not ok');
+        return res.json();
+      })
+      .then(repos => {
+        if (Array.isArray(repos)) {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data: repos }));
+          updateRepoCards(repos);
+        }
+      })
+      .catch(err => {
+        console.warn('Live GitHub stats fallback:', err);
+      });
+  }
+
+  // =========================================================================
+  // 9. INITIALIZATION
   // =========================================================================
   document.addEventListener('DOMContentLoaded', () => {
     setTheme(currentTheme, false);
@@ -889,5 +1249,8 @@
     initTUI();
     initShortcuts();
     initMusicPlayer();
+    initCommandPalette();
+    initNeovimPlayground();
+    initGitHubStats();
   });
 })();

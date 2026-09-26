@@ -1,0 +1,154 @@
+<!-- ==========================================
+     INTERACTIVE NEOVIM CODE BUFFER (LazyVim Style)
+     ========================================== -->
+<div class="neovim-window" id="neovim-playground">
+  <!-- Tabline -->
+  <div class="neovim-tabline">
+    <div class="neovim-tabs" role="tablist">
+      <button class="neovim-tab active" data-nvim-tab="rust" role="tab" aria-selected="true">
+        <span class="tab-icon">🦀</span>
+        <span class="tab-name">main.rs</span>
+        <span class="tab-badge">Rust</span>
+      </button>
+      <button class="neovim-tab" data-nvim-tab="python" role="tab" aria-selected="false">
+        <span class="tab-icon">🐍</span>
+        <span class="tab-name">state_machine.py</span>
+        <span class="tab-badge">Python</span>
+      </button>
+      <button class="neovim-tab" data-nvim-tab="hyprland" role="tab" aria-selected="false">
+        <span class="tab-icon">🪟</span>
+        <span class="tab-name">hyprland.conf</span>
+        <span class="tab-badge">Omarchy</span>
+      </button>
+      <button class="neovim-tab" data-nvim-tab="starship" role="tab" aria-selected="false">
+        <span class="tab-icon">🚀</span>
+        <span class="tab-name">starship.toml</span>
+        <span class="tab-badge">Prompt</span>
+      </button>
+    </div>
+    <div class="neovim-tab-actions">
+      <button id="copy-nvim-code-btn" class="neovim-copy-btn" title="Copy active buffer code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span class="copy-text">Copy Buffer</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Code Viewport -->
+  <div class="neovim-viewport">
+    <!-- Buffer 1: Rust -->
+    <div class="neovim-buffer-content active" id="nvim-buf-rust">
+      <pre><code><span class="hl-line"><span class="hl-num"> 1</span> <span class="hl-kw">use</span> tokio::net::TcpListener;</span>
+<span class="hl-line"><span class="hl-num"> 2</span> <span class="hl-kw">use</span> tokio::io::{AsyncReadExt, AsyncWriteExt};</span>
+<span class="hl-line"><span class="hl-num"> 3</span> <span class="hl-kw">use</span> std::sync::Arc;</span>
+<span class="hl-line"><span class="hl-num"> 4</span> </span>
+<span class="hl-line"><span class="hl-num"> 5</span> <span class="hl-comment">/// High-throughput zero-allocation event dispatcher</span></span>
+<span class="hl-line"><span class="hl-num"> 6</span> <span class="hl-meta">#[inline(always)]</span></span>
+<span class="hl-line"><span class="hl-num"> 7</span> <span class="hl-kw">pub async fn</span> <span class="hl-fn">dispatch_stream</span>(listener: TcpListener) -&gt; <span class="hl-type">Result</span>&lt;(), <span class="hl-type">std::io::Error</span>&gt; {</span>
+<span class="hl-line"><span class="hl-num"> 8</span>     <span class="hl-kw">loop</span> {</span>
+<span class="hl-line"><span class="hl-num"> 9</span>         <span class="hl-kw">let</span> (stream, addr) = listener.accept().<span class="hl-kw">await</span>?;</span>
+<span class="hl-line"><span class="hl-num">10</span>         tokio::spawn(<span class="hl-kw">async move</span> {</span>
+<span class="hl-line"><span class="hl-num">11</span>             <span class="hl-kw">let mut</span> buffer = [<span class="hl-num">0u8</span>; <span class="hl-num">4096</span>];</span>
+<span class="hl-line"><span class="hl-num">12</span>             <span class="hl-kw">let mut</span> stream = stream;</span>
+<span class="hl-line"><span class="hl-num">13</span>             <span class="hl-kw">while let</span> <span class="hl-type">Ok</span>(n) = stream.read(&amp;<span class="hl-kw">mut</span> buffer).<span class="hl-kw">await</span> {</span>
+<span class="hl-line"><span class="hl-num">14</span>                 <span class="hl-kw">if</span> n == <span class="hl-num">0</span> { <span class="hl-kw">break</span>; }</span>
+<span class="hl-line"><span class="hl-num">15</span>                 <span class="hl-comment">// Zero-copy echo transition with sub-millisecond p99</span></span>
+<span class="hl-line"><span class="hl-num">16</span>                 stream.write_all(&amp;buffer[..n]).<span class="hl-kw">await</span>.unwrap();</span>
+<span class="hl-line"><span class="hl-num">17</span>             }</span>
+<span class="hl-line"><span class="hl-num">18</span>         });</span>
+<span class="hl-line"><span class="hl-num">19</span>     }</span>
+<span class="hl-line"><span class="hl-num">20</span> }</span></code></pre>
+    </div>
+
+    <!-- Buffer 2: Python -->
+    <div class="neovim-buffer-content" id="nvim-buf-python" style="display: none;">
+      <pre><code><span class="hl-line"><span class="hl-num"> 1</span> <span class="hl-kw">from</span> dataclasses <span class="hl-kw">import</span> dataclass</span>
+<span class="hl-line"><span class="hl-num"> 2</span> <span class="hl-kw">from</span> typing <span class="hl-kw">import</span> Generic, TypeVar, Callable, Awaitable</span>
+<span class="hl-line"><span class="hl-num"> 3</span> <span class="hl-kw">import</span> asyncio</span>
+<span class="hl-line"><span class="hl-num"> 4</span> </span>
+<span class="hl-line"><span class="hl-num"> 5</span> TState = TypeVar(<span class="hl-str">"TState"</span>)</span>
+<span class="hl-line"><span class="hl-num"> 6</span> TEvent = TypeVar(<span class="hl-str">"TEvent"</span>)</span>
+<span class="hl-line"><span class="hl-num"> 7</span> </span>
+<span class="hl-line"><span class="hl-num"> 8</span> <span class="hl-kw">class</span> <span class="hl-type">AsyncStateMachine</span>(Generic[TState, TEvent]):</span>
+<span class="hl-line"><span class="hl-num"> 9</span>     <span class="hl-str">"""Non-blocking Finite State Machine with audit telemetry."""</span></span>
+<span class="hl-line"><span class="hl-num">10</span>     <span class="hl-kw">def</span> <span class="hl-fn">__init__</span>(self, initial: TState) -&gt; <span class="hl-kw">None</span>:</span>
+<span class="hl-line"><span class="hl-num">11</span>         self._current = initial</span>
+<span class="hl-line"><span class="hl-num">12</span>         self._lock = asyncio.Lock()</span>
+<span class="hl-line"><span class="hl-num">13</span>         self._history: list[tuple[TState, TEvent]] = []</span>
+<span class="hl-line"><span class="hl-num">14</span> </span>
+<span class="hl-line"><span class="hl-num">15</span>     <span class="hl-kw">async def</span> <span class="hl-fn">transition</span>(self, event: TEvent, to_state: TState) -&gt; <span class="hl-kw">None</span>:</span>
+<span class="hl-line"><span class="hl-num">16</span>         <span class="hl-kw">async with</span> self._lock:</span>
+<span class="hl-line"><span class="hl-num">17</span>             self._history.append((self._current, event))</span>
+<span class="hl-line"><span class="hl-num">18</span>             self._current = to_state</span>
+<span class="hl-line"><span class="hl-num">19</span>             <span class="hl-comment"># Atomic state broadcast over Redis event channel</span></span>
+<span class="hl-line"><span class="hl-num">20</span>             <span class="hl-kw">await</span> self._broadcast_telemetry(event, to_state)</span></code></pre>
+    </div>
+
+    <!-- Buffer 3: Hyprland -->
+    <div class="neovim-buffer-content" id="nvim-buf-hyprland" style="display: none;">
+      <pre><code><span class="hl-line"><span class="hl-num"> 1</span> <span class="hl-comment"># ==========================================</span></span>
+<span class="hl-line"><span class="hl-num"> 2</span> <span class="hl-comment"># OMARCHY HYPRLAND WAYLAND COMPOSITOR CONFIG</span></span>
+<span class="hl-line"><span class="hl-num"> 3</span> <span class="hl-comment"># ==========================================</span></span>
+<span class="hl-line"><span class="hl-num"> 4</span> $mainMod = SUPER</span>
+<span class="hl-line"><span class="hl-num"> 5</span> </span>
+<span class="hl-line"><span class="hl-num"> 6</span> <span class="hl-comment"># Hardware accelerated dynamic tiling</span></span>
+<span class="hl-line"><span class="hl-num"> 7</span> monitor=,preferred,auto,1</span>
+<span class="hl-line"><span class="hl-num"> 8</span> </span>
+<span class="hl-line"><span class="hl-num"> 9</span> <span class="hl-comment"># Ergonomic Workstation Keybindings</span></span>
+<span class="hl-line"><span class="hl-num">10</span> bind = $mainMod, Return, exec, foot</span>
+<span class="hl-line"><span class="hl-num">11</span> bind = $mainMod, Space,  exec, wofi --show drun</span>
+<span class="hl-line"><span class="hl-num">12</span> bind = $mainMod, Q,      killactive,</span>
+<span class="hl-line"><span class="hl-num">13</span> bind = $mainMod SHIFT, F, fullscreen, 0</span>
+<span class="hl-line"><span class="hl-num">14</span> </span>
+<span class="hl-line"><span class="hl-num">15</span> <span class="hl-comment"># Workspaces 1-5</span></span>
+<span class="hl-line"><span class="hl-num">16</span> bind = $mainMod, 1, workspace, 1</span>
+<span class="hl-line"><span class="hl-num">17</span> bind = $mainMod, 2, workspace, 2</span>
+<span class="hl-line"><span class="hl-num">18</span> bind = $mainMod, 3, workspace, 3</span>
+<span class="hl-line"><span class="hl-num">19</span> </span>
+<span class="hl-line"><span class="hl-num">20</span> <span class="hl-comment"># Decoration: Omarchy Blur &amp; Gaps</span></span>
+<span class="hl-line"><span class="hl-num">21</span> decoration {</span>
+<span class="hl-line"><span class="hl-num">22</span>     rounding = 8</span>
+<span class="hl-line"><span class="hl-num">23</span>     blur {</span>
+<span class="hl-line"><span class="hl-num">24</span>         enabled = true</span>
+<span class="hl-line"><span class="hl-num">25</span>         size = 8</span>
+<span class="hl-line"><span class="hl-num">26</span>         passes = 3</span>
+<span class="hl-line"><span class="hl-num">27</span>     }</span>
+<span class="hl-line"><span class="hl-num">28</span> }</span></code></pre>
+    </div>
+
+    <!-- Buffer 4: Starship -->
+    <div class="neovim-buffer-content" id="nvim-buf-starship" style="display: none;">
+      <pre><code><span class="hl-line"><span class="hl-num"> 1</span> <span class="hl-comment"># ==========================================</span></span>
+<span class="hl-line"><span class="hl-num"> 2</span> <span class="hl-comment"># STARSHIP MINIMALIST PROMPT CONFIG</span></span>
+<span class="hl-line"><span class="hl-num"> 3</span> <span class="hl-comment"># ==========================================</span></span>
+<span class="hl-line"><span class="hl-num"> 4</span> add_newline = false</span>
+<span class="hl-line"><span class="hl-num"> 5</span> format = """$directory$git_branch$git_status$character"""</span>
+<span class="hl-line"><span class="hl-num"> 6</span> </span>
+<span class="hl-line"><span class="hl-num"> 7</span> [directory]</span>
+<span class="hl-line"><span class="hl-num"> 8</span> truncation_length = 3</span>
+<span class="hl-line"><span class="hl-num"> 9</span> style = "bold fg:brand"</span>
+<span class="hl-line"><span class="hl-num">10</span> </span>
+<span class="hl-line"><span class="hl-num">11</span> [git_branch]</span>
+<span class="hl-line"><span class="hl-num">12</span> symbol = " "</span>
+<span class="hl-line"><span class="hl-num">13</span> style = "bold purple"</span>
+<span class="hl-line"><span class="hl-num">14</span> </span>
+<span class="hl-line"><span class="hl-num">15</span> [character]</span>
+<span class="hl-line"><span class="hl-num">16</span> success_symbol = "[❯](bold green)"</span>
+<span class="hl-line"><span class="hl-num">17</span> error_symbol = "[❯](bold red)"</span></code></pre>
+    </div>
+  </div>
+
+  <!-- Lualine Statusline -->
+  <div class="neovim-statusline">
+    <div class="lualine-mode">NORMAL</div>
+    <div class="lualine-file" id="nvim-status-file">src/runtime/main.rs</div>
+    <div class="lualine-diag">✓ 0 ✗ 0</div>
+    <div class="lualine-spacer"></div>
+    <div class="lualine-encoding">utf-8</div>
+    <div class="lualine-type" id="nvim-status-type">rust</div>
+    <div class="lualine-pos">LN 12, COL 4</div>
+  </div>
+</div>
