@@ -43,6 +43,47 @@
   <sub>Also working with <b>Tokio</b>, <b>Axum</b>, <b>Iced</b>, <b>Turso</b>, and <b>Tmux</b> · <a href="./docs/ARCHITECTURE.md">Read Architecture & Stack Notes →</a></sub>
 </div>
 
+---
+
+<!-- START_LANGUAGE_RADAR -->
+## 🔬 Language Radar: Python & Rust Evolution
+*Tracking cutting-edge runtime shifts, compiler internals, and upcoming language proposals.*
+
+<br />
+
+### 🐍 Python Track
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Python_3.14-Current_Stable-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.14" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/Python_3.15-Coming_Soon-F7C844?style=flat-square&logo=python&logoColor=black" alt="Python 3.15" />
+</div>
+
+<br />
+
+| Release | Architectural Focus | Top 3 Core Innovations |
+| :--- | :--- | :--- |
+| **🟢 Current: 3.14** | Typing & Metaprogramming | 1. **Deferred Annotations (PEP 649):** Type hints evaluated lazily on demand without runtime cost.<br>2. **Template Strings (PEP 750):** Native `t-strings` for injection-safe, structured templating.<br>3. **Tier-2 JIT Optimizations:** Micro-op tracing and deep interpreter tail-call speedups. |
+| **🚀 Next: 3.15** | Subinterpreters & JIT Maturity | 1. **Standard Free-Threading Stability:** Full ecosystem C-extension stabilization for No-GIL.<br>2. **Advanced Tier-2 Trace JIT:** Native machine-code generation for hot instruction traces.<br>3. **Zero-Cost Exception Refinements:** Near-zero overhead for try/except blocks on happy paths. |
+
+<br />
+
+### 🦀 Rust Track
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Rust_1.98-Current_Stable-000000?style=flat-square&logo=rust&logoColor=white" alt="Rust 1.98" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/Rust_1.99+-In_Pipeline-DEA584?style=flat-square&logo=rust&logoColor=black" alt="Rust 1.99+" />
+</div>
+
+<br />
+
+| Release | Systems Focus | Top 3 Core Innovations |
+| :--- | :--- | :--- |
+| **🟢 Current: 1.98 / 2024** | Concurrency & Ergonomics | 1. **Async Closures:** Ergonomic borrow capturing across await points in `async |x|`.<br>2. **Let Chains:** Flattened conditional matching (`if let Some(x) = opt && x > 0`).<br>3. **`gen` Blocks & Yield:** First-class coroutine iterators without handwritten state machine boilerplate. |
+| **🚀 Next: 1.99+** | Memory Safety & Expressiveness | 1. **Async Drop:** Automated asynchronous destructor cleanup for sockets and DB transactions.<br>2. **Dyn Trait Upcasting:** Native sub-to-super trait coercion without manual wrapper shims.<br>3. **Advanced Const Generics:** Compile-time evaluations and arbitrary expressions in types. |
+<!-- END_LANGUAGE_RADAR -->
+
 <br />
 <div align="center">
 
