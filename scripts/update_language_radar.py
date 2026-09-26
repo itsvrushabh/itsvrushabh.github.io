@@ -103,6 +103,26 @@ FEATURES = {
             ],
         },
     },
+    "django": {
+        "current": {
+            "version": "v6.1+",
+            "focus": "Native Background Workers & Async ORM",
+            "top3": [
+                "**Native Background Tasks Engine:** Asynchronous task queue and worker architecture integrated into core without external Celery brokers.",
+                "**Composite Primary Keys & Query Optimizations:** Native multi-column primary keys and advanced subquery unrolling in ORM.",
+                "**Zero-Threadpool Async Streaming:** Async streaming HTTP responses executing natively on event loops without sync-to-async thread handoffs.",
+            ],
+        },
+        "next": {
+            "version": "v6.2+",
+            "focus": "Full Async Writes & OpenTelemetry Core",
+            "top3": [
+                "**Non-Blocking Write Queries:** Native asynchronous write pipelines (`acreate`, `abulk_create`, `aupdate`) bypassing thread pool overhead.",
+                "**Built-in OpenTelemetry Instrumentation:** Distributed tracing and metrics exported directly from Django core request-response lifecycle.",
+                "**Reactive Form Components:** Component-based template rendering with declarative reactive client-side bindings.",
+            ],
+        },
+    },
     "tokio": {
         "current": {
             "version": "v1.53+",
@@ -377,9 +397,16 @@ def detect_all_versions():
 
     # Frameworks
     fastapi_v = get_version("fastapi", "https://pypi.org/pypi/fastapi/json", lambda d: d["info"]["version"], "0.141.1")
+    django_cycle = get_version("django", "https://endoflife.date/api/django.json", lambda d: d[0]["cycle"], "6.1")
     tokio_v = get_version("tokio", "https://crates.io/api/v1/crates/tokio", lambda d: d["crate"]["max_version"], "1.53.1")
     axum_v = get_version("axum", "https://crates.io/api/v1/crates/axum", lambda d: d["crate"]["max_version"], "0.8.9")
     iced_v = get_version("iced", "https://crates.io/api/v1/crates/iced", lambda d: d["crate"]["max_version"], "0.14.0")
+
+    try:
+        maj, minr = django_cycle.split(".")
+        django_next = f"v{maj}.{int(minr) + 1}+"
+    except Exception:
+        django_next = "v6.2+"
 
     # Databases
     pg_cycle = get_version("pg", "https://endoflife.date/api/postgresql.json", lambda d: d[0]["cycle"], "18")
@@ -395,6 +422,7 @@ def detect_all_versions():
         "python": (py_curr, py_next),
         "rust": (rust_curr, rust_next),
         "fastapi": (f"v{fastapi_v}", "v1.0 Milestone"),
+        "django": (f"v{django_cycle}", django_next),
         "tokio": (f"v{tokio_v}", "v1.54+"),
         "axum": (f"v{axum_v}", "v0.9.x"),
         "iced": (f"v{iced_v}", "v0.15+"),
@@ -537,6 +565,19 @@ def build_full_tech_radar_block(vers):
 | Release | Focus | Top 3 Core Innovations |
 | :--- | :--- | :--- |
 {card_rows("fastapi", vers["fastapi"][0], vers["fastapi"][1])}
+
+<br />
+
+### 🎸 Django
+<div align="left">
+  <img src="https://img.shields.io/badge/Django_{vers["django"][0]}-Current_Stable-092E20?style=flat-square&logo=django&logoColor=white" alt="Django" />
+  &nbsp;
+  <img src="https://img.shields.io/badge/Django_{vers["django"][1]}-Next_Gen-0C4B33?style=flat-square&logo=django&logoColor=white" alt="Django Next" />
+</div>
+
+| Release | Focus | Top 3 Core Innovations |
+| :--- | :--- | :--- |
+{card_rows("django", vers["django"][0], vers["django"][1])}
 
 <br />
 
