@@ -9,7 +9,7 @@ A deep-dive reference tracking the current production versions and upcoming gene
 | Category | Technologies Tracked |
 | :--- | :--- |
 | **🦀 Languages & Runtimes** | Python, Rust |
-| **⚡ Frameworks & Async Engines** | FastAPI, Tokio, Axum, Iced |
+| **⚡ Frameworks & Async Engines** | FastAPI, Django, Tokio, Axum, Iced |
 | **🗄️ Databases & Caching** | PostgreSQL, Redis, SQLite, Turso (libSQL), MySQL, MongoDB |
 | **🚀 Infrastructure & Messaging** | Docker, RabbitMQ |
 | **💻 Editors, OS & Tooling** | Neovim, VS Code, Tmux, Omarchy Linux (Hyprland) |

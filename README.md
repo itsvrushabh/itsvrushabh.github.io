@@ -29,7 +29,7 @@
   <h2>⚙️ Tech Stack</h2>
 
   <p><b>Languages, Runtimes, Infra & Tools</b></p>
-  <img src="https://skillicons.dev/icons?i=rust,py,fastapi,docker,rabbitmq,linux,neovim,vscode,vscodium,sublime,git&theme=dark" alt="Languages, Tools and Editors" />
+  <img src="https://skillicons.dev/icons?i=rust,py,fastapi,django,docker,rabbitmq,linux,neovim,vscode,vscodium,sublime,git&theme=dark" alt="Languages, Tools and Editors" />
   
   <br /><br />
   <p><b>Databases & Caching</b></p>
