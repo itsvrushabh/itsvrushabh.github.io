@@ -1,0 +1,44 @@
+# GitHub Pages & Jekyll Configuration
+# Theme: jekyll-theme-midnight (Dark theme)
+theme: jekyll-theme-midnight
+
+# Site Metadata
+title: Vrushabh Deshmukh
+tagline: Backend Developer | API Designer | Rust Enthusiast
+description: Personal documentation, system architecture notes, repository catalog, and full-stack technology radar.
+url: "https://itsvrushabh.github.io"
+baseurl: "/itsvrushabh"
+repository: itsvrushabh/itsvrushabh
+
+# Markdown and Syntax Highlighting
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+# Automatically apply the theme layout to markdown pages
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Theme Display Settings
+show_downloads: false
+
+# GitHub Pages Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude unnecessary files from the Jekyll build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - scripts
+  - profile-3d-contrib
+  - .github
