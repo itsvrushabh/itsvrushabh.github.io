@@ -1,0 +1,172 @@
+---
+layout: default
+title: "Resume / CV"
+subtitle: "Backend Developer & Systems Engineer Curriculum Vitae"
+---
+
+<div class="container resume-wrapper">
+  <!-- Resume Action Bar (Hidden in Print) -->
+  <div class="resume-actions no-print">
+    <a href="{{ '/' | relative_url }}" class="back-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>Back to Site</span>
+    </a>
+
+    <button onclick="window.print()" class="btn btn-primary btn-sm">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+        <rect x="6" y="14" width="12" height="8"></rect>
+      </svg>
+      <span>Print / Save as PDF</span>
+    </button>
+  </div>
+
+  <!-- Printable Resume Paper -->
+  <article class="resume-sheet card">
+    <!-- Header -->
+    <header class="resume-header">
+      <div class="resume-identity">
+        <h1 class="resume-name">{{ site.author.name }}</h1>
+        <div class="resume-role">Backend Developer &middot; Systems & API Architect</div>
+      </div>
+      <div class="resume-contacts">
+        <div class="contact-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+        </div>
+        <div class="contact-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener noreferrer">github.com/{{ site.author.github }}</a>
+        </div>
+        <div class="contact-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener noreferrer">linkedin.com/in/{{ site.author.linkedin }}</a>
+        </div>
+        <div class="contact-line">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <a href="{{ site.url }}">{{ site.url }}</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="resume-divider"></div>
+
+    <!-- Summary -->
+    <section class="resume-section">
+      <h2 class="resume-heading">Professional Summary</h2>
+      <p class="resume-text">
+        Backend Developer and Systems Engineer with deep expertise in asynchronous runtimes, distributed message brokers, 
+        and high-concurrency API architectures. Proven experience building robust microservices using Rust (Axum, Tokio) and 
+        Python (FastAPI, Django), optimizing PostgreSQL connection pools, implementing resilient cache-aside patterns with Redis, 
+        and orchestrating reliable event pipelines with RabbitMQ. Dedicated to zero-allocation critical paths, strict type contracts, 
+        and Linux systems ergonomics.
+      </p>
+    </section>
+
+    <!-- Technical Skills -->
+    <section class="resume-section">
+      <h2 class="resume-heading">Technical Competencies</h2>
+      <div class="resume-skills-table">
+        <div class="skill-row">
+          <span class="skill-row-label">Languages:</span>
+          <span class="skill-row-val">Rust, Python (3.10+ / PEP 649), SQL, Bash / Shell Scripting, Dart, HTML/CSS</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-row-label">Backend & Runtimes:</span>
+          <span class="skill-row-val">Axum, Tokio, Tower, FastAPI, Django, Asyncio, uvloop, Celery, Pydantic</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-row-label">Databases & Caching:</span>
+          <span class="skill-row-val">PostgreSQL, Redis, RabbitMQ, SQLite, libSQL / Turso, asyncpg, SQLx, SQLAlchemy</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-row-label">Infra & Workstation:</span>
+          <span class="skill-row-val">Docker & Compose, Omarchy Linux / Arch, Hyprland (Wayland), Neovim (LSP), Tmux, Git, CI/CD</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-row-label">Architecture:</span>
+          <span class="skill-row-val">Distributed State Machines, Transactional Outbox, Idempotent Consumers, REST, gRPC, Event-Driven</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Projects -->
+    <section class="resume-section">
+      <h2 class="resume-heading">Featured Open-Source & Engineering Projects</h2>
+
+      <div class="resume-item">
+        <div class="resume-item-top">
+          <div class="resume-item-title">
+            <strong>asyncfsm</strong> &mdash; <em>Asynchronous Finite State Machine Engine</em>
+          </div>
+          <a href="https://github.com/itsvrushabh/asyncfsm" target="_blank" rel="noopener noreferrer" class="resume-item-link">github.com/itsvrushabh/asyncfsm</a>
+        </div>
+        <ul class="resume-bullets">
+          <li>Architected a lock-free asynchronous finite state machine framework designed for non-blocking distributed lifecycle management.</li>
+          <li>Implemented transition guards, lifecycle callbacks, and complete state audit history for regulatory compliance.</li>
+          <li>Optimized execution overhead with zero-copy event dispatching across async task boundaries.</li>
+        </ul>
+      </div>
+
+      <div class="resume-item">
+        <div class="resume-item-top">
+          <div class="resume-item-title">
+            <strong>fastapi-template</strong> &mdash; <em>Enterprise Production Microservice Template</em>
+          </div>
+          <a href="https://github.com/itsvrushabh/fastapi-template" target="_blank" rel="noopener noreferrer" class="resume-item-link">github.com/itsvrushabh/fastapi-template</a>
+        </div>
+        <ul class="resume-bullets">
+          <li>Designed a modular enterprise boilerplate integrating asyncpg connection pooling, Redis caching, and JWT bearer authentication.</li>
+          <li>Configured multi-stage Docker containerization and automated healthcheck probes for orchestrated deployments.</li>
+          <li>Integrated Alembic asynchronous database migrations and strict Pydantic v2 data validation schemas.</li>
+        </ul>
+      </div>
+
+      <div class="resume-item">
+        <div class="resume-item-top">
+          <div class="resume-item-title">
+            <strong>DineInTakeOut</strong> &mdash; <em>Real-Time Order & Table Orchestration Backend</em>
+          </div>
+          <a href="https://github.com/itsvrushabh/DineInTakeOut" target="_blank" rel="noopener noreferrer" class="resume-item-link">github.com/itsvrushabh/DineInTakeOut</a>
+        </div>
+        <ul class="resume-bullets">
+          <li>Built a high-concurrency order dispatch platform with real-time WebSocket state broadcasting between point-of-sale and kitchen terminals.</li>
+          <li>Implemented strict transaction isolations to prevent race conditions during peak concurrent table reservation spikes.</li>
+        </ul>
+      </div>
+
+      <div class="resume-item">
+        <div class="resume-item-top">
+          <div class="resume-item-title">
+            <strong>tonarchy & Dotfiles Suite</strong> &mdash; <em>Linux Workstation & Desktop Automation</em>
+          </div>
+          <a href="https://github.com/itsvrushabh/nvim" target="_blank" rel="noopener noreferrer" class="resume-item-link">github.com/itsvrushabh/nvim</a>
+        </div>
+        <ul class="resume-bullets">
+          <li>Developed declarative provisioning scripts for Omarchy Linux with low-latency user-space kernel scheduling.</li>
+          <li>Crafted an ultra-fast Neovim configuration with custom LSP inlay hints, treesitter syntax trees, and Tokyo Night aesthetic.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="resume-section">
+      <h2 class="resume-heading">Education & Continuous Learning</h2>
+      <div class="resume-item">
+        <div class="resume-item-top">
+          <div class="resume-item-title">
+            <strong>Computer Science & Software Systems</strong>
+          </div>
+          <span class="resume-item-date">India</span>
+        </div>
+        <p class="resume-text" style="margin-top: 0.25rem;">
+          Specialized coursework and practical research in Distributed Systems, Operating System Internals, Database Management Systems, and Modern Compiler Architecture.
+        </p>
+      </div>
+    </section>
+  </article>
+</div>

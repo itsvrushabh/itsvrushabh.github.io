@@ -1,0 +1,16 @@
+{
+  "name": "Vrushabh Deshmukh",
+  "short_name": "VD",
+  "description": "Personal website and systems engineering blog of Vrushabh Deshmukh",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0f17",
+  "theme_color": "#0b0f17",
+  "icons": [
+    {
+      "src": "/assets/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

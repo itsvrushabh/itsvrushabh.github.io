@@ -44,6 +44,40 @@ COMMIT;
 
 A dedicated CDC (Change Data Capture) or high-frequency poller reads unpublished outbox rows, transmits them to RabbitMQ, and marks them processed only upon receiving a broker ACK.
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Client
+    participant API as API Service
+    participant DB as PostgreSQL (Orders + Outbox)
+    participant Relay as Outbox Publisher / CDC
+    participant RMQ as RabbitMQ Broker
+    participant Worker as Async Consumer
+
+    Client->>API: POST /orders/checkout
+    activate API
+    API->>DB: BEGIN Transaction
+    API->>DB: INSERT into orders
+    API->>DB: INSERT into outbox_events (Status: Pending)
+    API->>DB: COMMIT Transaction
+    API-->>Client: 201 Created (Order Accepted)
+    deactivate API
+
+    loop Event Polling / CDC Stream
+        Relay->>DB: Poll unpublished outbox rows
+        Relay->>RMQ: Publish message to exchange
+        RMQ-->>Relay: Broker ACK confirmation
+        Relay->>DB: Mark outbox row as processed
+    end
+
+    RMQ->>Worker: Deliver event (at-least-once)
+    activate Worker
+    Worker->>Worker: Check Redis idempotency lock (SET NX EX)
+    Worker->>Worker: Execute domain side-effects
+    Worker-->>RMQ: Consumer message ACK
+    deactivate Worker
+```
+
 ---
 
 ## Idempotent Message Consumers
