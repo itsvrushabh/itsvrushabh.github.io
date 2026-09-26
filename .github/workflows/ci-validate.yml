@@ -63,8 +63,7 @@ jobs:
 
       - name: Cargo Check
         run: |
-          cd tools/portfolio-sync
-          cargo check --all-targets
+          cargo check --workspace --all-targets
 
   validate-jekyll:
     name: Build & Verify Jekyll Site

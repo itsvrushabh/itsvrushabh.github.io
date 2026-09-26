@@ -52,7 +52,7 @@ jobs:
             
             Workstation verification running on branch \`${headBranch}\`:
             - **Target:** Clean borrow-checker traces, zero memory leaks
-            - **Tooling:** rust-analyzer, pyright & Jekyll CI validation
+            - **Tooling:** rust-analyzer, cargo check & Jekyll CI validation
             - **Status:** Queued for review
             
             Vrushabh will inspect your diffs shortly! ⚡`;

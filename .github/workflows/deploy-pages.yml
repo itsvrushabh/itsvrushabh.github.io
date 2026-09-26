@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
 
   deploy:
-    name: Deploy to Paddock Pages
+    name: Deploy to GitHub Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

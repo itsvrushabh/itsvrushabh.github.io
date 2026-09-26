@@ -309,6 +309,11 @@
       'help',
       'fastfetch',
       'neofetch',
+      'itsvrushabh',
+      'cargo',
+      'arch',
+      'wasm',
+      'sfx',
       'about',
       'skills',
       'projects',
@@ -329,14 +334,18 @@
     const COMMAND_HANDLERS = {
       help: () => `
 <div class="tui-help">
-  <div class="tui-help-title">OMARCHY TUI - AVAILABLE SHELL COMMANDS:</div>
+  <div class="tui-help-title">VRUSHABH WORKSTATION TUI - AVAILABLE SHELL COMMANDS:</div>
   <table class="tui-table">
     <tr><td class="cmd-k">fastfetch / neofetch</td><td>Display system hardware, OS & runtime telemetry</td></tr>
+    <tr><td class="cmd-k">itsvrushabh / cargo</td><td>Run Vrushabh's global Rust workstation CLI tool</td></tr>
+    <tr><td class="cmd-k">arch</td><td>Jump to Distributed Architecture Packet Explorer</td></tr>
+    <tr><td class="cmd-k">wasm</td><td>Execute Rust code in browser Tokio runtime</td></tr>
+    <tr><td class="cmd-k">sfx</td><td>Toggle mechanical keyboard audio feedback (<kbd>S</kbd>)</td></tr>
     <tr><td class="cmd-k">about</td><td>Systems architect background & engineering philosophy</td></tr>
     <tr><td class="cmd-k">skills</td><td>Low-level systems, Rust, Tokio, Linux stack</td></tr>
     <tr><td class="cmd-k">projects</td><td>Flagship engines, state machines, microservices</td></tr>
     <tr><td class="cmd-k">theme [name]</td><td>Live switch site theme (e.g. <span class="text-brand">theme everforest</span>)</td></tr>
-    <tr><td class="cmd-k">themes</td><td>List all 22 official Omarchy themes</td></tr>
+    <tr><td class="cmd-k">themes</td><td>List all 22 official themes</td></tr>
     <tr><td class="cmd-k">shortcuts</td><td>Open global keyboard shortcuts cheatsheet (<kbd>?</kbd>)</td></tr>
     <tr><td class="cmd-k">whoami</td><td>Current terminal user session credentials</td></tr>
     <tr><td class="cmd-k">date</td><td>Show current system date & timezone</td></tr>
@@ -349,12 +358,12 @@
       fastfetch: () => `
 <div class="tui-fastfetch">
   <pre class="tui-ascii">
-    ___                      _           
-   / _ \\ _ __ ___   __ _ _ __| |__  _   _ 
-  | | | | '_ \` _ \\ / _\` | '__| '_ \\| | | |
-  | |_| | | | | | | (_| | |  | | | | |_| |
-   \\___/|_| |_| |_|\\__,_|_|  |_| |_|\\__, |
-                                     |___/ 
+ __      __ _____  _    _  _____  _    _          ____   _    _ 
+ \\ \\    / /|  __ \\| |  | |/ ____|| |  | |   /\\   |  _ \\ | |  | |
+  \\ \\  / / | |__) | |  | | (___  | |__| |  /  \\  | |_) || |__| |
+   \\ \\/ /  |  _  /| |  | |\\___ \\ |  __  | / /\\ \\ |  _ < |  __  |
+    \\  /   | | \\ \\| |__| |____) || |  | |/ ____ \\| |_) || |  | |
+     \\/    |_|  \\_\\____/|_____/ |_|  |_/_/    \\_\\____/ |_|  |_|
   </pre>
   <div class="tui-spec-list">
     <div class="tui-spec-row"><span class="spec-label">OS:</span><span class="spec-val">Omarchy Linux x86_64 (Rolling)</span></div>
@@ -375,6 +384,28 @@
 </div>`,
 
       neofetch: () => COMMAND_HANDLERS.fastfetch(),
+      itsvrushabh: () => `
+<div class="tui-text-block">
+  <div class="tui-block-heading">[ CARGO BINARY // itsvrushabh 0.2.0 ]</div>
+  <p>Install globally with: <code>cargo install --git https://github.com/itsvrushabh/itsvrushabh.github.io</code></p>
+  <div>&bull; <code>itsvrushabh blog</code> - View latest engineering dispatches</div>
+  <div>&bull; <code>itsvrushabh projects</code> - Explore flagship Rust systems & crates</div>
+  <div>&bull; <code>itsvrushabh dotfiles</code> - Clone Neovim & Hyprland setup</div>
+  <div>&bull; <code>itsvrushabh themes</code> - Print 22 color palettes in ANSI 24-bit truecolor</div>
+</div>`,
+      cargo: () => COMMAND_HANDLERS.itsvrushabh(),
+      arch: () => {
+        document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' });
+        return `<span class="text-brand">&check; Scrolled to Distributed Systems Architecture Explorer.</span>`;
+      },
+      wasm: () => {
+        document.getElementById('run-wasm-btn')?.click();
+        return `<span class="text-brand">&check; Triggered in-browser WebAssembly Tokio execution.</span>`;
+      },
+      sfx: () => {
+        toggleSFX();
+        return `<span class="text-brand">&check; Mechanical keyboard SFX is now ${sfxEnabled ? 'ENABLED' : 'MUTED'}.</span>`;
+      },
 
       about: () => `
 <div class="tui-text-block">
@@ -660,8 +691,8 @@
       // If user is inside an input form, don't hijack typing
       if (isInputFocused) return;
 
-      // Handle '?' for shortcuts
-      if (e.key === '?' || (e.key === '/' && e.shiftKey)) {
+      // Handle '?' for shortcuts (unless in terminal input)
+      if ((e.key === '?' || (e.key === '/' && e.shiftKey)) && document.activeElement.id !== 'tui-input') {
         e.preventDefault();
         const modal = document.getElementById('shortcuts-modal');
         if (modal && modal.classList.contains('visible')) {
@@ -669,6 +700,13 @@
         } else {
           openShortcutsModal();
         }
+        return;
+      }
+
+      // Handle 'S' / 's' for mechanical audio SFX toggle (unless in terminal input)
+      if ((e.key === 's' || e.key === 'S') && document.activeElement.id !== 'tui-input') {
+        e.preventDefault();
+        toggleSFX();
         return;
       }
 
@@ -768,7 +806,7 @@
       copyBtn.addEventListener('click', () => {
         const snippet = copyBtn.dataset.snippet || 'curl -sL https://itsvrushabh.github.io/omarchy.sh | sh';
         navigator.clipboard.writeText(snippet).then(() => {
-          showToastNotice('Copied curl command to clipboard!');
+          showToastNotice('Copied command to clipboard!');
           const label = copyBtn.querySelector('.copy-label');
           if (label) {
             const original = label.textContent;
@@ -895,6 +933,11 @@
     if (iconPause) iconPause.style.display = playing ? 'block' : 'none';
     if (headSoundOff) headSoundOff.style.display = playing ? 'none' : 'block';
     if (headSoundOn) headSoundOn.style.display = playing ? 'block' : 'none';
+    if (!playing) {
+      document.querySelectorAll('#omarchy-music-player .eq-bar').forEach(bar => {
+        bar.style.height = '3px';
+      });
+    }
   }
 
   function playMusic() {
