@@ -21,10 +21,31 @@
   **Backend Developer | API Designer | Rust Enthusiast**
 
   I’m passionate about building scalable, fast, and reliable backend systems. Whether it’s designing clean REST APIs, optimizing database connection pools, or deploying distributed services with Docker — I enjoy working across the stack to deliver resilient backend solutions.
+</div>
 
 <br />
 
+<div align="center">
+  <h2>⚙️ Tech Stack</h2>
 
+  <p><b>Languages, Runtimes, Infra & Tools</b></p>
+  <img src="https://skillicons.dev/icons?i=rust,py,fastapi,docker,rabbitmq,linux,neovim,vscode,vscodium,sublime,git&theme=dark" alt="Languages, Tools and Editors" />
+  
+  <br /><br />
+  <p><b>Databases & Caching</b></p>
+  <img src="https://skillicons.dev/icons?i=postgres,mysql,sqlite,redis,mongodb&theme=dark" alt="Databases and Caching" />
+
+  <br /><br />
+  <sub>Also working with <b>Tokio</b>, <b>Axum</b>, <b>Iced</b>, <b>Turso</b>, and <b>Tmux</b> · <a href="./docs/ARCHITECTURE.md">Read Architecture & Stack Notes →</a></sub>
+</div>
+
+---
+
+<!-- START_LANGUAGE_RADAR -->
+## 🔬 Language Radar: Python & Rust Evolution
+*Tracking cutting-edge runtime shifts, compiler internals, and upcoming language proposals.*
+
+<br />
 
 ### 🐍 Python Track
 
@@ -59,26 +80,10 @@
 | **🚀 Next: 1.99+** | Memory Safety & Expressiveness | 1. **Async Drop:** Automated asynchronous destructor cleanup for sockets and DB transactions.<br>2. **Dyn Trait Upcasting:** Native sub-to-super trait coercion without manual wrapper shims.<br>3. **Advanced Const Generics:** Compile-time evaluations and arbitrary expressions in types. |
 <!-- END_LANGUAGE_RADAR -->
 
-
-
-</div>
-
 <br />
 
 <div align="center">
-
-  <p><b>Languages, Runtimes, Infra & Tools</b></p>
-  <img src="https://skillicons.dev/icons?i=rust,py,fastapi,docker,rabbitmq,linux,neovim,vscode,vscodium,sublime,git&theme=dark" alt="Languages, Tools and Editors" />
-  <br />
-  <p><b>Databases & Caching</b></p>
-  <img src="https://skillicons.dev/icons?i=postgres,mysql,sqlite,redis,mongodb&theme=dark" alt="Databases and Caching" />
-
-  <br /><br />
-  <sub>Also working with <b>Tokio</b>, <b>Axum</b>, <b>Iced</b>, <b>Turso</b>, and <b>Tmux</b> · <a href="./docs/ARCHITECTURE.md">Read Architecture & Stack Notes →</a></sub>
-</div>
-<br />
-
-<div align="center">
+  <h2>📊 GitHub Activity & Streak</h2>
 
   <img src="https://streak-stats.demolab.com/?user=itsvrushabh&theme=tokyonight" alt="GitHub Streak" />
 
@@ -113,10 +118,15 @@ Check out my **Pinned Repositories** on this profile for active flagship project
 <div align="center">
   <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight" alt="Quote of the Day" />
 
+  <h2>🤝 Connect with me</h2>
   
   <a href="https://github.com/itsvrushabh"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
   <a href="https://linkedin.com/in/itsvrushabh"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:itsvrushabh@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" /></a>
+
+  <br /><br />
+  <img src="https://komarev.com/ghpvc/?username=itsvrushabh&label=&color=7aa2f7&style=flat-square" alt="Views" />
 </div>
 
-⚡ Fun Fact: I love building backend systems that *just work* — fast, fault-tolerant, and future-proof.  <img src="https://komarev.com/ghpvc/?username=itsvrushabh&label=&color=7aa2f7&style=flat-square" alt="Views" />
+---
+> ⚡ Fun Fact: I love building backend systems that *just work* — fast, fault-tolerant, and future-proof.
