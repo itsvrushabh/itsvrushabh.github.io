@@ -33,8 +33,10 @@ flowchart LR
 * **Frameworks & Runtimes:** Axum, Tokio, FastAPI, Iced
 * **Databases & Caching:** PostgreSQL, MySQL, SQLite, Turso, Redis, MongoDB
 * **Messaging & Brokers:** RabbitMQ
-* **Infrastructure & Ops:** Docker, Docker Compose, Linux, Git
-* **Editors:** Neovim, VS Code, VSCodium, Sublime Text 4
+* **Infrastructure & Ops:** Docker, Docker Compose, Git
+* **Workstation & OS:** Omarchy Linux, Hyprland (Wayland compositor)
+* **Terminal & Multiplexer:** Tmux (with Omarchy Tokyo Night theme)
+* **Editors:** Neovim (LazyVim), VS Code, VSCodium, Sublime Text 4
 
 ---
 

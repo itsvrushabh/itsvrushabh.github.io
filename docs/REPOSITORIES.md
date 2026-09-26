@@ -35,9 +35,9 @@ A categorized directory of open-source projects, experiments, dotfiles, and cont
 ### ⚙️ Developer Environment & Systems
 | Repository | Description | Primary Focus |
 | :--- | :--- | :--- |
-| [**tonarchy**](https://github.com/itsvrushabh/tonarchy) | Custom Linux workstation configuration and scripts | Arch Linux, Customization |
-| [**nvim**](https://github.com/itsvrushabh/nvim) | Modular Neovim setup optimized for Rust & Python | LSP, Treesitter, Workflow |
-| [**tmux**](https://github.com/itsvrushabh/tmux) | Terminal multiplexer configuration and workflow | Terminal Ergonomics |
+| [**tonarchy**](https://github.com/itsvrushabh/tonarchy) | Custom workstation scripts and tweaks for Omarchy Linux | Omarchy, System Customization |
+| [**nvim**](https://github.com/itsvrushabh/nvim) | LazyVim configuration tailored for Omarchy Linux (Rust & Python LSP) | LazyVim, Treesitter, LSP |
+| [**tmux**](https://github.com/itsvrushabh/tmux) | Tmux multiplexer setup with custom Omarchy Tokyo Night theme | Session Ergonomics, Omarchy |
 | [**linux**](https://github.com/itsvrushabh/linux) | Linux kernel source exploration (Fork) | Systems Architecture |
 
 ---

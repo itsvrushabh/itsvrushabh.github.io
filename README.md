@@ -1,4 +1,15 @@
 <div align="center">
+  <!-- 🖥️ Workstation & Dotfiles Setup -->
+  <p>
+    <a href="https://omarchy.org/"><img src="https://img.shields.io/badge/OS-Omarchy%20Linux-101014?style=for-the-badge&logo=arch-linux&logoColor=9ece6a" alt="Omarchy Linux" /></a>
+    <a href="https://hyprland.org/"><img src="https://img.shields.io/badge/WM-Hyprland-101014?style=for-the-badge&logo=wayland&logoColor=00c8ff" alt="Hyprland" /></a>
+    <a href="https://github.com/itsvrushabh/nvim"><img src="https://img.shields.io/badge/Editor-Neovim-101014?style=for-the-badge&logo=neovim&logoColor=57a143" alt="Neovim Config" /></a>
+    <a href="https://github.com/itsvrushabh/tmux"><img src="https://img.shields.io/badge/Multiplexer-Tmux-101014?style=for-the-badge&logo=tmux&logoColor=1bb954" alt="Tmux Config" /></a>
+  </p>
+  <sub>⚡ Daily Driver: <b>Omarchy Linux</b> + <b>Hyprland</b> · Dotfiles: <a href="https://github.com/itsvrushabh/nvim"><b>nvim (LazyVim)</b></a> · <a href="https://github.com/itsvrushabh/tmux"><b>tmux (Omarchy theme)</b></a></sub>
+
+  <br /><br />
+
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/itsvrushabh/itsvrushabh/output/github-contribution-grid-snake-dark.svg" />
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/itsvrushabh/itsvrushabh/output/github-contribution-grid-snake.svg" />
