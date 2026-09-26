@@ -7,6 +7,8 @@
 
   I’m passionate about building scalable, fast, and reliable backend systems. Whether it’s designing clean REST APIs, optimizing database connection pools, or deploying distributed services with Docker — I enjoy working across the stack to deliver resilient backend solutions.
 
+<br />
+
   [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/itsvrushabh)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/itsvrushabh)
   [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:itsvrushabh@gmail.com)
@@ -18,15 +20,12 @@
 - 🌱 Exploring: Advanced Rust, Tokio concurrency patterns, and distributed systems architecture
 - 🧪 Obsessed with performance benchmarks, type safety, and clean code
 
----
-
+<br />
 <div align="center">
-  <h2>⚙️ Tech Stack</h2>
 
   <p><b>Languages, Runtimes, Infra & Tools</b></p>
   <img src="https://skillicons.dev/icons?i=rust,py,fastapi,docker,rabbitmq,linux,neovim,vscode,vscodium,sublime,git&theme=dark" alt="Languages, Tools and Editors" />
-  
-  <br /><br />
+  <br />
   <p><b>Databases & Caching</b></p>
   <img src="https://skillicons.dev/icons?i=postgres,mysql,sqlite,redis,mongodb&theme=dark" alt="Databases and Caching" />
 
@@ -34,10 +33,8 @@
   <sub>Also working with <b>Tokio</b>, <b>Axum</b>, <b>Iced</b>, <b>Turso</b>, and <b>Tmux</b> · <a href="./docs/ARCHITECTURE.md">Read Architecture & Stack Notes →</a></sub>
 </div>
 
----
-
+<br />
 <div align="center">
-  <h2>📊 GitHub Activity & Streak</h2>
 
   <img src="https://streak-stats.demolab.com/?user=itsvrushabh&theme=tokyonight" alt="GitHub Streak" />
 
