@@ -1129,27 +1129,33 @@ body.hero-scrolled .omarchy-scanlines {
   background-color: #f1f2f6;
   user-select: none;
   touch-action: none;
+  perspective: 1200px;
+  transform-style: preserve-3d;
   --reveal-opacity: 0;
   --mask-x: 50%;
   --mask-y: 48%;
-  --mask-radius: 160px;
+  --mask-radius: 260px;
 }
 
-/* Photos: Cropped with cover to fill 100% full screen edge-to-edge */
+/* Photos: Cropped with cover to fill 100% full screen edge-to-edge with 3D bleed */
 .h3d-layer {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: -2.5%;
+  width: 105%;
+  height: 105%;
   object-fit: cover;
   object-position: center bottom;
   pointer-events: none;
   user-select: none;
   filter: url(#water-ripple-filter);
+  transform-style: preserve-3d;
   will-change: filter, transform;
 }
 
 body.hero-scrolled .h3d-layer {
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-position: center 30%;
 }
 
@@ -1161,10 +1167,25 @@ body.hero-scrolled .h3d-layer {
 .h3d-reveal {
   z-index: 2;
   opacity: var(--reveal-opacity, 0);
-  -webkit-mask-image: radial-gradient(circle var(--mask-radius, 260px) at var(--mask-x, 50%) var(--mask-y, 48%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0) 80%);
-  mask-image: radial-gradient(circle var(--mask-radius, 260px) at var(--mask-x, 50%) var(--mask-y, 48%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0) 80%);
-  will-change: mask-image, -webkit-mask-image, opacity;
-  transition: opacity 0.3s ease;
+  -webkit-mask-image: radial-gradient(circle var(--mask-radius, 260px) at var(--mask-x, 50%) var(--mask-y, 48%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0) 85%);
+  mask-image: radial-gradient(circle var(--mask-radius, 260px) at var(--mask-x, 50%) var(--mask-y, 48%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0) 85%);
+  transform-style: preserve-3d;
+  will-change: mask-image, -webkit-mask-image, opacity, transform;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 3D Specular Lighting & Sheen Reflection Layer */
+.h3d-sheen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: var(--reveal-opacity, 0);
+  mix-blend-mode: soft-light;
+  transform-style: preserve-3d;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Real-time Water Ripple Wave Canvas */
@@ -1175,6 +1196,7 @@ body.hero-scrolled .h3d-layer {
   height: 100%;
   z-index: 3;
   pointer-events: none;
+  transform-style: preserve-3d;
 }
 
 /* Floating Minimalist Sound Toggle on Landing */

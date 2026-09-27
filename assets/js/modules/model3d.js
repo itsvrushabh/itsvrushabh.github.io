@@ -113,7 +113,9 @@ function playWaterSplashSound() {
 export function init3DModelViewer() {
   const card = document.getElementById('hero-3d-card');
   const viewport = document.getElementById('hero-3d-viewport');
+  const baseLayer = document.getElementById('h3d-base-layer');
   const revealImg = document.getElementById('h3d-reveal-layer');
+  const sheen = document.getElementById('h3d-sheen');
   const canvas = document.getElementById('h3d-water-canvas');
   const turb = document.getElementById('water-turbulence');
   const dispMap = document.getElementById('water-displacement');
@@ -128,10 +130,23 @@ export function init3DModelViewer() {
   // State variables
   let isHovered = false;
   let isHelmetLocked = false;
+  let isLingerActive = false;
+  let hoverLingerTimeout = null;
+
   let targetX = 50; // percentage
   let targetY = 48;
   let currentX = 50;
   let currentY = 48;
+
+  // 3D Parallax Tilt Physics (degrees)
+  let targetTiltX = 0;
+  let targetTiltY = 0;
+  let currentTiltX = 0;
+  let currentTiltY = 0;
+
+  // Dynamic Full-Helmet Reveal Radius (spring lerp)
+  let targetRadius = 0;
+  let currentRadius = 0;
 
   let pointerPixelX = 0;
   let pointerPixelY = 0;
@@ -177,6 +192,17 @@ export function init3DModelViewer() {
     const rect = viewport.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
 
+    // If lingering after pointer leave, moving back cancels linger and holds reveal
+    if (hoverLingerTimeout) {
+      clearTimeout(hoverLingerTimeout);
+      hoverLingerTimeout = null;
+    }
+    isLingerActive = false;
+    isHovered = true;
+    if (!isHelmetLocked) {
+      viewport.style.setProperty('--reveal-opacity', '1');
+    }
+
     const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
     const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
 
@@ -191,6 +217,12 @@ export function init3DModelViewer() {
 
     targetX = (clampedX / rect.width) * 100;
     targetY = (clampedY / rect.height) * 100;
+
+    // Interactive 3D Perspective Tilt Physics (-1 to +1 normalized coordinate)
+    const normX = (clampedX / rect.width - 0.5) * 2;
+    const normY = (clampedY / rect.height - 0.5) * 2;
+    targetTiltX = -normY * 9.5; // Pitch: vertical tilt towards pointer
+    targetTiltY = normX * 12.0;  // Yaw: horizontal tilt towards pointer
 
     // Calculate pointer velocity
     const dx = relX - lastPointerX;
@@ -216,6 +248,11 @@ export function init3DModelViewer() {
   }
 
   function handlePointerEnter(e) {
+    if (hoverLingerTimeout) {
+      clearTimeout(hoverLingerTimeout);
+      hoverLingerTimeout = null;
+    }
+    isLingerActive = false;
     isHovered = true;
     if (!isHelmetLocked) {
       viewport.style.setProperty('--reveal-opacity', '1');
@@ -232,18 +269,41 @@ export function init3DModelViewer() {
     pointerPixelY = relY;
     lastPointerX = relX;
     lastPointerY = relY;
+
+    // Compute initial 3D tilt
+    const clampedX = Math.max(0, Math.min(rect.width, relX));
+    const clampedY = Math.max(0, Math.min(rect.height, relY));
+    const normX = (clampedX / rect.width - 0.5) * 2;
+    const normY = (clampedY / rect.height - 0.5) * 2;
+    targetTiltX = -normY * 9.5;
+    targetTiltY = normX * 12.0;
+
     spawnRipple(relX, relY, 260, 1.2);
     playWaterDropSound(1.1, 0.05);
   }
 
   function handlePointerLeave() {
     isHovered = false;
-    if (!isHelmetLocked) {
-      viewport.style.setProperty('--reveal-opacity', '0');
-    }
     targetDispScale = 0;
+    targetTiltX = 0;
+    targetTiltY = 0;
     targetX = 50;
     targetY = 48;
+
+    if (isHelmetLocked) return;
+
+    // Post-hover linger duration (~2.6s hold + 1.2s dissolve):
+    // Allows the user to easily and comfortably see the full helmet without it cutting off
+    if (hoverLingerTimeout) clearTimeout(hoverLingerTimeout);
+    isLingerActive = true;
+
+    hoverLingerTimeout = setTimeout(() => {
+      isLingerActive = false;
+      if (!isHovered && !isHelmetLocked) {
+        viewport.style.setProperty('--reveal-opacity', '0');
+      }
+      hoverLingerTimeout = null;
+    }, 2600);
   }
 
   // Click handler: Toggle helmet lock & produce dramatic water splash wave
@@ -263,6 +323,12 @@ export function init3DModelViewer() {
     }
 
     playWaterSplashSound();
+
+    if (hoverLingerTimeout) {
+      clearTimeout(hoverLingerTimeout);
+      hoverLingerTimeout = null;
+    }
+    isLingerActive = false;
 
     // Toggle Helmet Lock state
     isHelmetLocked = !isHelmetLocked;
@@ -287,14 +353,18 @@ export function init3DModelViewer() {
   function handleOrientation(e) {
     if (e.gamma === null || e.beta === null) return;
     // gamma: left to right (-90 to +90), beta: front to back (-180 to +180)
-    const tiltX = Math.max(-30, Math.min(30, e.gamma));
-    const tiltY = Math.max(-20, Math.min(40, e.beta - 40)); // neutral holding angle ~40deg
+    const tiltGamma = Math.max(-30, Math.min(30, e.gamma));
+    const tiltBeta = Math.max(-20, Math.min(40, e.beta - 40)); // neutral holding angle ~40deg
 
-    targetX = 50 + (tiltX / 30) * 35;
-    targetY = 48 + (tiltY / 30) * 25;
+    targetX = 50 + (tiltGamma / 30) * 35;
+    targetY = 48 + (tiltBeta / 30) * 25;
+
+    // 3D Parallax Tilt from gyroscope
+    targetTiltX = Math.max(-14, Math.min(14, -(tiltBeta / 30) * 11));
+    targetTiltY = Math.max(-16, Math.min(16, (tiltGamma / 30) * 13));
 
     // If tilt change is energetic, spawn slosh ripple
-    if (Math.abs(tiltX) > 15 || Math.abs(tiltY) > 15) {
+    if (Math.abs(tiltGamma) > 15 || Math.abs(tiltBeta) > 15) {
       const rect = viewport.getBoundingClientRect();
       const px = (targetX / 100) * rect.width;
       const py = (targetY / 100) * rect.height;
@@ -355,12 +425,34 @@ export function init3DModelViewer() {
     });
   }
 
-  // Animation Loop: Updates water waves, SVG turbulence, liquid cursor, and fluid reveal mask
+  // Animation Loop: Updates water waves, SVG turbulence, 3D multiplane tilt transforms, and fluid reveal mask
   function updatePhysics() {
-    const damping = isHovered ? 0.12 : 0.08;
+    const damping = (isHovered || isLingerActive) ? 0.10 : 0.06;
+    const tiltDamping = isHovered ? 0.08 : 0.05;
 
     currentX += (targetX - currentX) * damping;
     currentY += (targetY - currentY) * damping;
+
+    // Damped spring interpolation for 3D tilt angles
+    currentTiltX += (targetTiltX - currentTiltX) * tiltDamping;
+    currentTiltY += (targetTiltY - currentTiltY) * tiltDamping;
+
+    // Dynamic Full-Helmet Reveal Radius:
+    // In 3D_helmat_model_v2.png, the helmet covers a tall central area.
+    // Setting targetRadius to ~76% of viewport height ensures the full helmet is seen easily.
+    const rect = viewport.getBoundingClientRect();
+    const fullHelmetRadius = Math.max(680, Math.round((rect.height || 900) * 0.76));
+
+    if (isHelmetLocked) {
+      targetRadius = 2400;
+    } else if (isHovered || isLingerActive) {
+      targetRadius = fullHelmetRadius;
+    } else {
+      targetRadius = 0;
+    }
+
+    const radiusDamping = (isHovered || isLingerActive) ? 0.08 : 0.05;
+    currentRadius += (targetRadius - currentRadius) * radiusDamping;
 
     // Decay target displacement scale toward idle
     if (isHovered) {
@@ -382,7 +474,6 @@ export function init3DModelViewer() {
       audioBoost = 1.0 + bass * 0.24;
       if (bass > 0.65 && Math.random() < 0.1) {
         // Spawn subtle bass droplet ripple
-        const rect = viewport.getBoundingClientRect();
         spawnRipple(rect.width * (0.35 + Math.random() * 0.3), rect.height * (0.25 + Math.random() * 0.3), 180, 0.6);
       }
     }
@@ -396,13 +487,43 @@ export function init3DModelViewer() {
       turb.setAttribute('baseFrequency', `${freqX} ${freqY}`);
     }
 
-    // Update mask coordinates
+    // Update mask coordinates and radius
     viewport.style.setProperty('--mask-x', `${currentX.toFixed(2)}%`);
     viewport.style.setProperty('--mask-y', `${currentY.toFixed(2)}%`);
 
-    const baseRadius = isHelmetLocked ? 2000 : 260;
-    const finalRadius = isHelmetLocked ? 2000 : Math.round(baseRadius * audioBoost + currentDispScale * 1.5);
-    viewport.style.setProperty('--mask-radius', `${finalRadius}px`);
+    const activeRadius = Math.max(0, Math.round(currentRadius * audioBoost + currentDispScale * 1.5));
+    viewport.style.setProperty('--mask-radius', `${activeRadius}px`);
+
+    // ── Real 3D Perspective Tilt & Multiplane Parallax Separation ──
+    const tiltXStr = currentTiltX.toFixed(2);
+    const tiltYStr = currentTiltY.toFixed(2);
+
+    // 1. Base Layer (Face & Suit) at depth plane Z = 0
+    if (baseLayer) {
+      baseLayer.style.transform = `rotateX(${tiltXStr}deg) rotateY(${tiltYStr}deg) translate3d(0, 0, 0)`;
+    }
+
+    // 2. Reveal Layer (Full Helmet) with stereoscopic pop-out: Z = 32px + dynamic parallax offset
+    if (revealImg) {
+      const parallaxX = (currentTiltY * 0.7).toFixed(2);
+      const parallaxY = (-currentTiltX * 0.7).toFixed(2);
+      revealImg.style.transform = `rotateX(${tiltXStr}deg) rotateY(${tiltYStr}deg) translate3d(${parallaxX}px, ${parallaxY}px, 32px)`;
+    }
+
+    // 3. Dynamic Specular Sheen (Directional lighting glaze based on 3D tilt)
+    if (sheen) {
+      const normX = (currentX - 50) / 50;
+      const normY = (currentY - 48) / 48;
+      const lightX = 50 + normX * 32 + currentTiltY * 1.2;
+      const lightY = 42 + normY * 28 - currentTiltX * 1.2;
+      sheen.style.background = `radial-gradient(ellipse 65% 55% at ${lightX.toFixed(1)}% ${lightY.toFixed(1)}%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.06) 45%, rgba(0, 0, 0, 0) 75%)`;
+      sheen.style.transform = `rotateX(${tiltXStr}deg) rotateY(${tiltYStr}deg) translate3d(0, 0, 42px)`;
+    }
+
+    // 4. Water Ripple Canvas (Floats as top holographic liquid plane at Z = 52px)
+    if (canvas) {
+      canvas.style.transform = `rotateX(${tiltXStr}deg) rotateY(${tiltYStr}deg) translate3d(0, 0, 52px)`;
+    }
 
     // Render Canvas Water Ripples & Liquid Cursor
     if (ctx && canvas) {
