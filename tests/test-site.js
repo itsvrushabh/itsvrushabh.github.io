@@ -208,6 +208,8 @@ assert(!indexHtml.includes('water-ripple-filter'), 'Water ripple SVG filter is a
 
 // Ensure static helmet image points to 3D_helmat_model_v2.webp
 assert(indexHtml.includes('3D_helmat_model_v2.webp'), 'Base layer src points to 3D_helmat_model_v2.webp');
+assert(indexHtml.includes('rel="preload" as="image" href="/assets/images/3D_helmat_model_v2.webp"'), 'Active hero helmet is preloaded on home page');
+assert(!indexHtml.includes('3D_model_v2.webp'), 'Unused 3D_model_v2.webp is not referenced or preloaded in index.html');
 
 // Ensure no obsolete duplicate hero-3d-card wrapper
 assert(!indexHtml.includes('id="hero-3d-card"'), 'Obsolete duplicate id="hero-3d-card" is absent');
@@ -215,13 +217,15 @@ assert(!indexHtml.includes('id="hero-3d-card"'), 'Obsolete duplicate id="hero-3d
 // Ensure omarchy-themes.css is directly linked in <head> for fast theme application
 assert(indexHtml.includes('/assets/css/omarchy-themes.css'), 'omarchy-themes.css is directly linked in index.html <head>');
 
-// Ensure Back Navigation buttons exist on critical subpages
+// Ensure Back Navigation buttons and no unused home preloads on critical subpages
 const SUBPAGES_WITH_BACK_BUTTON = ['projects/index.html', 'contact/index.html', 'resume/index.html', 'about/index.html', 'blog/index.html'];
 for (const subpage of SUBPAGES_WITH_BACK_BUTTON) {
   const subHtml = fs.readFileSync(path.join(SITE_DIR, subpage), 'utf8');
   assert(subHtml.includes('omarchy-back-btn'), `Subpage ${subpage} includes .omarchy-back-btn`);
   assert(subHtml.includes('Back to Home'), `Subpage ${subpage} includes "Back to Home" label`);
   assert(subHtml.includes('/assets/css/omarchy-themes.css'), `Subpage ${subpage} includes omarchy-themes.css link`);
+  assert(!subHtml.includes('3D_helmat_model_v2.webp'), `Subpage ${subpage} does not preload home-only helmet asset`);
+  assert(!subHtml.includes('3D_model_v2.webp'), `Subpage ${subpage} does not preload unused 3D_model_v2.webp`);
 }
 
 // -----------------------------------------------------------------------------
