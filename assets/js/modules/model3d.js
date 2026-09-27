@@ -400,7 +400,7 @@ export function init3DModelViewer() {
     viewport.style.setProperty('--mask-x', `${currentX.toFixed(2)}%`);
     viewport.style.setProperty('--mask-y', `${currentY.toFixed(2)}%`);
 
-    const baseRadius = isHelmetLocked ? 2000 : 160;
+    const baseRadius = isHelmetLocked ? 2000 : 260;
     const finalRadius = isHelmetLocked ? 2000 : Math.round(baseRadius * audioBoost + currentDispScale * 1.5);
     viewport.style.setProperty('--mask-radius', `${finalRadius}px`);
 
