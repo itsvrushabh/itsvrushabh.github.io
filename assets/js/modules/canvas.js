@@ -242,7 +242,7 @@ export function initBackgroundCanvas() {
 
       // Fallback music beat synchronizer: if audio is playing without FFT data (CORS or background loading)
       if (window.isAudioPlaying && !hasRealAudio) {
-        const audio = audioInstance;
+        const audio = window.audioInstance;
         const t = (audio && audio.currentTime) ? audio.currentTime : (Date.now() / 1000);
         // Use current track's BPM for accurate beat phase
         const bps = (window.currentTrackBPM || 112) / 60;

@@ -82,6 +82,8 @@ import {
   initWidgets
 } from './modules/widgets.js';
 
+import { init3DModelViewer } from './modules/model3d.js';
+
 // =========================================================================
 // GLOBAL PUBLIC API (window.omarchy)
 // =========================================================================
@@ -137,6 +139,9 @@ function initOmarchyApp() {
   initMenubarClock();
   initMenubarCalendar();
   initWorkspaceHUD();
+
+  // 11. Hero 3D Model interactive hover reveal
+  init3DModelViewer();
 }
 
 if (document.readyState === 'loading') {
@@ -188,5 +193,6 @@ export {
   initMemoryProfiler,
   initRaftMesh,
   initShaderSandbox,
-  initWidgets
+  initWidgets,
+  init3DModelViewer
 };

@@ -761,6 +761,293 @@ kbd {
 }
 
 /* ==========================================================================
+   HERO TWO-COLUMN GRID & 3D MODEL SHOWCASE (Lando Norris Inspired)
+   ========================================================================== */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    text-align: left;
+    gap: 3.5rem;
+  }
+
+  .omarchy-hero {
+    text-align: left;
+    padding: 5.5rem 0 4rem;
+  }
+
+  .hero-pill-wrap {
+    justify-content: flex-start;
+  }
+
+  .hero-title-name {
+    margin-left: 0;
+  }
+
+  .hero-lead {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero-snippet-wrap {
+    justify-content: flex-start;
+  }
+
+  .hero-ctas {
+    justify-content: flex-start;
+  }
+}
+
+/* 3D Model Column & Interactive Card */
+.hero-model-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+}
+
+.hero-3d-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background-color: color-mix(in srgb, var(--surface) 85%, transparent);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.65),
+    0 0 35px -10px color-mix(in srgb, var(--brand) 20%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow, border-color;
+  transition:
+    border-color var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.hero-3d-card:hover,
+.hero-3d-card.is-hovered {
+  border-color: color-mix(in srgb, var(--brand) 65%, transparent);
+  box-shadow:
+    0 32px 64px -16px rgba(0, 0, 0, 0.75),
+    0 0 50px -5px color-mix(in srgb, var(--brand) 40%, transparent);
+}
+
+/* Header bar */
+.hero-3d-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  background-color: color-mix(in srgb, var(--bg) 60%, transparent);
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  user-select: none;
+}
+
+.h3d-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.h3d-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--brand);
+  box-shadow: 0 0 8px var(--brand);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+.h3d-title {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.h3d-meta .h3d-pill {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.625rem;
+  color: var(--brand);
+  background-color: color-mix(in srgb, var(--brand) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand) 30%, transparent);
+  border-radius: 9999px;
+}
+
+/* Viewport Stage */
+.hero-3d-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  cursor: crosshair;
+  background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--brand) 8%, transparent) 0%, transparent 70%),
+              radial-gradient(circle at 50% 50%, var(--surface) 0%, color-mix(in srgb, var(--bg) 90%, black) 100%);
+  user-select: none;
+  --reveal-opacity: 0;
+  --mask-x: 50%;
+  --mask-y: 32%;
+  --mask-radius: 140px;
+}
+
+/* Backdrop ambient scanline & subtle grid */
+.hero-3d-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--border-subtle) 40%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--border-subtle) 40%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* Images */
+.h3d-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.h3d-base {
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.6));
+}
+
+/* Reveal Layer (3D Helmet Model with Lando Norris style cursor mask) */
+.h3d-reveal {
+  z-index: 2;
+  opacity: var(--reveal-opacity, 0);
+  -webkit-mask-image:
+    radial-gradient(circle var(--mask-radius, 140px) at var(--mask-x, 50%) var(--mask-y, 32%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0) 80%),
+    radial-gradient(circle 190px at 50% 28%, rgba(0,0,0,0.16) 0%, rgba(0,0,0,0) 75%);
+  mask-image:
+    radial-gradient(circle var(--mask-radius, 140px) at var(--mask-x, 50%) var(--mask-y, 32%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0) 80%),
+    radial-gradient(circle 190px at 50% 28%, rgba(0,0,0,0.16) 0%, rgba(0,0,0,0) 75%);
+  filter: drop-shadow(0 0 25px color-mix(in srgb, var(--brand) 45%, transparent));
+  will-change: mask-image, -webkit-mask-image, opacity;
+  transition: opacity 0.3s ease;
+}
+
+/* Spotlight Reticle Lens Ring */
+.h3d-lens-ring {
+  position: absolute;
+  z-index: 3;
+  width: calc(var(--mask-radius, 140px) * 1.5);
+  height: calc(var(--mask-radius, 140px) * 1.5);
+  top: var(--mask-y, 32%);
+  left: var(--mask-x, 50%);
+  transform: translate(-50%, -50%);
+  border: 1px dashed color-mix(in srgb, var(--brand) 70%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: var(--reveal-opacity, 0);
+  box-shadow:
+    0 0 20px color-mix(in srgb, var(--brand) 30%, transparent),
+    inset 0 0 15px color-mix(in srgb, var(--brand) 15%, transparent);
+  transition: opacity 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.h3d-lens-crosshair {
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+.h3d-lens-crosshair::before,
+.h3d-lens-crosshair::after {
+  content: '';
+  position: absolute;
+  background-color: var(--brand);
+}
+
+.h3d-lens-crosshair::before {
+  top: 5px;
+  left: 0;
+  width: 12px;
+  height: 2px;
+}
+
+.h3d-lens-crosshair::after {
+  top: 0;
+  left: 5px;
+  width: 2px;
+  height: 12px;
+}
+
+.h3d-lens-label {
+  position: absolute;
+  bottom: -22px;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.4rem;
+  background-color: color-mix(in srgb, var(--bg) 85%, black);
+  border: 1px solid color-mix(in srgb, var(--brand) 40%, transparent);
+  border-radius: var(--radius-sm);
+  color: var(--brand);
+  white-space: nowrap;
+}
+
+/* Corner Crosshairs */
+.h3d-corner {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--brand) 40%, transparent);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 4;
+}
+
+.h3d-corner.tl { top: 8px; left: 8px; }
+.h3d-corner.tr { top: 8px; right: 8px; }
+.h3d-corner.bl { bottom: 8px; left: 8px; }
+.h3d-corner.br { bottom: 8px; right: 8px; }
+
+/* Footer bar */
+.hero-3d-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  background-color: color-mix(in srgb, var(--bg) 60%, transparent);
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.h3d-footer-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--brand);
+}
+
+/* ==========================================================================
    TUI (TERMINAL USER INTERFACE)
    ========================================================================== */
 .omarchy-tui-section {

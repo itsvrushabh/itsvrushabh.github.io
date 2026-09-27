@@ -34,6 +34,7 @@ export let currentTrack = 'kevin';
 export function getAudio() {
   if (!audioInstance) {
     audioInstance = new Audio();
+    window.audioInstance = audioInstance;
     audioInstance.crossOrigin = 'anonymous';
 
     // Setup Web Audio API Analyser for real-time visualizer
