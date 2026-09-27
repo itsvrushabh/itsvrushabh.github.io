@@ -19,35 +19,32 @@ title: "Home"
   <div class="container hero-container">
     <div class="hero-layout" id="hero-layout">
 
-      <!-- 3D Model Stage: Full Screen & Borderless on landing, collapses on scroll -->
+      <!-- 3D Model Viewport: Full Screen & Borderless on landing, collapses on scroll -->
       <div class="hero-model-col" id="hero-model-col">
-        <div class="hero-3d-card hero-3d-stage" id="hero-3d-card">
-          <!-- Interactive Viewport -->
-          <div class="hero-3d-viewport" id="hero-3d-viewport">
-            <!-- Base 3D Model: Helmet Model on Landing -->
-            <img src="{{ '/assets/images/3D_helmat_model_v2.webp' | relative_url }}"
-                 alt="3D Racing Helmet Model"
-                 class="h3d-layer h3d-base"
-                 id="h3d-base-layer"
-                 width="2752"
-                 height="1536"
-                 loading="eager" />
+        <div class="hero-3d-viewport" id="hero-3d-viewport">
+          <!-- Base 3D Model: Helmet Model on Landing -->
+          <img src="{{ '/assets/images/3D_helmat_model_v2.webp' | relative_url }}"
+               alt="3D Racing Helmet Model"
+               class="h3d-layer h3d-base"
+               id="h3d-base-layer"
+               width="2752"
+               height="1536"
+               loading="eager" />
 
-            <!-- Revealed 3D Character Model (shown through fluid water mask on hover) -->
-            <img src="{{ '/assets/images/3D_model_v2.webp' | relative_url }}"
-                 alt="3D Character Face Model"
-                 class="h3d-layer h3d-reveal"
-                 id="h3d-reveal-layer"
-                 width="2752"
-                 height="1536"
-                 loading="eager" />
+          <!-- Revealed 3D Character Model (shown through fluid water mask on hover) -->
+          <img src="{{ '/assets/images/3D_model_v2.webp' | relative_url }}"
+               alt="3D Character Face Model"
+               class="h3d-layer h3d-reveal"
+               id="h3d-reveal-layer"
+               width="2752"
+               height="1536"
+               loading="eager" />
 
-            <!-- 3D Specular Lighting & Sheen Reflection Layer -->
-            <div class="h3d-sheen" id="h3d-sheen" aria-hidden="true"></div>
+          <!-- 3D Specular Lighting & Sheen Reflection Layer -->
+          <div class="h3d-sheen" id="h3d-sheen" aria-hidden="true"></div>
 
-            <!-- Dynamic Water Ripple Canvas Overlay -->
-            <canvas id="h3d-water-canvas" class="h3d-water-canvas" aria-hidden="true"></canvas>
-          </div>
+          <!-- Dynamic Water Ripple Canvas Overlay -->
+          <canvas id="h3d-water-canvas" class="h3d-water-canvas" aria-hidden="true"></canvas>
         </div>
 
         <!-- Floating Minimalist Sound Toggle on Landing -->

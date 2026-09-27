@@ -111,7 +111,6 @@ function playWaterSplashSound() {
 }
 
 export function init3DModelViewer() {
-  const card = document.getElementById('hero-3d-card');
   const viewport = document.getElementById('hero-3d-viewport');
   const baseLayer = document.getElementById('h3d-base-layer');
   const revealImg = document.getElementById('h3d-reveal-layer');
@@ -123,7 +122,7 @@ export function init3DModelViewer() {
   const helmetBadge = document.getElementById('hero-helmet-badge');
   const helmetText = document.getElementById('hhb-text');
 
-  if (!card || !viewport || !revealImg) return;
+  if (!viewport || !revealImg) return;
 
   const ctx = canvas ? canvas.getContext('2d') : null;
 

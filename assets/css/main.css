@@ -921,9 +921,8 @@ body.hero-scrolled .hero-model-col {
   height: auto;
 }
 
-/* Borderless 3D Stage: Fills 100% of the screen with zero borders on landing */
-.hero-3d-stage,
-.hero-3d-card {
+/* ── Borderless 3D Viewport: Fills 100% of the screen on landing, collapses on scroll ── */
+.hero-3d-viewport {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -935,33 +934,37 @@ body.hero-scrolled .hero-model-col {
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  background: #f1f2f6 !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  background-color: #f1f2f6;
   overflow: hidden;
+  cursor: crosshair;
+  user-select: none;
+  touch-action: none;
+  perspective: 1200px;
+  transform-style: preserve-3d;
   transition:
     width 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     max-width 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     height 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     border-radius 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  --reveal-opacity: 0;
+  --mask-x: 50%;
+  --mask-y: 48%;
+  --mask-rx: 360px;
+  --mask-ry: 520px;
 }
 
 /* Collapsed state when scrolled down */
-body.hero-scrolled .hero-3d-stage,
-body.hero-scrolled .hero-3d-card {
+body.hero-scrolled .hero-3d-viewport {
   width: 100%;
   max-width: 380px;
   height: 480px;
   border-radius: var(--radius-lg) !important;
-  border: none !important;
   box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.65) !important;
-  overflow: hidden;
 }
 
 @media (max-width: 991px) {
-  body.hero-scrolled .hero-3d-stage,
-  body.hero-scrolled .hero-3d-card {
+  body.hero-scrolled .hero-3d-viewport {
     max-width: 340px;
     height: 440px;
   }
@@ -971,12 +974,11 @@ body.hero-scrolled .hero-3d-card {
   }
 }
 
-body.hero-scrolled .hero-3d-card:hover,
-body.hero-scrolled .hero-3d-card.is-hovered {
+body.hero-scrolled .hero-3d-viewport:hover {
   border-color: color-mix(in srgb, var(--brand) 65%, transparent);
   box-shadow:
     0 35px 70px -15px rgba(0, 0, 0, 0.8),
-    0 0 55px -5px color-mix(in srgb, var(--brand) 45%, transparent);
+    0 0 55px -5px color-mix(in srgb, var(--brand) 45%, transparent) !important;
 }
 
 /* Scroll down prompt button on landing */
@@ -1117,26 +1119,8 @@ body.hero-scrolled .omarchy-scanlines {
 }
 
 /* ==========================================================================
-   INTERACTIVE 3D PHOTO & WATER ANIMATION VIEWPORT
+   INTERACTIVE 3D PHOTO & WATER ANIMATION LAYERS
    ========================================================================== */
-.hero-3d-viewport {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  cursor: crosshair;
-  background-color: #f1f2f6;
-  user-select: none;
-  touch-action: none;
-  perspective: 1200px;
-  transform-style: preserve-3d;
-  --reveal-opacity: 0;
-  --mask-x: 50%;
-  --mask-y: 48%;
-  --mask-rx: 360px;
-  --mask-ry: 520px;
-}
 
 /* Photos: Cropped with cover to fill 100% full screen edge-to-edge with 3D bleed */
 .h3d-layer {
