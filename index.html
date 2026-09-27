@@ -10,17 +10,29 @@ title: "Home"
   <div class="container hero-container">
     <div class="hero-layout" id="hero-layout">
 
-      <!-- Hero Helmet Viewport: Full Screen & Borderless on landing, collapses on scroll -->
+      <!-- Interactive 3D Hero Viewport: Full Screen on landing, collapses on scroll -->
       <div class="hero-model-col" id="hero-model-col">
         <div class="hero-3d-viewport" id="hero-3d-viewport">
-          <!-- Static Helmet Image -->
-          <img src="{{ '/assets/images/3D_helmat_model_v2.webp' | relative_url }}"
-               alt="Racing Helmet"
+          <!-- Base 3D Model: Helmet Model v3 (Front) -->
+          <img src="{{ '/assets/images/3D_helmat_model_v3.webp' | relative_url }}"
+               alt="3D Racing Helmet Model"
                class="h3d-layer h3d-base"
                id="h3d-base-layer"
                width="2752"
                height="1536"
                loading="eager" />
+
+          <!-- Back 3D Model: Character Model v3 (Revealed with depth parallax) -->
+          <img src="{{ '/assets/images/3D_model_v3.webp' | relative_url }}"
+               alt="3D Character Face Model"
+               class="h3d-layer h3d-reveal"
+               id="h3d-reveal-layer"
+               width="2752"
+               height="1536"
+               loading="eager" />
+
+          <!-- 3D Specular Sheen Lighting Glaze -->
+          <div class="h3d-sheen" id="h3d-sheen" aria-hidden="true"></div>
         </div>
 
 

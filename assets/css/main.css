@@ -1036,7 +1036,7 @@ body.hero-scrolled .hero-model-col {
   display: none !important;
 }
 
-/* ── Clean Hero Viewport: Fills 100% of the screen on landing ── */
+/* ── Interactive 3D Hero Viewport: Fills 100% of the screen on landing ── */
 .hero-3d-viewport {
   position: relative;
   display: flex;
@@ -1052,6 +1052,18 @@ body.hero-scrolled .hero-model-col {
   background-color: transparent;
   overflow: hidden;
   user-select: none;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  cursor: grab;
+  --reveal-opacity: 0;
+  --mask-x: 50%;
+  --mask-y: 48%;
+  --mask-rx: 340px;
+  --mask-ry: 480px;
+}
+
+.hero-3d-viewport:active {
+  cursor: grabbing;
 }
 
 /* Scroll down prompt button on landing */
@@ -1192,19 +1204,21 @@ body.hero-scrolled .omarchy-scanlines {
 }
 
 /* ==========================================================================
-   STATIC HERO HELMET PHOTO
+   INTERACTIVE 3D V3 HERO LAYERS & DEPTH REVEAL
    ========================================================================== */
 
-/* Photo: Cropped with cover to fill 100% full screen edge-to-edge cleanly */
+/* Photos: Cropped with cover to fill 100% full screen edge-to-edge with 3D tilt bleed */
 .h3d-layer {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: -2.5%;
+  width: 105%;
+  height: 105%;
   object-fit: cover;
   object-position: center bottom;
   pointer-events: none;
   user-select: none;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 body.hero-scrolled .h3d-layer {
@@ -1214,8 +1228,34 @@ body.hero-scrolled .h3d-layer {
   object-position: center 30%;
 }
 
+/* Base Helmet Layer (Front) */
 .h3d-base {
   z-index: 1;
+}
+
+/* Revealed Character Layer (Back Model shown with depth parallax & soft radial mask) */
+.h3d-reveal {
+  z-index: 2;
+  opacity: var(--reveal-opacity, 0);
+  -webkit-mask-image: radial-gradient(ellipse var(--mask-rx, 340px) var(--mask-ry, 480px) at var(--mask-x, 50%) var(--mask-y, 48%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 65%, rgba(0,0,0,0) 88%);
+  mask-image: radial-gradient(ellipse var(--mask-rx, 340px) var(--mask-ry, 480px) at var(--mask-x, 50%) var(--mask-y, 48%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 65%, rgba(0,0,0,0) 88%);
+  transform-style: preserve-3d;
+  will-change: mask-image, -webkit-mask-image, opacity, transform;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 3D Specular Sheen Lighting Glaze */
+.h3d-sheen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: var(--reveal-opacity, 0);
+  mix-blend-mode: soft-light;
+  transform-style: preserve-3d;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 

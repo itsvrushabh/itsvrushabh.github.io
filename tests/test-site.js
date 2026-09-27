@@ -84,6 +84,8 @@ const REQUIRED_FILES = [
   'assets/js/modules/model3d.js',
   'assets/images/3D_model_v2.webp',
   'assets/images/3D_helmat_model_v2.webp',
+  'assets/images/3D_model_v3.webp',
+  'assets/images/3D_helmat_model_v3.webp',
   'assets/images/favicon.svg',
   'assets/audio/33_max_verstappen.mp3'
 ];
@@ -176,7 +178,9 @@ const indexHtml = fs.readFileSync(indexPath, 'utf8');
 
 const CRITICAL_SELECTORS = [
   { id: 'hero-3d-viewport', desc: 'Hero Viewport container' },
-  { id: 'h3d-base-layer', desc: 'Base Helmet layer img' },
+  { id: 'h3d-base-layer', desc: 'Base Helmet layer img (v3)' },
+  { id: 'h3d-reveal-layer', desc: 'Revealed Character Face layer img (v3)' },
+  { id: 'h3d-sheen', desc: '3D Sheen reflection overlay' },
   { id: 'hero-scroll-prompt', desc: 'Scroll prompt navigation button' },
   { id: 'omarchy-canvas', desc: 'Omarchy background canvas' },
   { id: 'home', desc: 'Home anchor section' },
@@ -200,16 +204,15 @@ assert(!indexHtml.includes('id="hero-landing-sound"'), 'Landing sound toggle #he
 assert(!indexHtml.includes('id="hero-helmet-badge"'), 'Helmet badge #hero-helmet-badge is absent from index.html');
 assert(!indexHtml.includes('CLICK TO REVEAL FACE'), '"CLICK TO REVEAL FACE" text is absent from index.html');
 
-// Ensure 3D effect animation layers and filters are absent
-assert(!indexHtml.includes('id="h3d-reveal-layer"'), 'Animated 3D reveal layer is absent');
-assert(!indexHtml.includes('id="h3d-sheen"'), '3D sheen layer is absent');
+// Ensure heavy water ripple canvas and SVG displacement filter are absent (zero lag)
 assert(!indexHtml.includes('id="h3d-water-canvas"'), 'Water ripple canvas is absent');
 assert(!indexHtml.includes('water-ripple-filter'), 'Water ripple SVG filter is absent');
 
-// Ensure static helmet image points to 3D_helmat_model_v2.webp
-assert(indexHtml.includes('3D_helmat_model_v2.webp'), 'Base layer src points to 3D_helmat_model_v2.webp');
-assert(indexHtml.includes('rel="preload" as="image" href="/assets/images/3D_helmat_model_v2.webp"'), 'Active hero helmet is preloaded on home page');
-assert(!indexHtml.includes('3D_model_v2.webp'), 'Unused 3D_model_v2.webp is not referenced or preloaded in index.html');
+// Ensure static base points to v3 helmet and reveal layer points to v3 character model
+assert(indexHtml.includes('3D_helmat_model_v3.webp'), 'Base layer src points to 3D_helmat_model_v3.webp');
+assert(indexHtml.includes('3D_model_v3.webp'), 'Reveal layer src points to 3D_model_v3.webp');
+assert(indexHtml.includes('rel="preload" as="image" href="/assets/images/3D_helmat_model_v3.webp"'), 'Active hero helmet v3 is preloaded on home page');
+assert(indexHtml.includes('rel="preload" as="image" href="/assets/images/3D_model_v3.webp"'), 'Active hero face v3 is preloaded on home page');
 
 // Ensure no obsolete duplicate hero-3d-card wrapper
 assert(!indexHtml.includes('id="hero-3d-card"'), 'Obsolete duplicate id="hero-3d-card" is absent');
@@ -224,8 +227,8 @@ for (const subpage of SUBPAGES_WITH_BACK_BUTTON) {
   assert(subHtml.includes('omarchy-back-btn'), `Subpage ${subpage} includes .omarchy-back-btn`);
   assert(subHtml.includes('Back to Home'), `Subpage ${subpage} includes "Back to Home" label`);
   assert(subHtml.includes('/assets/css/omarchy-themes.css'), `Subpage ${subpage} includes omarchy-themes.css link`);
-  assert(!subHtml.includes('3D_helmat_model_v2.webp'), `Subpage ${subpage} does not preload home-only helmet asset`);
-  assert(!subHtml.includes('3D_model_v2.webp'), `Subpage ${subpage} does not preload unused 3D_model_v2.webp`);
+  assert(!subHtml.includes('3D_helmat_model_v3.webp'), `Subpage ${subpage} does not preload home-only helmet asset`);
+  assert(!subHtml.includes('3D_model_v3.webp'), `Subpage ${subpage} does not preload home-only character asset`);
 }
 
 // -----------------------------------------------------------------------------
@@ -344,6 +347,8 @@ async function runHttpTests() {
     { path: '/assets/js/main.js', expectedStatus: 200, contentType: 'text/javascript' },
     { path: '/assets/images/3D_model_v2.webp', expectedStatus: 200, contentType: 'image/webp' },
     { path: '/assets/images/3D_helmat_model_v2.webp', expectedStatus: 200, contentType: 'image/webp' },
+    { path: '/assets/images/3D_model_v3.webp', expectedStatus: 200, contentType: 'image/webp' },
+    { path: '/assets/images/3D_helmat_model_v3.webp', expectedStatus: 200, contentType: 'image/webp' },
     { path: '/assets/audio/33_max_verstappen.mp3', expectedStatus: 200, contentType: 'audio/mpeg' },
     { path: '/non-existent-canary-route', expectedStatus: 404, contentType: 'text/html' }
   ];
