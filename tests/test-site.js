@@ -175,11 +175,8 @@ const indexPath = path.join(SITE_DIR, 'index.html');
 const indexHtml = fs.readFileSync(indexPath, 'utf8');
 
 const CRITICAL_SELECTORS = [
-  { id: 'hero-3d-viewport', desc: 'Hero 3D Viewport container' },
-  { id: 'h3d-base-layer', desc: 'Base 3D Helmet layer img' },
-  { id: 'h3d-reveal-layer', desc: 'Revealed 3D Face layer img' },
-  { id: 'h3d-sheen', desc: '3D Sheen reflection overlay' },
-  { id: 'h3d-water-canvas', desc: 'Dynamic Water ripple canvas' },
+  { id: 'hero-3d-viewport', desc: 'Hero Viewport container' },
+  { id: 'h3d-base-layer', desc: 'Base Helmet layer img' },
   { id: 'hero-scroll-prompt', desc: 'Scroll prompt navigation button' },
   { id: 'omarchy-canvas', desc: 'Omarchy background canvas' },
   { id: 'home', desc: 'Home anchor section' },
@@ -203,9 +200,14 @@ assert(!indexHtml.includes('id="hero-landing-sound"'), 'Landing sound toggle #he
 assert(!indexHtml.includes('id="hero-helmet-badge"'), 'Helmet badge #hero-helmet-badge is absent from index.html');
 assert(!indexHtml.includes('CLICK TO REVEAL FACE'), '"CLICK TO REVEAL FACE" text is absent from index.html');
 
-// Ensure 3D images point to the correct v2 assets
+// Ensure 3D effect animation layers and filters are absent
+assert(!indexHtml.includes('id="h3d-reveal-layer"'), 'Animated 3D reveal layer is absent');
+assert(!indexHtml.includes('id="h3d-sheen"'), '3D sheen layer is absent');
+assert(!indexHtml.includes('id="h3d-water-canvas"'), 'Water ripple canvas is absent');
+assert(!indexHtml.includes('water-ripple-filter'), 'Water ripple SVG filter is absent');
+
+// Ensure static helmet image points to 3D_helmat_model_v2.webp
 assert(indexHtml.includes('3D_helmat_model_v2.webp'), 'Base layer src points to 3D_helmat_model_v2.webp');
-assert(indexHtml.includes('3D_model_v2.webp'), 'Reveal layer src points to 3D_model_v2.webp');
 
 // Ensure no obsolete duplicate hero-3d-card wrapper
 assert(!indexHtml.includes('id="hero-3d-card"'), 'Obsolete duplicate id="hero-3d-card" is absent');

@@ -2,7 +2,7 @@
 // VRUSHABH DESHMUKH // PWA SERVICE WORKER (OFFLINE DISPATCHES CACHE)
 // ==============================================================================
 
-const CACHE_NAME = 'vrushabh-v2.7';
+const CACHE_NAME = 'vrushabh-v2.8';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
