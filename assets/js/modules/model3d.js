@@ -158,6 +158,36 @@ export function init3DModelViewer() {
   // Start animation loop
   animFrameId = requestAnimationFrame(updatePhysics);
 
+  // Scroll collapse controller: When user scrolls, collapse 3D model and reveal details
+  const scrollThreshold = 35;
+  let wasScrolled = false;
+
+  function handleScroll() {
+    const isScrolled = window.scrollY > scrollThreshold;
+    if (isScrolled !== wasScrolled) {
+      wasScrolled = isScrolled;
+      if (isScrolled) {
+        document.body.classList.add('hero-scrolled');
+      } else {
+        document.body.classList.remove('hero-scrolled');
+      }
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  // Initial state check
+  handleScroll();
+
+  // Scroll prompt button click to smoothly collapse 3D model & reveal details
+  const scrollPrompt = document.getElementById('hero-scroll-prompt');
+  scrollPrompt?.addEventListener('click', () => {
+    const targetY = Math.min(320, window.innerHeight * 0.42);
+    window.scrollTo({
+      top: targetY,
+      behavior: 'smooth'
+    });
+  });
+
   // Cleanup on tab switch
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
