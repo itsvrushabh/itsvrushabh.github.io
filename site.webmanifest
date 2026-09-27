@@ -1,16 +1,41 @@
 {
-  "name": "Vrushabh Deshmukh",
-  "short_name": "VD",
+  "name": "Vrushabh Deshmukh // Systems Architect",
+  "short_name": "Vrushabh",
   "description": "Personal website and systems engineering blog of Vrushabh Deshmukh",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#0b0f17",
   "theme_color": "#0b0f17",
   "icons": [
     {
       "src": "/assets/images/favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/omarchy-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Projects",
+      "url": "/projects/",
+      "description": "View flagship systems and open-source engines"
+    },
+    {
+      "name": "Dispatches / Blog",
+      "url": "/blog/",
+      "description": "Read technical architecture articles"
+    },
+    {
+      "name": "Terminal",
+      "url": "/#terminal",
+      "description": "Launch the interactive Omarchy workstation TUI"
     }
   ]
 }

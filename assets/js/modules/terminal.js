@@ -48,6 +48,8 @@ export function initTUI() {
       'sound',
       'play',
       'pause',
+      'helmet',
+      'reveal',
       'exit'
     ];
 
@@ -69,6 +71,7 @@ export function initTUI() {
     <tr><td class="cmd-k">theme [name]</td><td>Live switch site theme (e.g. <span class="text-brand">theme everforest</span>)</td></tr>
     <tr><td class="cmd-k">themes</td><td>List all 22 official themes</td></tr>
     <tr><td class="cmd-k">shortcuts</td><td>Open global keyboard shortcuts cheatsheet (<kbd>?</kbd>)</td></tr>
+    <tr><td class="cmd-k">helmet / reveal</td><td>Inspect 3D racing helmet &amp; toggle visor reveal</td></tr>
     <tr><td class="cmd-k">whoami</td><td>Current terminal user session credentials</td></tr>
     <tr><td class="cmd-k">date</td><td>Show current system date & timezone</td></tr>
     <tr><td class="cmd-k">music / sound</td><td>Toggle background music playback (<kbd>M</kbd>)</td></tr>
@@ -267,6 +270,20 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
       sound: (args) => COMMAND_HANDLERS.music(args),
       play: () => COMMAND_HANDLERS.music(['play']),
       pause: () => COMMAND_HANDLERS.music(['pause']),
+
+      helmet: () => {
+        const viewport = document.getElementById('hero-3d-viewport');
+        if (viewport) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          viewport.click();
+          return `<div class="tui-text-block">
+  <div class="tui-block-heading">[ 3D RACING HELMET // HUD ENGAGED ]</div>
+  <div>Navigating to 3D Viewport. Toggling interactive visor reveal...</div>
+</div>`;
+        }
+        return `<div>3D Viewport not active.</div>`;
+      },
+      reveal: () => COMMAND_HANDLERS.helmet(),
 
       exit: () => {
         COMMAND_HANDLERS.clear();

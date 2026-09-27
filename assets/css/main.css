@@ -1066,7 +1066,16 @@ body.hero-scrolled .hero-model-col {
   cursor: grabbing;
 }
 
-/* Scroll down prompt button on landing */
+/* Scroll down prompt button on landing with subtle breathing bounce */
+@keyframes heroPromptBounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-6px);
+  }
+}
+
 .hero-scroll-prompt {
   position: absolute;
   bottom: 0.95rem;
@@ -1081,12 +1090,14 @@ body.hero-scrolled .hero-model-col {
   padding: 0;
   cursor: pointer;
   opacity: 1;
+  animation: heroPromptBounce 2.5s ease-in-out infinite;
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
   user-select: none;
 }
 
 body.hero-scrolled .hero-scroll-prompt {
   opacity: 0;
+  animation: none;
   pointer-events: none;
   visibility: hidden;
   transform: translateX(-50%) translateY(20px);
@@ -1260,6 +1271,10 @@ body.hero-scrolled .h3d-layer {
 
 
 @media (max-width: 768px) {
+  .hero-3d-viewport {
+    --mask-rx: 180px;
+    --mask-ry: 260px;
+  }
   .hero-scroll-prompt {
     bottom: 1rem;
   }

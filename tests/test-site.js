@@ -82,8 +82,6 @@ const REQUIRED_FILES = [
   'assets/css/main.css',
   'assets/js/main.js',
   'assets/js/modules/model3d.js',
-  'assets/images/3D_model_v2.webp',
-  'assets/images/3D_helmat_model_v2.webp',
   'assets/images/3D_model_v3.webp',
   'assets/images/3D_helmat_model_v3.webp',
   'assets/images/favicon.svg',
@@ -94,6 +92,12 @@ for (const relFile of REQUIRED_FILES) {
   const filePath = path.join(SITE_DIR, relFile);
   assert(fs.existsSync(filePath), `Required route/file: ${relFile}`, `Missing expected file: ${filePath}`);
 }
+
+// Verify obsolete v2 3D images are absent from build
+const oldV2ModelPath = path.join(SITE_DIR, 'assets/images/3D_model_v2.webp');
+const oldV2HelmetPath = path.join(SITE_DIR, 'assets/images/3D_helmat_model_v2.webp');
+assert(!fs.existsSync(oldV2ModelPath), 'Obsolete 3D_model_v2.webp is absent from build');
+assert(!fs.existsSync(oldV2HelmetPath), 'Obsolete 3D_helmat_model_v2.webp is absent from build');
 
 // Verify obsolete Kevin Koontz song is absent
 const oldSongPath = path.join(SITE_DIR, 'assets/audio/kevin_koontz-we_can_fix_everything.mp3');
@@ -345,8 +349,6 @@ async function runHttpTests() {
     { path: '/robots.txt', expectedStatus: 200, contentType: 'text/plain' },
     { path: '/assets/css/main.css', expectedStatus: 200, contentType: 'text/css' },
     { path: '/assets/js/main.js', expectedStatus: 200, contentType: 'text/javascript' },
-    { path: '/assets/images/3D_model_v2.webp', expectedStatus: 200, contentType: 'image/webp' },
-    { path: '/assets/images/3D_helmat_model_v2.webp', expectedStatus: 200, contentType: 'image/webp' },
     { path: '/assets/images/3D_model_v3.webp', expectedStatus: 200, contentType: 'image/webp' },
     { path: '/assets/images/3D_helmat_model_v3.webp', expectedStatus: 200, contentType: 'image/webp' },
     { path: '/assets/audio/33_max_verstappen.mp3', expectedStatus: 200, contentType: 'audio/mpeg' },

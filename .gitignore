@@ -62,3 +62,7 @@ __pycache__/
 .venv/
 venv/
 env/
+
+# Raw Uncompressed Source Images (Only optimized WebP assets are tracked)
+assets/images/*.png
+
