@@ -1,13 +1,15 @@
 /**
  * OMARCHY 3D MODEL & INTERACTIVE WATER RIPPLE ENGINE
  * Features:
- * 1. Borderless full-screen 3D model render
+ * 1. Borderless full-screen cropped 3D model render
  * 2. Realistic interactive water ripple waves on hover/move/click
  * 3. Physical liquid pixel refraction via dynamic SVG displacement filter
- * 4. Fluid-reactive radial mask reveal of 3D helmet model
- * 5. Audio-reactive water wave pulse when ambient music is playing
- * 6. Responsive touch/pointer support for mobile and desktop
- * 7. Smooth scroll-driven collapse & expansion
+ * 4. Web Audio API synthesized water droplet & splash sound effects
+ * 5. Minimalist landing audio toggle
+ * 6. Custom liquid refraction cursor reticle on water canvas
+ * 7. Mobile gyroscope tilt physics (DeviceOrientation)
+ * 8. Click-to-lock helmet toggle with splash wave
+ * 9. Smooth scroll-driven collapse & expansion
  */
 
 class WaterRipple {
@@ -55,6 +57,59 @@ class WaterRipple {
   }
 }
 
+// ── Web Audio Synthesizer for Pure Water Droplets ──
+let audioCtx = null;
+let soundEnabled = true;
+
+function getAudioContext() {
+  if (!audioCtx) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) audioCtx = new AudioContextClass();
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  return audioCtx;
+}
+
+function playWaterDropSound(pitch = 1.0, volume = 0.06) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    // Water droplet physics: rapid pitch ramp up then down, steep exponential decay
+    const startFreq = (650 + Math.random() * 200) * pitch;
+    const peakFreq = (1300 + Math.random() * 350) * pitch;
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(startFreq, now);
+    osc.frequency.exponentialRampToValueAtTime(peakFreq, now + 0.035);
+    osc.frequency.exponentialRampToValueAtTime(startFreq * 0.75, now + 0.12);
+
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(volume, now + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.15);
+  } catch (_) {}
+}
+
+function playWaterSplashSound() {
+  if (!soundEnabled) return;
+  playWaterDropSound(0.75, 0.10);
+  setTimeout(() => playWaterDropSound(1.05, 0.08), 35);
+  setTimeout(() => playWaterDropSound(1.35, 0.05), 75);
+}
+
 export function init3DModelViewer() {
   const card = document.getElementById('hero-3d-card');
   const viewport = document.getElementById('hero-3d-viewport');
@@ -62,6 +117,9 @@ export function init3DModelViewer() {
   const canvas = document.getElementById('h3d-water-canvas');
   const turb = document.getElementById('water-turbulence');
   const dispMap = document.getElementById('water-displacement');
+  const landingSoundBtn = document.getElementById('hero-landing-sound');
+  const helmetBadge = document.getElementById('hero-helmet-badge');
+  const helmetText = document.getElementById('hhb-text');
 
   if (!card || !viewport || !revealImg) return;
 
@@ -69,14 +127,18 @@ export function init3DModelViewer() {
 
   // State variables
   let isHovered = false;
+  let isHelmetLocked = false;
   let targetX = 50; // percentage
   let targetY = 32;
   let currentX = 50;
   let currentY = 32;
 
+  let pointerPixelX = 0;
+  let pointerPixelY = 0;
   let lastPointerX = 0;
   let lastPointerY = 0;
   let lastRippleTime = 0;
+  let lastAudioDropTime = 0;
 
   // SVG displacement physics
   let targetDispScale = 0;
@@ -107,7 +169,7 @@ export function init3DModelViewer() {
 
   // Spawn water ripple at relative coordinates
   function spawnRipple(relX, relY, maxR = 240, intensity = 1.0) {
-    if (ripples.length > 25) ripples.shift();
+    if (ripples.length > 30) ripples.shift();
     ripples.push(new WaterRipple(relX, relY, maxR, intensity));
   }
 
@@ -120,6 +182,9 @@ export function init3DModelViewer() {
 
     const relX = clientX - rect.left;
     const relY = clientY - rect.top;
+
+    pointerPixelX = relX;
+    pointerPixelY = relY;
 
     const clampedX = Math.max(0, Math.min(rect.width, relX));
     const clampedY = Math.max(0, Math.min(rect.height, relY));
@@ -136,17 +201,25 @@ export function init3DModelViewer() {
 
     // Spawn water ripples on movement
     const now = performance.now();
-    if (dist > 8 && now - lastRippleTime > 40) {
+    if (dist > 7 && now - lastRippleTime > 35) {
       lastRippleTime = now;
       const speedNorm = Math.min(2.0, dist / 12);
       spawnRipple(clampedX, clampedY, Math.min(280, 160 + dist * 3), 0.7 + speedNorm * 0.4);
-      targetDispScale = Math.min(36, 10 + dist * 1.4);
+      targetDispScale = Math.min(36, 12 + dist * 1.4);
+
+      // Trigger subtle synthesized water droplet sound (throttled)
+      if (now - lastAudioDropTime > 150) {
+        lastAudioDropTime = now;
+        playWaterDropSound(1.0 + Math.random() * 0.4, 0.035);
+      }
     }
   }
 
   function handlePointerEnter(e) {
     isHovered = true;
-    viewport.style.setProperty('--reveal-opacity', '1');
+    if (!isHelmetLocked) {
+      viewport.style.setProperty('--reveal-opacity', '1');
+    }
     targetDispScale = 16;
 
     const rect = viewport.getBoundingClientRect();
@@ -155,20 +228,25 @@ export function init3DModelViewer() {
     const relX = clientX - rect.left;
     const relY = clientY - rect.top;
 
+    pointerPixelX = relX;
+    pointerPixelY = relY;
     lastPointerX = relX;
     lastPointerY = relY;
     spawnRipple(relX, relY, 260, 1.2);
+    playWaterDropSound(1.1, 0.05);
   }
 
   function handlePointerLeave() {
     isHovered = false;
-    viewport.style.setProperty('--reveal-opacity', '0');
+    if (!isHelmetLocked) {
+      viewport.style.setProperty('--reveal-opacity', '0');
+    }
     targetDispScale = 0;
     targetX = 50;
     targetY = 32;
   }
 
-  // Click splash effect: triggers outward water wave rings
+  // Click handler: Toggle helmet lock & produce dramatic water splash wave
   function handleClick(e) {
     const rect = viewport.getBoundingClientRect();
     const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : rect.width / 2);
@@ -177,15 +255,107 @@ export function init3DModelViewer() {
     const relY = clientY - rect.top;
 
     targetDispScale = 45;
-    const splashMax = Math.max(rect.width, rect.height) * 0.65;
-    for (let i = 0; i < 3; i++) {
+    const splashMax = Math.max(rect.width, rect.height) * 0.75;
+    for (let i = 0; i < 4; i++) {
       setTimeout(() => {
-        spawnRipple(relX, relY, splashMax, 1.4 - i * 0.2);
-      }, i * 80);
+        spawnRipple(relX, relY, splashMax, 1.5 - i * 0.22);
+      }, i * 75);
+    }
+
+    playWaterSplashSound();
+
+    // Toggle Helmet Lock state
+    isHelmetLocked = !isHelmetLocked;
+    if (isHelmetLocked) {
+      viewport.style.setProperty('--reveal-opacity', '1');
+      if (helmetBadge && helmetText) {
+        helmetBadge.classList.add('locked');
+        helmetText.textContent = 'HELMET LOCKED 🏎️ (CLICK TO UNLOCK)';
+      }
+    } else {
+      if (helmetBadge && helmetText) {
+        helmetBadge.classList.remove('locked');
+        helmetText.textContent = 'CLICK TO LOCK HELMET';
+      }
+      if (!isHovered) {
+        viewport.style.setProperty('--reveal-opacity', '0');
+      }
     }
   }
 
-  // Animation Loop: Updates water waves, SVG turbulence, and fluid reveal mask
+  // ── Mobile Gyroscope Tilt Physics ──
+  function handleOrientation(e) {
+    if (e.gamma === null || e.beta === null) return;
+    // gamma: left to right (-90 to +90), beta: front to back (-180 to +180)
+    const tiltX = Math.max(-30, Math.min(30, e.gamma));
+    const tiltY = Math.max(-20, Math.min(40, e.beta - 40)); // neutral holding angle ~40deg
+
+    targetX = 50 + (tiltX / 30) * 35;
+    targetY = 32 + (tiltY / 30) * 25;
+
+    // If tilt change is energetic, spawn slosh ripple
+    if (Math.abs(tiltX) > 15 || Math.abs(tiltY) > 15) {
+      const rect = viewport.getBoundingClientRect();
+      const px = (targetX / 100) * rect.width;
+      const py = (targetY / 100) * rect.height;
+      const now = performance.now();
+      if (now - lastRippleTime > 120) {
+        lastRippleTime = now;
+        spawnRipple(px, py, 220, 0.7);
+        targetDispScale = 22;
+      }
+    }
+  }
+
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', handleOrientation, { passive: true });
+  }
+
+  // ── Landing Sound Button Controller ──
+  if (landingSoundBtn) {
+    landingSoundBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      getAudioContext(); // unlock audio context
+
+      const mainPlayBtn = document.getElementById('music-play-btn');
+      if (mainPlayBtn) {
+        mainPlayBtn.click();
+      }
+
+      // Check playing state
+      const isPlaying = window.isAudioPlaying || document.querySelector('.omarchy-music-card')?.classList.contains('playing');
+      const soundText = document.getElementById('hls-text');
+      const soundIcon = document.getElementById('hls-icon');
+
+      if (!isPlaying) {
+        landingSoundBtn.classList.add('active');
+        if (soundText) soundText.textContent = 'SOUND: ON';
+        if (soundIcon) {
+          soundIcon.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          `;
+        }
+        playWaterDropSound(1.2, 0.08);
+      } else {
+        landingSoundBtn.classList.remove('active');
+        if (soundText) soundText.textContent = 'SOUND: OFF';
+        if (soundIcon) {
+          soundIcon.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          `;
+        }
+      }
+    });
+  }
+
+  // Animation Loop: Updates water waves, SVG turbulence, liquid cursor, and fluid reveal mask
   function updatePhysics() {
     const damping = isHovered ? 0.12 : 0.08;
 
@@ -230,13 +400,15 @@ export function init3DModelViewer() {
     viewport.style.setProperty('--mask-x', `${currentX.toFixed(2)}%`);
     viewport.style.setProperty('--mask-y', `${currentY.toFixed(2)}%`);
 
-    const baseRadius = 160;
-    const finalRadius = Math.round(baseRadius * audioBoost + currentDispScale * 1.5);
+    const baseRadius = isHelmetLocked ? 2000 : 160;
+    const finalRadius = isHelmetLocked ? 2000 : Math.round(baseRadius * audioBoost + currentDispScale * 1.5);
     viewport.style.setProperty('--mask-radius', `${finalRadius}px`);
 
-    // Render Canvas Water Ripples
+    // Render Canvas Water Ripples & Liquid Cursor
     if (ctx && canvas) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Render expanding water ripples
       for (let i = ripples.length - 1; i >= 0; i--) {
         const ripple = ripples[i];
         if (ripple.update()) {
@@ -244,6 +416,27 @@ export function init3DModelViewer() {
         } else {
           ripples.splice(i, 1);
         }
+      }
+
+      // Draw custom interactive liquid cursor reticle when hovered
+      if (isHovered && pointerPixelX > 0 && pointerPixelY > 0) {
+        const cursorRadius = 18 + Math.sin(waterTime * 4) * 2 + currentDispScale * 0.35;
+        
+        // Specular outer water ring
+        ctx.beginPath();
+        ctx.arc(pointerPixelX, pointerPixelY, cursorRadius, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Inner aquatic glow dot
+        ctx.beginPath();
+        ctx.arc(pointerPixelX, pointerPixelY, 3, 0, Math.PI * 2);
+        ctx.fillStyle = isHelmetLocked ? '#ef4444' : '#60a5fa';
+        ctx.shadowColor = isHelmetLocked ? '#ef4444' : '#60a5fa';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowBlur = 0; // reset
       }
     }
 

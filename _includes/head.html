@@ -22,6 +22,10 @@
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
 
+<!-- Preload High-Priority 3D Hero Assets -->
+<link rel="preload" as="image" href="{{ '/assets/images/3D_model.png' | relative_url }}">
+<link rel="preload" as="image" href="{{ '/assets/images/3D_helmet_model.png' | relative_url }}">
+
 <!-- Open Graph / Meta -->
 <meta property="og:title" content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
 <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
