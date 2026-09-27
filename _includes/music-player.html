@@ -1,12 +1,11 @@
 <!-- ==========================================
-     OMARCHY AMBIENT MUSIC PLAYER
-     Tracks: Kevin Koontz / 33 Max Verstappen
-     Features: Seek Scrubber, Volume Slider, Auto-Next, Multi-Track
+     OMARCHY AMBIENT MUSIC PLAYER (33 MAX VERSTAPPEN)
+     Features: Single Track, Auto-Loop, Shortcuts, Real-time Equalizer
      ========================================== -->
 <div id="omarchy-music-player" class="omarchy-music-card" aria-label="Music Player">
-  <!-- Album Art & Play/Pause Trigger -->
+  <!-- Play/Pause Trigger -->
   <button id="music-play-btn" class="music-art-btn" title="Turn Sound On / Off (Press 'M')" aria-label="Toggle Sound">
-    <img id="music-art-img" src="{{ '/assets/images/kevin_koontz.webp' | relative_url }}" alt="Track Album Art" class="music-art-img">
+    <span class="music-emoji-art" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; z-index: 1;">🏎️</span>
     <span class="music-play-overlay">
       <svg id="music-overlay-icon-play" class="music-icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
         <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -21,9 +20,9 @@
   <!-- Track Information & Scrubbing Bar -->
   <div class="music-info">
     <div class="music-title-wrap">
-      <span class="music-track-title" id="music-track-title">We Can Fix Everything</span>
+      <span class="music-track-title" id="music-track-title">33 Max Verstappen</span>
     </div>
-    <div class="music-artist" id="music-track-artist">Kevin Koontz &middot; Omarchy OST</div>
+    <div class="music-artist" id="music-track-artist">Carte Blanq &middot; Maxx Power</div>
     <div class="music-progress-wrap">
       <span id="music-curr-time">0:00</span>
       <input type="range" id="music-seek" class="music-seek-bar" min="0" max="100" value="0" aria-label="Seek track position">
@@ -31,27 +30,9 @@
     </div>
   </div>
 
-  <!-- Right Controls: Volume + Track Switcher -->
-  <div class="music-controls-right">
-    <div class="music-vol-wrap" title="Volume Slider">
-      <button id="music-vol-btn" class="music-vol-btn" aria-label="Toggle Mute">
-        <svg id="music-vol-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-        </svg>
-      </button>
-      <input type="range" id="music-volume" class="music-vol-bar" min="0" max="1" step="0.05" value="0.8" aria-label="Volume">
-    </div>
-
-    <!-- Track Switcher: Kevin Koontz / Max Verstappen -->
-    <div class="music-track-switcher" aria-label="Switch Track">
-      <button class="music-track-btn active" data-track="kevin" title="Kevin Koontz - We Can Fix Everything" aria-pressed="true">
-        <span class="track-btn-icon">🎵</span>
-      </button>
-      <button class="music-track-btn" data-track="max" title="33 Max Verstappen - Carte Blanq · Maxx Power" aria-pressed="false">
-        <span class="track-btn-icon">🏎️</span>
-      </button>
-    </div>
+  <!-- Keybinding / Shortcut Badge -->
+  <div class="music-shortcut-badge" title="Press 'M' to toggle sound">
+    <kbd>M</kbd>
   </div>
 
   <!-- Real-time Animated Equalizer Bars -->

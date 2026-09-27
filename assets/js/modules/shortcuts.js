@@ -108,7 +108,7 @@ export function initShortcuts() {
         '1': { section: '#projects', url: '/projects/' },
         '2': { section: '#dispatches', url: '/blog/' },
         '3': { section: null, url: '/about/' },
-        '4': { section: '#themes', url: '/#themes' },
+        '4': { section: null, url: '/contact/' },
         '5': { section: null, url: '/resume/' }
       };
       const item = navMap[e.key];

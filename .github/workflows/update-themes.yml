@@ -1,0 +1,49 @@
+name: Sync Themes from Omarchy Bot
+
+on:
+  schedule:
+    # Runs weekly on Sundays at 02:00 UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "sync-themes"
+  cancel-in-progress: true
+
+jobs:
+  sync-themes:
+    name: Sync Official Palettes from Upstream Omarchy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Execute Upstream Theme Synchronization
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/sync-omarchy-themes.js
+
+      - name: Commit & Push Updated Themes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [[ -n $(git status --porcelain _data/themes.json assets/css/omarchy-themes.css assets/js/modules/theme.js) ]]; then
+            echo "Theme changes detected from upstream Omarchy. Committing..."
+            git add _data/themes.json assets/css/omarchy-themes.css assets/js/modules/theme.js
+            git commit -m "chore(themes): sync official theme palettes from upstream omarchy"
+            git push origin main
+          else
+            echo "All themes are fully up-to-date with upstream Omarchy. Clean working tree."
+          fi

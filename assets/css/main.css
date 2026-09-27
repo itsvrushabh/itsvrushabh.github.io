@@ -868,19 +868,16 @@ body.hero-scrolled .hero-content {
   }
 
   body.hero-scrolled .hero-layout {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 3.5rem;
-    align-items: center;
+    display: block;
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: left;
   }
 
   body.hero-scrolled .hero-content {
     order: 1;
-  }
-
-  body.hero-scrolled .hero-model-col {
-    order: 2;
+    max-width: 880px;
   }
 
   body.hero-scrolled .hero-pill-wrap {
@@ -905,7 +902,7 @@ body.hero-scrolled .hero-content {
   }
 }
 
-/* ── 3D Model Column: Full-Screen & Borderless on landing, collapses on scroll ── */
+/* ── 3D Model Column: Full-Screen & Borderless on landing, hidden on scroll ── */
 .hero-model-col {
   display: flex;
   flex-direction: column;
@@ -918,10 +915,10 @@ body.hero-scrolled .hero-content {
 }
 
 body.hero-scrolled .hero-model-col {
-  height: auto;
+  display: none !important;
 }
 
-/* ── Borderless 3D Viewport: Fills 100% of the screen on landing, collapses on scroll ── */
+/* ── Borderless 3D Viewport: Fills 100% of the screen on landing ── */
 .hero-3d-viewport {
   position: relative;
   display: flex;
@@ -941,44 +938,11 @@ body.hero-scrolled .hero-model-col {
   touch-action: none;
   perspective: 1200px;
   transform-style: preserve-3d;
-  transition:
-    width 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    max-width 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    height 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    border-radius 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   --reveal-opacity: 0;
   --mask-x: 50%;
   --mask-y: 48%;
   --mask-rx: 360px;
   --mask-ry: 520px;
-}
-
-/* Collapsed state when scrolled down */
-body.hero-scrolled .hero-3d-viewport {
-  width: 100%;
-  max-width: 380px;
-  height: 480px;
-  border-radius: var(--radius-lg) !important;
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.65) !important;
-}
-
-@media (max-width: 991px) {
-  body.hero-scrolled .hero-3d-viewport {
-    max-width: 340px;
-    height: 440px;
-  }
-
-  body.hero-scrolled .hero-content {
-    margin-top: 2rem;
-  }
-}
-
-body.hero-scrolled .hero-3d-viewport:hover {
-  border-color: color-mix(in srgb, var(--brand) 65%, transparent);
-  box-shadow:
-    0 35px 70px -15px rgba(0, 0, 0, 0.8),
-    0 0 55px -5px color-mix(in srgb, var(--brand) 45%, transparent) !important;
 }
 
 /* Scroll down prompt button on landing */
@@ -2796,99 +2760,26 @@ body.hero-scrolled .hero-helmet-badge {
   100% { height: 14px; }
 }
 
-/* Right Controls: Volume + Track Switcher */
-.music-controls-right {
+/* Shortcut Keybinding Badge in Music Card */
+.music-shortcut-badge {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0 0.5rem;
+  justify-content: center;
+  padding: 0 0.6rem;
   border-left: 1px solid var(--border-subtle);
 }
 
-.music-vol-wrap {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.music-vol-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  padding: 0;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-
-.music-vol-btn:hover {
+.music-shortcut-badge kbd {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
   color: var(--brand);
-}
-
-.music-vol-bar {
-  width: 38px;
-  height: 3px;
-  -webkit-appearance: none;
-  appearance: none;
   background: var(--surface-2);
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-}
-
-.music-vol-bar::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--brand);
-  cursor: pointer;
-}
-
-/* Track Switcher */
-.music-track-switcher {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.music-track-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 20px;
-  background: transparent;
-  border: 1px solid var(--border-subtle);
-  border-radius: 4px;
-  cursor: pointer;
-  color: var(--text-muted);
-  font-size: 12px;
-  line-height: 1;
-  transition: all 0.15s ease;
-  padding: 1px;
-}
-
-.music-track-btn:hover {
-  border-color: var(--brand);
-  color: var(--brand);
-  background: var(--brand-soft, rgba(158, 206, 106, 0.1));
-}
-
-.music-track-btn.active {
-  border-color: var(--brand);
-  color: var(--brand);
-  background: var(--brand-soft, rgba(158, 206, 106, 0.15));
-}
-
-.track-btn-icon {
-  font-size: 10px;
-  line-height: 1;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 0 var(--border-strong);
 }
 
 

@@ -1,7 +1,7 @@
 /**
- * OMARCHY AMBIENT AUDIO ENGINE (Multi-Track)
- * Tracks: Kevin Koontz & 33 Max Verstappen
- * Features: Web Audio API analyser, real-time beat sync, seek scrubber, volume control, auto-next playback
+ * OMARCHY AMBIENT AUDIO ENGINE (33 Max Verstappen)
+ * Track: 33 Max Verstappen (Carte Blanq · Maxx Power · Nils van Zandt)
+ * Features: Web Audio API analyser, real-time beat sync, seek scrubber, shortcut keybinding (M)
  */
 import { showToastNotice } from './theme.js';
 
@@ -9,27 +9,18 @@ let audioInstance = null;
 export let isAudioPlaying = false;
 
 export const TRACKS = {
-  kevin: {
-    src: '/assets/audio/kevin_koontz-we_can_fix_everything.mp3',
-    title: 'We Can Fix Everything',
-    artist: 'Kevin Koontz · Omarchy OST',
-    art: '/assets/images/kevin_koontz.webp',
-    artAlt: 'Kevin Koontz Album Art',
-    bpm: 112,
-    toast: '▶ Kevin Koontz – We Can Fix Everything'
-  },
   max: {
     src: '/assets/audio/33_max_verstappen.mp3',
     title: '33 Max Verstappen',
     artist: 'Carte Blanq · Maxx Power · Nils van Zandt',
-    art: null, // F1 helmet emoji fallback
+    art: null, // F1 helmet emoji
     artAlt: '33 Max Verstappen',
     bpm: 130,
     toast: '▶ 33 Max Verstappen – Tu-tu-du-du 🏎️'
   }
 };
 
-export let currentTrack = 'kevin';
+export let currentTrack = 'max';
 
 export function getAudio() {
   if (!audioInstance) {
@@ -55,18 +46,11 @@ export function getAudio() {
     } catch (e) {
       console.warn('Web Audio API not supported or restricted:', e);
     }
-    audioInstance.loop = false;
+
+    audioInstance.loop = true;
+    audioInstance.volume = 0.85;
     audioInstance.preload = 'metadata';
     audioInstance.src = TRACKS[currentTrack].src;
-
-    // Auto-play next track when track finishes
-    audioInstance.addEventListener('ended', () => {
-      const trackKeys = Object.keys(TRACKS);
-      const nextIdx = (trackKeys.indexOf(currentTrack) + 1) % trackKeys.length;
-      const nextId = trackKeys[nextIdx];
-      switchTrack(nextId);
-      playMusic();
-    });
 
     audioInstance.addEventListener('error', () => {
       console.warn('Audio load failed. Retrying without crossOrigin.');
@@ -77,8 +61,6 @@ export function getAudio() {
     const seek = document.getElementById('music-seek');
     const currTimeEl = document.getElementById('music-curr-time');
     const durationEl = document.getElementById('music-duration');
-    const volBar = document.getElementById('music-volume');
-    const volBtn = document.getElementById('music-vol-btn');
 
     audioInstance.addEventListener('timeupdate', () => {
       if (audioInstance.duration) {
@@ -108,95 +90,8 @@ export function getAudio() {
         }
       });
     }
-
-    if (volBar) {
-      audioInstance.volume = parseFloat(volBar.value) || 0.8;
-      volBar.addEventListener('input', () => {
-        audioInstance.volume = parseFloat(volBar.value);
-      });
-    }
-
-    if (volBtn) {
-      volBtn.addEventListener('click', () => {
-        if (audioInstance.volume > 0) {
-          audioInstance.dataset.savedVol = audioInstance.volume;
-          audioInstance.volume = 0;
-          if (volBar) volBar.value = 0;
-        } else {
-          const restored = parseFloat(audioInstance.dataset.savedVol) || 0.8;
-          audioInstance.volume = restored;
-          if (volBar) volBar.value = restored;
-        }
-      });
-    }
   }
   return audioInstance;
-}
-
-export function applyTrackMeta(trackId) {
-  const t = TRACKS[trackId];
-  const titleEl = document.getElementById('music-track-title');
-  const artistEl = document.getElementById('music-track-artist');
-  const artEl = document.getElementById('music-art-img');
-
-  if (titleEl) titleEl.textContent = t.title;
-  if (artistEl) artistEl.textContent = t.artist;
-  if (artEl) {
-    if (t.art) {
-      artEl.src = t.art;
-      artEl.alt = t.artAlt;
-      artEl.style.fontSize = '';
-      artEl.style.display = 'block';
-    } else {
-      artEl.style.display = 'none';
-      const btn = document.querySelector('.music-art-btn');
-      if (btn && !btn.querySelector('.music-emoji-art')) {
-        const em = document.createElement('span');
-        em.className = 'music-emoji-art';
-        em.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;z-index:1;';
-        em.textContent = '🏎️';
-        btn.insertBefore(em, btn.querySelector('.music-play-overlay'));
-      }
-    }
-  }
-
-  if (t.art) {
-    const em = document.querySelector('.music-emoji-art');
-    if (em) em.remove();
-  }
-
-  document.querySelectorAll('.music-track-btn').forEach(b => {
-    const isActive = b.dataset.track === trackId;
-    b.classList.toggle('active', isActive);
-    b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-  });
-
-  window.currentTrackBPM = t.bpm;
-}
-
-export function switchTrack(trackId) {
-  if (!TRACKS[trackId] || trackId === currentTrack) return;
-  const wasPlaying = isAudioPlaying;
-  currentTrack = trackId;
-
-  const audio = getAudio();
-  const wasPaused = audio.paused;
-  audio.pause();
-  audio.currentTime = 0;
-  audio.src = TRACKS[trackId].src;
-
-  applyTrackMeta(trackId);
-
-  if (wasPlaying || !wasPaused) {
-    audio.play().then(() => {
-      updateMusicUI(true);
-      showToastNotice(TRACKS[trackId].toast);
-    }).catch(() => {
-      updateMusicUI(false);
-    });
-  } else {
-    updateMusicUI(false);
-  }
 }
 
 export function formatAudioTime(seconds) {
@@ -239,7 +134,7 @@ export function playMusic() {
     showToastNotice(TRACKS[currentTrack].toast);
   }).catch(err => {
     console.warn('User gesture required to play audio:', err);
-    showToastNotice('Click music button to enable sound');
+    showToastNotice('Press M or click music button to enable sound');
   });
   return true;
 }
@@ -271,17 +166,5 @@ export function initMusicPlayer() {
     headerToggle.addEventListener('click', toggleMusic);
   }
 
-  // Wire track switcher buttons
-  document.querySelectorAll('.music-track-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const trackId = btn.dataset.track;
-      if (trackId && trackId !== currentTrack) {
-        switchTrack(trackId);
-      }
-    });
-  });
-
-  // Set initial track metadata
-  applyTrackMeta(currentTrack);
-  window.currentTrackBPM = TRACKS[currentTrack].bpm;
+  window.currentTrackBPM = TRACKS.max.bpm;
 }

@@ -84,13 +84,18 @@ const REQUIRED_FILES = [
   'assets/js/modules/model3d.js',
   'assets/images/3D_model_v2.webp',
   'assets/images/3D_helmat_model_v2.webp',
-  'assets/images/favicon.svg'
+  'assets/images/favicon.svg',
+  'assets/audio/33_max_verstappen.mp3'
 ];
 
 for (const relFile of REQUIRED_FILES) {
   const filePath = path.join(SITE_DIR, relFile);
   assert(fs.existsSync(filePath), `Required route/file: ${relFile}`, `Missing expected file: ${filePath}`);
 }
+
+// Verify obsolete Kevin Koontz song is absent
+const oldSongPath = path.join(SITE_DIR, 'assets/audio/kevin_koontz-we_can_fix_everything.mp3');
+assert(!fs.existsSync(oldSongPath), 'Obsolete Kevin Koontz song is absent');
 
 // -----------------------------------------------------------------------------
 // 3. RECURSIVE HTML SCAN: LIQUID LEAKS & SYNTAX ARTIFACTS
@@ -154,7 +159,6 @@ const CRITICAL_SELECTORS = [
   { id: 'omarchy-canvas', desc: 'Omarchy background canvas' },
   { id: 'home', desc: 'Home anchor section' },
   { id: 'terminal', desc: 'Interactive Omarchy TUI Terminal' },
-  { id: 'themes', desc: '22 System Themes section' },
   { id: 'projects', desc: 'Flagship Projects section' },
   { id: 'dispatches', desc: 'Latest Engineering Dispatches section' }
 ];
@@ -163,6 +167,11 @@ for (const item of CRITICAL_SELECTORS) {
   const regex = new RegExp(`id=["']${item.id}["']`);
   assert(regex.test(indexHtml), `Selector #${item.id} (${item.desc}) exists in index.html`);
 }
+
+// Ensure "Pick a theme, change everything" and themes section are absent
+assert(!indexHtml.includes('Pick a theme, change everything'), '"Pick a theme, change everything" is absent from website');
+assert(!indexHtml.includes('More Omarchy Themes'), '"More Omarchy Themes" link is absent from website');
+assert(!indexHtml.includes('id="themes"'), 'Theme section container #themes is absent from index.html');
 
 // Ensure 3D images point to the correct v2 assets
 assert(indexHtml.includes('3D_helmat_model_v2.webp'), 'Base layer src points to 3D_helmat_model_v2.webp');
@@ -287,6 +296,7 @@ async function runHttpTests() {
     { path: '/assets/js/main.js', expectedStatus: 200, contentType: 'text/javascript' },
     { path: '/assets/images/3D_model_v2.webp', expectedStatus: 200, contentType: 'image/webp' },
     { path: '/assets/images/3D_helmat_model_v2.webp', expectedStatus: 200, contentType: 'image/webp' },
+    { path: '/assets/audio/33_max_verstappen.mp3', expectedStatus: 200, contentType: 'audio/mpeg' },
     { path: '/non-existent-canary-route', expectedStatus: 404, contentType: 'text/html' }
   ];
 
