@@ -26,8 +26,7 @@ import {
 } from './modules/theme.js';
 
 import {
-  initBackgroundCanvas,
-  resizeCanvas
+  initBackgroundCanvas
 } from './modules/canvas.js';
 
 import {
@@ -156,7 +155,6 @@ export {
   formatThemeName,
   showToastNotice,
   initBackgroundCanvas,
-  resizeCanvas,
   initSFX,
   toggleSFX,
   updateSFXButton,

@@ -28,6 +28,8 @@ export const OMARCHY_THEMES = [
   'white'
 ];
 
+export const THEMES = OMARCHY_THEMES;
+
 export let currentTheme = localStorage.getItem('omarchy-site-theme') || 'tokyo-night';
 if (!OMARCHY_THEMES.includes(currentTheme)) {
   currentTheme = 'tokyo-night';

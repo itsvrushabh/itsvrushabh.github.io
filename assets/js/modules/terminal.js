@@ -9,8 +9,7 @@ import { toggleMusic, playMusic, pauseMusic } from "./audio.js";
 import { openShortcutsModal } from "./shortcuts.js";
 import { openCommandPalette } from "./palette.js";
 
-export   // =========================================================================
-  function initTUI() {
+export function initTUI() {
     const tuiContainer = document.getElementById('omarchy-tui');
     if (!tuiContainer) return;
 

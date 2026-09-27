@@ -1,6 +1,6 @@
 import { currentTheme, getThemeFamily } from "./theme.js";
 
-export   function initBackgroundCanvas() {
+export function initBackgroundCanvas() {
     const canvas = document.getElementById('omarchy-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
