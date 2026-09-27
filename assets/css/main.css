@@ -11,18 +11,19 @@
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-display: 'Inter', -apple-system, sans-serif;
 
-  /* Theme mappings from omarchy-themes.css */
-  --bg: var(--t-bg);
-  --bg-deep: var(--t-bg-deep);
-  --surface: var(--t-surface);
-  --surface-2: var(--t-surface-2);
-  --border-subtle: var(--t-border-subtle);
-  --border-strong: var(--t-border-strong);
-  --text: var(--t-text);
-  --text-secondary: var(--t-text-secondary);
-  --text-muted: var(--t-text-muted);
-  --brand: var(--t-brand);
-  --brand-ink: var(--t-brand-ink);
+  /* Theme mappings from omarchy-themes.css with resilient defaults */
+  --bg: var(--t-bg, #1a1b26);
+  --bg-deep: var(--t-bg-deep, #13141c);
+  --surface: var(--t-surface, #13141c);
+  --surface-2: var(--t-surface-2, #24283b);
+  --border-subtle: var(--t-border-subtle, #24283b);
+  --border-strong: var(--t-border-strong, #414868);
+  --text: var(--t-text, #c0caf5);
+  --text-secondary: var(--t-text-secondary, #a9b1d6);
+  --text-muted: var(--t-text-muted, #414868);
+  --brand: var(--t-brand, #9ece6a);
+  --brand-soft: var(--t-brand-soft, rgba(158, 206, 106, 0.15));
+  --brand-ink: var(--t-brand-ink, #0c0e10);
 
   --radius-xs: 4px;
   --radius-sm: 6px;
@@ -218,6 +219,123 @@ kbd {
 .btn-sm {
   padding: 0.35rem 0.75rem;
   font-size: 0.8rem;
+}
+
+/* Component & Button Aliases */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.15rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform var(--transition-fast), filter var(--transition-fast), opacity var(--transition-fast);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn-primary {
+  color: var(--brand-ink);
+  background-color: var(--brand);
+  border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+/* Page Layout & Header Styles */
+.page-container {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+.page-header {
+  margin-bottom: 2.5rem;
+}
+
+.page-title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.page-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 44rem;
+  line-height: 1.6;
+}
+
+/* Page Back Navigation Button */
+.page-back-nav {
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.omarchy-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.omarchy-back-btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  background-color: var(--surface-2);
+  transform: translateX(-3px);
+  box-shadow: 0 0 14px var(--brand-soft);
+}
+
+.omarchy-back-btn svg {
+  transition: transform var(--transition-fast);
+}
+
+.omarchy-back-btn:hover svg {
+  transform: translateX(-2px);
+}
+
+.mb-back {
+  color: var(--brand);
+}
+
+.mb-back:hover {
+  background-color: var(--surface-2);
+  color: var(--brand);
+  transform: translateX(-1px);
 }
 
 /* ==========================================================================

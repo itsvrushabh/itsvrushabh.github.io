@@ -21,6 +21,20 @@
         </svg>
       </a>
 
+      {% if page.url != '/' %}
+      <!-- Back Navigation on subpages -->
+      <a href="{{ '/' | relative_url }}"
+         class="mb-item mb-back"
+         data-ws-name="Back to Home"
+         title="Back to Home Overview" aria-label="Back to Home Overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </a>
+      {% endif %}
+
       <span class="mb-divider" aria-hidden="true"></span>
 
       <!-- 1: Plugins & Code -->
