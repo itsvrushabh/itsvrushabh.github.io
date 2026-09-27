@@ -971,8 +971,8 @@ body.hero-scrolled .hero-3d-card {
   }
 }
 
-.hero-3d-card:hover,
-.hero-3d-card.is-hovered {
+body.hero-scrolled .hero-3d-card:hover,
+body.hero-scrolled .hero-3d-card.is-hovered {
   border-color: color-mix(in srgb, var(--brand) 65%, transparent);
   box-shadow:
     0 35px 70px -15px rgba(0, 0, 0, 0.8),
