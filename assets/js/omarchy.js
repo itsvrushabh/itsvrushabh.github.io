@@ -1522,19 +1522,24 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
         return;
       }
 
-      // Handle navigation keys 1-5
+      // Handle navigation keys 1-5 (Menubar Workspace slots)
       if (['1', '2', '3', '4', '5'].includes(e.key) && document.activeElement.id !== 'tui-input') {
         e.preventDefault();
-        const map = {
-          '1': '#home',
-          '2': '#terminal',
-          '3': '#projects',
-          '4': '#themes',
-          '5': '#dispatches'
+        const navMap = {
+          '1': { section: '#projects', url: '/projects/' },
+          '2': { section: '#dispatches', url: '/blog/' },
+          '3': { section: null, url: '/about/' },
+          '4': { section: '#themes', url: '/#themes' },
+          '5': { section: null, url: '/resume/' }
         };
-        const target = document.querySelector(map[e.key]);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
+        const item = navMap[e.key];
+        if (item) {
+          const target = item.section ? document.querySelector(item.section) : null;
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          } else if (item.url) {
+            window.location.href = item.url;
+          }
         }
         return;
       }
@@ -2918,5 +2923,41 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
     initMemoryProfiler();
     initRaftMesh();
     initShaderSandbox();
+    initMenubarClock();
   });
+
+  // =========================================================================
+  // 18. SYSTEM MENUBAR CLOCK (Live Date & Time in Top Bar)
+  // =========================================================================
+  function initMenubarClock() {
+    const clockEl = document.getElementById('menubar-datetime');
+    if (!clockEl) return;
+    const dateEl = clockEl.querySelector('.mb-clock-date');
+    const timeEl = clockEl.querySelector('.mb-clock-time');
+
+    function updateTime() {
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
+      });
+      const timeStr = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+
+      if (dateEl && timeEl) {
+        dateEl.textContent = dateStr;
+        timeEl.textContent = timeStr;
+      } else {
+        clockEl.textContent = `${dateStr} · ${timeStr}`;
+      }
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+  }
 })();
