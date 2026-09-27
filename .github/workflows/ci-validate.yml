@@ -25,9 +25,13 @@ jobs:
 
       - name: Verify JavaScript Syntax
         run: |
-          echo "Verifying omarchy.js syntax..."
+          echo "Verifying JavaScript modules syntax..."
+          node --check assets/js/main.js
           node --check assets/js/omarchy.js
-          echo "✓ JavaScript syntax valid."
+          for f in assets/js/modules/*.js; do
+            node --check "$f"
+          done
+          echo "✓ All JavaScript modules syntax valid."
 
       - name: Validate JSON Data Files
         run: |
