@@ -80,6 +80,16 @@ export function initShortcuts() {
       return;
     }
 
+    // Handle 'H' / 'h' or 'V' / 'v' to toggle 3D helmet visor reveal (unless in terminal input)
+    if ((e.key === 'h' || e.key === 'H' || e.key === 'v' || e.key === 'V') && document.activeElement.id !== 'tui-input' && !gPressed) {
+      const viewport = document.getElementById('hero-3d-viewport');
+      if (viewport) {
+        e.preventDefault();
+        viewport.click();
+        return;
+      }
+    }
+
     // Handle 'T' / 't' for theme cycle (unless in terminal input)
     if ((e.key === 't' || e.key === 'T') && document.activeElement.id !== 'tui-input') {
       e.preventDefault();

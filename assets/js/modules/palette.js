@@ -1,13 +1,14 @@
 /**
  * OMARCHY COMMAND PALETTE (Wofi / Ctrl+K / Super+Space)
  */
-import { setTheme } from './theme.js';
+import { setTheme, cycleTheme } from './theme.js';
 import { toggleSFX, playKeyClick } from './sfx.js';
 import { toggleMusic, playMusic, pauseMusic } from './audio.js';
 
 export const PALETTE_COMMANDS = [
-  // Navigation
+  // Navigation & 3D Hero
   { id: 'nav-home', label: 'Go to Home / Overview', category: 'Navigation', icon: '⚡', action: () => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' }) },
+  { id: 'hero-reveal', label: 'Toggle 3D Racing Helmet Visor Reveal (Press H or V)', category: 'Media', icon: '🪖', action: () => document.getElementById('hero-3d-viewport')?.click() },
   { id: 'nav-arch', label: 'Distributed Systems Architecture Explorer', category: 'Navigation', icon: '🏗️', action: () => document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' }) },
   { id: 'nav-mem', label: 'Rust Zero-Copy Memory & Allocation Profiler', category: 'Navigation', icon: '🧠', action: () => document.getElementById('memory-profiler')?.scrollIntoView({ behavior: 'smooth' }) },
   { id: 'nav-raft', label: 'Distributed Raft Consensus & Gossip Mesh', category: 'Navigation', icon: '🛰️', action: () => document.getElementById('raft-mesh')?.scrollIntoView({ behavior: 'smooth' }) },
@@ -16,7 +17,7 @@ export const PALETTE_COMMANDS = [
   { id: 'wasm-run', label: 'Run Active Rust Code in WebAssembly', category: 'Navigation', icon: '🦀', action: () => document.getElementById('run-wasm-btn')?.click() },
   { id: 'nav-cockpit', label: 'Open The Cockpit & Neovim', category: 'Navigation', icon: '🪟', action: () => document.getElementById('cockpit')?.scrollIntoView({ behavior: 'smooth' }) },
   { id: 'nav-projects', label: 'Explore Plugins & Projects', category: 'Navigation', icon: '📦', action: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) },
-  { id: 'nav-themes', label: 'Cycle Theme [ T ] (22 Palettes)', category: 'Theme', icon: '🎨', action: () => { import('./theme.js').then(m => m.cycleTheme()); } },
+  { id: 'nav-themes', label: 'Cycle Theme [ T ] (22 Palettes)', category: 'Theme', icon: '🎨', action: () => cycleTheme() },
   { id: 'nav-blog', label: 'Read Technical Dispatches', category: 'Navigation', icon: '📰', action: () => { window.location.href = '/blog/'; } },
   { id: 'nav-about', label: 'View Omarchy Manual & Philosophy', category: 'Navigation', icon: '📖', action: () => { window.location.href = '/about/'; } },
   { id: 'nav-resume', label: 'View Driver Resume / CV', category: 'Navigation', icon: '📄', action: () => { window.location.href = '/resume/'; } },

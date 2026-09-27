@@ -19,17 +19,6 @@ export function initBackgroundCanvas() {
     let borderStrong = 'rgba(255, 255, 255, 0.2)';
     let accentColor = '#9ece6a';
     let bgColor = '#1a1b26';
-
-    // Theme family classifier: maps all 22 official themes to 6 visual families
-    function getThemeFamily(t) {
-      if (['hackerman', 'retro-82'].includes(t)) return 'matrix';
-      if (['gruvbox', 'everforest', 'miasma', 'ristretto'].includes(t)) return 'contour';
-      if (['matte-black', 'vantablack', 'solitude'].includes(t)) return 'sonar';
-      if (['nord', 'catppuccin-latte', 'flexoki-light', 'white', 'lumon'].includes(t)) return 'frost';
-      if (['kanagawa', 'osaka-jade'].includes(t)) return 'wave';
-      return 'neon'; // tokyo-night, catppuccin, rose-pine, ethereal, last-horizon, lupine
-    }
-
     let activeFamily = getThemeFamily(currentTheme);
 
     // Audio & Beat Tracking State
