@@ -16,16 +16,16 @@ export const PALETTE_COMMANDS = [
   { id: 'wasm-run', label: 'Run Active Rust Code in WebAssembly', category: 'Navigation', icon: '🦀', action: () => document.getElementById('run-wasm-btn')?.click() },
   { id: 'nav-cockpit', label: 'Open The Cockpit & Neovim', category: 'Navigation', icon: '🪟', action: () => document.getElementById('cockpit')?.scrollIntoView({ behavior: 'smooth' }) },
   { id: 'nav-projects', label: 'Explore Plugins & Projects', category: 'Navigation', icon: '📦', action: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) },
-  { id: 'nav-themes', label: 'Pick a Theme (22 Palettes)', category: 'Navigation', icon: '🎨', action: () => document.getElementById('themes')?.scrollIntoView({ behavior: 'smooth' }) },
+  { id: 'nav-themes', label: 'Cycle Theme [ T ] (22 Palettes)', category: 'Theme', icon: '🎨', action: () => { import('./theme.js').then(m => m.cycleTheme()); } },
   { id: 'nav-blog', label: 'Read Technical Dispatches', category: 'Navigation', icon: '📰', action: () => { window.location.href = '/blog/'; } },
   { id: 'nav-about', label: 'View Omarchy Manual & Philosophy', category: 'Navigation', icon: '📖', action: () => { window.location.href = '/about/'; } },
   { id: 'nav-resume', label: 'View Driver Resume / CV', category: 'Navigation', icon: '📄', action: () => { window.location.href = '/resume/'; } },
   { id: 'nav-contact', label: 'Get in Touch / Contact', category: 'Navigation', icon: '✉️', action: () => { window.location.href = '/contact/'; } },
 
   // Music
-  { id: 'music-toggle', label: 'Toggle Background Music (Kevin Koontz / Max Verstappen)', category: 'Media', icon: '🎵', action: () => toggleMusic() },
-  { id: 'music-play', label: 'Play Omarchy Soundtrack', category: 'Media', icon: '▶️', action: () => playMusic() },
-  { id: 'music-pause', label: 'Pause Omarchy Soundtrack', category: 'Media', icon: '⏸️', action: () => pauseMusic() },
+  { id: 'music-toggle', label: 'Toggle Background Music (33 Max Verstappen - Press M)', category: 'Media', icon: '🏎️', action: () => toggleMusic() },
+  { id: 'music-play', label: 'Play 33 Max Verstappen', category: 'Media', icon: '▶️', action: () => playMusic() },
+  { id: 'music-pause', label: 'Pause Background Music', category: 'Media', icon: '⏸️', action: () => pauseMusic() },
 
   // Themes
   { id: 'theme-tokyo', label: 'Theme: Tokyo Night (Default)', category: 'Theme', icon: '🌙', action: () => setTheme('tokyo-night', true) },

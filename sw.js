@@ -12,6 +12,7 @@ const PRECACHE_ASSETS = [
   '/resume/',
   '/contact/',
   '/assets/css/main.css',
+  '/assets/css/omarchy-themes.css',
   '/assets/css/syntax.css',
   '/assets/js/main.js',
   '/assets/js/omarchy.js',

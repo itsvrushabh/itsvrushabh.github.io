@@ -253,14 +253,14 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
         const sub = (args && args[0]) ? args[0].toLowerCase() : '';
         if (sub === 'play') {
           playMusic();
-          return '<span class="text-brand">▶ Playing: Kevin Koontz - We Can Fix Everything [Omarchy OST]</span>';
+          return '<span class="text-brand">▶ Playing: 33 Max Verstappen – Carte Blanq · Maxx Power 🏎️</span>';
         } else if (sub === 'pause' || sub === 'stop') {
           pauseMusic();
           return '<span class="text-muted">❚❚ Paused background music.</span>';
         } else {
           const isPlaying = toggleMusic();
           return isPlaying
-            ? '<span class="text-brand">▶ Sound on: Kevin Koontz - We Can Fix Everything [Omarchy OST]</span>'
+            ? '<span class="text-brand">▶ Sound on: 33 Max Verstappen – Carte Blanq · Maxx Power 🏎️</span>'
             : '<span class="text-muted">❚❚ Sound off: Background music paused.</span>';
         }
       },

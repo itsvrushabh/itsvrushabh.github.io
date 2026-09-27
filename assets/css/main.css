@@ -1618,53 +1618,7 @@ body.hero-scrolled .hero-helmet-badge {
   line-height: 1.6;
 }
 
-.themes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 0.65rem;
-}
 
-.theme-chip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.65rem 0.85rem;
-  background-color: var(--surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  color: var(--text-secondary);
-  transition: all var(--transition-fast);
-  text-align: left;
-}
-
-.theme-chip:hover {
-  background-color: var(--surface-2);
-  border-color: var(--border-strong);
-  color: var(--text);
-  transform: translateY(-1px);
-}
-
-.theme-chip[aria-pressed="true"],
-.theme-chip.active {
-  background-color: var(--surface-2);
-  border-color: var(--brand);
-  color: var(--brand);
-  box-shadow: 0 0 0 1px var(--brand);
-}
-
-.theme-name {
-  font-weight: 500;
-}
-
-.theme-swatch {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
 
 /* ==========================================================================
    PROJECTS SECTION (Plugins & Software)
