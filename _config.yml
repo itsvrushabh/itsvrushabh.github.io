@@ -57,3 +57,6 @@ exclude:
   - Cargo.lock
   - .github
   - README.md
+  - tests
+  - package.json
+  - package-lock.json

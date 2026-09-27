@@ -1,7 +1,9 @@
-name: Deploy Jekyll site to Pages
+name: Test & Deploy to GitHub Pages
 
 on:
   push:
+    branches: ["main"]
+  pull_request:
     branches: ["main"]
   workflow_dispatch:
 
@@ -11,18 +13,115 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
+# Allow one concurrent deployment, skip in-progress deployment runs
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  build:
-    name: Build Telemetry Assets
+  test-assets:
+    name: Lint & Validate Assets & Data
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verify JavaScript Syntax
+        run: |
+          echo "Verifying JavaScript modules syntax..."
+          node --check assets/js/main.js
+          node --check assets/js/omarchy.js
+          for f in assets/js/modules/*.js; do
+            node --check "$f"
+          done
+          node --check sw.js
+          node --check tests/test-site.js
+          echo "✓ All JavaScript files syntax valid."
+
+      - name: Validate JSON Data Files
+        run: |
+          echo "Validating JSON data files in _data/..."
+          node -e "
+          const fs = require('fs');
+          const path = require('path');
+          const dataDir = '_data';
+          if (fs.existsSync(dataDir)) {
+            fs.readdirSync(dataDir).forEach(f => {
+              if (f.endsWith('.json')) {
+                JSON.parse(fs.readFileSync(path.join(dataDir, f), 'utf8'));
+                console.log('✓ ' + f + ' is valid JSON');
+              }
+            });
+          }
+          "
+
+  test-rust:
+    name: Build & Verify Rust Sync Tool
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "tools/portfolio-sync -> target"
+
+      - name: Cargo Check
+        run: |
+          cargo check --workspace --all-targets
+
+  test-website:
+    name: Build & Test Website Integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: false
+
+      - name: Install Jekyll & Core Plugins
+        run: |
+          gem install jekyll jekyll-feed jekyll-sitemap jekyll-seo-tag kramdown rouge
+
+      - name: Build Jekyll Site
+        run: |
+          jekyll build --strict_front_matter --trace
+
+      - name: Run Automated Website Pre-Deployment Test Suite
+        run: |
+          node tests/test-site.js
+
+  build:
+    name: Build Telemetry Assets
+    needs: [test-assets, test-rust, test-website]
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -32,6 +131,10 @@ jobs:
         with:
           source: ./
           destination: ./_site
+
+      - name: Verify Built Pages Artifact
+        run: |
+          node tests/test-site.js
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -43,6 +146,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

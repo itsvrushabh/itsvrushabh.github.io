@@ -118,6 +118,15 @@ jekyll build
 python3 -m http.server 4000 -d _site
 ```
 
+### Pre-Deployment Test Suite
+
+Run the automated route, asset, Liquid template, and live HTTP server test suite:
+
+```bash
+jekyll build
+npm test
+```
+
 ---
 
 ## 📜 License
