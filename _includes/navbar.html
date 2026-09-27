@@ -1,8 +1,8 @@
 <!-- ================================================================
      OMARCHY MENUBAR — Sleek Minimal OS Top Bar
-     Left:   🏠  1  2  3  4  5
-     Center: Date & Time (Live ticking)
-     Right:  Themes · Songs · Git · Contact (Icons only)
+     Left:   🏠  1  2  3  4  5 (Hyprland Workspaces with HUD)
+     Center: Date & Time (Clickable for terminal cal & uptime)
+     Right:  Themes · Songs (with Live EQ) · Git · Contact (Icons only)
      ================================================================ -->
 <header class="site-header" role="banner">
   <div class="menubar-inner">
@@ -12,6 +12,7 @@
       <!-- Simple Home Icon -->
       <a href="{{ '/' | relative_url }}"
          class="mb-item mb-home {% if page.url == '/' %}active{% endif %}"
+         data-ws-name="Home Overview"
          title="Home" aria-label="Home">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -25,6 +26,7 @@
       <!-- 1: Plugins & Code -->
       <a href="{{ '/projects/' | relative_url }}"
          class="mb-item mb-num {% if page.url contains '/projects/' %}active{% endif %}"
+         data-ws-num="1" data-ws-name="Plugins &amp; Code"
          title="1: Plugins &amp; Code" aria-label="1: Plugins and Code">
         <span>1</span>
       </a>
@@ -32,6 +34,7 @@
       <!-- 2: Dispatches -->
       <a href="{{ '/blog/' | relative_url }}"
          class="mb-item mb-num {% if page.url contains '/blog/' %}active{% endif %}"
+         data-ws-num="2" data-ws-name="Dispatches / Blog"
          title="2: Dispatches" aria-label="2: Dispatches">
         <span>2</span>
       </a>
@@ -39,6 +42,7 @@
       <!-- 3: Manual -->
       <a href="{{ '/about/' | relative_url }}"
          class="mb-item mb-num {% if page.url contains '/about/' %}active{% endif %}"
+         data-ws-num="3" data-ws-name="Manual &amp; Philosophy"
          title="3: Manual" aria-label="3: Manual">
         <span>3</span>
       </a>
@@ -46,6 +50,7 @@
       <!-- 4: Themes -->
       <a href="{{ '/#themes' | relative_url }}"
          class="mb-item mb-num"
+         data-ws-num="4" data-ws-name="22 Color Themes"
          title="4: Themes" aria-label="4: Themes">
         <span>4</span>
       </a>
@@ -53,17 +58,33 @@
       <!-- 5: Resume -->
       <a href="{{ '/resume/' | relative_url }}"
          class="mb-item mb-num {% if page.url contains '/resume/' %}active{% endif %}"
+         data-ws-num="5" data-ws-name="Systems Driver Resume"
          title="5: Resume" aria-label="5: Resume">
         <span>5</span>
       </a>
     </nav>
 
-    <!-- ── MIDDLE: Live Date & Time ── -->
+    <!-- ── MIDDLE: Live Date & Time + Terminal Calendar Popover ── -->
     <div class="menubar-center" aria-live="polite" aria-atomic="true">
-      <div id="menubar-datetime" class="mb-clock" title="System Date &amp; Time">
+      <button id="menubar-datetime" class="mb-clock" title="Click to view System Calendar &amp; Uptime" aria-label="System Date &amp; Time" aria-expanded="false">
         <span class="mb-clock-date"></span>
         <span class="mb-clock-sep">·</span>
         <span class="mb-clock-time"></span>
+      </button>
+
+      <!-- Terminal Calendar Popover (cal) -->
+      <div id="menubar-calendar-popover" class="mb-calendar-popover" aria-hidden="true">
+        <div class="mb-cal-header">
+          <span class="mb-cal-title" id="cal-month-year"></span>
+          <span class="mb-cal-uptime" id="cal-uptime">up 0m</span>
+        </div>
+        <div class="mb-cal-grid" id="cal-days-grid">
+          <!-- Calendar matrix injected by JS -->
+        </div>
+        <div class="mb-cal-footer">
+          <span>OMARCHY ARCH/SYS</span>
+          <span class="mb-cal-time-live" id="cal-time-live"></span>
+        </div>
       </div>
     </div>
 
@@ -85,7 +106,7 @@
         </svg>
       </button>
 
-      <!-- Songs (Icon only) -->
+      <!-- Songs (Icon only with live animated equalizer) -->
       <button id="header-music-toggle"
               class="mb-item mb-action"
               title="Songs: Toggle Background Music (M)"
@@ -104,6 +125,12 @@
           <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
           <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
         </svg>
+        <!-- Mini animated equalizer bars in topbar -->
+        <span class="mb-eq-bars" id="header-eq-bars" aria-hidden="true">
+          <span class="mb-eq-bar"></span>
+          <span class="mb-eq-bar"></span>
+          <span class="mb-eq-bar"></span>
+        </span>
       </button>
 
       <!-- Git (Icon only) -->
@@ -149,5 +176,11 @@
       </button>
     </div>
 
+  </div>
+
+  <!-- Floating Hyprland-Style Workspace Tooltip HUD -->
+  <div id="mb-workspace-hud" class="mb-workspace-hud" aria-hidden="true">
+    <span class="hud-num">[1]</span>
+    <span class="hud-name">Plugins &amp; Code</span>
   </div>
 </header>

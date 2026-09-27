@@ -19,10 +19,18 @@
   <!-- Ambient Music Player (Kevin Koontz - We Can Fix Everything) -->
   {% include music-player.html %}
 
-  <!-- Floating Shortcuts Indicator Pill -->
-  <button data-open-shortcuts class="floating-shortcut-pill" aria-label="Open keyboard shortcuts cheatsheet">
-    <kbd>?</kbd> <span>Shortcuts</span> &middot; <kbd>T</kbd> <span>Theme</span>
-  </button>
+  <!-- Floating Bottom-Right Status Tray: HW Telemetry & Shortcuts -->
+  <div class="floating-status-tray">
+    <div class="floating-hw-pill" id="floating-hw-pill" title="Hardware Render Engine &amp; Performance Telemetry">
+      <span class="hw-dot" aria-hidden="true"></span>
+      <span id="hw-fps" class="hw-val">60 FPS</span>
+      <span class="hw-sep" aria-hidden="true">&middot;</span>
+      <span id="hw-renderer" class="hw-val">Canvas2D</span>
+    </div>
+    <button data-open-shortcuts class="floating-shortcut-pill" aria-label="Open keyboard shortcuts cheatsheet">
+      <kbd>?</kbd> <span>Shortcuts</span> &middot; <kbd>T</kbd> <span>Theme</span>
+    </button>
+  </div>
 
   <!-- Live Toast Notification Container -->
   <div id="omarchy-toast" class="omarchy-toast" aria-live="polite"></div>

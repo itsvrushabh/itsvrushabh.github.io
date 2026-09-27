@@ -342,6 +342,14 @@ kbd {
   border-radius: var(--radius-xs, 4px);
   background-color: color-mix(in srgb, var(--surface) 40%, transparent);
   border: 1px solid color-mix(in srgb, var(--border-subtle) 50%, transparent);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mb-clock:hover, .mb-clock.active {
+  color: var(--text);
+  background-color: var(--surface-2);
+  border-color: var(--brand);
 }
 
 .mb-clock-sep {
@@ -351,6 +359,183 @@ kbd {
 .mb-clock-time {
   color: var(--text);
   font-weight: 600;
+}
+
+/* ── Center Calendar Popover (cal) ── */
+.menubar-center {
+  position: relative;
+}
+
+.mb-calendar-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  width: 250px;
+  background-color: color-mix(in srgb, var(--bg) 95%, black);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm, 6px);
+  padding: 0.85rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 15px color-mix(in srgb, var(--brand) 15%, transparent);
+  backdrop-filter: blur(16px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  z-index: 110;
+  font-family: var(--font-mono);
+}
+
+.mb-calendar-popover.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.mb-cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.mb-cal-uptime {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.mb-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.cal-header-cell {
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 2px 0;
+  font-size: 0.65rem;
+}
+
+.cal-day-cell {
+  padding: 3px 0;
+  color: var(--text-secondary);
+  border-radius: 3px;
+  transition: background 0.12s;
+}
+
+.cal-day-cell.empty {
+  opacity: 0;
+}
+
+.cal-day-cell:hover:not(.empty) {
+  background-color: var(--surface-2);
+  color: var(--text);
+}
+
+.cal-day-cell.cal-today {
+  background-color: var(--brand);
+  color: var(--bg);
+  font-weight: 700;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--brand) 60%, transparent);
+}
+
+.mb-cal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.6rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.mb-cal-time-live {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+/* ── Workspace Floating Tooltip HUD ── */
+.mb-workspace-hud {
+  position: absolute;
+  top: calc(var(--nav-h) + 6px);
+  left: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.65rem;
+  background-color: color-mix(in srgb, var(--bg) 94%, black);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs, 4px);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 105;
+}
+
+.mb-workspace-hud.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mb-workspace-hud .hud-num {
+  color: var(--brand);
+  font-weight: 700;
+}
+
+.mb-workspace-hud .hud-name {
+  color: var(--text-secondary);
+}
+
+/* ── Mini Topbar Animated Equalizer Bars ── */
+.mb-eq-bars {
+  display: none;
+  align-items: flex-end;
+  gap: 1.5px;
+  height: 11px;
+  margin-left: 2px;
+}
+
+.mb-eq-bars.active,
+.playing .mb-eq-bars {
+  display: inline-flex;
+}
+
+.mb-eq-bar {
+  width: 2px;
+  height: 3px;
+  background-color: var(--brand);
+  border-radius: 1px;
+  transition: height 0.08s ease;
+  animation: mbEqJump 0.8s ease-in-out infinite alternate;
+}
+
+.mb-eq-bar:nth-child(1) { animation-delay: 0.0s; height: 5px; }
+.mb-eq-bar:nth-child(2) { animation-delay: 0.25s; height: 10px; }
+.mb-eq-bar:nth-child(3) { animation-delay: 0.15s; height: 7px; }
+
+@keyframes mbEqJump {
+  0%   { height: 3px; }
+  50%  { height: 11px; }
+  100% { height: 4px; }
 }
 
 /* ── RIGHT: System Controls (Themes, Songs, Git, Contact) ── */
@@ -1223,11 +1408,60 @@ kbd {
 /* ==========================================================================
    FLOATING SHORTCUT PILL & TOAST
    ========================================================================== */
-.floating-shortcut-pill {
+/* ==========================================================================
+   FLOATING STATUS TRAY (HW Telemetry & Shortcuts Pill)
+   ========================================================================== */
+.floating-status-tray {
   position: fixed;
   bottom: 1.25rem;
   right: 1.25rem;
   z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.floating-hw-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background-color: color-mix(in srgb, var(--surface) 85%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-strong);
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  user-select: none;
+}
+
+.hw-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  animation: hwDotPulse 2s infinite ease-in-out;
+}
+
+@keyframes hwDotPulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+.hw-sep {
+  opacity: 0.4;
+}
+
+.hw-val {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.floating-shortcut-pill {
+  position: static;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -1248,6 +1482,12 @@ kbd {
   border-color: var(--brand);
   color: var(--text);
   transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .floating-hw-pill {
+    display: none;
+  }
 }
 
 .omarchy-toast {
@@ -2006,13 +2246,65 @@ kbd {
   100% { height: 14px; }
 }
 
+/* Right Controls: Volume + Track Switcher */
+.music-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 0.5rem;
+  border-left: 1px solid var(--border-subtle);
+}
+
+.music-vol-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.music-vol-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.music-vol-btn:hover {
+  color: var(--brand);
+}
+
+.music-vol-bar {
+  width: 38px;
+  height: 3px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--surface-2);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.music-vol-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand);
+  cursor: pointer;
+}
+
 /* Track Switcher */
 .music-track-switcher {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  padding: 0 0.5rem;
-  border-left: 1px solid var(--border-subtle);
 }
 
 .music-track-btn {

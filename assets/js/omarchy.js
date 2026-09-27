@@ -271,8 +271,35 @@
       initFamilyData();
     }
 
+    let fpsFrames = 0;
+    let lastFpsTime = performance.now();
+    const fpsEl = document.getElementById('hw-fps');
+
     function render() {
       ctx.clearRect(0, 0, width, height);
+
+      // Real-time FPS telemetry
+      fpsFrames++;
+      const nowMs = performance.now();
+      if (nowMs - lastFpsTime >= 500) {
+        const currentFps = Math.round((fpsFrames * 1000) / (nowMs - lastFpsTime));
+        if (fpsEl) fpsEl.textContent = `${Math.min(120, currentFps)} FPS`;
+        fpsFrames = 0;
+        lastFpsTime = nowMs;
+      }
+
+      // Sync topbar mini equalizer heights to real audio when playing
+      if (window.isAudioPlaying) {
+        const topEqBars = document.querySelectorAll('#header-eq-bars .mb-eq-bar');
+        if (topEqBars.length === 3) {
+          const h1 = 3 + Math.round((audioBoost || 0.2) * 8);
+          const h2 = 4 + Math.round((midBoost || 0.3) * 7);
+          const h3 = 3 + Math.round((trebleBoost || 0.2) * 8);
+          topEqBars[0].style.height = `${h1}px`;
+          topEqBars[1].style.height = `${h2}px`;
+          topEqBars[2].style.height = `${h3}px`;
+        }
+      }
 
       // =======================================================================
       // A. REAL-TIME MUSIC BEAT EXTRACTION & SYNCHRONIZATION
@@ -1158,6 +1185,8 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
     <div class="tui-spec-row"><span class="spec-label">Terminal:</span><span class="spec-val">foot / alacritty (vi-mode bindings)</span></div>
     <div class="tui-spec-row"><span class="spec-label">Editor:</span><span class="spec-val">Neovim (rust-analyzer LSP)</span></div>
     <div class="tui-spec-row"><span class="spec-label">Theme:</span><span class="spec-val text-brand">${currentTheme}</span></div>
+    <div class="tui-spec-row"><span class="spec-label">Uptime:</span><span class="spec-val">${getUptimeString()}</span></div>
+    <div class="tui-spec-row"><span class="spec-label">CLI Curl:</span><span class="spec-val text-brand">curl -sL itsvrushabh.github.io/cli</span></div>
     <div class="tui-spec-row"><span class="spec-label">Architect:</span><span class="spec-val">Vrushabh Deshmukh</span></div>
     <div class="tui-spec-row"><span class="spec-label">Philosophy:</span><span class="spec-val">Zero-Allocation Concurrency &middot; Omakase Defaults</span></div>
     <div class="tui-spec-colors">
@@ -1673,9 +1702,18 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
       } catch (e) {
         console.warn('Web Audio API not supported or restricted:', e);
       }
-      audioInstance.loop = true;
+      audioInstance.loop = false;
       audioInstance.preload = 'metadata';
       audioInstance.src = TRACKS[currentTrack].src;
+
+      // Auto-play next track when track finishes
+      audioInstance.addEventListener('ended', () => {
+        const trackKeys = Object.keys(TRACKS);
+        const nextIdx = (trackKeys.indexOf(currentTrack) + 1) % trackKeys.length;
+        const nextId = trackKeys[nextIdx];
+        switchTrack(nextId);
+        playMusic();
+      });
 
       audioInstance.addEventListener('error', () => {
         console.warn('Audio load failed. Retrying without crossOrigin.');
@@ -1686,6 +1724,8 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
       const seek = document.getElementById('music-seek');
       const currTimeEl = document.getElementById('music-curr-time');
       const durationEl = document.getElementById('music-duration');
+      const volBar = document.getElementById('music-volume');
+      const volBtn = document.getElementById('music-vol-btn');
 
       audioInstance.addEventListener('timeupdate', () => {
         if (audioInstance.duration) {
@@ -1712,6 +1752,27 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
           seek.dataset.seeking = '';
           if (audioInstance.duration) {
             audioInstance.currentTime = (seek.value / 100) * audioInstance.duration;
+          }
+        });
+      }
+
+      if (volBar) {
+        audioInstance.volume = parseFloat(volBar.value) || 0.8;
+        volBar.addEventListener('input', () => {
+          audioInstance.volume = parseFloat(volBar.value);
+        });
+      }
+
+      if (volBtn) {
+        volBtn.addEventListener('click', () => {
+          if (audioInstance.volume > 0) {
+            audioInstance.dataset.savedVol = audioInstance.volume;
+            audioInstance.volume = 0;
+            if (volBar) volBar.value = 0;
+          } else {
+            const restored = parseFloat(audioInstance.dataset.savedVol) || 0.8;
+            audioInstance.volume = restored;
+            if (volBar) volBar.value = restored;
           }
         });
       }
@@ -1807,12 +1868,14 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
     const iconPause = document.getElementById('music-overlay-icon-pause');
     const headSoundOff = document.getElementById('header-sound-off-icon');
     const headSoundOn = document.getElementById('header-sound-on-icon');
+    const headerEqBars = document.getElementById('header-eq-bars');
 
     if (playerEl) playerEl.classList.toggle('playing', playing);
     if (iconPlay) iconPlay.style.display = playing ? 'none' : 'block';
     if (iconPause) iconPause.style.display = playing ? 'block' : 'none';
     if (headSoundOff) headSoundOff.style.display = playing ? 'none' : 'block';
     if (headSoundOn) headSoundOn.style.display = playing ? 'block' : 'none';
+    if (headerEqBars) headerEqBars.classList.toggle('active', playing);
     if (!playing) {
       document.querySelectorAll('#omarchy-music-player .eq-bar').forEach(bar => {
         bar.style.height = '3px';
@@ -2553,7 +2616,8 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
 
     const snippets = {
       cargo: 'cargo install --git https://github.com/itsvrushabh/itsvrushabh.github.io',
-      curl: 'curl -sL https://itsvrushabh.github.io/omarchy.sh | sh'
+      curl: 'curl -sL https://itsvrushabh.github.io/omarchy.sh | sh',
+      cli: 'curl -sL https://itsvrushabh.github.io/cli'
     };
 
     tabs.forEach(tab => {
@@ -2924,11 +2988,24 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
     initRaftMesh();
     initShaderSandbox();
     initMenubarClock();
+    initMenubarCalendar();
+    initWorkspaceHUD();
   });
 
   // =========================================================================
   // 18. SYSTEM MENUBAR CLOCK (Live Date & Time in Top Bar)
   // =========================================================================
+  const siteStartTime = Date.now();
+
+  function getUptimeString() {
+    const s = Math.floor((Date.now() - siteStartTime) / 1000);
+    const m = Math.floor(s / 60);
+    const h = Math.floor(m / 60);
+    if (h > 0) return `${h}h ${m % 60}m ${s % 60}s`;
+    if (m > 0) return `${m}m ${s % 60}s`;
+    return `${s}s (active session)`;
+  }
+
   function initMenubarClock() {
     const clockEl = document.getElementById('menubar-datetime');
     if (!clockEl) return;
@@ -2959,5 +3036,137 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
 
     updateTime();
     setInterval(updateTime, 1000);
+  }
+
+  // =========================================================================
+  // 19. TERMINAL CALENDAR POPOVER & UPTIME (cal)
+  // =========================================================================
+  function initMenubarCalendar() {
+    const trigger = document.getElementById('menubar-datetime');
+    const popover = document.getElementById('menubar-calendar-popover');
+    if (!trigger || !popover) return;
+
+    const monthYearEl = document.getElementById('cal-month-year');
+    const uptimeEl = document.getElementById('cal-uptime');
+    const gridEl = document.getElementById('cal-days-grid');
+    const timeLiveEl = document.getElementById('cal-time-live');
+
+    function renderCalendar() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const todayDate = now.getDate();
+
+      const monthName = now.toLocaleString('en-US', { month: 'long' });
+      if (monthYearEl) monthYearEl.textContent = `${monthName} ${year}`;
+
+      const uptimeSec = Math.floor((Date.now() - siteStartTime) / 1000);
+      const uptimeMins = Math.floor(uptimeSec / 60);
+      const uptimeHours = Math.floor(uptimeMins / 60);
+      if (uptimeEl) {
+        uptimeEl.textContent = uptimeHours > 0 ? `up ${uptimeHours}h ${uptimeMins % 60}m` : `up ${Math.max(1, uptimeMins)}m`;
+      }
+
+      if (timeLiveEl) {
+        timeLiveEl.textContent = now.toLocaleTimeString('en-US', { hour12: false });
+      }
+
+      if (gridEl && (!gridEl.dataset.renderedMonth || gridEl.dataset.renderedMonth !== `${year}-${month}`)) {
+        gridEl.dataset.renderedMonth = `${year}-${month}`;
+        gridEl.innerHTML = '';
+
+        const dayHeaders = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+        dayHeaders.forEach(d => {
+          const h = document.createElement('div');
+          h.className = 'cal-header-cell';
+          h.textContent = d;
+          gridEl.appendChild(h);
+        });
+
+        const firstDayIdx = new Date(year, month, 1).getDay();
+        const totalDays = new Date(year, month + 1, 0).getDate();
+
+        for (let e = 0; e < firstDayIdx; e++) {
+          const empty = document.createElement('div');
+          empty.className = 'cal-day-cell empty';
+          gridEl.appendChild(empty);
+        }
+
+        for (let day = 1; day <= totalDays; day++) {
+          const cell = document.createElement('div');
+          cell.className = 'cal-day-cell';
+          if (day === todayDate) cell.classList.add('cal-today');
+          cell.textContent = day;
+          gridEl.appendChild(cell);
+        }
+      }
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = popover.classList.toggle('open');
+      trigger.classList.toggle('active', isOpen);
+      trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (isOpen) renderCalendar();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!popover.contains(e.target) && !trigger.contains(e.target)) {
+        popover.classList.remove('open');
+        trigger.classList.remove('active');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popover.classList.contains('open')) {
+        popover.classList.remove('open');
+        trigger.classList.remove('active');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    setInterval(() => {
+      if (popover.classList.contains('open')) {
+        const now = new Date();
+        const uptimeSec = Math.floor((Date.now() - siteStartTime) / 1000);
+        const uptimeMins = Math.floor(uptimeSec / 60);
+        const uptimeHours = Math.floor(uptimeMins / 60);
+        if (uptimeEl) {
+          uptimeEl.textContent = uptimeHours > 0 ? `up ${uptimeHours}h ${uptimeMins % 60}m` : `up ${Math.max(1, uptimeMins)}m`;
+        }
+        if (timeLiveEl) {
+          timeLiveEl.textContent = now.toLocaleTimeString('en-US', { hour12: false });
+        }
+      }
+    }, 1000);
+  }
+
+  // =========================================================================
+  // 20. HYPRLAND WORKSPACE TOOLTIP HUD
+  // =========================================================================
+  function initWorkspaceHUD() {
+    const hud = document.getElementById('mb-workspace-hud');
+    if (!hud) return;
+    const hudNum = hud.querySelector('.hud-num');
+    const hudName = hud.querySelector('.hud-name');
+
+    const items = document.querySelectorAll('.menubar-left .mb-item');
+    items.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        const num = item.dataset.wsNum;
+        const name = item.dataset.wsName;
+        if (hudNum) hudNum.textContent = num ? `[${num}]` : `[~]`;
+        if (hudName) hudName.textContent = name || 'Workspace';
+
+        const rect = item.getBoundingClientRect();
+        hud.style.left = `${Math.max(8, rect.left)}px`;
+        hud.classList.add('visible');
+      });
+
+      item.addEventListener('mouseleave', () => {
+        hud.classList.remove('visible');
+      });
+    });
   }
 })();

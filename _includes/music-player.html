@@ -1,6 +1,7 @@
 <!-- ==========================================
      OMARCHY AMBIENT MUSIC PLAYER
      Tracks: Kevin Koontz / 33 Max Verstappen
+     Features: Seek Scrubber, Volume Slider, Auto-Next, Multi-Track
      ========================================== -->
 <div id="omarchy-music-player" class="omarchy-music-card" aria-label="Music Player">
   <!-- Album Art & Play/Pause Trigger -->
@@ -30,14 +31,27 @@
     </div>
   </div>
 
-  <!-- Track Switcher: Kevin Koontz / Max Verstappen -->
-  <div class="music-track-switcher" aria-label="Switch Track">
-    <button class="music-track-btn active" data-track="kevin" title="Kevin Koontz - We Can Fix Everything" aria-pressed="true">
-      <span class="track-btn-icon">🎵</span>
-    </button>
-    <button class="music-track-btn" data-track="max" title="33 Max Verstappen - Carte Blanq · Maxx Power" aria-pressed="false">
-      <span class="track-btn-icon">🏎️</span>
-    </button>
+  <!-- Right Controls: Volume + Track Switcher -->
+  <div class="music-controls-right">
+    <div class="music-vol-wrap" title="Volume Slider">
+      <button id="music-vol-btn" class="music-vol-btn" aria-label="Toggle Mute">
+        <svg id="music-vol-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+      </button>
+      <input type="range" id="music-volume" class="music-vol-bar" min="0" max="1" step="0.05" value="0.8" aria-label="Volume">
+    </div>
+
+    <!-- Track Switcher: Kevin Koontz / Max Verstappen -->
+    <div class="music-track-switcher" aria-label="Switch Track">
+      <button class="music-track-btn active" data-track="kevin" title="Kevin Koontz - We Can Fix Everything" aria-pressed="true">
+        <span class="track-btn-icon">🎵</span>
+      </button>
+      <button class="music-track-btn" data-track="max" title="33 Max Verstappen - Carte Blanq · Maxx Power" aria-pressed="false">
+        <span class="track-btn-icon">🏎️</span>
+      </button>
+    </div>
   </div>
 
   <!-- Real-time Animated Equalizer Bars -->
