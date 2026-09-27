@@ -118,9 +118,6 @@ export function init3DModelViewer() {
   const canvas = document.getElementById('h3d-water-canvas');
   const turb = document.getElementById('water-turbulence');
   const dispMap = document.getElementById('water-displacement');
-  const landingSoundBtn = document.getElementById('hero-landing-sound');
-  const helmetBadge = document.getElementById('hero-helmet-badge');
-  const helmetText = document.getElementById('hhb-text');
 
   if (!viewport || !revealImg) return;
 
@@ -335,15 +332,7 @@ export function init3DModelViewer() {
     isHelmetLocked = !isHelmetLocked;
     if (isHelmetLocked) {
       viewport.style.setProperty('--reveal-opacity', '1');
-      if (helmetBadge && helmetText) {
-        helmetBadge.classList.add('locked');
-        helmetText.textContent = 'FACE LOCKED 🔓 (CLICK TO UNLOCK)';
-      }
     } else {
-      if (helmetBadge && helmetText) {
-        helmetBadge.classList.remove('locked');
-        helmetText.textContent = 'CLICK TO REVEAL FACE';
-      }
       if (!isHovered) {
         viewport.style.setProperty('--reveal-opacity', '0');
       }
@@ -382,49 +371,6 @@ export function init3DModelViewer() {
     window.addEventListener('deviceorientation', handleOrientation, { passive: true });
   }
 
-  // ── Landing Sound Button Controller ──
-  if (landingSoundBtn) {
-    landingSoundBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      getAudioContext(); // unlock audio context
-
-      const mainPlayBtn = document.getElementById('music-play-btn');
-      if (mainPlayBtn) {
-        mainPlayBtn.click();
-      }
-
-      // Check playing state
-      const isPlaying = window.isAudioPlaying || document.querySelector('.omarchy-music-card')?.classList.contains('playing');
-      const soundText = document.getElementById('hls-text');
-      const soundIcon = document.getElementById('hls-icon');
-
-      if (!isPlaying) {
-        landingSoundBtn.classList.add('active');
-        if (soundText) soundText.textContent = 'SOUND: ON';
-        if (soundIcon) {
-          soundIcon.innerHTML = `
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-            </svg>
-          `;
-        }
-        playWaterDropSound(1.2, 0.08);
-      } else {
-        landingSoundBtn.classList.remove('active');
-        if (soundText) soundText.textContent = 'SOUND: OFF';
-        if (soundIcon) {
-          soundIcon.innerHTML = `
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-              <line x1="23" y1="9" x2="17" y2="15"></line>
-              <line x1="17" y1="9" x2="23" y2="15"></line>
-            </svg>
-          `;
-        }
-      }
-    });
-  }
 
   // Animation Loop: Updates water waves, SVG turbulence, 3D multiplane tilt transforms, and fluid reveal mask
   function updatePhysics() {

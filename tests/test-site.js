@@ -180,7 +180,6 @@ const CRITICAL_SELECTORS = [
   { id: 'h3d-reveal-layer', desc: 'Revealed 3D Face layer img' },
   { id: 'h3d-sheen', desc: '3D Sheen reflection overlay' },
   { id: 'h3d-water-canvas', desc: 'Dynamic Water ripple canvas' },
-  { id: 'hero-landing-sound', desc: 'Hero landing sound toggle button' },
   { id: 'hero-scroll-prompt', desc: 'Scroll prompt navigation button' },
   { id: 'omarchy-canvas', desc: 'Omarchy background canvas' },
   { id: 'home', desc: 'Home anchor section' },
@@ -198,6 +197,11 @@ for (const item of CRITICAL_SELECTORS) {
 assert(!indexHtml.includes('Pick a theme, change everything'), '"Pick a theme, change everything" is absent from website');
 assert(!indexHtml.includes('More Omarchy Themes'), '"More Omarchy Themes" link is absent from website');
 assert(!indexHtml.includes('id="themes"'), 'Theme section container #themes is absent from index.html');
+
+// Ensure "click to reveal face" badge and "hero-landing-sound" button are absent
+assert(!indexHtml.includes('id="hero-landing-sound"'), 'Landing sound toggle #hero-landing-sound is absent from index.html');
+assert(!indexHtml.includes('id="hero-helmet-badge"'), 'Helmet badge #hero-helmet-badge is absent from index.html');
+assert(!indexHtml.includes('CLICK TO REVEAL FACE'), '"CLICK TO REVEAL FACE" text is absent from index.html');
 
 // Ensure 3D images point to the correct v2 assets
 assert(indexHtml.includes('3D_helmat_model_v2.webp'), 'Base layer src points to 3D_helmat_model_v2.webp');
