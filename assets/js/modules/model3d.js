@@ -144,9 +144,11 @@ export function init3DModelViewer() {
   let currentTiltX = 0;
   let currentTiltY = 0;
 
-  // Dynamic Full-Helmet Reveal Radius (spring lerp)
-  let targetRadius = 0;
-  let currentRadius = 0;
+  // Dynamic Elliptical Reveal Dimensions (spring lerp)
+  let targetRadiusX = 0;
+  let targetRadiusY = 0;
+  let currentRadiusX = 0;
+  let currentRadiusY = 0;
 
   let pointerPixelX = 0;
   let pointerPixelY = 0;
@@ -330,18 +332,18 @@ export function init3DModelViewer() {
     }
     isLingerActive = false;
 
-    // Toggle Helmet Lock state
+    // Toggle Lock state
     isHelmetLocked = !isHelmetLocked;
     if (isHelmetLocked) {
       viewport.style.setProperty('--reveal-opacity', '1');
       if (helmetBadge && helmetText) {
         helmetBadge.classList.add('locked');
-        helmetText.textContent = 'HELMET LOCKED 🏎️ (CLICK TO UNLOCK)';
+        helmetText.textContent = 'FACE LOCKED 🔓 (CLICK TO UNLOCK)';
       }
     } else {
       if (helmetBadge && helmetText) {
         helmetBadge.classList.remove('locked');
-        helmetText.textContent = 'CLICK TO LOCK HELMET';
+        helmetText.textContent = 'CLICK TO REVEAL FACE';
       }
       if (!isHovered) {
         viewport.style.setProperty('--reveal-opacity', '0');
@@ -437,22 +439,27 @@ export function init3DModelViewer() {
     currentTiltX += (targetTiltX - currentTiltX) * tiltDamping;
     currentTiltY += (targetTiltY - currentTiltY) * tiltDamping;
 
-    // Dynamic Full-Helmet Reveal Radius:
-    // In 3D_helmat_model_v2.png, the helmet covers a tall central area.
-    // Setting targetRadius to ~76% of viewport height ensures the full helmet is seen easily.
+    // Dynamic Elliptical Reveal Dimensions:
+    // Tailored to human face and helmet visor aspect ratio (~1 : 1.45)
     const rect = viewport.getBoundingClientRect();
-    const fullHelmetRadius = Math.max(680, Math.round((rect.height || 900) * 0.76));
+    const fullHeight = rect.height || 900;
+    const fullRevealY = Math.max(480, Math.round(fullHeight * 0.52));
+    const fullRevealX = Math.round(fullRevealY * 0.68);
 
     if (isHelmetLocked) {
-      targetRadius = 2400;
+      targetRadiusX = 2400;
+      targetRadiusY = 2400;
     } else if (isHovered || isLingerActive) {
-      targetRadius = fullHelmetRadius;
+      targetRadiusX = fullRevealX;
+      targetRadiusY = fullRevealY;
     } else {
-      targetRadius = 0;
+      targetRadiusX = 0;
+      targetRadiusY = 0;
     }
 
     const radiusDamping = (isHovered || isLingerActive) ? 0.08 : 0.05;
-    currentRadius += (targetRadius - currentRadius) * radiusDamping;
+    currentRadiusX += (targetRadiusX - currentRadiusX) * radiusDamping;
+    currentRadiusY += (targetRadiusY - currentRadiusY) * radiusDamping;
 
     // Decay target displacement scale toward idle
     if (isHovered) {
@@ -487,27 +494,29 @@ export function init3DModelViewer() {
       turb.setAttribute('baseFrequency', `${freqX} ${freqY}`);
     }
 
-    // Update mask coordinates and radius
+    // Update mask coordinates and elliptical radius (rx & ry)
     viewport.style.setProperty('--mask-x', `${currentX.toFixed(2)}%`);
     viewport.style.setProperty('--mask-y', `${currentY.toFixed(2)}%`);
 
-    const activeRadius = Math.max(0, Math.round(currentRadius * audioBoost + currentDispScale * 1.5));
-    viewport.style.setProperty('--mask-radius', `${activeRadius}px`);
+    const activeRadiusX = Math.max(0, Math.round(currentRadiusX * audioBoost + currentDispScale * 1.5));
+    const activeRadiusY = Math.max(0, Math.round(currentRadiusY * audioBoost + currentDispScale * 1.5));
+    viewport.style.setProperty('--mask-rx', `${activeRadiusX}px`);
+    viewport.style.setProperty('--mask-ry', `${activeRadiusY}px`);
 
     // ── Real 3D Perspective Tilt & Multiplane Parallax Separation ──
     const tiltXStr = currentTiltX.toFixed(2);
     const tiltYStr = currentTiltY.toFixed(2);
 
-    // 1. Base Layer (Face & Suit) at depth plane Z = 0
+    // 1. Base Layer (Helmet Model) at depth plane Z = 0
     if (baseLayer) {
       baseLayer.style.transform = `rotateX(${tiltXStr}deg) rotateY(${tiltYStr}deg) translate3d(0, 0, 0)`;
     }
 
-    // 2. Reveal Layer (Full Helmet) with stereoscopic pop-out: Z = 32px + dynamic parallax offset
+    // 2. Reveal Layer (Face Model) with stereoscopic depth: Z = 24px + dynamic parallax offset
     if (revealImg) {
       const parallaxX = (currentTiltY * 0.7).toFixed(2);
       const parallaxY = (-currentTiltX * 0.7).toFixed(2);
-      revealImg.style.transform = `rotateX(${tiltXStr}deg) rotateY(${tiltYStr}deg) translate3d(${parallaxX}px, ${parallaxY}px, 32px)`;
+      revealImg.style.transform = `rotateX(${tiltXStr}deg) rotateY(${tiltYStr}deg) translate3d(${parallaxX}px, ${parallaxY}px, 24px)`;
     }
 
     // 3. Dynamic Specular Sheen (Directional lighting glaze based on 3D tilt)

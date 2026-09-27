@@ -24,18 +24,18 @@ title: "Home"
         <div class="hero-3d-card hero-3d-stage" id="hero-3d-card">
           <!-- Interactive Viewport -->
           <div class="hero-3d-viewport" id="hero-3d-viewport">
-            <!-- Base 3D Model -->
-            <img src="{{ '/assets/images/3D_model_v2.png' | relative_url }}"
-                 alt="3D Character Model"
+            <!-- Base 3D Model: Helmet Model on Landing -->
+            <img src="{{ '/assets/images/3D_helmat_model_v2.webp' | relative_url }}"
+                 alt="3D Racing Helmet Model"
                  class="h3d-layer h3d-base"
                  id="h3d-base-layer"
                  width="2752"
                  height="1536"
                  loading="eager" />
 
-            <!-- Revealed 3D Helmet Model (shown through fluid water mask on hover) -->
-            <img src="{{ '/assets/images/3D_helmat_model_v2.png' | relative_url }}"
-                 alt="3D Helmet Model"
+            <!-- Revealed 3D Character Model (shown through fluid water mask on hover) -->
+            <img src="{{ '/assets/images/3D_model_v2.webp' | relative_url }}"
+                 alt="3D Character Face Model"
                  class="h3d-layer h3d-reveal"
                  id="h3d-reveal-layer"
                  width="2752"
@@ -62,10 +62,10 @@ title: "Home"
           <span class="hls-text" id="hls-text">SOUND: OFF</span>
         </button>
 
-        <!-- Floating Helmet Mode Badge (Shows on click lock) -->
+        <!-- Floating Mode Badge (Shows on click lock) -->
         <div class="hero-helmet-badge" id="hero-helmet-badge" aria-live="polite">
           <span class="hhb-dot"></span>
-          <span class="hhb-text" id="hhb-text">CLICK TO LOCK HELMET</span>
+          <span class="hhb-text" id="hhb-text">CLICK TO REVEAL FACE</span>
         </div>
 
         <!-- Scroll down indicator button (Visible on landing, fades on scroll) -->

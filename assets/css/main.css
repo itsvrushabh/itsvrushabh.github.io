@@ -982,7 +982,7 @@ body.hero-scrolled .hero-3d-card {
 /* Scroll down prompt button on landing */
 .hero-scroll-prompt {
   position: absolute;
-  bottom: 1.25rem;
+  bottom: 0.95rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 25;
@@ -1134,7 +1134,8 @@ body.hero-scrolled .omarchy-scanlines {
   --reveal-opacity: 0;
   --mask-x: 50%;
   --mask-y: 48%;
-  --mask-radius: 260px;
+  --mask-rx: 360px;
+  --mask-ry: 520px;
 }
 
 /* Photos: Cropped with cover to fill 100% full screen edge-to-edge with 3D bleed */
@@ -1163,12 +1164,12 @@ body.hero-scrolled .h3d-layer {
   z-index: 1;
 }
 
-/* Reveal Layer (3D Helmet Model with fluid water ripple reveal) */
+/* Reveal Layer (3D Model with fluid water ripple reveal) */
 .h3d-reveal {
   z-index: 2;
   opacity: var(--reveal-opacity, 0);
-  -webkit-mask-image: radial-gradient(circle var(--mask-radius, 260px) at var(--mask-x, 50%) var(--mask-y, 48%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0) 85%);
-  mask-image: radial-gradient(circle var(--mask-radius, 260px) at var(--mask-x, 50%) var(--mask-y, 48%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0) 85%);
+  -webkit-mask-image: radial-gradient(ellipse var(--mask-rx, 360px) var(--mask-ry, 520px) at var(--mask-x, 50%) var(--mask-y, 48%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 65%, rgba(0,0,0,0) 88%);
+  mask-image: radial-gradient(ellipse var(--mask-rx, 360px) var(--mask-ry, 520px) at var(--mask-x, 50%) var(--mask-y, 48%), rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 65%, rgba(0,0,0,0) 88%);
   transform-style: preserve-3d;
   will-change: mask-image, -webkit-mask-image, opacity, transform;
   transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1283,9 +1284,21 @@ body.hero-scrolled .hero-landing-sound {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.hero-helmet-badge.locked {
+  border-color: #ef4444;
+  color: #ef4444;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.35);
+}
+
 .hero-helmet-badge.locked .hhb-dot {
   background-color: #ef4444;
   box-shadow: 0 0 8px #ef4444;
+  animation: pulse-badge-dot 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-badge-dot {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.35); opacity: 1; }
 }
 
 body.hero-scrolled .hero-helmet-badge {
