@@ -872,8 +872,11 @@ body.hero-scrolled .hero-content {
 
 .hero-3d-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: min(460px, 88vw); /* Big immersive view on landing */
+  max-width: min(780px, 94vw); /* Big 3D image filling the window on landing */
+  height: min(78vh, 760px);
   background-color: color-mix(in srgb, var(--surface) 85%, transparent);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -884,9 +887,10 @@ body.hero-scrolled .hero-content {
   -webkit-backdrop-filter: blur(20px);
   overflow: hidden;
   transform-style: preserve-3d;
-  will-change: transform, box-shadow, border-color, max-width;
+  will-change: transform, box-shadow, border-color, max-width, height;
   transition:
     max-width 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     border-color var(--transition-normal),
     box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -894,14 +898,21 @@ body.hero-scrolled .hero-content {
 /* Collapsed state when scrolled down */
 body.hero-scrolled .hero-3d-card {
   max-width: 380px; /* Compact collapsed view */
+  height: auto;
   box-shadow:
     0 24px 48px -12px rgba(0, 0, 0, 0.65),
     0 0 35px -10px color-mix(in srgb, var(--brand) 20%, transparent);
 }
 
 @media (max-width: 991px) {
+  .hero-3d-card {
+    max-width: min(580px, 94vw);
+    height: min(74vh, 660px);
+  }
+
   body.hero-scrolled .hero-3d-card {
-    max-width: 320px;
+    max-width: 340px;
+    height: auto;
   }
 
   body.hero-scrolled .hero-content {
@@ -1042,17 +1053,22 @@ body.hero-scrolled .hero-scroll-prompt {
 .hero-3d-viewport {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
-  max-height: min(56vh, 480px);
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
   cursor: crosshair;
-  background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--brand) 8%, transparent) 0%, transparent 70%),
-              radial-gradient(circle at 50% 50%, var(--surface) 0%, color-mix(in srgb, var(--bg) 90%, black) 100%);
+  background-color: #ffffff;
   user-select: none;
   --reveal-opacity: 0;
   --mask-x: 50%;
   --mask-y: 32%;
-  --mask-radius: 140px;
+  --mask-radius: 150px;
+}
+
+body.hero-scrolled .hero-3d-viewport {
+  flex: none;
+  aspect-ratio: 3 / 4;
+  max-height: 440px;
 }
 
 /* Backdrop ambient scanline & subtle grid */
@@ -1060,20 +1076,22 @@ body.hero-scrolled .hero-scroll-prompt {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--border-subtle) 40%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--border-subtle) 40%, transparent) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
-  opacity: 0.25;
+  opacity: 0.35;
   pointer-events: none;
+  z-index: 0;
 }
 
-/* Images */
+/* Images: Fill window edge-to-edge */
 .h3d-layer {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center 12%;
   pointer-events: none;
   user-select: none;
 }
