@@ -92,6 +92,7 @@ export function cycleTheme() {
 }
 
 export function formatThemeName(slug) {
+  if (slug === 'tokyo-night') return 'Lando Norris Racing';
   return slug
     .split('-')
     .map(w => w.charAt(0).toUpperCase() + w.slice(1))

@@ -13,12 +13,12 @@ export function initBackgroundCanvas() {
     let mouse = { x: -1000, y: -1000 };
 
     // Dynamic Theme Color Palette
-    let brandColor = '#9ece6a';
-    let brandSoft = 'rgba(158, 206, 106, 0.15)';
-    let borderColor = 'rgba(255, 255, 255, 0.08)';
-    let borderStrong = 'rgba(255, 255, 255, 0.2)';
-    let accentColor = '#9ece6a';
-    let bgColor = '#1a1b26';
+    let brandColor = '#d2ff00';
+    let brandSoft = 'rgba(210, 255, 0, 0.15)';
+    let borderColor = 'rgba(210, 255, 0, 0.16)';
+    let borderStrong = 'rgba(210, 255, 0, 0.42)';
+    let accentColor = '#d2ff00';
+    let bgColor = '#0b0f0b';
     let activeFamily = getThemeFamily(currentTheme);
 
     // Audio & Beat Tracking State

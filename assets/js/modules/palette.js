@@ -29,7 +29,7 @@ export const PALETTE_COMMANDS = [
   { id: 'music-pause', label: 'Pause Background Music', category: 'Media', icon: '⏸️', action: () => pauseMusic() },
 
   // Themes
-  { id: 'theme-tokyo', label: 'Theme: Tokyo Night (Default)', category: 'Theme', icon: '🌙', action: () => setTheme('tokyo-night', true) },
+  { id: 'theme-tokyo', label: 'Theme: Lando Norris Racing (Default)', category: 'Theme', icon: '🏎️', action: () => setTheme('tokyo-night', true) },
   { id: 'theme-catppuccin', label: 'Theme: Catppuccin', category: 'Theme', icon: '☕', action: () => setTheme('catppuccin', true) },
   { id: 'theme-gruvbox', label: 'Theme: Gruvbox', category: 'Theme', icon: '🪵', action: () => setTheme('gruvbox', true) },
   { id: 'theme-everforest', label: 'Theme: Everforest', category: 'Theme', icon: '🌲', action: () => setTheme('everforest', true) },
