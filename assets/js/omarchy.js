@@ -332,8 +332,8 @@
       if (window.isAudioPlaying && !hasRealAudio) {
         const audio = audioInstance;
         const t = (audio && audio.currentTime) ? audio.currentTime : (Date.now() / 1000);
-        // Track: Kevin Koontz - We Can Fix Everything (~112 BPM = 1.866 Hz)
-        const bps = 112 / 60;
+        // Use current track's BPM for accurate beat phase
+        const bps = (window.currentTrackBPM || 112) / 60;
         const beatCycle = (t * bps) % 1;
         const kickEnvelope = Math.max(0, 1 - beatCycle * 3.5);
         audioBoost = 0.22 + kickEnvelope * 0.58;
@@ -384,8 +384,10 @@
         }
       }
 
-      // Continuous phase advancement driven by music tempo & kicks
-      const speedMult = 1.0 + (audioBoost * 2.4) + (kickPulse * 2.2);
+      // Continuous phase advancement driven by music tempo, kicks & mouse velocity
+      mouseHoverForce *= 0.90;
+      mouseSpeed *= 0.85;
+      const speedMult = 1.0 + (audioBoost * 2.4) + (kickPulse * 2.2) + (mouseHoverForce * 1.2);
       time += 0.016 * speedMult;
       beatPhase += 0.03 * speedMult;
 
@@ -421,10 +423,17 @@
         // =====================================================================
         ctx.save();
         ctx.font = '13px var(--font-mono, monospace)';
-        const rainSpeed = 1.0 + (audioBoost * 3.8) + (kickPulse * 3.5);
+        const rainSpeed = 1.0 + (audioBoost * 3.8) + (kickPulse * 3.5) + (mouseHoverForce * 2.5);
+
+        // Mouse proximity: columns near cursor create a "vortex" glitch zone
+        const mouseProxRadius = 160;
 
         matrixColumns.forEach(col => {
-          col.y += col.speed * rainSpeed;
+          const distFromMouse = Math.abs(col.x - mouse.x);
+          const mouseProx = Math.max(0, 1 - distFromMouse / mouseProxRadius);
+          const colSpeedBoost = 1 + mouseProx * (2.5 + mouseSpeed * 4.0);
+
+          col.y += col.speed * rainSpeed * colSpeedBoost;
           if (col.y > height + 80) {
             col.y = -80 - Math.random() * 120;
             col.speed = Math.random() * 2.5 + 2.0;
@@ -436,16 +445,17 @@
             if (charY < -20 || charY > height + 20) continue;
 
             const isHead = i === 0;
+            const hoverBright = isHead ? mouseProx * 0.6 : mouseProx * 0.25;
             let alpha = isHead
-              ? (isKickBeat ? 1.0 : 0.9)
-              : Math.max(0.06, (1 - i / streamLen) * (0.45 + audioBoost * 0.35));
+              ? Math.min(1.0, (isKickBeat ? 1.0 : 0.9) + hoverBright)
+              : Math.max(0.06, (1 - i / streamLen) * (0.45 + audioBoost * 0.35 + mouseProx * 0.25));
 
             ctx.globalAlpha = alpha;
-            ctx.fillStyle = isHead ? (isKickBeat ? '#ffffff' : brandColor) : brandColor;
+            ctx.fillStyle = (isHead && (isKickBeat || mouseProx > 0.6)) ? '#ffffff' : brandColor;
 
-            if (isHead && isKickBeat) {
+            if (isHead && (isKickBeat || mouseProx > 0.5)) {
               ctx.shadowColor = brandColor;
-              ctx.shadowBlur = 12;
+              ctx.shadowBlur = 10 + mouseProx * 14;
             } else {
               ctx.shadowBlur = 0;
             }
@@ -453,14 +463,19 @@
             ctx.fillText(col.chars[i], col.x, charY);
           }
 
-          // Random character mutation on music beat
-          if ((isKickBeat || Math.random() < 0.08) && col.chars.length > 0) {
+          // Mouse proximity: rapid glyph mutation at cursor (digital disruption)
+          if ((isKickBeat || mouseProx > 0.4 || Math.random() < 0.08)) {
             const mutIdx = Math.floor(Math.random() * col.chars.length);
             col.chars[mutIdx] = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+            // Extra mutations near cursor for glitch burst
+            if (mouseProx > 0.6) {
+              col.chars[Math.floor(Math.random() * col.chars.length)] =
+                matrixChars[Math.floor(Math.random() * matrixChars.length)];
+            }
           }
         });
 
-        // Horizontal phosphor scanline beam swept by kick beats
+        // Horizontal phosphor scanline beam swept by kicks
         const scanlineY = (time * 180 * (1 + audioBoost)) % height;
         ctx.strokeStyle = brandColor;
         ctx.globalAlpha = 0.15 + kickPulse * 0.35;
@@ -469,6 +484,19 @@
         ctx.moveTo(0, scanlineY);
         ctx.lineTo(width, scanlineY);
         ctx.stroke();
+
+        // Mouse cursor glitch halo (bright ring around cursor in matrix theme)
+        if (mouseActive && mouse.x > 0 && mouse.x < width) {
+          const haloR = 40 + mouseSpeed * 60 + kickPulse * 30;
+          ctx.strokeStyle = brandColor;
+          ctx.globalAlpha = 0.18 + mouseSpeed * 0.5 + kickPulse * 0.3;
+          ctx.lineWidth = 1.5;
+          ctx.setLineDash([4, 4]);
+          ctx.beginPath();
+          ctx.arc(mouse.x, mouse.y, haloR, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
 
         ctx.restore();
 
@@ -518,10 +546,22 @@
         // 3. STEALTH SONAR & RADAR SWEEP (Matte Black, Vantablack, Solitude)
         // =====================================================================
         ctx.save();
-        sonarAngle += 0.018 * (1.0 + (audioBoost * 3.2) + (kickPulse * 2.2));
+        // Radar beam naturally sweeps, but gradually homes toward cursor when nearby
+        const baseSpeed = 0.018 * (1.0 + (audioBoost * 3.2) + (kickPulse * 2.2) + (mouseHoverForce * 1.8));
         const cx = width / 2;
         const cy = height / 2;
         const maxR = Math.max(width, height) * 0.55;
+
+        // Mouse hover: rotate beam toward cursor
+        if (mouseActive && mouse.x > 0) {
+          const targetAngle = Math.atan2(mouse.y - cy, mouse.x - cx);
+          let diff = targetAngle - sonarAngle;
+          while (diff > Math.PI) diff -= Math.PI * 2;
+          while (diff < -Math.PI) diff += Math.PI * 2;
+          sonarAngle += baseSpeed + (diff * mouseSpeed * 0.06);
+        } else {
+          sonarAngle += baseSpeed;
+        }
 
         // Concentric radar range rings (pulse outward on kick beats)
         [0.2, 0.4, 0.6, 0.8, 1.0].forEach(factor => {
@@ -621,12 +661,32 @@
         ctx.globalAlpha = 0.25 + audioBoost * 0.45 + kickPulse * 0.25;
         ctx.fill();
 
-        // 3D Tumbling Crystalline Frost Shards
-        const shardSpeed = 1.0 + (audioBoost * 3.2) + (kickPulse * 2.8);
+        // 3D Tumbling Crystalline Frost Shards with Mouse Repulsion
+        const shardSpeed = 1.0 + (audioBoost * 3.2) + (kickPulse * 2.8) + (mouseHoverForce * 1.5);
         frostCrystals.forEach(s => {
+          // Mouse repulsion force: crystals scatter away from cursor
+          const dx = s.x - mouse.x;
+          const dy = s.y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          const repulseRadius = 130;
+          if (dist < repulseRadius && dist > 0 && mouseActive) {
+            const force = ((repulseRadius - dist) / repulseRadius) * (0.6 + mouseSpeed * 1.8);
+            s.vx += (dx / dist) * force;
+            s.vy += (dy / dist) * force;
+            // Speed clamp to avoid flying off screen
+            const spd = Math.hypot(s.vx, s.vy);
+            if (spd > 4.5) { s.vx = (s.vx / spd) * 4.5; s.vy = (s.vy / spd) * 4.5; }
+            // Spin faster on repulsion
+            s.spin += (Math.random() - 0.5) * 0.04;
+          } else {
+            // Gentle friction damping to settle back
+            s.vx *= 0.97;
+            s.vy *= 0.97;
+          }
+
           s.x += s.vx * shardSpeed;
           s.y += s.vy * shardSpeed;
-          s.angle += s.spin * (1.0 + trebleBoost * 4.0);
+          s.angle += s.spin * (1.0 + trebleBoost * 4.0 + mouseSpeed * 2.0);
 
           if (s.x < -30) s.x = width + 30;
           if (s.x > width + 30) s.x = -30;
@@ -753,10 +813,14 @@
         // =====================================================================
         ctx.save();
         const horizonY = height * 0.62;
-        const cx = width / 2;
+        const cx_base = width / 2;
+        // Horizon glow X position tracks cursor horizontally for an immersive follow effect
+        const cx = mouseActive && mouse.x > 0
+          ? cx_base + (mouse.x - cx_base) * 0.4
+          : cx_base;
 
-        // Twilight Horizon Glow Bloom (flares up brightly on music kick)
-        const glowRadius = 220 + (audioBoost * 200) + (kickPulse * 240);
+        // Twilight Horizon Glow Bloom (flares on music kick + mouse movement)
+        const glowRadius = 220 + (audioBoost * 200) + (kickPulse * 240) + (mouseHoverForce * 180);
         const horizonGlow = ctx.createRadialGradient(cx, horizonY, 10, cx, horizonY, glowRadius);
         horizonGlow.addColorStop(0, brandColor);
         horizonGlow.addColorStop(0.4, brandSoft);
@@ -866,6 +930,13 @@
       animationFrameId = requestAnimationFrame(render);
     }
 
+    // Mouse state with smooth velocity tracking
+    let mouseVX = 0, mouseVY = 0; // velocity
+    let prevMouseX = -1000, prevMouseY = -1000;
+    let mouseSpeed = 0; // magnitude of cursor speed (0.0–1.0)
+    let mouseActive = false; // true while cursor is over viewport
+    let mouseHoverForce = 0; // decaying hover force impulse
+
     // Interactive Listeners
     window.addEventListener('resize', () => {
       cancelAnimationFrame(animationFrameId);
@@ -874,26 +945,68 @@
     });
 
     window.addEventListener('mousemove', e => {
+      mouseVX = e.clientX - prevMouseX;
+      mouseVY = e.clientY - prevMouseY;
+      mouseSpeed = Math.min(1.0, Math.hypot(mouseVX, mouseVY) / 40);
+      prevMouseX = mouse.x;
+      prevMouseY = mouse.y;
       mouse.x = e.clientX;
       mouse.y = e.clientY;
+      mouseActive = true;
+      // Surge hover force on fast mouse movement
+      if (mouseSpeed > 0.35) {
+        mouseHoverForce = Math.min(1.0, mouseHoverForce + mouseSpeed * 0.8);
+      }
     });
 
-    // Clicking anywhere triggers a kinetic shockwave ripple across the active theme animation
+    window.addEventListener('mouseleave', () => {
+      mouseActive = false;
+      mouseSpeed = 0;
+    });
+
+    // Touch support — treat touch as mouse for hover interactions
+    window.addEventListener('touchmove', e => {
+      const t = e.touches[0];
+      const tx = t.clientX, ty = t.clientY;
+      mouseVX = tx - prevMouseX;
+      mouseVY = ty - prevMouseY;
+      mouseSpeed = Math.min(1.0, Math.hypot(mouseVX, mouseVY) / 40);
+      prevMouseX = mouse.x;
+      prevMouseY = mouse.y;
+      mouse.x = tx;
+      mouse.y = ty;
+      mouseActive = true;
+    }, { passive: true });
+
+    // Click / tap → spawn shockwave at cursor position
     window.addEventListener('pointerdown', e => {
       if (shockwaves.length < 6) {
         shockwaves.push({
           x: e.clientX,
           y: e.clientY,
           radius: 12,
-          maxRadius: Math.max(width, height) * 0.85,
-          alpha: 0.75
+          maxRadius: Math.max(width, height) * 0.88,
+          alpha: 0.85
         });
+        mouseHoverForce = 1.0;
       }
     });
 
     window.addEventListener('omarchyThemeChanged', () => {
       updateColors();
     });
+
+    // Decay hover force each frame and expose to render loop
+    function updateMouseState() {
+      mouseHoverForce *= 0.90;
+      mouseSpeed *= 0.85;
+      window._omarchyMouseForce = mouseHoverForce;
+      window._omarchyMouseSpeed = mouseSpeed;
+    }
+
+    // Patch render to include mouse state update at top
+    const _origRender = render;
+    const origAnimFrameId = animationFrameId;
 
     // Pause canvas loop when tab is hidden to conserve power and CPU
     document.addEventListener('visibilitychange', () => {
@@ -1504,10 +1617,33 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
   // =========================================================================
   
   // =========================================================================
-  // 5. AMBIENT MUSIC ENGINE (Kevin Koontz - We Can Fix Everything)
+  // 5. AMBIENT MUSIC ENGINE — Multi-Track (Kevin Koontz + 33 Max Verstappen)
   // =========================================================================
   let audioInstance = null;
   let isAudioPlaying = false;
+
+  const TRACKS = {
+    kevin: {
+      src: '/assets/audio/kevin_koontz-we_can_fix_everything.mp3',
+      title: 'We Can Fix Everything',
+      artist: 'Kevin Koontz · Omarchy OST',
+      art: '/assets/images/kevin_koontz.webp',
+      artAlt: 'Kevin Koontz Album Art',
+      bpm: 112,
+      toast: '▶ Kevin Koontz – We Can Fix Everything'
+    },
+    max: {
+      src: '/assets/audio/33_max_verstappen.mp3',
+      title: '33 Max Verstappen',
+      artist: 'Carte Blanq · Maxx Power · Nils van Zandt',
+      art: null, // F1 helmet emoji fallback
+      artAlt: '33 Max Verstappen',
+      bpm: 130,
+      toast: '▶ 33 Max Verstappen – Tu-tu-du-du 🏎️'
+    }
+  };
+
+  let currentTrack = 'kevin';
 
   function getAudio() {
     if (!audioInstance) {
@@ -1534,14 +1670,12 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
       }
       audioInstance.loop = true;
       audioInstance.preload = 'metadata';
-      audioInstance.src = '/assets/audio/kevin_koontz-we_can_fix_everything.mp3';
+      audioInstance.src = TRACKS[currentTrack].src;
 
       audioInstance.addEventListener('error', () => {
-        console.warn('Local audio path failed, falling back to omarchy.org CDN');
-        if (!audioInstance.src.includes('omarchy.org')) {
-          audioInstance.removeAttribute('crossOrigin');
-          audioInstance.src = 'https://omarchy.org/music/kevin_koontz-we_can_fix_everything.mp3';
-        }
+        console.warn('Audio load failed. Retrying without crossOrigin.');
+        audioInstance.removeAttribute('crossOrigin');
+        audioInstance.load();
       });
 
       const seek = document.getElementById('music-seek');
@@ -1551,9 +1685,7 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
       audioInstance.addEventListener('timeupdate', () => {
         if (audioInstance.duration) {
           const progress = (audioInstance.currentTime / audioInstance.duration) * 100;
-          if (seek && !seek.dataset.seeking) {
-            seek.value = progress;
-          }
+          if (seek && !seek.dataset.seeking) seek.value = progress;
           if (currTimeEl) currTimeEl.textContent = formatAudioTime(audioInstance.currentTime);
           if (durationEl) durationEl.textContent = formatAudioTime(audioInstance.duration);
         }
@@ -1580,6 +1712,76 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
       }
     }
     return audioInstance;
+  }
+
+  function applyTrackMeta(trackId) {
+    const t = TRACKS[trackId];
+    const titleEl = document.getElementById('music-track-title');
+    const artistEl = document.getElementById('music-track-artist');
+    const artEl = document.getElementById('music-art-img');
+
+    if (titleEl) titleEl.textContent = t.title;
+    if (artistEl) artistEl.textContent = t.artist;
+    if (artEl) {
+      if (t.art) {
+        artEl.src = t.art;
+        artEl.alt = t.artAlt;
+        artEl.style.fontSize = '';
+        artEl.style.display = 'block';
+      } else {
+        // Emoji fallback for tracks without album art
+        artEl.style.display = 'none';
+        const btn = document.querySelector('.music-art-btn');
+        if (btn && !btn.querySelector('.music-emoji-art')) {
+          const em = document.createElement('span');
+          em.className = 'music-emoji-art';
+          em.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;z-index:1;';
+          em.textContent = '🏎️';
+          btn.insertBefore(em, btn.querySelector('.music-play-overlay'));
+        }
+      }
+    }
+
+    // Remove emoji art when switching back to a track with art
+    if (t.art) {
+      const em = document.querySelector('.music-emoji-art');
+      if (em) em.remove();
+    }
+
+    // Update active tab buttons
+    document.querySelectorAll('.music-track-btn').forEach(b => {
+      const isActive = b.dataset.track === trackId;
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    // Expose current BPM for beat-fallback sync
+    window.currentTrackBPM = t.bpm;
+  }
+
+  function switchTrack(trackId) {
+    if (!TRACKS[trackId] || trackId === currentTrack) return;
+    const wasPlaying = isAudioPlaying;
+    currentTrack = trackId;
+
+    const audio = getAudio();
+    const wasPaused = audio.paused;
+    audio.pause();
+    audio.currentTime = 0;
+    audio.src = TRACKS[trackId].src;
+
+    applyTrackMeta(trackId);
+
+    if (wasPlaying || !wasPaused) {
+      audio.play().then(() => {
+        updateMusicUI(true);
+        showToastNotice(TRACKS[trackId].toast);
+      }).catch(() => {
+        updateMusicUI(false);
+      });
+    } else {
+      updateMusicUI(false);
+    }
   }
 
   function formatAudioTime(seconds) {
@@ -1617,7 +1819,7 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
     const audio = getAudio();
     audio.play().then(() => {
       updateMusicUI(true);
-      showToastNotice('▶ Sound on: Kevin Koontz - We Can Fix Everything');
+      showToastNotice(TRACKS[currentTrack].toast);
     }).catch(err => {
       console.warn('User gesture required to play audio:', err);
       showToastNotice('Click music button to enable sound');
@@ -1651,6 +1853,20 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
     if (headerToggle) {
       headerToggle.addEventListener('click', toggleMusic);
     }
+
+    // Wire track switcher buttons
+    document.querySelectorAll('.music-track-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const trackId = btn.dataset.track;
+        if (trackId && trackId !== currentTrack) {
+          switchTrack(trackId);
+        }
+      });
+    });
+
+    // Set initial track metadata
+    applyTrackMeta(currentTrack);
+    window.currentTrackBPM = TRACKS[currentTrack].bpm;
   }
 
   // =========================================================================

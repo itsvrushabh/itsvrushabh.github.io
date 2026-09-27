@@ -1,11 +1,11 @@
 <!-- ==========================================
      OMARCHY AMBIENT MUSIC PLAYER
-     Track: Kevin Koontz - We Can Fix Everything
+     Tracks: Kevin Koontz / 33 Max Verstappen
      ========================================== -->
 <div id="omarchy-music-player" class="omarchy-music-card" aria-label="Music Player">
   <!-- Album Art & Play/Pause Trigger -->
   <button id="music-play-btn" class="music-art-btn" title="Turn Sound On / Off (Press 'M')" aria-label="Toggle Sound">
-    <img src="{{ '/assets/images/kevin_koontz.webp' | relative_url }}" alt="Kevin Koontz Album Art" class="music-art-img">
+    <img id="music-art-img" src="{{ '/assets/images/kevin_koontz.webp' | relative_url }}" alt="Track Album Art" class="music-art-img">
     <span class="music-play-overlay">
       <svg id="music-overlay-icon-play" class="music-icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
         <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -20,14 +20,24 @@
   <!-- Track Information & Scrubbing Bar -->
   <div class="music-info">
     <div class="music-title-wrap">
-      <span class="music-track-title">We Can Fix Everything</span>
+      <span class="music-track-title" id="music-track-title">We Can Fix Everything</span>
     </div>
-    <div class="music-artist">Kevin Koontz &middot; Omarchy OST</div>
+    <div class="music-artist" id="music-track-artist">Kevin Koontz &middot; Omarchy OST</div>
     <div class="music-progress-wrap">
       <span id="music-curr-time">0:00</span>
       <input type="range" id="music-seek" class="music-seek-bar" min="0" max="100" value="0" aria-label="Seek track position">
       <span id="music-duration">--:--</span>
     </div>
+  </div>
+
+  <!-- Track Switcher: Kevin Koontz / Max Verstappen -->
+  <div class="music-track-switcher" aria-label="Switch Track">
+    <button class="music-track-btn active" data-track="kevin" title="Kevin Koontz - We Can Fix Everything" aria-pressed="true">
+      <span class="track-btn-icon">🎵</span>
+    </button>
+    <button class="music-track-btn" data-track="max" title="33 Max Verstappen - Carte Blanq · Maxx Power" aria-pressed="false">
+      <span class="track-btn-icon">🏎️</span>
+    </button>
   </div>
 
   <!-- Real-time Animated Equalizer Bars -->
