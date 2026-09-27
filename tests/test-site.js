@@ -97,12 +97,8 @@ for (const relFile of REQUIRED_FILES) {
 const oldSongPath = path.join(SITE_DIR, 'assets/audio/kevin_koontz-we_can_fix_everything.mp3');
 assert(!fs.existsSync(oldSongPath), 'Obsolete Kevin Koontz song is absent');
 
-// -----------------------------------------------------------------------------
-// 3. RECURSIVE HTML SCAN: LIQUID LEAKS & SYNTAX ARTIFACTS
-// -----------------------------------------------------------------------------
-console.log(`\n${BOLD}3. Scanning Generated HTML for Template Leakage${RESET}`);
-
 function findFiles(dir, ext, results = []) {
+  if (!fs.existsSync(dir)) return results;
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
@@ -114,6 +110,36 @@ function findFiles(dir, ext, results = []) {
   }
   return results;
 }
+
+// -----------------------------------------------------------------------------
+// 2.5 JAVASCRIPT ES MODULE IMPORT/EXPORT RESOLUTION
+// -----------------------------------------------------------------------------
+console.log(`\n${BOLD}2.5 Validating JavaScript ES Module Imports & Exports${RESET}`);
+const jsFiles = findFiles(path.join(SITE_DIR, 'assets/js'), '.js');
+for (const jsFile of jsFiles) {
+  const content = fs.readFileSync(jsFile, 'utf8');
+  const importRegex = /import\s+\{([^}]+)\}\s+from\s+['"]([^'"]+)['"]/g;
+  let match;
+  while ((match = importRegex.exec(content)) !== null) {
+    const symbols = match[1].split(',').map(s => s.trim().split(/\s+as\s+/)[0]).filter(Boolean);
+    const importTarget = match[2];
+    const resolvedPath = path.resolve(path.dirname(jsFile), importTarget);
+    assert(fs.existsSync(resolvedPath), `Module target exists: ${importTarget} in ${path.basename(jsFile)}`);
+    if (fs.existsSync(resolvedPath)) {
+      const targetContent = fs.readFileSync(resolvedPath, 'utf8');
+      for (const sym of symbols) {
+        const hasExport = new RegExp(`export\\s+(const|let|function|class|var)\\s+${sym}\\b`).test(targetContent) ||
+                          new RegExp(`export\\s*\\{[^}]*\\b${sym}\\b[^}]*\\}`).test(targetContent);
+        assert(hasExport, `Symbol "${sym}" exported by ${path.basename(resolvedPath)} for ${path.basename(jsFile)}`, `Export missing in ${resolvedPath}`);
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 3. RECURSIVE HTML SCAN: LIQUID LEAKS & SYNTAX ARTIFACTS
+// -----------------------------------------------------------------------------
+console.log(`\n${BOLD}3. Scanning Generated HTML for Template Leakage${RESET}`);
 
 const htmlFiles = findFiles(SITE_DIR, '.html');
 assert(htmlFiles.length >= 7, `Discovered at least 7 generated HTML pages (found ${htmlFiles.length})`);

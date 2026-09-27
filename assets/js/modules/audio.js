@@ -168,3 +168,9 @@ export function initMusicPlayer() {
 
   window.currentTrackBPM = TRACKS.max.bpm;
 }
+
+export function switchTrack(_trackId) {
+  // Single-track mode: 33 Max Verstappen
+  return;
+}
+
