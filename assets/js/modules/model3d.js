@@ -129,9 +129,9 @@ export function init3DModelViewer() {
   let isHovered = false;
   let isHelmetLocked = false;
   let targetX = 50; // percentage
-  let targetY = 32;
+  let targetY = 48;
   let currentX = 50;
-  let currentY = 32;
+  let currentY = 48;
 
   let pointerPixelX = 0;
   let pointerPixelY = 0;
@@ -224,7 +224,7 @@ export function init3DModelViewer() {
 
     const rect = viewport.getBoundingClientRect();
     const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : rect.width / 2);
-    const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : rect.height / 3);
+    const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : rect.height * 0.48);
     const relX = clientX - rect.left;
     const relY = clientY - rect.top;
 
@@ -243,14 +243,14 @@ export function init3DModelViewer() {
     }
     targetDispScale = 0;
     targetX = 50;
-    targetY = 32;
+    targetY = 48;
   }
 
   // Click handler: Toggle helmet lock & produce dramatic water splash wave
   function handleClick(e) {
     const rect = viewport.getBoundingClientRect();
     const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : rect.width / 2);
-    const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : rect.height / 3);
+    const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : rect.height * 0.48);
     const relX = clientX - rect.left;
     const relY = clientY - rect.top;
 
@@ -291,7 +291,7 @@ export function init3DModelViewer() {
     const tiltY = Math.max(-20, Math.min(40, e.beta - 40)); // neutral holding angle ~40deg
 
     targetX = 50 + (tiltX / 30) * 35;
-    targetY = 32 + (tiltY / 30) * 25;
+    targetY = 48 + (tiltY / 30) * 25;
 
     // If tilt change is energetic, spawn slosh ripple
     if (Math.abs(tiltX) > 15 || Math.abs(tiltY) > 15) {
