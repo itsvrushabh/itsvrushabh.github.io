@@ -145,15 +145,27 @@ title: "Home"
     <!-- Interactive Neovim Window -->
     {% include neovim-buffer.html %}
 
+    <!-- Rust Zero-Copy vs Heap Allocation Profiler -->
+    {% include memory-profiler.html %}
+
+    <!-- Live Hyprland WebGL Compositor Shader Sandbox -->
+    {% include shader-sandbox.html %}
+
     <!-- Native Themed GitHub Contribution Heatmap -->
     {% include contribution-heatmap.html %}
   </div>
 </section>
 
 <!-- ==========================================
-     INTERACTIVE DISTRIBUTED ARCHITECTURE EXPLORER
+     INTERACTIVE DISTRIBUTED ARCHITECTURE EXPLORER & RAFT MESH
      ========================================== -->
 {% include architecture-explorer.html %}
+
+<section id="consensus" class="omarchy-section" style="padding-top: 0;">
+  <div class="container">
+    {% include raft-mesh.html %}
+  </div>
+</section>
 
 <!-- ==========================================
      THEMES SECTION: PICK A THEME, CHANGE EVERYTHING

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>Vrushabh Deshmukh - Engineering Dispatches</title>
+    <dateCreated>2026-09-27T00:00:00Z</dateCreated>
+    <ownerName>Vrushabh Deshmukh</ownerName>
+    <ownerEmail>itsvrushabh@gmail.com</ownerEmail>
+  </head>
+  <body>
+    <outline text="Systems Architecture &amp; Rust Dispatches" title="Vrushabh Deshmukh" type="rss" 
+             xmlUrl="https://itsvrushabh.github.io/feed.xml" 
+             htmlUrl="https://itsvrushabh.github.io/blog/" 
+             description="Low-latency distributed systems, zero-allocation Rust, and Linux systems architecture." />
+  </body>
+</opml>

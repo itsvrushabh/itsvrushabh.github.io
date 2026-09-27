@@ -1,0 +1,97 @@
+<!-- ==========================================
+     LIVE HYPRLAND COMPOSITOR SHADER SANDBOX
+     ========================================== -->
+<div class="shader-card" id="shader-sandbox">
+  <div class="shader-header">
+    <div class="shader-title-wrap">
+      <div class="shader-icon">✨</div>
+      <div>
+        <h3 class="shader-title">Hyprland Compositor &middot; Live WebGL Shader Sandbox</h3>
+        <p class="shader-subtitle">
+          Real-time Wayland GPU fragment shaders: Explore Kawase dual-filter blur, CRT phosphor scanlines, and neon bloom with interactive GLSL inspection.
+        </p>
+      </div>
+    </div>
+    <div class="shader-modes-toggle">
+      <button class="shader-mode-btn active" data-shader="blur">Kawase Blur</button>
+      <button class="shader-mode-btn" data-shader="crt">CRT Scanlines</button>
+      <button class="shader-mode-btn" data-shader="bloom">Cyber Bloom</button>
+      <button class="shader-mode-btn" data-shader="matte">Matte Vignette</button>
+    </div>
+  </div>
+
+  <div class="shader-grid-view">
+    <!-- Live Canvas Viewport -->
+    <div class="shader-canvas-wrap">
+      <canvas id="hyprland-shader-canvas" class="shader-canvas" width="600" height="320"></canvas>
+      
+      <!-- Overlaid Wayland Window Decoration -->
+      <div class="shader-window-overlay">
+        <div class="shader-overlay-titlebar">
+          <div class="tui-dots">
+            <span class="tui-dot dot-red"></span>
+            <span class="tui-dot dot-yellow"></span>
+            <span class="tui-dot dot-green"></span>
+          </div>
+          <span class="shader-overlay-title" id="shader-overlay-title">wayland://hyprland.omarchy.blur</span>
+          <span class="shader-overlay-fps" id="shader-fps-counter">60 FPS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parameter Sliders & GLSL Source Inspection -->
+    <div class="shader-controls-pane">
+      <div class="shader-controls-header">
+        <span class="controls-title">COMPOSITOR PARAMETERS</span>
+        <button id="toggle-glsl-btn" class="btn-omarchy-secondary btn-xs">
+          <span>&lt;/&gt; View GLSL Source</span>
+        </button>
+      </div>
+
+      <!-- Sliders -->
+      <div class="shader-sliders" id="shader-sliders-pane">
+        <div class="slider-group">
+          <div class="slider-label-row">
+            <span class="slider-label">Shader Intensity / Passes</span>
+            <span class="slider-val" id="val-intensity">0.75</span>
+          </div>
+          <input type="range" class="shader-slider-input" id="slider-intensity" min="0" max="100" value="75">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label-row">
+            <span class="slider-label">Dispersion / Kernel Radius</span>
+            <span class="slider-val" id="val-radius">12px</span>
+          </div>
+          <input type="range" class="shader-slider-input" id="slider-radius" min="1" max="30" value="12">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label-row">
+            <span class="slider-label">Chromatic Aberration / RGB Split</span>
+            <span class="slider-val" id="val-aberration">0.40</span>
+          </div>
+          <input type="range" class="shader-slider-input" id="slider-aberration" min="0" max="100" value="40">
+        </div>
+      </div>
+
+      <!-- GLSL Code Snippet (Collapsible) -->
+      <div class="shader-glsl-pane" id="shader-glsl-pane" style="display: none;">
+        <pre class="glsl-code"><code id="glsl-code-content">// Kawase Dual Blur Fragment Shader (Hyprland Wayland)
+precision mediump float;
+uniform sampler2D u_texture;
+uniform vec2 u_resolution;
+uniform float u_radius;
+
+void main() {
+    vec2 uv = gl_FragCoord.xy / u_resolution;
+    vec2 halfpixel = 0.5 / u_resolution;
+    vec4 sum = texture2D(u_texture, uv) * 4.0;
+    sum += texture2D(u_texture, uv - halfpixel * u_radius);
+    sum += texture2D(u_texture, uv + halfpixel * u_radius);
+    gl_FragColor = sum / 6.0;
+}</code></pre>
+      </div>
+    </div>
+  </div>
+</div>

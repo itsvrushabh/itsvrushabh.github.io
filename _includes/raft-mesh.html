@@ -1,0 +1,139 @@
+<!-- ==========================================
+     MULTI-TAB IN-BROWSER RAFT CONSENSUS & GOSSIP MESH
+     ========================================== -->
+<div class="raft-card" id="raft-mesh">
+  <div class="raft-header">
+    <div class="raft-title-wrap">
+      <div class="raft-icon">🛰️</div>
+      <div>
+        <h3 class="raft-title">Distributed Raft Consensus &amp; In-Browser Gossip Mesh</h3>
+        <p class="raft-subtitle">
+          Real-time cluster consensus: Synchronized via HTML5 <code>BroadcastChannel</code>. Open this page in multiple browser tabs to watch multi-node peer coordination.
+        </p>
+      </div>
+    </div>
+    <div class="raft-controls">
+      <button id="raft-replicate-btn" class="btn-omarchy-primary btn-xs">
+        <span>📝 Replicate Entry</span>
+      </button>
+      <button id="raft-election-btn" class="btn-omarchy-secondary btn-xs" title="Simulate election timeout or force candidate state">
+        <span>🗳️ Trigger Election</span>
+      </button>
+      <button id="raft-kill-leader-btn" class="btn-omarchy-secondary btn-xs" title="Simulate leader crash and observe follower failover">
+        <span>💥 Partition Leader</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Cluster Telemetry Bar -->
+  <div class="raft-telemetry-bar">
+    <div class="raft-stat-pill">
+      <span class="pill-label">CURRENT RAFT TERM:</span>
+      <strong class="pill-val text-brand" id="raft-term-val">Term 4</strong>
+    </div>
+    <div class="raft-stat-pill">
+      <span class="pill-label">ACTIVE LEADER:</span>
+      <strong class="pill-val text-brand" id="raft-leader-val">Node-Alpha</strong>
+    </div>
+    <div class="raft-stat-pill">
+      <span class="pill-label">COMMIT INDEX:</span>
+      <strong class="pill-val" id="raft-commit-val">Index 128</strong>
+    </div>
+    <div class="raft-stat-pill">
+      <span class="pill-label">BROWSER TABS LINKED:</span>
+      <strong class="pill-val" id="raft-tabs-val">1 Tab (Local Mesh)</strong>
+    </div>
+  </div>
+
+  <!-- 5-Node Visual Topology -->
+  <div class="raft-nodes-grid" id="raft-nodes-container">
+    <!-- Node 1 (Leader) -->
+    <div class="raft-node-box node-leader" id="rnode-1" data-node-id="1">
+      <div class="rnode-header">
+        <span class="rnode-role-badge">LEADER</span>
+        <span class="rnode-id">Node-Alpha</span>
+      </div>
+      <div class="rnode-heartbeat-bar">
+        <div class="hb-fill" style="width: 85%;"></div>
+      </div>
+      <div class="rnode-meta">
+        <span>Log: <strong>128</strong></span> &middot;
+        <span>State: <strong>Healthy</strong></span>
+      </div>
+    </div>
+
+    <!-- Node 2 (Follower) -->
+    <div class="raft-node-box node-follower" id="rnode-2" data-node-id="2">
+      <div class="rnode-header">
+        <span class="rnode-role-badge">FOLLOWER</span>
+        <span class="rnode-id">Node-Beta</span>
+      </div>
+      <div class="rnode-heartbeat-bar">
+        <div class="hb-fill" style="width: 72%;"></div>
+      </div>
+      <div class="rnode-meta">
+        <span>Log: <strong>128</strong></span> &middot;
+        <span>State: <strong>In-Sync</strong></span>
+      </div>
+    </div>
+
+    <!-- Node 3 (Follower) -->
+    <div class="raft-node-box node-follower" id="rnode-3" data-node-id="3">
+      <div class="rnode-header">
+        <span class="rnode-role-badge">FOLLOWER</span>
+        <span class="rnode-id">Node-Gamma</span>
+      </div>
+      <div class="rnode-heartbeat-bar">
+        <div class="hb-fill" style="width: 65%;"></div>
+      </div>
+      <div class="rnode-meta">
+        <span>Log: <strong>128</strong></span> &middot;
+        <span>State: <strong>In-Sync</strong></span>
+      </div>
+    </div>
+
+    <!-- Node 4 (Follower) -->
+    <div class="raft-node-box node-follower" id="rnode-4" data-node-id="4">
+      <div class="rnode-header">
+        <span class="rnode-role-badge">FOLLOWER</span>
+        <span class="rnode-id">Node-Delta</span>
+      </div>
+      <div class="rnode-heartbeat-bar">
+        <div class="hb-fill" style="width: 78%;"></div>
+      </div>
+      <div class="rnode-meta">
+        <span>Log: <strong>128</strong></span> &middot;
+        <span>State: <strong>In-Sync</strong></span>
+      </div>
+    </div>
+
+    <!-- Node 5 (Follower) -->
+    <div class="raft-node-box node-follower" id="rnode-5" data-node-id="5">
+      <div class="rnode-header">
+        <span class="rnode-role-badge">FOLLOWER</span>
+        <span class="rnode-id">Node-Epsilon</span>
+      </div>
+      <div class="rnode-heartbeat-bar">
+        <div class="hb-fill" style="width: 80%;"></div>
+      </div>
+      <div class="rnode-meta">
+        <span>Log: <strong>128</strong></span> &middot;
+        <span>State: <strong>In-Sync</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Raft Consensus Audit Stream -->
+  <div class="raft-log-console">
+    <div class="rlog-header">
+      <span>RAFT STATE MACHINE REPLICATION LOG STREAM</span>
+      <span class="rlog-live-dot">&bull; BROADCAST ACTIVE</span>
+    </div>
+    <div class="rlog-body" id="raft-log-body">
+      <div class="rlog-entry">
+        <span class="rlog-term">[Term 4]</span>
+        <span class="rlog-msg">[LEADER Node-Alpha] Heartbeat AppendEntries RPC acked by 4/4 followers. Quorum maintained.</span>
+      </div>
+    </div>
+  </div>
+</div>

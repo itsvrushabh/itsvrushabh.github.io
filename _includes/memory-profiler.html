@@ -1,0 +1,112 @@
+<!-- ==========================================
+     INTERACTIVE RUST ZERO-COPY MEMORY PROFILER
+     ========================================== -->
+<div class="memory-profiler-card" id="memory-profiler">
+  <div class="profiler-header">
+    <div class="profiler-title-wrap">
+      <div class="profiler-icon">🧠</div>
+      <div>
+        <h3 class="profiler-title">Rust Memory Architecture &middot; Zero-Copy vs. Heap Allocation Profiler</h3>
+        <p class="profiler-subtitle">
+          Interactive allocator telemetry: Compare heap pointer dereferencing with zero-allocation stack and slice references.
+        </p>
+      </div>
+    </div>
+    <div class="profiler-mode-toggle">
+      <button class="profiler-tab-btn active" id="prof-btn-zerocopy" data-mode="zerocopy">
+        <span>🦀 Zero-Copy (&amp;[u8] / Bytes)</span>
+      </button>
+      <button class="profiler-tab-btn" id="prof-btn-heap" data-mode="heap">
+        <span>⚠️ Naive Heap (clone / String)</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="profiler-body">
+    <!-- Code Comparison & Assembly Insight -->
+    <div class="profiler-code-pane">
+      <div class="profiler-pane-header">
+        <span class="pane-title" id="prof-code-title">ZERO-COPY PATH // STACK-BOUND SLICE (src/parser/zero_copy.rs)</span>
+        <button id="prof-run-bench-btn" class="btn-omarchy-primary btn-xs">
+          <span>⚡ Run Latency Benchmark</span>
+        </button>
+      </div>
+      <pre class="profiler-code-block"><code id="prof-code-display">// Zero-copy stream ingestion without heap allocation
+pub fn parse_packet&lt;'a&gt;(buf: &amp;'a [u8]) -&gt; Result&lt;PacketHeader&lt;'a&gt;, ParseError&gt; {
+    let magic = &amp;buf[0..4];
+    let payload = &amp;buf[4..]; // Borrows directly from stack/ring-buffer
+    Ok(PacketHeader { magic, payload }) // 0 bytes allocated on heap
+}</code></pre>
+
+      <!-- Live Allocation Telemetry Gauges -->
+      <div class="profiler-metrics-grid">
+        <div class="metric-box">
+          <span class="metric-label">HEAP ALLOCATIONS</span>
+          <span class="metric-val text-brand" id="prof-metric-heap">0 Bytes</span>
+          <span class="metric-sub" id="prof-metric-heap-sub">0 malloc calls on critical path</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-label">L1/L2 CACHE MISS RATE</span>
+          <span class="metric-val" id="prof-metric-cache">0.04%</span>
+          <span class="metric-sub">Full 64B cache-line residency</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-label">p99 LATENCY</span>
+          <span class="metric-val text-brand" id="prof-metric-latency">28 μs</span>
+          <span class="metric-sub">Sub-millisecond packet parse</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-label">CPU CYCLES / MSG</span>
+          <span class="metric-val" id="prof-metric-cycles">420 cycles</span>
+          <span class="metric-sub">Direct register passing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Memory Layout Diagram (Stack vs Heap) -->
+    <div class="profiler-diagram-pane">
+      <div class="diagram-header">
+        <span class="diagram-title">VIRTUAL ADDRESS SPACE &middot; HARDWARE MEMORY LAYOUT</span>
+        <span class="diagram-status" id="prof-status-badge">ZERO ALLOCATION ACTIVE</span>
+      </div>
+
+      <div class="memory-layout-visual">
+        <!-- Stack Region -->
+        <div class="memory-region stack-region">
+          <div class="region-label">STACK REGION [RSP &darr; RBP] (L1 DATA CACHE)</div>
+          <div class="memory-slots" id="prof-stack-slots">
+            <div class="mem-slot active-slot">
+              <span class="slot-addr">0x7ffd84a0</span>
+              <span class="slot-content">ptr: &amp;buf[0..4] (0x7ffd8480)</span>
+            </div>
+            <div class="mem-slot active-slot">
+              <span class="slot-addr">0x7ffd84a8</span>
+              <span class="slot-content">len: 4096 (usize)</span>
+            </div>
+            <div class="mem-slot active-slot">
+              <span class="slot-addr">0x7ffd84b0</span>
+              <span class="slot-content">cap: inline stack buffer</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bus Interconnect / Cache Lines -->
+        <div class="memory-interconnect" id="prof-interconnect">
+          <div class="interconnect-line"></div>
+          <span class="interconnect-label" id="prof-interconnect-label">Zero-copy pass-through: No heap traversal</span>
+        </div>
+
+        <!-- Heap Region -->
+        <div class="memory-region heap-region">
+          <div class="region-label">HEAP REGION [brk / mmap] (DRAM)</div>
+          <div class="memory-slots" id="prof-heap-slots">
+            <div class="mem-slot slot-idle">
+              <span class="slot-addr">0x55d1a000</span>
+              <span class="slot-content">[UNALLOCATED // ZERO HEAP CHURN]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
