@@ -10,7 +10,10 @@ export function init3DModelViewer() {
   const revealLayer = document.getElementById('h3d-reveal-layer');
   const sheen = document.getElementById('h3d-sheen');
 
-  if (!viewport || !baseLayer) return;
+  if (!viewport || !baseLayer) {
+    document.body.classList.add('hero-scrolled');
+    return;
+  }
 
   // Interaction State
   let isHovered = false;

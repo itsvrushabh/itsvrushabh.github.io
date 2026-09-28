@@ -1,0 +1,62 @@
+<!-- ==========================================
+     OMARCHY THEME PICKER MODAL (22 OFFICIAL PALETTES)
+     ========================================== -->
+<div id="theme-picker-modal" class="omarchy-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="theme-modal-title">
+  <div class="omarchy-modal-backdrop" data-close-themes></div>
+  <div class="omarchy-modal-card theme-picker-card">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <svg viewBox="0 0 24 24" fill="none" class="modal-icon" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2Z"/>
+        </svg>
+        <h3 id="theme-modal-title" class="modal-title">SYSTEM // SELECT THEME</h3>
+      </div>
+      <button class="modal-close-btn" data-close-themes aria-label="Close theme picker">
+        <svg viewBox="0 0 24 24" fill="none" class="close-icon"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
+      </button>
+    </div>
+
+    <div class="theme-picker-search-wrap">
+      <svg class="palette-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="theme-search-input" class="palette-input" placeholder="Search 22 official Omarchy themes (dark / light)..." autocomplete="off" spellcheck="false" aria-label="Search themes">
+    </div>
+
+    <div class="theme-picker-body">
+      <div class="theme-picker-grid" id="theme-picker-grid">
+        {% for theme in site.data.themes %}
+          <button class="theme-choice-card" data-theme-choice="{{ theme.id }}" data-theme-mode="{{ theme.mode }}" data-theme-name="{{ theme.name | downcase }}" aria-pressed="false" role="option">
+            <div class="theme-card-swatches">
+              <span class="theme-swatch-circle" style="background: {{ theme.background }}; border: 1px solid rgba(255,255,255,0.15);" title="Background"></span>
+              <span class="theme-swatch-circle" style="background: {{ theme.accent }};" title="Accent"></span>
+              <span class="theme-swatch-circle" style="background: {{ theme.green | default: theme.accent }};" title="Brand / Green"></span>
+              <span class="theme-swatch-circle" style="background: {{ theme.foreground }};" title="Foreground"></span>
+            </div>
+            <div class="theme-card-info">
+              <span class="theme-card-name">{{ theme.name }}</span>
+              <span class="theme-card-badge {{ theme.mode }}">{{ theme.mode | upcase }}</span>
+            </div>
+            <span class="theme-card-check" aria-hidden="true">✓</span>
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="modal-footer theme-picker-footer">
+      <div class="palette-hints">
+        <span>Click to apply immediately</span>
+        <span><kbd>T</kbd> to cycle</span>
+        <span><kbd>Esc</kbd> to close</span>
+      </div>
+      <div class="palette-power">
+        <span>22 Official Palettes</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -65,8 +65,12 @@ import {
 import {
   initShortcuts,
   openShortcutsModal,
-  closeShortcutsModal
+  closeShortcutsModal,
+  openThemePickerModal,
+  closeThemePickerModal
 } from './modules/shortcuts.js';
+
+import { initBlog } from './modules/blog.js';
 
 import { initTUI } from './modules/terminal.js';
 import { initGitHubStats } from './modules/stats.js';
@@ -99,6 +103,8 @@ window.omarchy = {
   closeCommandPalette,
   openShortcutsModal,
   closeShortcutsModal,
+  openThemePickerModal,
+  closeThemePickerModal,
   getUptimeString,
   showToastNotice
 };
@@ -142,6 +148,9 @@ function initOmarchyApp() {
 
   // 11. Hero 3D Model interactive hover reveal
   init3DModelViewer();
+
+  // 12. Blog & Dispatches (Search, tags, TOC, reading progress, code copy)
+  initBlog();
 }
 
 if (document.readyState === 'loading') {
@@ -184,6 +193,9 @@ export {
   initShortcuts,
   openShortcutsModal,
   closeShortcutsModal,
+  openThemePickerModal,
+  closeThemePickerModal,
+  initBlog,
   initTUI,
   initGitHubStats,
   initNeovimPlayground,

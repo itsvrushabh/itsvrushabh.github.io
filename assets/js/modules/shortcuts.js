@@ -22,6 +22,40 @@ export function closeShortcutsModal() {
   }
 }
 
+export function openThemePickerModal() {
+  const modal = document.getElementById('theme-picker-modal');
+  if (modal) {
+    modal.classList.add('visible');
+    modal.setAttribute('aria-hidden', 'false');
+    const input = document.getElementById('theme-search-input');
+    if (input) {
+      input.value = '';
+      filterThemesInModal('');
+      setTimeout(() => input.focus(), 60);
+    }
+  }
+}
+
+export function closeThemePickerModal() {
+  const modal = document.getElementById('theme-picker-modal');
+  if (modal) {
+    modal.classList.remove('visible');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+}
+
+export function filterThemesInModal(query) {
+  const q = (query || '').toLowerCase().trim();
+  const cards = document.querySelectorAll('#theme-picker-grid .theme-choice-card');
+  cards.forEach(card => {
+    const name = card.dataset.themeName || '';
+    const id = card.dataset.themeChoice || '';
+    const mode = card.dataset.themeMode || '';
+    const matches = !q || name.includes(q) || id.includes(q) || mode.includes(q);
+    card.style.display = matches ? '' : 'none';
+  });
+}
+
 export function initShortcuts() {
   let gKeyTimeout;
   let gPressed = false;
@@ -41,6 +75,7 @@ export function initShortcuts() {
     if (e.key === 'Escape') {
       closeCommandPalette();
       closeShortcutsModal();
+      closeThemePickerModal();
       const tuiWindow = document.getElementById('tui-window');
       if (tuiWindow && tuiWindow.classList.contains('fullscreen')) {
         tuiWindow.classList.remove('fullscreen');
@@ -165,12 +200,37 @@ export function initShortcuts() {
   // Theme trigger button in header
   const themeBtn = document.getElementById('theme-toggle-btn');
   if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-      cycleTheme();
+    themeBtn.addEventListener('click', (e) => {
+      if (e.shiftKey || e.altKey) {
+        cycleTheme();
+      } else {
+        openThemePickerModal();
+      }
     });
   }
 
-  // Theme picker chips in themes section
+  // Open theme picker triggers
+  document.querySelectorAll('[data-open-themes]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      openThemePickerModal();
+    });
+  });
+
+  // Close theme picker triggers
+  document.querySelectorAll('[data-close-themes]').forEach(el => {
+    el.addEventListener('click', closeThemePickerModal);
+  });
+
+  // Theme search filter input
+  const themeSearchInput = document.getElementById('theme-search-input');
+  if (themeSearchInput) {
+    themeSearchInput.addEventListener('input', e => {
+      filterThemesInModal(e.target.value);
+    });
+  }
+
+  // Theme picker chips
   document.querySelectorAll('[data-theme-choice]').forEach(btn => {
     btn.addEventListener('click', () => {
       const chosen = btn.dataset.themeChoice;

@@ -2,7 +2,7 @@
 // VRUSHABH DESHMUKH // PWA SERVICE WORKER (OFFLINE DISPATCHES CACHE)
 // ==============================================================================
 
-const CACHE_NAME = 'vrushabh-v3.4';
+const CACHE_NAME = 'vrushabh-v3.5';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
@@ -27,6 +27,7 @@ const PRECACHE_ASSETS = [
   '/assets/js/modules/stats.js',
   '/assets/js/modules/widgets.js',
   '/assets/js/modules/model3d.js',
+  '/assets/js/modules/blog.js',
   '/assets/images/3D_helmat_model_v3.webp',
   '/assets/images/3D_model_v3.webp',
   '/assets/images/favicon.svg',

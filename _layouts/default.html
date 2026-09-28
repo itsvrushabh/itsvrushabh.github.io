@@ -28,7 +28,10 @@
       <span id="hw-renderer" class="hw-val">Canvas2D</span>
     </div>
     <button data-open-shortcuts class="floating-shortcut-pill" aria-label="Open keyboard shortcuts cheatsheet">
-      <kbd>?</kbd> <span>Shortcuts</span> &middot; <kbd>T</kbd> <span>Theme</span>
+      <kbd>?</kbd> <span>Shortcuts</span>
+    </button>
+    <button data-open-themes class="floating-shortcut-pill" aria-label="Open theme picker">
+      <kbd>T</kbd> <span>Theme</span>
     </button>
   </div>
 
@@ -37,6 +40,9 @@
 
   <!-- Keyboard Shortcuts Cheatsheet Modal -->
   {% include shortcuts-modal.html %}
+
+  <!-- Omarchy Theme Picker Modal (22 Palettes) -->
+  {% include theme-picker-modal.html %}
 
   <!-- Omarchy Command Palette Modal (Ctrl+K / Super+Space) -->
   {% include command-palette.html %}
