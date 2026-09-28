@@ -2,8 +2,8 @@ name: Sync Themes from Omarchy Bot
 
 on:
   schedule:
-    # Runs weekly on Sundays at 02:00 UTC
-    - cron: '0 2 * * 0'
+    # Runs daily at 02:00 UTC
+    - cron: '0 2 * * *'
   workflow_dispatch:
 
 permissions:
