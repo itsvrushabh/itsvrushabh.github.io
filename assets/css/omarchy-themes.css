@@ -3,19 +3,19 @@
    ========================================================================== */
 
 :root {
-  --t-bg-deep: #070907;
-  --t-bg: #0b0f0b;
-  --t-surface: #121713;
-  --t-surface-2: #19221a;
-  --t-border-subtle: rgba(210, 255, 0, 0.16);
-  --t-border-strong: rgba(210, 255, 0, 0.42);
-  --t-text: #ffffff;
-  --t-text-secondary: #a4b3a6;
-  --t-text-muted: #5a6b5c;
-  --t-brand: #d2ff00;
-  --t-brand-soft: rgba(210, 255, 0, 0.14);
-  --t-brand-ink: #070907;
-  --t-selection: #d2ff00;
+  --t-bg-deep: #13141c;
+  --t-bg: #1a1b26;
+  --t-surface: #13141c;
+  --t-surface-2: #24283b;
+  --t-border-subtle: #24283b;
+  --t-border-strong: #414868;
+  --t-text: #c0caf5;
+  --t-text-secondary: #a9b1d6;
+  --t-text-muted: #414868;
+  --t-brand: #9ece6a;
+  --t-brand-soft: color-mix(in srgb, var(--t-brand) 15%, transparent);
+  --t-brand-ink: #0c0e10;
+  --t-selection: #292e42;
   color-scheme: dark;
 }
 
@@ -343,19 +343,19 @@
 }
 
 [data-theme="tokyo-night"] {
-  --t-bg-deep: #070907;
-  --t-bg: #0b0f0b;
-  --t-surface: #121713;
-  --t-surface-2: #19221a;
-  --t-border-subtle: rgba(210, 255, 0, 0.16);
-  --t-border-strong: rgba(210, 255, 0, 0.42);
-  --t-text: #ffffff;
-  --t-text-secondary: #a4b3a6;
-  --t-text-muted: #5a6b5c;
-  --t-brand: #d2ff00;
-  --t-brand-soft: rgba(210, 255, 0, 0.14);
-  --t-brand-ink: #070907;
-  --t-selection: #d2ff00;
+  --t-bg-deep: #13141c;
+  --t-bg: #1a1b26;
+  --t-surface: #13141c;
+  --t-surface-2: #24283b;
+  --t-border-subtle: #24283b;
+  --t-border-strong: #414868;
+  --t-text: #c0caf5;
+  --t-text-secondary: #a9b1d6;
+  --t-text-muted: #414868;
+  --t-brand: #9ece6a;
+  --t-brand-soft: color-mix(in srgb, #9ece6a 16%, transparent);
+  --t-brand-ink: #0c0e10;
+  --t-selection: #292e42;
   color-scheme: dark;
 }
 
