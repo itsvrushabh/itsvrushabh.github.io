@@ -685,6 +685,53 @@ export function initShaderSandbox() {
 }
 
 /**
+ * 8. Interactive Card Spotlight & 3D Tilt Engine
+ */
+export function initCardSpotlightAndTilt() {
+  if (typeof window === 'undefined') return;
+
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  const cards = document.querySelectorAll('.project-card, .post-card, .omarchy-quote-card');
+  if (!cards.length) return;
+
+  cards.forEach(card => {
+    let bounds = null;
+
+    card.addEventListener('pointerenter', () => {
+      bounds = card.getBoundingClientRect();
+    });
+
+    card.addEventListener('pointermove', (e) => {
+      if (!bounds) bounds = card.getBoundingClientRect();
+      const x = e.clientX - bounds.left;
+      const y = e.clientY - bounds.top;
+      const px = Math.max(0, Math.min(100, (x / bounds.width) * 100));
+      const py = Math.max(0, Math.min(100, (y / bounds.height) * 100));
+
+      card.style.setProperty('--mouse-x', `${px.toFixed(1)}%`);
+      card.style.setProperty('--mouse-y', `${py.toFixed(1)}%`);
+
+      if (isFinePointer) {
+        const centerX = bounds.width / 2;
+        const centerY = bounds.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -4;
+        const rotateY = ((x - centerX) / centerX) * 4;
+        card.style.setProperty('--tilt-rx', `${rotateX.toFixed(2)}deg`);
+        card.style.setProperty('--tilt-ry', `${rotateY.toFixed(2)}deg`);
+      }
+    });
+
+    card.addEventListener('pointerleave', () => {
+      bounds = null;
+      card.style.setProperty('--tilt-rx', '0deg');
+      card.style.setProperty('--tilt-ry', '0deg');
+      card.style.setProperty('--mouse-x', '50%');
+      card.style.setProperty('--mouse-y', '50%');
+    });
+  });
+}
+
+/**
  * Convenience aggregator to initialize all widgets in one call
  */
 export function initWidgets() {
@@ -695,4 +742,5 @@ export function initWidgets() {
   initMemoryProfiler();
   initRaftMesh();
   initShaderSandbox();
+  initCardSpotlightAndTilt();
 }

@@ -101,6 +101,32 @@ export function formatAudioTime(seconds) {
   return `${m}:${String(rem).padStart(2, '0')}`;
 }
 
+let beatAnimFrame = null;
+
+function runBeatGlowLoop() {
+  if (!isAudioPlaying) {
+    document.documentElement.style.setProperty('--music-beat-glow', '0');
+    if (beatAnimFrame) cancelAnimationFrame(beatAnimFrame);
+    beatAnimFrame = null;
+    return;
+  }
+
+  if (window.audioAnalyser && window.audioFrequencyData) {
+    window.audioAnalyser.getByteFrequencyData(window.audioFrequencyData);
+    let sum = 0;
+    const binCount = 8;
+    for (let i = 1; i <= binCount; i++) {
+      sum += window.audioFrequencyData[i];
+    }
+    const avg = sum / binCount;
+    const beatLevel = Math.max(0, (avg - 130) / 125);
+    const pulse = Math.min(1, Math.max(0, beatLevel));
+    document.documentElement.style.setProperty('--music-beat-glow', pulse.toFixed(3));
+  }
+
+  beatAnimFrame = requestAnimationFrame(runBeatGlowLoop);
+}
+
 export function updateMusicUI(playing) {
   isAudioPlaying = playing;
   window.isAudioPlaying = playing;
@@ -124,6 +150,13 @@ export function updateMusicUI(playing) {
     document.querySelectorAll('#omarchy-music-player .eq-bar').forEach(bar => {
       bar.style.height = '3px';
     });
+    document.documentElement.style.setProperty('--music-beat-glow', '0');
+    if (beatAnimFrame) {
+      cancelAnimationFrame(beatAnimFrame);
+      beatAnimFrame = null;
+    }
+  } else {
+    runBeatGlowLoop();
   }
 }
 

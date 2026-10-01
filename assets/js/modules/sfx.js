@@ -115,3 +115,54 @@ export function playThemeChime() {
     });
   } catch (e) {}
 }
+
+let lastHoverSoundTime = 0;
+
+export function playHoverTick() {
+  if (!sfxEnabled) return;
+  const now = performance.now();
+  if (now - lastHoverSoundTime < 45) return;
+  lastHoverSoundTime = now;
+
+  initSFX();
+  if (!sfxAudioCtx) return;
+
+  try {
+    const t = sfxAudioCtx.currentTime;
+    const osc = sfxAudioCtx.createOscillator();
+    const gain = sfxAudioCtx.createGain();
+    const filter = sfxAudioCtx.createBiquadFilter();
+
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(1750, t);
+    filter.Q.value = 3.0;
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(2200, t);
+    osc.frequency.exponentialRampToValueAtTime(800, t + 0.015);
+
+    gain.gain.setValueAtTime(0.016, t);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.015);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(sfxAudioCtx.destination);
+
+    osc.start(t);
+    osc.stop(t + 0.015);
+  } catch (e) {}
+}
+
+export function initHoverSFX() {
+  if (typeof window === 'undefined') return;
+  document.addEventListener('mouseover', (e) => {
+    if (!sfxEnabled) return;
+    const interactive = e.target.closest(
+      '.btn-omarchy-primary, .btn-omarchy-secondary, .btn, .mb-item, .tui-cmd-btn, .snippet-tab-btn, .hero-snippet, .filter-btn, .project-card, .post-card, .card-link, .theme-choice-card, .neovim-tab, .neovim-run-btn, .neovim-copy-btn, .floating-shortcut-pill, .omarchy-back-btn, .toc-link, .copy-code-btn, .share-btn'
+    );
+    if (interactive) {
+      playHoverTick();
+    }
+  }, { passive: true });
+}
+

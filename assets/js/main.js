@@ -35,7 +35,9 @@ import {
   updateSFXButton,
   playKeyClick,
   playWindowSnap,
-  playThemeChime
+  playThemeChime,
+  playHoverTick,
+  initHoverSFX
 } from './modules/sfx.js';
 
 import {
@@ -83,10 +85,12 @@ import {
   initMemoryProfiler,
   initRaftMesh,
   initShaderSandbox,
+  initCardSpotlightAndTilt,
   initWidgets
 } from './modules/widgets.js';
 
 import { init3DModelViewer } from './modules/model3d.js';
+import { initCyberCursor } from './modules/cursor.js';
 
 // =========================================================================
 // GLOBAL PUBLIC API (window.omarchy)
@@ -151,6 +155,10 @@ function initOmarchyApp() {
 
   // 12. Blog & Dispatches (Search, tags, TOC, reading progress, code copy)
   initBlog();
+
+  // 13. Mechanical hover sound effects & cyber cursor
+  initHoverSFX();
+  initCyberCursor();
 }
 
 if (document.readyState === 'loading') {
@@ -175,6 +183,8 @@ export {
   playKeyClick,
   playWindowSnap,
   playThemeChime,
+  playHoverTick,
+  initHoverSFX,
   initMenubarClock,
   initMenubarCalendar,
   initWorkspaceHUD,
@@ -205,6 +215,8 @@ export {
   initMemoryProfiler,
   initRaftMesh,
   initShaderSandbox,
+  initCardSpotlightAndTilt,
   initWidgets,
-  init3DModelViewer
+  init3DModelViewer,
+  initCyberCursor
 };

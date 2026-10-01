@@ -342,10 +342,46 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
       tuiContainer.scrollTop = tuiContainer.scrollHeight;
     }
 
+    // Ghost autosuggestion element
+    let ghostEl = document.getElementById('tui-ghost');
+    if (!ghostEl && tuiForm) {
+      ghostEl = document.createElement('span');
+      ghostEl.id = 'tui-ghost';
+      ghostEl.className = 'tui-ghost';
+      ghostEl.setAttribute('aria-hidden', 'true');
+      tuiForm.insertBefore(ghostEl, tuiInput);
+    }
+
+    let activeSuggestion = '';
+
+    function updateGhostSuggestion() {
+      if (!ghostEl) return;
+      const current = tuiInput.value;
+      const trimmed = current.toLowerCase().trim();
+      if (!trimmed) {
+        ghostEl.innerHTML = '';
+        activeSuggestion = '';
+        return;
+      }
+      const match = KNOWN_COMMANDS.find(c => c.startsWith(trimmed) && c !== trimmed);
+      if (match) {
+        activeSuggestion = match;
+        const remaining = match.slice(current.length);
+        ghostEl.innerHTML = `<span class="ghost-hidden">${escapeHtml(current)}</span><span class="ghost-match">${escapeHtml(remaining)}</span>`;
+      } else {
+        activeSuggestion = '';
+        ghostEl.innerHTML = '';
+      }
+    }
+
+    tuiInput.addEventListener('input', updateGhostSuggestion);
+
     tuiForm.addEventListener('submit', e => {
       e.preventDefault();
       const val = tuiInput.value;
       tuiInput.value = '';
+      activeSuggestion = '';
+      if (ghostEl) ghostEl.innerHTML = '';
       runCommand(val);
     });
 
@@ -355,23 +391,33 @@ PID   COMMAND              CPU%   MEM%   TOKIO-THREADS   STATUS
         if (historyIdx > 0) {
           historyIdx--;
           tuiInput.value = commandHistory[historyIdx] || '';
+          updateGhostSuggestion();
         }
       } else if (e.key === 'ArrowDown') {
         e.preventDefault();
         if (historyIdx < commandHistory.length - 1) {
           historyIdx++;
           tuiInput.value = commandHistory[historyIdx] || '';
+          updateGhostSuggestion();
         } else {
           historyIdx = commandHistory.length;
           tuiInput.value = '';
+          updateGhostSuggestion();
         }
-      } else if (e.key === 'Tab') {
-        e.preventDefault();
-        const current = tuiInput.value.toLowerCase().trim();
-        if (current) {
-          const match = KNOWN_COMMANDS.find(c => c.startsWith(current));
-          if (match) {
-            tuiInput.value = match;
+      } else if (e.key === 'Tab' || (e.key === 'ArrowRight' && tuiInput.selectionStart === tuiInput.value.length)) {
+        if (activeSuggestion) {
+          e.preventDefault();
+          tuiInput.value = activeSuggestion;
+          updateGhostSuggestion();
+        } else if (e.key === 'Tab') {
+          e.preventDefault();
+          const current = tuiInput.value.toLowerCase().trim();
+          if (current) {
+            const match = KNOWN_COMMANDS.find(c => c.startsWith(current));
+            if (match) {
+              tuiInput.value = match;
+              updateGhostSuggestion();
+            }
           }
         }
       }
