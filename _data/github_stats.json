@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-01T02:49:40Z",
-  "last_updated_pretty": "October 01, 2026 at 02:49 UTC",
+  "last_updated": "2026-10-01T11:58:17Z",
+  "last_updated_pretty": "October 01, 2026 at 11:58 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -18,7 +18,17 @@
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-09-30T21:36:40Z",
+      "pushed_at": "2026-10-01T11:44:35Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-10-01T11:37:14Z",
       "stars": 0,
       "topics": []
     },
@@ -39,16 +49,6 @@
       "language": "Python",
       "name": "testing_itsvrushabh.github.io",
       "pushed_at": "2026-09-28T07:53:12Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-09-28T05:20:09Z",
       "stars": 0,
       "topics": []
     },
