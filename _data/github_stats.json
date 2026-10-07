@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-07T12:12:21Z",
-  "last_updated_pretty": "October 07, 2026 at 12:12 UTC",
+  "last_updated": "2026-10-07T22:22:41Z",
+  "last_updated_pretty": "October 07, 2026 at 22:22 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,20 +15,20 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/expense-organizer",
-      "language": "Dart",
-      "name": "expense-organizer",
-      "pushed_at": "2026-10-07T11:37:30Z",
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-10-07T12:12:22Z",
       "stars": 0,
       "topics": []
     },
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-07T03:02:13Z",
+      "html_url": "https://github.com/itsvrushabh/expense-organizer",
+      "language": "Dart",
+      "name": "expense-organizer",
+      "pushed_at": "2026-10-07T11:37:30Z",
       "stars": 0,
       "topics": []
     },
