@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-07T03:02:12Z",
-  "last_updated_pretty": "October 07, 2026 at 03:02 UTC",
+  "last_updated": "2026-10-07T12:12:21Z",
+  "last_updated_pretty": "October 07, 2026 at 12:12 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,10 +15,10 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-10-07T02:49:23Z",
+      "html_url": "https://github.com/itsvrushabh/expense-organizer",
+      "language": "Dart",
+      "name": "expense-organizer",
+      "pushed_at": "2026-10-07T11:37:30Z",
       "stars": 0,
       "topics": []
     },
@@ -28,7 +28,17 @@
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-06T21:58:02Z",
+      "pushed_at": "2026-10-07T03:02:13Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-10-07T02:49:23Z",
       "stars": 0,
       "topics": []
     },
@@ -79,16 +89,6 @@
       "language": "Python",
       "name": "todo",
       "pushed_at": "2026-09-25T07:43:30Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/expense-organizer",
-      "language": "Dart",
-      "name": "expense-organizer",
-      "pushed_at": "2026-09-16T11:35:19Z",
       "stars": 0,
       "topics": []
     },
