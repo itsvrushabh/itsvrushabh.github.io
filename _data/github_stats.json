@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-10-08T03:18:54Z",
-  "last_updated_pretty": "October 08, 2026 at 03:18 UTC",
+  "last_updated": "2026-10-08T12:22:45Z",
+  "last_updated_pretty": "October 08, 2026 at 12:22 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
     "bio": "",
-    "public_repos": 19,
+    "public_repos": 20,
     "followers": 6,
     "total_stars": 0,
     "total_forks": 0,
@@ -13,12 +13,12 @@
   },
   "repos": [
     {
-      "description": "",
+      "description": "Beautiful, Modern & Opinionated Linux",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "html_url": "https://github.com/itsvrushabh/omarchy",
       "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-10-08T03:07:10Z",
+      "name": "omarchy",
+      "pushed_at": "2026-10-08T10:31:16Z",
       "stars": 0,
       "topics": []
     },
@@ -28,7 +28,17 @@
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-07T22:22:42Z",
+      "pushed_at": "2026-10-08T03:18:55Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-10-08T03:07:10Z",
       "stars": 0,
       "topics": []
     },
