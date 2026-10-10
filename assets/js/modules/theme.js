@@ -23,6 +23,7 @@ export const OMARCHY_THEMES = [
   'ristretto',
   'rose-pine',
   'solitude',
+  'starship',
   'tokyo-night',
   'vantablack',
   'white'

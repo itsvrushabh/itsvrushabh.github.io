@@ -1,5 +1,5 @@
 /* ==========================================================================
-   OMARCHY OFFICIAL THEMES (22 THEMES - AUTO-SYNCED)
+   OMARCHY OFFICIAL THEMES (23 THEMES - AUTO-SYNCED)
    ========================================================================== */
 
 :root {
@@ -339,6 +339,23 @@
   --t-brand-soft: color-mix(in srgb, #9fa5a9 16%, transparent);
   --t-brand-ink: #0c0e10;
   --t-selection: #343d41;
+  color-scheme: dark;
+}
+
+[data-theme="starship"] {
+  --t-bg-deep: #161618;
+  --t-bg: #1c1c1e;
+  --t-surface: #161618;
+  --t-surface-2: #2c2c2e;
+  --t-border-subtle: #2c2c2e;
+  --t-border-strong: #8e8e93;
+  --t-text: #ffffff;
+  --t-text-secondary: #f5f5f7;
+  --t-text-muted: #8e8e93;
+  --t-brand: #ff9f0a;
+  --t-brand-soft: color-mix(in srgb, #ff9f0a 16%, transparent);
+  --t-brand-ink: #0c0e10;
+  --t-selection: #3a3a3c;
   color-scheme: dark;
 }
 
