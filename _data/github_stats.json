@@ -1,17 +1,27 @@
 {
-  "last_updated": "2026-10-10T03:04:36Z",
-  "last_updated_pretty": "October 10, 2026 at 03:04 UTC",
+  "last_updated": "2026-10-10T11:30:12Z",
+  "last_updated_pretty": "October 10, 2026 at 11:30 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
     "bio": "",
-    "public_repos": 20,
+    "public_repos": 21,
     "followers": 6,
     "total_stars": 0,
     "total_forks": 0,
     "html_url": "https://github.com/itsvrushabh"
   },
   "repos": [
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-10-10T08:01:59Z",
+      "stars": 0,
+      "topics": []
+    },
     {
       "description": "",
       "forks": 0,
@@ -23,12 +33,12 @@
       "topics": []
     },
     {
-      "description": "",
+      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-09T21:57:23Z",
+      "html_url": "https://github.com/itsvrushabh/pr-agent",
+      "language": "",
+      "name": "pr-agent",
+      "pushed_at": "2026-10-10T01:05:14Z",
       "stars": 0,
       "topics": []
     },
