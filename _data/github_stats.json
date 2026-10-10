@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-10-10T11:30:12Z",
-  "last_updated_pretty": "October 10, 2026 at 11:30 UTC",
+  "last_updated": "2026-10-10T16:29:49Z",
+  "last_updated_pretty": "October 10, 2026 at 16:29 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
     "bio": "",
-    "public_repos": 21,
+    "public_repos": 22,
     "followers": 6,
     "total_stars": 0,
     "total_forks": 0,
@@ -13,12 +13,32 @@
   },
   "repos": [
     {
+      "description": "The lean application framework for Python.  Build sophisticated user interfaces with a simple Python API. Run your apps in the terminal and a web browser.",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/textual",
+      "language": "",
+      "name": "textual",
+      "pushed_at": "2026-10-10T15:29:08Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/pr-agent",
+      "language": "Python",
+      "name": "pr-agent",
+      "pushed_at": "2026-10-10T14:30:09Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
       "description": "",
       "forks": 0,
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-10T08:01:59Z",
+      "pushed_at": "2026-10-10T11:30:13Z",
       "stars": 0,
       "topics": []
     },
@@ -29,16 +49,6 @@
       "language": "",
       "name": "itsvrushabh",
       "pushed_at": "2026-10-10T02:52:59Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/pr-agent",
-      "language": "",
-      "name": "pr-agent",
-      "pushed_at": "2026-10-10T01:05:14Z",
       "stars": 0,
       "topics": []
     },
