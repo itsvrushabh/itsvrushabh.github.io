@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-11T11:43:23Z",
-  "last_updated_pretty": "October 11, 2026 at 11:43 UTC",
+  "last_updated": "2026-10-11T16:54:38Z",
+  "last_updated_pretty": "October 11, 2026 at 16:54 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -12,6 +12,16 @@
     "html_url": "https://github.com/itsvrushabh"
   },
   "repos": [
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-10-11T11:43:25Z",
+      "stars": 0,
+      "topics": []
+    },
     {
       "description": "Beautiful, Modern & Opinionated Linux",
       "forks": 0,
@@ -29,16 +39,6 @@
       "language": "Python",
       "name": "pr-agent",
       "pushed_at": "2026-10-11T08:13:51Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-11T02:35:42Z",
       "stars": 0,
       "topics": []
     },
