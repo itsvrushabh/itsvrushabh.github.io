@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-11T02:35:41Z",
-  "last_updated_pretty": "October 11, 2026 at 02:35 UTC",
+  "last_updated": "2026-10-11T11:43:23Z",
+  "last_updated_pretty": "October 11, 2026 at 11:43 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -13,6 +13,36 @@
   },
   "repos": [
     {
+      "description": "Beautiful, Modern & Opinionated Linux",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/omarchy",
+      "language": "",
+      "name": "omarchy",
+      "pushed_at": "2026-10-11T10:03:49Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/pr-agent",
+      "language": "Python",
+      "name": "pr-agent",
+      "pushed_at": "2026-10-11T08:13:51Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-10-11T02:35:42Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
       "description": "",
       "forks": 0,
       "html_url": "https://github.com/itsvrushabh/itsvrushabh",
@@ -23,42 +53,12 @@
       "topics": []
     },
     {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-10T20:48:14Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
       "description": "The lean application framework for Python.  Build sophisticated user interfaces with a simple Python API. Run your apps in the terminal and a web browser.",
       "forks": 0,
       "html_url": "https://github.com/itsvrushabh/textual",
       "language": "",
       "name": "textual",
       "pushed_at": "2026-10-10T15:29:08Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/pr-agent",
-      "language": "Python",
-      "name": "pr-agent",
-      "pushed_at": "2026-10-10T14:30:09Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "Beautiful, Modern & Opinionated Linux",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/omarchy",
-      "language": "",
-      "name": "omarchy",
-      "pushed_at": "2026-10-08T10:31:16Z",
       "stars": 0,
       "topics": []
     },
