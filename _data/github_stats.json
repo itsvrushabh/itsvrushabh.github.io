@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-12T23:53:43Z",
-  "last_updated_pretty": "October 12, 2026 at 23:53 UTC",
+  "last_updated": "2026-10-13T04:14:58Z",
+  "last_updated_pretty": "October 13, 2026 at 04:14 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,20 +15,40 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-12T13:45:10Z",
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-10-13T04:03:01Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "Linux kernel source tree",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/linux",
+      "language": "C",
+      "name": "linux",
+      "pushed_at": "2026-10-13T03:13:22Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/pr-agent",
+      "language": "Python",
+      "name": "pr-agent",
+      "pushed_at": "2026-10-13T02:51:06Z",
       "stars": 0,
       "topics": []
     },
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-10-12T02:46:08Z",
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-10-12T23:53:44Z",
       "stars": 0,
       "topics": []
     },
@@ -39,16 +59,6 @@
       "language": "",
       "name": "omarchy",
       "pushed_at": "2026-10-11T10:03:49Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/pr-agent",
-      "language": "Python",
-      "name": "pr-agent",
-      "pushed_at": "2026-10-11T08:13:51Z",
       "stars": 0,
       "topics": []
     },
@@ -213,16 +223,6 @@
       "language": "Python",
       "name": "snowflake-sqlalchemy",
       "pushed_at": "2026-01-14T05:53:45Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "Linux kernel source tree",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/linux",
-      "language": "C",
-      "name": "linux",
-      "pushed_at": "2026-01-14T04:27:41Z",
       "stars": 0,
       "topics": []
     },
