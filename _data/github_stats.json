@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-18T01:52:07Z",
-  "last_updated_pretty": "October 18, 2026 at 01:52 UTC",
+  "last_updated": "2026-10-18T10:01:46Z",
+  "last_updated_pretty": "October 18, 2026 at 10:01 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -13,12 +13,12 @@
   },
   "repos": [
     {
-      "description": "",
+      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-10-18T01:39:13Z",
+      "html_url": "https://github.com/itsvrushabh/pr-agent",
+      "language": "Python",
+      "name": "pr-agent",
+      "pushed_at": "2026-10-18T08:00:02Z",
       "stars": 0,
       "topics": []
     },
@@ -28,7 +28,17 @@
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-17T19:46:57Z",
+      "pushed_at": "2026-10-18T01:52:08Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-10-18T01:39:13Z",
       "stars": 0,
       "topics": []
     },
@@ -59,16 +69,6 @@
       "language": "C",
       "name": "linux",
       "pushed_at": "2026-10-13T03:13:22Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/pr-agent",
-      "language": "Python",
-      "name": "pr-agent",
-      "pushed_at": "2026-10-13T02:51:06Z",
       "stars": 0,
       "topics": []
     },
