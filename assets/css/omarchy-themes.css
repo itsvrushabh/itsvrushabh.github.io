@@ -138,6 +138,23 @@
   color-scheme: dark;
 }
 
+[data-theme="jade-horse"] {
+  --t-bg-deep: #0f1e19;
+  --t-bg: #142620;
+  --t-surface: #0f1e19;
+  --t-surface-2: #203b31;
+  --t-border-subtle: #203b31;
+  --t-border-strong: #64887b;
+  --t-text: #f0faf4;
+  --t-text-secondary: #dfede5;
+  --t-text-muted: #64887b;
+  --t-brand: #8bcbb1;
+  --t-brand-soft: color-mix(in srgb, #8bcbb1 16%, transparent);
+  --t-brand-ink: #0c0e10;
+  --t-selection: #2b5147;
+  color-scheme: dark;
+}
+
 [data-theme="kanagawa"] {
   --t-bg-deep: #17171e;
   --t-bg: #1f1f28;
@@ -254,23 +271,6 @@
   --t-brand-soft: color-mix(in srgb, #a3be8c 16%, transparent);
   --t-brand-ink: #0c0e10;
   --t-selection: #434c5e;
-  color-scheme: dark;
-}
-
-[data-theme="osaka-jade"] {
-  --t-bg-deep: #0c1512;
-  --t-bg: #111c18;
-  --t-surface: #0c1512;
-  --t-surface-2: #23372B;
-  --t-border-subtle: #23372B;
-  --t-border-strong: #53685B;
-  --t-text: #F7E8B2;
-  --t-text-secondary: #C1C497;
-  --t-text-muted: #53685B;
-  --t-brand: #549e6a;
-  --t-brand-soft: color-mix(in srgb, #549e6a 16%, transparent);
-  --t-brand-ink: #0c0e10;
-  --t-selection: #32473B;
   color-scheme: dark;
 }
 

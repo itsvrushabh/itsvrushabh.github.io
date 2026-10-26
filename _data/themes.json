@@ -133,6 +133,25 @@
     "red": "#50f872"
   },
   {
+    "id": "jade-horse",
+    "name": "Jade Horse",
+    "mode": "dark",
+    "accent": "#8bcbb1",
+    "background": "#142620",
+    "dark_background": "#0f1e19",
+    "lighter_background": "#203b31",
+    "foreground": "#dfede5",
+    "bright_foreground": "#f0faf4",
+    "muted": "#64887b",
+    "selection": "#2b5147",
+    "green": "#8bcbb1",
+    "cyan": "#86c7c5",
+    "blue": "#96b7d0",
+    "magenta": "#b7a1c8",
+    "yellow": "#c5cc91",
+    "red": "#d88d91"
+  },
+  {
     "id": "kanagawa",
     "name": "Kanagawa",
     "mode": "dark",
@@ -264,25 +283,6 @@
     "magenta": "#b48ead",
     "yellow": "#ebcb8b",
     "red": "#bf616a"
-  },
-  {
-    "id": "osaka-jade",
-    "name": "Osaka Jade",
-    "mode": "dark",
-    "accent": "#509475",
-    "background": "#111c18",
-    "dark_background": "#0c1512",
-    "lighter_background": "#23372B",
-    "foreground": "#C1C497",
-    "bright_foreground": "#F7E8B2",
-    "muted": "#53685B",
-    "selection": "#32473B",
-    "green": "#549e6a",
-    "cyan": "#2DD5B7",
-    "blue": "#509475",
-    "magenta": "#D2689C",
-    "yellow": "#459451",
-    "red": "#FF5345"
   },
   {
     "id": "retro-82",
