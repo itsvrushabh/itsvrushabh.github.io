@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-29T03:12:51Z",
-  "last_updated_pretty": "October 29, 2026 at 03:12 UTC",
+  "last_updated": "2026-10-29T11:53:48Z",
+  "last_updated_pretty": "October 29, 2026 at 11:53 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,10 +15,30 @@
     {
       "description": "",
       "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-10-29T08:41:24Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/pr-agent",
+      "language": "Python",
+      "name": "pr-agent",
+      "pushed_at": "2026-10-29T07:37:04Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-28T21:57:37Z",
+      "pushed_at": "2026-10-29T03:12:52Z",
       "stars": 0,
       "topics": []
     },
@@ -29,26 +49,6 @@
       "language": "Dart",
       "name": "expense-organizer",
       "pushed_at": "2026-10-28T11:35:08Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-10-28T09:28:34Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/pr-agent",
-      "language": "Python",
-      "name": "pr-agent",
-      "pushed_at": "2026-10-28T05:06:28Z",
       "stars": 0,
       "topics": []
     },
