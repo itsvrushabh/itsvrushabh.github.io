@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-10-30T03:16:10Z",
-  "last_updated_pretty": "October 30, 2026 at 03:16 UTC",
+  "last_updated": "2026-10-30T11:46:55Z",
+  "last_updated_pretty": "October 30, 2026 at 11:46 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
     "bio": "",
-    "public_repos": 23,
+    "public_repos": 24,
     "followers": 7,
     "total_stars": 0,
     "total_forks": 0,
@@ -15,20 +15,10 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-29T22:08:19Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/pr-agent",
-      "language": "Python",
-      "name": "pr-agent",
-      "pushed_at": "2026-10-29T15:36:25Z",
+      "html_url": "https://github.com/itsvrushabh/pinchpr",
+      "language": "Rust",
+      "name": "pinchpr",
+      "pushed_at": "2026-10-30T10:07:29Z",
       "stars": 0,
       "topics": []
     },
@@ -38,7 +28,27 @@
       "html_url": "https://github.com/itsvrushabh/itsvrushabh",
       "language": "",
       "name": "itsvrushabh",
-      "pushed_at": "2026-10-29T08:41:24Z",
+      "pushed_at": "2026-10-30T08:47:43Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier.",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/pr-agent",
+      "language": "Python",
+      "name": "pr-agent",
+      "pushed_at": "2026-10-30T05:24:11Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-10-30T03:16:11Z",
       "stars": 0,
       "topics": []
     },
