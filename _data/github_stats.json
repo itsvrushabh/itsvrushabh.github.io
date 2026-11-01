@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-01T02:55:23Z",
-  "last_updated_pretty": "November 01, 2026 at 02:55 UTC",
+  "last_updated": "2026-11-01T12:12:21Z",
+  "last_updated_pretty": "November 01, 2026 at 12:12 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
     "bio": "",
-    "public_repos": 24,
+    "public_repos": 26,
     "followers": 7,
     "total_stars": 0,
     "total_forks": 0,
@@ -15,10 +15,20 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-10-31T20:44:56Z",
+      "html_url": "https://github.com/itsvrushabh/dhabatui",
+      "language": "Rust",
+      "name": "dhabatui",
+      "pushed_at": "2026-11-01T12:11:18Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "A Rust crate for cooking up terminal user interfaces (TUIs) 👨‍🍳🐀 https://ratatui.rs",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/ratatui",
+      "language": "",
+      "name": "ratatui",
+      "pushed_at": "2026-11-01T11:22:58Z",
       "stars": 0,
       "topics": []
     },
@@ -28,7 +38,51 @@
       "html_url": "https://github.com/itsvrushabh/itsvrushabh",
       "language": "",
       "name": "itsvrushabh",
-      "pushed_at": "2026-10-31T08:34:42Z",
+      "pushed_at": "2026-11-01T09:26:08Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "Textfsm-rs with async code",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/asyncfsm",
+      "language": "Rust",
+      "name": "asyncfsm",
+      "pushed_at": "2026-11-01T06:12:20Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "An experiment in implementing TextFSM in Rust",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/textfsm-rs",
+      "language": "Rust",
+      "name": "textfsm-rs",
+      "pushed_at": "2026-11-01T06:08:41Z",
+      "stars": 0,
+      "topics": [
+        "networking",
+        "nts-templates",
+        "rust"
+      ]
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/todo",
+      "language": "Python",
+      "name": "todo",
+      "pushed_at": "2026-11-01T06:08:37Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-11-01T02:55:24Z",
       "stars": 0,
       "topics": []
     },
@@ -145,16 +199,6 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/todo",
-      "language": "Python",
-      "name": "todo",
-      "pushed_at": "2026-09-25T07:43:30Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
       "html_url": "https://github.com/itsvrushabh/DineInTakeOut",
       "language": "Rust",
       "name": "DineInTakeOut",
@@ -201,30 +245,6 @@
       "pushed_at": "2026-01-23T21:46:31Z",
       "stars": 0,
       "topics": []
-    },
-    {
-      "description": "Textfsm-rs with async code",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/asyncfsm",
-      "language": "Rust",
-      "name": "asyncfsm",
-      "pushed_at": "2026-01-20T15:59:23Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "An experiment in implementing TextFSM in Rust",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/textfsm-rs",
-      "language": "Rust",
-      "name": "textfsm-rs",
-      "pushed_at": "2026-01-16T05:45:47Z",
-      "stars": 0,
-      "topics": [
-        "networking",
-        "nts-templates",
-        "rust"
-      ]
     },
     {
       "description": "🔒 End-to-end encrypted cloud for photos, videos and 2FA secrets.",
