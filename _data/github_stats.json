@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-03T00:07:54Z",
-  "last_updated_pretty": "November 03, 2026 at 00:07 UTC",
+  "last_updated": "2026-11-03T13:09:03Z",
+  "last_updated_pretty": "November 03, 2026 at 13:09 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,10 +15,30 @@
     {
       "description": "",
       "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-11-03T09:44:38Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "A Rust crate for cooking up terminal user interfaces (TUIs) 👨‍🍳🐀 https://ratatui.rs",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/ratatui",
+      "language": "",
+      "name": "ratatui",
+      "pushed_at": "2026-11-03T05:18:38Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-02T14:00:09Z",
+      "pushed_at": "2026-11-03T00:07:55Z",
       "stars": 0,
       "topics": []
     },
@@ -35,30 +55,10 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-11-02T09:41:00Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
       "html_url": "https://github.com/itsvrushabh/dhabatui",
       "language": "Rust",
       "name": "dhabatui",
       "pushed_at": "2026-11-02T06:23:50Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "A Rust crate for cooking up terminal user interfaces (TUIs) 👨‍🍳🐀 https://ratatui.rs",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/ratatui",
-      "language": "",
-      "name": "ratatui",
-      "pushed_at": "2026-11-02T03:20:35Z",
       "stars": 0,
       "topics": []
     },
