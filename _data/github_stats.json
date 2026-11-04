@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-04T03:40:19Z",
-  "last_updated_pretty": "November 04, 2026 at 03:40 UTC",
+  "last_updated": "2026-11-04T13:24:49Z",
+  "last_updated_pretty": "November 04, 2026 at 13:24 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,10 +15,10 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-03T22:39:18Z",
+      "html_url": "https://github.com/itsvrushabh/rs-budget",
+      "language": "Rust",
+      "name": "rs-budget",
+      "pushed_at": "2026-11-04T10:32:39Z",
       "stars": 0,
       "topics": []
     },
@@ -28,7 +28,27 @@
       "html_url": "https://github.com/itsvrushabh/itsvrushabh",
       "language": "",
       "name": "itsvrushabh",
-      "pushed_at": "2026-11-03T09:44:38Z",
+      "pushed_at": "2026-11-04T09:30:49Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/testing_itsvrushabh.github.io",
+      "language": "Python",
+      "name": "testing_itsvrushabh.github.io",
+      "pushed_at": "2026-11-04T09:29:32Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-11-04T03:40:20Z",
       "stars": 0,
       "topics": []
     },
@@ -39,16 +59,6 @@
       "language": "",
       "name": "ratatui",
       "pushed_at": "2026-11-03T05:18:38Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/rs-budget",
-      "language": "Rust",
-      "name": "rs-budget",
-      "pushed_at": "2026-11-02T13:41:11Z",
       "stars": 0,
       "topics": []
     },
@@ -173,16 +183,6 @@
       "language": "",
       "name": "textual",
       "pushed_at": "2026-10-10T15:29:08Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/testing_itsvrushabh.github.io",
-      "language": "Python",
-      "name": "testing_itsvrushabh.github.io",
-      "pushed_at": "2026-09-28T07:53:12Z",
       "stars": 0,
       "topics": []
     },
