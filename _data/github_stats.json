@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-05T03:58:27Z",
-  "last_updated_pretty": "November 05, 2026 at 03:58 UTC",
+  "last_updated": "2026-11-05T13:38:22Z",
+  "last_updated_pretty": "November 05, 2026 at 13:38 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,10 +15,20 @@
     {
       "description": "",
       "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-11-05T09:40:05Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-04T22:57:50Z",
+      "pushed_at": "2026-11-05T03:58:28Z",
       "stars": 0,
       "topics": []
     },
@@ -29,16 +39,6 @@
       "language": "Rust",
       "name": "rs-budget",
       "pushed_at": "2026-11-04T10:32:39Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-11-04T09:30:49Z",
       "stars": 0,
       "topics": []
     },
