@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-08T03:00:20Z",
-  "last_updated_pretty": "November 08, 2026 at 03:00 UTC",
+  "last_updated": "2026-11-08T12:20:51Z",
+  "last_updated_pretty": "November 08, 2026 at 12:20 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,20 +15,10 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-07T21:10:16Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-11-07T08:57:48Z",
+      "html_url": "https://github.com/itsvrushabh/dhabatui",
+      "language": "Rust",
+      "name": "dhabatui",
+      "pushed_at": "2026-11-08T11:10:21Z",
       "stars": 0,
       "topics": []
     },
@@ -38,7 +28,37 @@
       "html_url": "https://github.com/itsvrushabh/rs-budget",
       "language": "Rust",
       "name": "rs-budget",
-      "pushed_at": "2026-11-04T10:32:39Z",
+      "pushed_at": "2026-11-08T11:07:08Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "A Rust crate for cooking up terminal user interfaces (TUIs) 👨‍🍳🐀 https://ratatui.rs",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/ratatui",
+      "language": "",
+      "name": "ratatui",
+      "pushed_at": "2026-11-08T10:52:49Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-11-08T09:14:00Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-11-08T03:00:21Z",
       "stars": 0,
       "topics": []
     },
@@ -49,26 +69,6 @@
       "language": "Python",
       "name": "testing_itsvrushabh.github.io",
       "pushed_at": "2026-11-04T09:29:32Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "A Rust crate for cooking up terminal user interfaces (TUIs) 👨‍🍳🐀 https://ratatui.rs",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/ratatui",
-      "language": "",
-      "name": "ratatui",
-      "pushed_at": "2026-11-03T05:18:38Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/dhabatui",
-      "language": "Rust",
-      "name": "dhabatui",
-      "pushed_at": "2026-11-02T06:23:50Z",
       "stars": 0,
       "topics": []
     },
