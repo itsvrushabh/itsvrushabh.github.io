@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-11T03:30:30Z",
-  "last_updated_pretty": "November 11, 2026 at 03:30 UTC",
+  "last_updated": "2026-11-11T13:05:58Z",
+  "last_updated_pretty": "November 11, 2026 at 13:05 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,10 +15,20 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-10T22:37:25Z",
+      "html_url": "https://github.com/itsvrushabh/expense-organizer",
+      "language": "Dart",
+      "name": "expense-organizer",
+      "pushed_at": "2026-11-11T11:34:21Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/rs-budget",
+      "language": "Rust",
+      "name": "rs-budget",
+      "pushed_at": "2026-11-11T11:21:58Z",
       "stars": 0,
       "topics": []
     },
@@ -28,7 +38,17 @@
       "html_url": "https://github.com/itsvrushabh/itsvrushabh",
       "language": "",
       "name": "itsvrushabh",
-      "pushed_at": "2026-11-10T10:05:38Z",
+      "pushed_at": "2026-11-11T09:37:48Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-11-11T03:30:31Z",
       "stars": 0,
       "topics": []
     },
@@ -39,16 +59,6 @@
       "language": "Rust",
       "name": "dhabatui",
       "pushed_at": "2026-11-08T11:10:21Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/rs-budget",
-      "language": "Rust",
-      "name": "rs-budget",
-      "pushed_at": "2026-11-08T11:07:08Z",
       "stars": 0,
       "topics": []
     },
@@ -123,16 +133,6 @@
       "language": "Python",
       "name": "pr-agent",
       "pushed_at": "2026-10-30T05:24:11Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/expense-organizer",
-      "language": "Dart",
-      "name": "expense-organizer",
-      "pushed_at": "2026-10-28T11:35:08Z",
       "stars": 0,
       "topics": []
     },
