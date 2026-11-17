@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-17T01:14:36Z",
-  "last_updated_pretty": "November 17, 2026 at 01:14 UTC",
+  "last_updated": "2026-11-17T15:02:15Z",
+  "last_updated_pretty": "November 17, 2026 at 15:02 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
-    "bio": "",
-    "public_repos": 27,
+    "bio": "developer",
+    "public_repos": 25,
     "followers": 6,
     "total_stars": 0,
     "total_forks": 0,
@@ -15,10 +15,10 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-16T14:09:32Z",
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-11-17T10:52:46Z",
       "stars": 0,
       "topics": []
     },
@@ -28,7 +28,27 @@
       "html_url": "https://github.com/itsvrushabh/todo",
       "language": "Rust",
       "name": "todo",
-      "pushed_at": "2026-11-16T13:51:40Z",
+      "pushed_at": "2026-11-17T06:56:57Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/dhabatui",
+      "language": "Rust",
+      "name": "dhabatui",
+      "pushed_at": "2026-11-17T06:26:13Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-11-17T01:14:37Z",
       "stars": 0,
       "topics": []
     },
@@ -39,26 +59,6 @@
       "language": "Rust",
       "name": "rs-budget",
       "pushed_at": "2026-11-16T13:21:31Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-11-16T09:56:35Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/dhabatui",
-      "language": "Rust",
-      "name": "dhabatui",
-      "pushed_at": "2026-11-16T06:53:41Z",
       "stars": 0,
       "topics": []
     },
@@ -213,26 +213,6 @@
       "language": "Rust",
       "name": "DineInTakeOut",
       "pushed_at": "2026-09-15T04:59:26Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/DinningIn",
-      "language": "",
-      "name": "DinningIn",
-      "pushed_at": "2026-09-09T06:30:31Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/hotel-management",
-      "language": "TypeScript",
-      "name": "hotel-management",
-      "pushed_at": "2026-08-28T12:44:46Z",
       "stars": 0,
       "topics": []
     },
