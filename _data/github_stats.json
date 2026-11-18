@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-18T00:07:30Z",
-  "last_updated_pretty": "November 18, 2026 at 00:07 UTC",
+  "last_updated": "2026-11-18T14:42:54Z",
+  "last_updated_pretty": "November 18, 2026 at 14:42 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,20 +15,30 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-17T15:02:16Z",
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-11-18T10:23:33Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "A Rust crate for cooking up terminal user interfaces (TUIs) 👨‍🍳🐀 https://ratatui.rs",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/ratatui",
+      "language": "",
+      "name": "ratatui",
+      "pushed_at": "2026-11-18T05:39:43Z",
       "stars": 0,
       "topics": []
     },
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-11-17T10:52:46Z",
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-11-18T00:07:31Z",
       "stars": 0,
       "topics": []
     },
@@ -59,16 +69,6 @@
       "language": "Rust",
       "name": "rs-budget",
       "pushed_at": "2026-11-16T13:21:31Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "A Rust crate for cooking up terminal user interfaces (TUIs) 👨‍🍳🐀 https://ratatui.rs",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/ratatui",
-      "language": "",
-      "name": "ratatui",
-      "pushed_at": "2026-11-16T06:42:17Z",
       "stars": 0,
       "topics": []
     },
