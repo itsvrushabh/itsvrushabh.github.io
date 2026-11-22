@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-22T03:49:14Z",
-  "last_updated_pretty": "November 22, 2026 at 03:49 UTC",
+  "last_updated": "2026-11-22T13:42:32Z",
+  "last_updated_pretty": "November 22, 2026 at 13:42 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,10 +15,20 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/todo",
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-11-22T09:57:46Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/dhabatui",
       "language": "Rust",
-      "name": "todo",
-      "pushed_at": "2026-11-22T03:33:56Z",
+      "name": "dhabatui",
+      "pushed_at": "2026-11-22T04:04:47Z",
       "stars": 0,
       "topics": []
     },
@@ -28,17 +38,17 @@
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-21T22:31:44Z",
+      "pushed_at": "2026-11-22T03:49:15Z",
       "stars": 0,
       "topics": []
     },
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-11-21T09:58:33Z",
+      "html_url": "https://github.com/itsvrushabh/todo",
+      "language": "Rust",
+      "name": "todo",
+      "pushed_at": "2026-11-22T03:33:56Z",
       "stars": 0,
       "topics": []
     },
@@ -49,16 +59,6 @@
       "language": "",
       "name": "ratatui",
       "pushed_at": "2026-11-18T05:39:43Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/dhabatui",
-      "language": "Rust",
-      "name": "dhabatui",
-      "pushed_at": "2026-11-17T06:26:13Z",
       "stars": 0,
       "topics": []
     },
