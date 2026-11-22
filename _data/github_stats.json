@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-21T22:31:43Z",
-  "last_updated_pretty": "November 21, 2026 at 22:31 UTC",
+  "last_updated": "2026-11-22T03:49:14Z",
+  "last_updated_pretty": "November 22, 2026 at 03:49 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
@@ -15,10 +15,20 @@
     {
       "description": "",
       "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/todo",
+      "language": "Rust",
+      "name": "todo",
+      "pushed_at": "2026-11-22T03:33:56Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-21T13:49:38Z",
+      "pushed_at": "2026-11-21T22:31:44Z",
       "stars": 0,
       "topics": []
     },
@@ -39,16 +49,6 @@
       "language": "",
       "name": "ratatui",
       "pushed_at": "2026-11-18T05:39:43Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/todo",
-      "language": "Rust",
-      "name": "todo",
-      "pushed_at": "2026-11-17T06:56:57Z",
       "stars": 0,
       "topics": []
     },
