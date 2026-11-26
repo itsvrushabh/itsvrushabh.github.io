@@ -1,17 +1,57 @@
 {
-  "last_updated": "2026-11-25T16:21:07Z",
-  "last_updated_pretty": "November 25, 2026 at 16:21 UTC",
+  "last_updated": "2026-11-26T01:15:07Z",
+  "last_updated_pretty": "November 26, 2026 at 01:15 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
     "bio": "developer",
-    "public_repos": 25,
+    "public_repos": 26,
     "followers": 6,
     "total_stars": 0,
     "total_forks": 0,
     "html_url": "https://github.com/itsvrushabh"
   },
   "repos": [
+    {
+      "description": "My default tmux config",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/tmux",
+      "language": "Shell",
+      "name": "tmux",
+      "pushed_at": "2026-11-25T17:11:18Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/nvim",
+      "language": "Lua",
+      "name": "nvim",
+      "pushed_at": "2026-11-25T16:40:51Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/wsl-init",
+      "language": "",
+      "name": "wsl-init",
+      "pushed_at": "2026-11-25T16:31:58Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
+      "language": "JavaScript",
+      "name": "itsvrushabh.github.io",
+      "pushed_at": "2026-11-25T16:21:09Z",
+      "stars": 0,
+      "topics": []
+    },
     {
       "description": "",
       "forks": 0,
@@ -35,30 +75,10 @@
     {
       "description": "",
       "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
-      "language": "JavaScript",
-      "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-25T01:42:02Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
       "html_url": "https://github.com/itsvrushabh/rs-budget",
       "language": "Rust",
       "name": "rs-budget",
       "pushed_at": "2026-11-23T06:49:24Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "My default tmux config",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/tmux",
-      "language": "Shell",
-      "name": "tmux",
-      "pushed_at": "2026-11-23T04:52:38Z",
       "stars": 0,
       "topics": []
     },
@@ -89,16 +109,6 @@
       "language": "",
       "name": "ratatui",
       "pushed_at": "2026-11-18T05:39:43Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/nvim",
-      "language": "Lua",
-      "name": "nvim",
-      "pushed_at": "2026-11-16T05:20:35Z",
       "stars": 0,
       "topics": []
     },
