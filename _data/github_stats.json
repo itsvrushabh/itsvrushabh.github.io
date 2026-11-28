@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-11-28T00:46:54Z",
-  "last_updated_pretty": "November 28, 2026 at 00:46 UTC",
+  "last_updated": "2026-11-28T14:40:25Z",
+  "last_updated_pretty": "November 28, 2026 at 14:40 UTC",
   "user": {
     "login": "itsvrushabh",
     "name": "Vrushabh Deshmukh",
     "bio": "developer",
-    "public_repos": 27,
+    "public_repos": 29,
     "followers": 6,
     "total_stars": 0,
     "total_forks": 0,
@@ -15,10 +15,30 @@
     {
       "description": "",
       "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
+      "language": "",
+      "name": "itsvrushabh",
+      "pushed_at": "2026-11-28T10:38:54Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
       "html_url": "https://github.com/itsvrushabh/itsvrushabh.github.io",
       "language": "JavaScript",
       "name": "itsvrushabh.github.io",
-      "pushed_at": "2026-11-27T15:44:27Z",
+      "pushed_at": "2026-11-28T09:44:30Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/volttick",
+      "language": "Rust",
+      "name": "volttick",
+      "pushed_at": "2026-11-28T08:54:47Z",
       "stars": 0,
       "topics": []
     },
@@ -28,7 +48,7 @@
       "html_url": "https://github.com/itsvrushabh/rs-budget",
       "language": "Rust",
       "name": "rs-budget",
-      "pushed_at": "2026-11-27T12:59:01Z",
+      "pushed_at": "2026-11-28T06:22:15Z",
       "stars": 0,
       "topics": []
     },
@@ -39,16 +59,6 @@
       "language": "Rust",
       "name": "dhabatui",
       "pushed_at": "2026-11-27T11:59:18Z",
-      "stars": 0,
-      "topics": []
-    },
-    {
-      "description": "",
-      "forks": 0,
-      "html_url": "https://github.com/itsvrushabh/itsvrushabh",
-      "language": "",
-      "name": "itsvrushabh",
-      "pushed_at": "2026-11-27T11:01:58Z",
       "stars": 0,
       "topics": []
     },
@@ -283,6 +293,16 @@
       "language": "Python",
       "name": "fastapi-template",
       "pushed_at": "2025-08-23T07:24:00Z",
+      "stars": 0,
+      "topics": []
+    },
+    {
+      "description": "Interactive batteries viewer",
+      "forks": 0,
+      "html_url": "https://github.com/itsvrushabh/rust-battop",
+      "language": "",
+      "name": "rust-battop",
+      "pushed_at": "2023-11-05T07:21:05Z",
       "stars": 0,
       "topics": []
     }
