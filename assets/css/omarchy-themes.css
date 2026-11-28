@@ -1,5 +1,5 @@
 /* ==========================================================================
-   OMARCHY OFFICIAL THEMES (23 THEMES - AUTO-SYNCED)
+   OMARCHY OFFICIAL THEMES (24 THEMES - AUTO-SYNCED)
    ========================================================================== */
 
 :root {
@@ -16,6 +16,23 @@
   --t-brand-soft: color-mix(in srgb, var(--t-brand) 15%, transparent);
   --t-brand-ink: #0c0e10;
   --t-selection: #292e42;
+  color-scheme: dark;
+}
+
+[data-theme="anduril-bluechip"] {
+  --t-bg-deep: #060707;
+  --t-bg: #0a0b0c;
+  --t-surface: #060707;
+  --t-surface-2: #1a1c1e;
+  --t-border-subtle: #1a1c1e;
+  --t-border-strong: #4d4f52;
+  --t-text: #efeeea;
+  --t-text-secondary: #d6d4cd;
+  --t-text-muted: #4d4f52;
+  --t-brand: #8fa67a;
+  --t-brand-soft: color-mix(in srgb, #8fa67a 16%, transparent);
+  --t-brand-ink: #0c0e10;
+  --t-selection: #12254d;
   color-scheme: dark;
 }
 

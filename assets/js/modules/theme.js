@@ -4,6 +4,7 @@
  */
 
 export const OMARCHY_THEMES = [
+  'anduril-bluechip',
   'catppuccin-latte',
   'catppuccin',
   'ethereal',

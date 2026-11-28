@@ -1,5 +1,24 @@
 [
   {
+    "id": "anduril-bluechip",
+    "name": "Anduril Bluechip",
+    "mode": "dark",
+    "accent": "#3d7bff",
+    "background": "#0a0b0c",
+    "dark_background": "#060707",
+    "lighter_background": "#1a1c1e",
+    "foreground": "#d6d4cd",
+    "bright_foreground": "#efeeea",
+    "muted": "#4d4f52",
+    "selection": "#12254d",
+    "green": "#8fa67a",
+    "cyan": "#3fa9d6",
+    "blue": "#3d7bff",
+    "magenta": "#8f8fc4",
+    "yellow": "#ba9f80",
+    "red": "#d8414f"
+  },
+  {
     "id": "catppuccin-latte",
     "name": "Catppuccin Latte",
     "mode": "light",
